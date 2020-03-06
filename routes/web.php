@@ -17,4 +17,4 @@ Route::get('/', function () {
 
 Route::resource('/users','UsersController');
 Route::resource('/posts','PostsController');
-
+Route::resource('/pets', 'PetsController');
