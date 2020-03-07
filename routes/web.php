@@ -15,8 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('/users','UsersController');
-Route::resource('/posts','PostsController');
-Route::resource('/doctorLists','DoctorListsController');
+Route::get('/users', 'UsersController@getUserProfile');
+Route::resource('/posts', 'PostsController');
+Route::resource('/pets', 'PetsController');
 
+//doctor
+Route::get('/docProfile', 'UsersController@getDocProfile');
+Route::get('/admin/createDoc', 'UsersController@createDoc');
 
+//admin
+Route::get('/admin/viewMembers', 'UsersController@index');

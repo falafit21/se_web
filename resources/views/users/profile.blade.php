@@ -1,6 +1,4 @@
 @extends('layouts.master')
-
-
 @section('style')
 <style>
     .card {
@@ -9,40 +7,13 @@
         margin-right: 30px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         transition: 0.3s;
-
     }
-
-    .post-card:hover {
-        box-shadow: 0 8px 5px 0 rgb(170, 172, 247);
-    }
-
-    #btn-edit,
-    #btn-upload {
-        margin-top: 20px;
-    }
-
-    #user-pic {
-        margin-top: 10px;
-        margin-bottom: 30px;
-    }
-
     img {
         display: block;
         margin-left: auto;
         margin-right: auto;
     }
-
-    .pet-card:hover {
-        box-shadow: 0 8px 16px 0 rgb(245, 245, 156);
-
-    }
-
-    .pet-card {
-        margin-bottom: 50px;
-    }
-
     .active {
-
         color: white;
     }
 </style>
@@ -58,7 +29,7 @@
                 <h1 style="text-align: center">Profile</h1>
                 </div>
                 <div class="card-body">
-                    <div class="">
+                    <div class="container">
                         <div><img id="user-pic" src="https://static.raccweb.com/images/no_image.png" alt=""></div>
                         <h3>Name :</h3>
                         <h3>Email :</h3>
@@ -121,10 +92,7 @@
 
 </div>
 
-
 @endsection
-
-
 
 @section('script')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

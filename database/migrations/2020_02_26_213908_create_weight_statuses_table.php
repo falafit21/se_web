@@ -23,14 +23,14 @@ class CreateWeightStatusesTable extends Migration
             $table->timestamps();
 
             $table->foreign('pet_type_id')
-                    ->references('id')
-                    ->on('pet_types')
-                    ->onDelete('cascade');
+                ->references('id')
+                ->on('pet_types')
+                ->onDelete('cascade');
 
             $table->foreign('pet_size_id')
-                    ->references('id')
-                    ->on('pet_sizes')
-                    ->onDelete('cascade');
+                ->references('id')
+                ->on('pet_sizes')
+                ->onDelete('cascade');
         });
     }
 
@@ -41,6 +41,15 @@ class CreateWeightStatusesTable extends Migration
      */
     public function down()
     {
+        Schema::enableForeignKeyConstraints();
+        Schema::table('weight_statuses', function (Blueprint $table) {
+            $table->dropForeign(['pet_type_id']);
+        });
+        Schema::table('weight_statuses', function(Blueprint $table){
+            $table->dropForeign(['pet_size_id']);
+        });
+        Schema::disableForeignKeyConstraints();
+
         Schema::dropIfExists('weight_statuses');
     }
 }

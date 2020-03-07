@@ -15,9 +15,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="">DOCTOR</a>
             </li>
-            
-
         </ul>
-
     </div>
 </nav>

@@ -33,6 +33,12 @@ class CreateFormsTable extends Migration
      */
     public function down()
     {
+        Schema::enableForeignKeyConstraints();
+        Schema::table('forms', function (Blueprint $table) {
+            $table->dropForeign(['question_form_id']);
+        });
+        Schema::disableForeignKeyConstraints();
+
         Schema::dropIfExists('forms');
     }
 }

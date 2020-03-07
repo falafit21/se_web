@@ -39,6 +39,14 @@ class CreateRecievedVaccinesTable extends Migration
      */
     public function down()
     {
+        Schema::enableForeignKeyConstraints();
+        Schema::table('recieved_vaccines', function (Blueprint $table) {
+            $table->dropForeign(['pet_id']);
+        });
+        Schema::table('recieved_vaccines', function(Blueprint $table){
+            $table->dropForeign(['vaccine_id']);
+        });
+        Schema::disableForeignKeyConstraints();
         Schema::dropIfExists('recieved_vaccines');
     }
 }
