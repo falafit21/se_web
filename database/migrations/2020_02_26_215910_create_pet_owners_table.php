@@ -38,6 +38,15 @@ class CreatePetOwnersTable extends Migration
      */
     public function down()
     {
+        Schema::enableForeignKeyConstraints();
+        Schema::table('pet_owners', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+        Schema::table('pet_owners', function(Blueprint $table){
+            $table->dropForeign(['pet_id']);
+        });
+        Schema::disableForeignKeyConstraints();
+
         Schema::dropIfExists('pet_owners');
     }
 }

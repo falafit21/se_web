@@ -40,6 +40,15 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
+        Schema::enableForeignKeyConstraints();
+        Schema::table('comments', function (Blueprint $table) {
+            $table->dropForeign(['post_id']);
+        });
+        Schema::table('comments', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
+        Schema::disableForeignKeyConstraints();
+
         Schema::dropIfExists('comments');
     }
 }

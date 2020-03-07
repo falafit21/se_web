@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuestionFormsTable extends Migration
+class CreateDoctorsInfoTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreateQuestionFormsTable extends Migration
      */
     public function up()
     {
-        Schema::create('question_forms', function (Blueprint $table) {
+        Schema::create('doctors_info', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('question');
+            $table->string('phone_number')->nullable();
+            $table->string('graduated')->nullable();
+            $table->string('work_at')->nullable();
+            $table->string('license_number')->nullable();
             $table->timestamps();
         });
     }
@@ -27,8 +30,6 @@ class CreateQuestionFormsTable extends Migration
      */
     public function down()
     {
-
-
-        Schema::dropIfExists('question_forms');
+        Schema::dropIfExists('doctor_info');
     }
 }

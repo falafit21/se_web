@@ -23,11 +23,13 @@ class CreateUsersTable extends Migration
             $table->string('img_path')->nullable();
             $table->boolean('status');
             $table->string('role');
-            $table->string('phone_number')->nullable();
-            $table->string('graduated')->nullable();
-            $table->string('work_at')->nullable();
-            $table->string('license_number')->nullable();
+            $table->bigInteger('doctors_info_id')->unsigned()->nullable();
             $table->timestamps();
+
+            $table->foreign('doctors_info_id')
+                ->references('id')
+                ->on('doctors_info')
+                ->onDelete('cascade');
         });
     }
 
@@ -38,6 +40,12 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::enableForeignKeyConstraints();
+        Schema::table('users', function(Blueprint $table){
+            $table->dropForeign(['doctors_info_id']);
+        });
+        Schema::disableForeignKeyConstraints();
+
         Schema::dropIfExists('users');
     }
 }
