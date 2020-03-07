@@ -22,6 +22,7 @@ Route::resource('/pets', 'PetsController');
 //doctor
 Route::get('/docProfile', 'UsersController@getDocProfile');
 Route::get('/admin/createDoc', 'UsersController@createDoc');
+Route::resource('/doctorLists','DoctorListsController');
 
 //admin
 Route::get('/admin/viewMembers', 'UsersController@index');
