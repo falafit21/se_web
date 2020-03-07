@@ -23,7 +23,7 @@ class PetsController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
