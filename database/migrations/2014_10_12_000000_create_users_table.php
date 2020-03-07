@@ -40,6 +40,12 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::enableForeignKeyConstraints();
+        Schema::table('users', function(Blueprint $table){
+            $table->dropForeign(['doctors_info_id']);
+        });
+        Schema::disableForeignKeyConstraints();
+
         Schema::dropIfExists('users');
     }
 }
