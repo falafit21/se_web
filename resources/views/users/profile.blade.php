@@ -44,21 +44,21 @@
             <h2>My Pets</h2>
             <!-- Pet -->
             <div class="row">
-                <a href="">
+                <a href="{{ route('pets.index') }}">
                     <span class="card pet-card" style="width: 11.5rem; ">
                         <span class="card-body">
                             <img width="140" height="140" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Creative-Tail-Animal-dog.svg/1024px-Creative-Tail-Animal-dog.svg.png" alt="">
                         </span>
                     </span>
                 </a>
-                <a href="">
+                <a href="{{ route('pets.index') }}">
                     <span class="card pet-card" style="width: 11.5rem;">
                         <span class="card-body">
                             <img width="140" height="140" src="https://image.flaticon.com/icons/png/512/141/141782.png" alt="">
                         </span>
                     </span>
                 </a>
-                <a href="">
+                <a href="{{ route('pets.create') }}">
                     <span class="card pet-card" style="width: 11.5rem;">
                         <span class="card-body">
                             <img width="140" height="140" src="https://static.vecteezy.com/system/resources/previews/000/363/962/non_2x/vector-plus-sign-line-black-icon.jpg" alt="">

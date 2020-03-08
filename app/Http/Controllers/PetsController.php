@@ -16,18 +16,13 @@ class PetsController extends Controller
         return view('pets.profile');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-
-    }
-    public function createPet(){
         return view('pets.create');
     }
+//    public function createPet(){
+//
+//    }
 
     /**
      * Store a newly created resource in storage.
