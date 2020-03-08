@@ -1,23 +1,22 @@
-@extends('.layouts.master')
+@extends('layouts.master')
 @section('style')
     <style>
-
-        .card {
-            padding-top: 20px;
-            margin: 10px 0 20px 0;
-            background-color: rgba(214, 224, 226, 0.2);
-            border-top-width: 0;
-            border-bottom-width: 2px;
-            -webkit-border-radius: 3px;
-            -moz-border-radius: 3px;
-            border-radius: 3px;
-            -webkit-box-shadow: none;
-            -moz-box-shadow: none;
-            box-shadow: none;
-            -webkit-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            box-sizing: border-box;
-        }
+        /*.card {*/
+        /*    padding-top: 20px;*/
+        /*    margin: 10px 0 20px 0;*/
+        /*    background-color: rgba(214, 224, 226, 0.2);*/
+        /*    border-top-width: 0;*/
+        /*    border-bottom-width: 2px;*/
+        /*    -webkit-border-radius: 3px;*/
+        /*    -moz-border-radius: 3px;*/
+        /*    border-radius: 3px;*/
+        /*    -webkit-box-shadow: none;*/
+        /*    -moz-box-shadow: none;*/
+        /*    box-shadow: none;*/
+        /*    -webkit-box-sizing: border-box;*/
+        /*    -moz-box-sizing: border-box;*/
+        /*    box-sizing: border-box;*/
+        /*}*/
 
         .card .card-heading.image img {
             display: inline-block;
@@ -76,63 +75,48 @@
 @endsection
 
 @section('content')
-
-    <div class="container">
-        <div style="color:darkgrey;margin-top:2em;font-weight: bolder;text-align: center;">
-            <h1>Doctors</h1>
+    <div style="margin: 50px">
+        <div style="color:darkgrey; margin-top:2em; font-weight: bolder; text-align: center; margin-bottom: 30px;">
+            <h1>Doctors lists</h1>
         </div>
-
         <div class="row">
-
             @for ($i = 0; $i < 10; $i++)
                 <div class="col-lg-4">
-
-                    <div class="card hovercard" style="height: 400px">
-
-                        <div class="avatar" style="text-align: center">
-                            <img src="{{ url('images/blueBg.png') }}" alt="">
+                    <div class="card hovercard text-center" style="margin-bottom: 20px">
+                        <div class="card-header text-center">
+                            <h4>Suvicha narongchai</h4>
                         </div>
-                        <div>
-                            <div class="title" style="font-weight: bold;font-size: 26px;text-align: center;">
-                                <a target="_blank" href="">Dr.Weerachai  Wutiwong</a>
-                            </div>
-
-
-                            <div  style="color: #737373 ; font-size: 18px;margin-top: 0.5em;margin-left: 4em;">
-                                <div>
-                                    <span><i class="fa fa-id-card-o" aria-hidden="true"></i></span>
-                                    <span class="desc">01-7050/2552</span>
-{{--                                    http://www.vetcouncil.or.th/index.php?option=com_content&view=article&id=183--}}
-                                </div>
-
-                                <div>
-                                    <span>
-                                        <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-                                    </span>
-                                    <span class="desc">Kasetsart U.</span>
-                                </div>
-
-                                <div>
-                                    <span><i class="fa fa-hospital-o" aria-hidden="true"></i></span>
-                                    <span class="desc">Parichart Animal Hospital</span>
-                                </div>
-                                <div><span><i class="fa fa-envelope" aria-hidden="true"></i></span>
-                                    <span class="desc">dr.a@gmail.com</span>
-                                </div>
-
-                            </div>
-                            <div style="text-align: center;">
-                                <button type="button" class="btn btn-outline-secondary" style="width: 80px;margin-top: 0.5em;">DBTVM</button>
-                            </div>
+                        <div class="card-body">
+                            <table class="table table-borderless text-left">
+                                <tbody style="color: black">
+                                <tr>
+                                    <th scope="row">PHONE NUMBER</th>
+                                    <td>084 5858267</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">EMAIL</th>
+                                    <td>kitpavin@gmail.com</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">GRADUATED FROM</th>
+                                    <td>Kasetart University</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">LICENSE NUMBER</th>
+                                    <td>1264597846</td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">WORK AT</th>
+                                    <td>Kasetsart Unversity</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <button type="button" class="btn btn-primary" style="margin: 20px">view Doctor profile</button>
                         </div>
-
                     </div>
-
                 </div>
             @endfor
-
         </div>
     </div>
-
 
 @endsection

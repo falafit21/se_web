@@ -3,213 +3,208 @@
 @section('style')
 @endsection
 @section('content')
-    <div class="container" style="margin-top: 50px">
+    <div style="margin: 50px">
         <div class="row">
             <div class="col-4">
                 <div class="card bg-light">
                     <div class="card-header text-center">
-                        <h4>Question ?<i class="far fa-user" style="margin-left: 10px"></i></h4>
+                        <h4>Question<i class="far fa-user"></i></h4>
                     </div>
-                    <div class="card-body">
-                        <form action="" method="post" style="padding-bottom: 1.5rem;"></form>
-                        <div style="padding-bottom: 1.5rem;">
-                            <label for="title">Title</label>
-                            <input type="text" name="title" id="">
-                        </div>
-                        <div style="padding-bottom: 1.5rem;">
-                            <label for="detail">Detail</label>
-                            <textarea name="detail" id="" cols="30" rows="10"></textarea>
-                        </div>
-                        <div style="padding-bottom: 1.5rem;">
-                            <label for="choose your pet">Choose your pet </label>
-                            <select name="number">
-                                <option text="0">dog</option>
-                                <option value="1">cat</option>
-                                <option value="2" selected="selected">giraffe</option>
-                            </select>
-
-                        </div>
-                        <div style="padding-bottom: 1.5rem;">
-                            <label for="choose your pet">Choose Doctor </label>
-                            <select name="number">
-                                <option text="0">Dr. A</option>
-                                <option value="1">Dr. B</option>
-                                <option value="2" selected="selected">Dr. C</option>
-                            </select>
-
-                        </div>
-                        <h3>Pet Symptom</h3>
-                        <div style="padding-bottom: 1.5rem;">
-                            <div>Does your pet Vomiting and Diarrhoea?</div>
-                            <div style="text-align: center;">
-
-                                <input type="checkbox" value="1" checked id="yes" name="yes">
-                                <label for="yes">Yes</label>
-                                <input type="checkbox" value="1" checked id="No" name="No">
-                                <label for="No">No</label>
+                    <div class="card-body text-right">
+                        <form action="" method="post" class="text-left">
+                            <div class="form-group">
+                                <label for="title">title</label>
+                                <input type="text" class="form-control" id="title">
                             </div>
-
-
-                        </div>
-                        <div style="padding-bottom: 1.5rem;">
-                            <div>Does your pet Vomiting and Lumps or bumps?</div>
-                            <div style="text-align: center;">
-
-                                <input type="checkbox" value="1" checked id="yes" name="yes">
-                                <label for="yes">Yes</label>
-                                <input type="checkbox" value="1" checked id="No" name="No">
-                                <label for="No">No</label>
+                            <div class="form-group">
+                                <label for="detail">detail</label>
+                                <textarea class="form-control" id="detail" rows="3"></textarea>
                             </div>
-
-                        </div>
-                        <div style="padding-bottom: 1.5rem;">
-                            <div>Does your pet  Limping?</div>
-                            <div style="text-align: center;">
-
-                                <input type="checkbox" value="1" checked id="yes" name="yes">
-                                <label for="yes">Yes</label>
-                                <input type="checkbox" value="1" checked id="No" name="No">
-                                <label for="No">No</label>
+                            <div class="form-group">
+                                <label for="choosePet">Choose your pet</label>
+                                <select id="choosePet" class="form-control">
+                                    <option value="0">dog</option>
+                                    <option value="1">cat</option>
+                                    <option value="2" selected="selected">giraffe</option>
+                                </select>
                             </div>
-
-                        </div>
-                        <div style="padding-bottom: 1.5rem;">
-                            <div>Does your pet Bad Breath?</div>
-                            <div style="text-align: center;">
-
-                                <input type="checkbox" value="1" checked id="yes" name="yes">
-                                <label for="yes">Yes</label>
-                                <input type="checkbox" value="1" checked id="No" name="No">
-                                <label for="No">No</label>
+                            <div class="form-group">
+                                <label for="choosePet">Choose Doctor</label>
+                                <select id="choosePet" class="form-control">
+                                    <option value="0">Dr. A</option>
+                                    <option value="1">Dr. B</option>
+                                    <option value="2" selected="selected">Dr. C</option>
+                                </select>
                             </div>
+                        </form>
 
-                        </div>
-                        <div style="padding-bottom: 1.5rem;">
-                            <div>Does your pet Coughing?</div>
-                            <div style="text-align: center;">
+                        <h5 style="margin-top: 50px" class="text-left">Pet Symptom</h5>
+                        <table class="table text-left">
+                            <tr>
+                                <th>Does your pet Vomiting and Diarrhoea?</th>
+                                <td>
+                                    <div class="text-left">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="yes1" name="customRadio"
+                                                   class="custom-control-input">
+                                            <label class="custom-control-label" for="yes1">yes</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="no1" name="customRadio"
+                                                   class="custom-control-input">
+                                            <label class="custom-control-label" for="no1">no</label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Does your pet Vomiting and Lumps or bumps?</th>
+                                <td>
+                                    <div class="text-left">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="yes2" name="customRadio"
+                                                   class="custom-control-input">
+                                            <label class="custom-control-label" for="yes2">yes</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="no2" name="customRadio"
+                                                   class="custom-control-input">
+                                            <label class="custom-control-label" for="no2">no</label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Does your pet Limping?</th>
+                                <td>
+                                    <div class="text-left">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="yes3" name="customRadio"
+                                                   class="custom-control-input">
+                                            <label class="custom-control-label" for="yes3">yes</label>
+                                        </div>
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" id="no3" name="customRadio"
+                                                   class="custom-control-input">
+                                            <label class="custom-control-label" for="no3">no</label>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
 
-                                <input type="checkbox" value="1" checked id="yes" name="yes">
-                                <label for="yes">Yes</label>
-                                <input type="checkbox" value="1" checked id="No" name="No">
-                                <label for="No">No</label>
-                            </div>
 
-                        </div>
-                        <div style="padding-bottom: 1.5rem;">
-                            <div>Does your pet Appetite or drinking changes?</div>
-                            <div style="text-align: center;">
+{{--                        <div style="padding-bottom: 1.5rem;">--}}
+{{--                            <div>Does your pet Bad Breath?</div>--}}
+{{--                            <div style="text-align: center;">--}}
 
-                                <input type="checkbox" value="1" checked id="yes" name="yes">
-                                <label for="yes">Yes</label>
-                                <input type="checkbox" value="1" checked id="No" name="No">
-                                <label for="No">No</label>
-                            </div>
+{{--                                <input type="checkbox" value="1" checked id="yes" name="yes">--}}
+{{--                                <label for="yes">Yes</label>--}}
+{{--                                <input type="checkbox" value="1" checked id="No" name="No">--}}
+{{--                                <label for="No">No</label>--}}
+{{--                            </div>--}}
 
-                        </div>
-                        <div style="padding-bottom: 1.5rem;">
-                            <div>Does your pet Urine or defaecation changes?</div>
-                            <div style="text-align: center;">
+{{--                        </div>--}}
+{{--                        <div style="padding-bottom: 1.5rem;">--}}
+{{--                            <div>Does your pet Coughing?</div>--}}
+{{--                            <div style="text-align: center;">--}}
 
-                                <input type="checkbox" value="1" checked id="yes" name="yes">
-                                <label for="yes">Yes</label>
-                                <input type="checkbox" value="1" checked id="No" name="No">
-                                <label for="No">No</label>
-                            </div>
+{{--                                <input type="checkbox" value="1" checked id="yes" name="yes">--}}
+{{--                                <label for="yes">Yes</label>--}}
+{{--                                <input type="checkbox" value="1" checked id="No" name="No">--}}
+{{--                                <label for="No">No</label>--}}
+{{--                            </div>--}}
 
-                        </div>
-                        <div style="padding-bottom: 1.5rem;">
-                            <div>Does your pet Eye/ Ear problems?</div>
-                            <div style="text-align: center;">
+{{--                        </div>--}}
+{{--                        <div style="padding-bottom: 1.5rem;">--}}
+{{--                            <div>Does your pet Appetite or drinking changes?</div>--}}
+{{--                            <div style="text-align: center;">--}}
 
-                                <input type="checkbox" value="1" checked id="yes" name="yes">
-                                <label for="yes">Yes</label>
-                                <input type="checkbox" value="1" checked id="No" name="No">
-                                <label for="No">No</label>
-                            </div>
+{{--                                <input type="checkbox" value="1" checked id="yes" name="yes">--}}
+{{--                                <label for="yes">Yes</label>--}}
+{{--                                <input type="checkbox" value="1" checked id="No" name="No">--}}
+{{--                                <label for="No">No</label>--}}
+{{--                            </div>--}}
 
-                        </div>
-                        <div style="padding-bottom: 1.5rem;">
-                            <div>Does your pet Itching/ skin irritation?</div>
-                            <div style="text-align: center;">
+{{--                        </div>--}}
+{{--                        <div style="padding-bottom: 1.5rem;">--}}
+{{--                            <div>Does your pet Urine or defaecation changes?</div>--}}
+{{--                            <div style="text-align: center;">--}}
 
-                                <input type="checkbox" value="1" checked id="yes" name="yes">
-                                <label for="yes">Yes</label>
-                                <input type="checkbox" value="1" checked id="No" name="No">
-                                <label for="No">No</label>
-                            </div>
+{{--                                <input type="checkbox" value="1" checked id="yes" name="yes">--}}
+{{--                                <label for="yes">Yes</label>--}}
+{{--                                <input type="checkbox" value="1" checked id="No" name="No">--}}
+{{--                                <label for="No">No</label>--}}
+{{--                            </div>--}}
 
-                        </div>
-                        <div style="padding-bottom: 1.5rem;">
-                            <div>Does your pet Lethargy/ change in demeanour or activity levels?</div>
-                            <div style="text-align: center;">
+{{--                        </div>--}}
+{{--                        <div style="padding-bottom: 1.5rem;">--}}
+{{--                            <div>Does your pet Eye/ Ear problems?</div>--}}
+{{--                            <div style="text-align: center;">--}}
 
-                                <input type="checkbox" value="1" checked id="yes" name="yes">
-                                <label for="yes">Yes</label>
-                                <input type="checkbox" value="1" checked id="No" name="No">
-                                <label for="No">No</label>
-                            </div>
+{{--                                <input type="checkbox" value="1" checked id="yes" name="yes">--}}
+{{--                                <label for="yes">Yes</label>--}}
+{{--                                <input type="checkbox" value="1" checked id="No" name="No">--}}
+{{--                                <label for="No">No</label>--}}
+{{--                            </div>--}}
 
-                        </div>
+{{--                        </div>--}}
+{{--                        <div style="padding-bottom: 1.5rem;">--}}
+{{--                            <div>Does your pet Itching/ skin irritation?</div>--}}
+{{--                            <div style="text-align: center;">--}}
 
-                        <div style="align: center;">
-                            <button type="button" class="btn btn-primary " style="margin: 20px;align: center;">Post</button>
-                        </div>
+{{--                                <input type="checkbox" value="1" checked id="yes" name="yes">--}}
+{{--                                <label for="yes">Yes</label>--}}
+{{--                                <input type="checkbox" value="1" checked id="No" name="No">--}}
+{{--                                <label for="No">No</label>--}}
+{{--                            </div>--}}
 
+{{--                        </div>--}}
+{{--                        <div style="padding-bottom: 1.5rem;">--}}
+{{--                            <div>Does your pet Lethargy/ change in demeanour or activity levels?</div>--}}
+{{--                            <div style="text-align: center;">--}}
+
+{{--                                <input type="checkbox" value="1" checked id="yes" name="yes">--}}
+{{--                                <label for="yes">Yes</label>--}}
+{{--                                <input type="checkbox" value="1" checked id="No" name="No">--}}
+{{--                                <label for="No">No</label>--}}
+{{--                            </div>--}}
+
+{{--                        </div>--}}
+                        <a href="#" class="btn btn-primary">Post</a>
                     </div>
 
                 </div>
 
             </div>
             <div class="col-8">
-
-                    <h2>Tips</h2>
-                    <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 280px;width: 730px;">
-                        <!-- Indicators -->
-                        <ol class="carousel-indicators">
-                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                            <li data-target="#myCarousel" data-slide-to="1"></li>
-                            <li data-target="#myCarousel" data-slide-to="2"></li>
-                        </ol>
-
-                        <!-- Wrapper for slides -->
-                        <div class="carousel-inner">
-
-                            <div class="item active">
-                                <img src="{{ url('images/petTips.png') }}" alt="Los Angeles" style="height: 280px;width: 100%;">
-                                <div class="carousel-caption">
-{{--                                    <h3>Los Angeles</h3>--}}
-{{--                                    <p>LA is always so much fun!</p>--}}
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <img src="chicago.jpg" alt="Chicago" >
-                                <div class="carousel-caption">
-                                    <h3>Chicago</h3>
-                                    <p>Thank you, Chicago!</p>
-                                </div>
-                            </div>
-
-                            <div class="item">
-                                <img src="ny.jpg" alt="New York" >
-                                <div class="carousel-caption">
-                                    <h3>New York</h3>
-                                    <p>We love the Big Apple!</p>
-                                </div>
-                            </div>
-
+                <h2>Tips</h2>
+                <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" style="background-color: #636b6f; height: 250px; ">
+                        <div class="carousel-item active">
+                            sdfgsdf
                         </div>
-
-                        <!-- Left and right controls -->
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-                            <span class="glyphicon glyphicon-chevron-left"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next">
-                            <span class="glyphicon glyphicon-chevron-right"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
+                        <div class="carousel-item">
+                            sdfgsdg
+                        </div>
+                        <div class="carousel-item">
+                            sdfgsdg
+                        </div>
                     </div>
+                    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                </div>
 
                 <h2 style="margin-top: 50px">All Questions</h2>
                 <div class="card post-card" style="margin-top: 10px">
@@ -257,7 +252,7 @@
 
             </div>
 
-         </div>
+        </div>
     </div>
 
 
