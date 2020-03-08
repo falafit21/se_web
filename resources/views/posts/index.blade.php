@@ -8,7 +8,7 @@
             <div class="col-4">
                 <div class="card bg-light">
                     <div class="card-header text-center">
-                        <h4>Question<i class="far fa-user"></i></h4>
+                        <h4>Create post<i class="far fa-user"></i></h4>
                     </div>
                     <div class="card-body text-right">
                         <form action="" method="post" class="text-left">
@@ -41,7 +41,7 @@
                         <h5 style="margin-top: 50px" class="text-left">Pet Symptom</h5>
                         <table class="table text-left">
                             <tr>
-                                <th>Does your pet Vomiting and Diarrhoea?</th>
+                                <td>Does your pet Vomiting and Diarrhoea?</td>
                                 <td>
                                     <div class="text-left">
                                         <div class="custom-control custom-radio">
@@ -58,7 +58,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Does your pet Vomiting and Lumps or bumps?</th>
+                                <td>Does your pet Vomiting and Lumps or bumps?</td>
                                 <td>
                                     <div class="text-left">
                                         <div class="custom-control custom-radio">
@@ -75,7 +75,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th>Does your pet Limping?</th>
+                                <td>Does your pet Limping?</td>
                                 <td>
                                     <div class="text-left">
                                         <div class="custom-control custom-radio">
@@ -95,7 +95,6 @@
 
                         <a href="#" class="btn btn-primary">Post</a>
                     </div>
-
                 </div>
 
             </div>
@@ -129,49 +128,17 @@
                 </div>
 
                 <h2 style="margin-top: 50px">All Questions</h2>
-                <div class="card post-card" style="margin-top: 10px">
-                    <div class="card-body">
-                        <h5>question 1</h5>
-                        <p>question detail 1</p>
-                    </div>
-                </div>
-                <div class="card post-card" style="margin-top: 10px">
-                    <div class="card-body">
-                        <h5>question 2 </h5>
-                        <p>question detail 2</p>
-                    </div>
-                </div>
-                <div class="card post-card" style="margin-top: 10px">
-                    <div class="card-body">
-                        <h5>question 3</h5>
-                        <p>question detail 3 </p>
-                    </div>
-                </div>
-                <div class="card post-card" style="margin-top: 10px">
-                    <div class="card-body">
-                        <h5>question 4</h5>
-                        <p>question detail 4 </p>
-                    </div>
-                </div>
-                <div class="card post-card" style="margin-top: 10px">
-                    <div class="card-body">
-                        <h5>question 5</h5>
-                        <p>question detail 5 </p>
-                    </div>
-                </div>
-                <div class="card post-card" style="margin-top: 10px">
-                    <div class="card-body">
-                        <h5>question 6</h5>
-                        <p>question detail 6 </p>
-                    </div>
-                </div>
-                <div class="card post-card" style="margin-top: 10px">
-                    <div class="card-body">
-                        <h5>question 7</h5>
-                        <p>question detail 7 </p>
-                    </div>
-                </div>
 
+                @foreach($posts as $post)
+                    <a href="{{ url('posts/show') }}">
+                        <div class="card post-card" style="margin-top: 10px">
+                            <div class="card-body">
+                                <h5>{{ $post->question }}</h5>
+                                <p>{{ $post->detail }}</p>
+                            </div>
+                        </div>
+                    </a>
+                @endforeach
             </div>
 
         </div>

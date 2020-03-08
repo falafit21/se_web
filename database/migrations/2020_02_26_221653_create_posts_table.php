@@ -19,7 +19,6 @@ class CreatePostsTable extends Migration
             $table->bigInteger('request_ans_user_id')->unsigned();
             $table->string('question');
             $table->text('detail');
-            $table->bigInteger('form_id')->unsigned();
             $table->bigInteger('pet_id')->unsigned();
             $table->timestamps();
 
@@ -32,11 +31,6 @@ class CreatePostsTable extends Migration
             $table->foreign('request_ans_user_id')
                     ->references('id')
                     ->on('users')
-                    ->onDelete('cascade');
-
-            $table->foreign('form_id')
-                    ->references('id')
-                    ->on('forms')
                     ->onDelete('cascade');
 
             $table->foreign('pet_id')
@@ -60,9 +54,6 @@ class CreatePostsTable extends Migration
         });
         Schema::table('posts', function (Blueprint $table) {
             $table->dropForeign(['request_ans_user_id']);
-        });
-        Schema::table('posts', function (Blueprint $table) {
-            $table->dropForeign(['form_id']);
         });
         Schema::table('posts', function (Blueprint $table) {
             $table->dropForeign(['pet_id']);
