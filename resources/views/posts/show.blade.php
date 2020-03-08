@@ -5,9 +5,20 @@
 
 @section('content')
     <div class="container" style="margin-top: 30px">
-        <div class="card ">
-            <div class="card-header"><h4>Question</h4></div>
-            <div class="card-body">detail</div>
+        <div class="card">
+            <div class="card-body">
+                <div class="row" >
+                    <div class="col-11">
+                        <h4>Question 1 </h4>
+                        detail question 1
+                    </div>
+                    <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
+                        <a href="{{ route('posts.edit', ['post' => 2]) }}">
+                            <button class="btn btn-warning">edit</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
             <div class="card-footer text-muted text-right">
                 by Mr. tommy
             </div>
@@ -28,24 +39,59 @@
         <!-- comment -->
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
-                <h4>name</h4>
-                <div>comment</div>
+                <div class="row" >
+                    <div class="col-11">
+                        <h4>name</h4>
+                        <div>comment</div>
+                    </div>
+                    <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
+                        <button class="btn btn-warning">edit</button>
+                    </div>
+                </div>
             </li>
             <li class="list-group-item">
-                <h4>name</h4>
-                <div>comment</div>
+                <div class="row" >
+                    <div class="col-11">
+                        <h4>name</h4>
+                        <div>comment</div>
+                    </div>
+                    <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
+                        <button class="btn btn-warning">edit</button>
+                    </div>
+                </div>
             </li>
             <li class="list-group-item">
-                <h4>name</h4>
-                <div>comment</div>
+                <div class="row" >
+                    <div class="col-11">
+                        <h4>name</h4>
+                        <div>comment</div>
+                    </div>
+                    <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
+                        <button class="btn btn-warning">edit</button>
+                    </div>
+                </div>
             </li>
             <li class="list-group-item">
-                <h4>name</h4>
-                <div>comment</div>
+                <div class="row" >
+                    <div class="col-11">
+                        <h4>name</h4>
+                        <div>comment</div>
+                    </div>
+                    <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
+                        <button class="btn btn-warning">edit</button>
+                    </div>
+                </div>
             </li>
             <li class="list-group-item">
-                <h4>name</h4>
-                <div>comment</div>
+                <div class="row" >
+                    <div class="col-11">
+                        <h4>name</h4>
+                        <div>comment</div>
+                    </div>
+                    <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
+                        <button class="btn btn-warning">edit</button>
+                    </div>
+                </div>
             </li>
         </ul>
     </div>
