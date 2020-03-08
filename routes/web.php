@@ -17,12 +17,17 @@ Route::get('/', function () {
 
 Route::get('/users', 'UsersController@getUserProfile');
 Route::resource('/posts', 'PostsController');
-Route::resource('/pets', 'PetsController');
+
 
 //doctor
 Route::get('/docProfile', 'UsersController@getDocProfile');
 Route::get('/admin/createDoc', 'UsersController@createDoc');
+
 Route::resource('/doctorLists','DoctorListsController');
 
 //admin
 Route::get('/admin/viewMembers', 'UsersController@index');
+
+//pet
+Route::get('/pet/createPet','PetsController@createPet');
+Route::resource('/pets', 'PetsController');

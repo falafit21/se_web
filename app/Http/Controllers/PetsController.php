@@ -25,6 +25,9 @@ class PetsController extends Controller
     {
 
     }
+    public function createPet(){
+        return view('pets.create');
+    }
 
     /**
      * Store a newly created resource in storage.
