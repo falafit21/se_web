@@ -44,7 +44,7 @@
 
             </div>
             <div class="col-8">
-                <h2>question ที่ถูก tag</h2>
+                <h2>Request Question</h2>
                 <div class="card post-card" style="margin-top: 10px">
                     <div class="card-body">
                         <h5>question 1</h5>
@@ -64,7 +64,7 @@
                     </div>
                 </div>
 
-                <h2 style="margin-top: 50px">all question</h2>
+                <h2 style="margin-top: 50px">All Questions</h2>
                 <div class="card post-card" style="margin-top: 10px">
                     <div class="card-body">
                         <h5>question 1</h5>
