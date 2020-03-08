@@ -25,13 +25,7 @@
                 <label for="name">Name</label>
                 <input type="name" class="form-control" id="name">
             </div>
-
-            <div class="form-group">
-                <label for="breed">Breed</label>
-                <input type="text" class="form-control" id="breed">
-            </div>
-
-
+            
             <div class="form-group row">
               <label for="example-date-input" class="col-2 col-form-label">BirthDate</label>
               <div class="col-10">
