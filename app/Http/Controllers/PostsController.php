@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\QuestionForm;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -10,7 +11,11 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('posts.index', ['posts' => $posts]);
+        $formsQuestion = QuestionForm::all();
+        return view('posts.index', [
+            'posts' => $posts,
+            'formsQuestion' => $formsQuestion
+        ]);
     }
 
     public function create()
@@ -25,7 +30,8 @@ class PostsController extends Controller
 
     public function show($id)
     {
-        return view('posts.show');
+        $post = Post::find($id);
+        return view('posts.show', ['post' => $post]);
     }
 
     public function edit($id)

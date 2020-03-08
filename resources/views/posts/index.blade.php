@@ -40,57 +40,25 @@
 
                         <h5 style="margin-top: 50px" class="text-left">Pet Symptom</h5>
                         <table class="table text-left">
-                            <tr>
-                                <td>Does your pet Vomiting and Diarrhoea?</td>
-                                <td>
-                                    <div class="text-left">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="yes1" name="customRadio"
-                                                   class="custom-control-input">
-                                            <label class="custom-control-label" for="yes1">yes</label>
+                            @foreach( $formsQuestion as $formQuestion )
+                                <tr>
+                                    <td>{{ $formQuestion->question }}</td>
+                                    <td>
+                                        <div class="text-left">
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="yes1" name="customRadio"
+                                                       class="custom-control-input">
+                                                <label class="custom-control-label" for="yes1">yes</label>
+                                            </div>
+                                            <div class="custom-control custom-radio">
+                                                <input type="radio" id="no1" name="customRadio"
+                                                       class="custom-control-input">
+                                                <label class="custom-control-label" for="no1">no</label>
+                                            </div>
                                         </div>
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="no1" name="customRadio"
-                                                   class="custom-control-input">
-                                            <label class="custom-control-label" for="no1">no</label>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Does your pet Vomiting and Lumps or bumps?</td>
-                                <td>
-                                    <div class="text-left">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="yes2" name="customRadio"
-                                                   class="custom-control-input">
-                                            <label class="custom-control-label" for="yes2">yes</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="no2" name="customRadio"
-                                                   class="custom-control-input">
-                                            <label class="custom-control-label" for="no2">no</label>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Does your pet Limping?</td>
-                                <td>
-                                    <div class="text-left">
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="yes3" name="customRadio"
-                                                   class="custom-control-input">
-                                            <label class="custom-control-label" for="yes3">yes</label>
-                                        </div>
-                                        <div class="custom-control custom-radio">
-                                            <input type="radio" id="no3" name="customRadio"
-                                                   class="custom-control-input">
-                                            <label class="custom-control-label" for="no3">no</label>
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </table>
 
                         <a href="#" class="btn btn-primary">Post</a>
@@ -108,13 +76,13 @@
                     </ol>
                     <div class="carousel-inner" style="background-color: #636b6f; height: 250px; ">
                         <div class="carousel-item active">
-                            sdfgsdf
+
                         </div>
                         <div class="carousel-item">
-                            sdfgsdg
+
                         </div>
                         <div class="carousel-item">
-                            sdfgsdg
+
                         </div>
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -130,14 +98,20 @@
                 <h2 style="margin-top: 50px">All Questions</h2>
 
                 @foreach($posts as $post)
-                    <a href="{{ url('posts/show') }}">
-                        <div class="card post-card" style="margin-top: 10px">
+                    <div class="card post-card" style="margin-top: 10px">
+                        <a href="{{ route('posts.show', ['post' => $post->id]) }}">
+                            <h4 class="card-header">
+                                {{ $post->question }}
+                            </h4>
                             <div class="card-body">
-                                <h5>{{ $post->question }}</h5>
+
                                 <p>{{ $post->detail }}</p>
                             </div>
+                        </a>
+                        <div class="card-footer text-muted text-right">
+                            {{ $post->user->name }}
                         </div>
-                    </a>
+                    </div>
                 @endforeach
             </div>
 

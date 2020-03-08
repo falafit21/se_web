@@ -11,6 +11,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+
+
         //pet
         $this->call(PetSizesTableSeeder::class);
         $this->call(PetTypesTableSeeder::class);
@@ -21,5 +23,9 @@ class DatabaseSeeder extends Seeder
 
         //post
         $this->call(PostsTableSeeder::class);
+
+        //form
+        $this->call(QuestionFormsTableSeeder::class);
+        $this->call(FormsTableSeeder::class);
     }
 }

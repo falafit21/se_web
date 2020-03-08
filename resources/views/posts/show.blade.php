@@ -6,12 +6,14 @@
 @section('content')
     <div class="container" style="margin-top: 30px">
         <div class="card">
+            <h4 class="card-header">
+                {{ $post->question }}
+            </h4>
             <div class="card-body">
                 <div class="row" >
-                    <div class="col-11">
-                        <h4>Question 1 </h4>
-                        detail question 1
-                    </div>
+                    <h5 class="col-11">
+                        {{ $post->detail }}
+                    </h5>
                     <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
                         <a href="{{ route('posts.edit', ['post' => 2]) }}">
                             <button class="btn btn-warning">edit</button>
@@ -19,8 +21,8 @@
                     </div>
                 </div>
             </div>
-            <div class="card-footer text-muted text-right">
-                by Mr. tommy
+            <div class="card-footer text-muted">
+                {{ $post->user->name }}
             </div>
         </div>
 
@@ -35,7 +37,7 @@
             </div>
 
         </form>
-
+<hr>
         <!-- comment -->
         <ul class="list-group list-group-flush">
             <li class="list-group-item">
