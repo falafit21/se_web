@@ -1,0 +1,22 @@
+<?php
+
+use Illuminate\Database\Seeder;
+
+class PetsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $pet = new \App\Pet();
+        $pet->name = "Bobo";
+        $pet->pet_type_id = 1;
+        $pet->pet_size_id = 1;
+        $pet->weight = 25.2;
+        $pet->birth_date = "1997-10-10";
+        $pet->save();
+    }
+}
