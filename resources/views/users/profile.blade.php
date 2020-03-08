@@ -60,12 +60,13 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
+                            <li class="list-group-item">Pet 1's name</li>
+                            <li class="list-group-item">Pet 2's name</li>
+                            <li class="list-group-item">Pet 3's name</li>
+
                         </ul>
                     <div class="card">
-                        <button href="#" class="btn btn-info">create</button>
+                        <a href="{{ route('pets.create') }}" style=""><button class="btn btn-info btn-block">create</button></a>
                     </div>
 
                     </div>
@@ -118,83 +119,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card post-card" style="margin-bottom: 10px">
-                    <div class="card-body row">
-                        <div class="col-11">
-                            <h5>My post1</h5>
-                            <div>post detail</div>
-                        </div>
-                        <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
-                            <button class="btn btn-warning">edit</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card post-card" style="margin-bottom: 10px">
-                    <div class="card-body row">
-                        <div class="col-11">
-                            <h5>My post1</h5>
-                            <div>post detail</div>
-                        </div>
-                        <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
-                            <button class="btn btn-warning">edit</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card post-card" style="margin-bottom: 10px">
-                    <div class="card-body row">
-                        <div class="col-11">
-                            <h5>My post1</h5>
-                            <div>post detail</div>
-                        </div>
-                        <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
-                            <button class="btn btn-warning">edit</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card post-card" style="margin-bottom: 10px">
-                    <div class="card-body row">
-                        <div class="col-11">
-                            <h5>My post1</h5>
-                            <div>post detail</div>
-                        </div>
-                        <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
-                            <button class="btn btn-warning">edit</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card post-card" style="margin-bottom: 10px">
-                    <div class="card-body row">
-                        <div class="col-11">
-                            <h5>My post1</h5>
-                            <div>post detail</div>
-                        </div>
-                        <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
-                            <button class="btn btn-warning">edit</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card post-card" style="margin-bottom: 10px">
-                    <div class="card-body row">
-                        <div class="col-11">
-                            <h5>My post1</h5>
-                            <div>post detail</div>
-                        </div>
-                        <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
-                            <button class="btn btn-warning">edit</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card post-card" style="margin-bottom: 10px">
-                    <div class="card-body row">
-                        <div class="col-11">
-                            <h5>My post1</h5>
-                            <div>post detail</div>
-                        </div>
-                        <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
-                            <button class="btn btn-warning">edit</button>
-                        </div>
-                    </div>
-                </div>
+
             </div>
         </div>
 

@@ -130,7 +130,7 @@
                 <h2 style="margin-top: 50px">All Questions</h2>
 
                 @foreach($posts as $post)
-                    <a >
+                    <a href="{{ url('posts/show') }}">
                         <div class="card post-card" style="margin-top: 10px">
                             <div class="card-body">
                                 <h5>{{ $post->question }}</h5>
