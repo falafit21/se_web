@@ -35,6 +35,8 @@
                                     <option value="1">Dr. B</option>
                                     <option value="2" selected="selected">Dr. C</option>
                                 </select>
+                                <a href="{{ url('doctorLists') }}" class="btn btn-info">doctor list</a>
+
                             </div>
                         </form>
 
@@ -99,7 +101,7 @@
 
                 @foreach($posts as $post)
                     <div class="card post-card" style="margin-top: 10px">
-                        <a href="{{ route('posts.show', ['post' => $post->id]) }}">
+                        <a href="{{ route('post.show', ['post' => $post->id]) }}">
                             <h4 class="card-header">
                                 {{ $post->question }}
                             </h4>

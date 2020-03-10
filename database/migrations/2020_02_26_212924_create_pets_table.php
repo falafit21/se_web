@@ -16,11 +16,17 @@ class CreatePetsTable extends Migration
         Schema::create('pets', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('pet_type_id')->unsigned();
             $table->bigInteger('pet_size_id')->unsigned()->nullable();
             $table->float('weight');
             $table->date('birth_date');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
 
             $table->foreign('pet_type_id')
                     ->references('id')
@@ -42,6 +48,9 @@ class CreatePetsTable extends Migration
     public function down()
     {
         Schema::enableForeignKeyConstraints();
+        Schema::table('pets', function(Blueprint $table){
+            $table->dropForeign(['user_id']);
+        });
         Schema::table('pets', function(Blueprint $table){
             $table->dropForeign(['pet_type_id']);
         });

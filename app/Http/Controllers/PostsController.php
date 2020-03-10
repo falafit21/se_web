@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Post;
 use App\QuestionForm;
+use App\User;
 use Illuminate\Http\Request;
 
 class PostsController extends Controller
@@ -26,6 +28,23 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function commentStore(Request $request, $post_id, $user_id){
+        $use_post_id = Post::findOrFail($post_id);
+        $use_user_id = User::findOrFail($user_id);
+
+        $request->validate([
+            'answer' => ['required', 'min:1']
+        ]);
+
+        $comment = new Comment;
+        $comment->post_id = $use_post_id->id;
+        $comment->user_id = $use_user_id->id;
+        $comment->comment = $request->input('answer');
+        $comment->save();
+
+        return redirect()->route('post.show', ['post' => $use_post_id->id]);
     }
 
     public function show($id)

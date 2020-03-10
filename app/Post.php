@@ -16,4 +16,8 @@ class Post extends Model
     public function Form(){
         return $this->hasOne(Form::class);
     }
+
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
 }
