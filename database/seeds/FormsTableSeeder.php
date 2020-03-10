@@ -18,7 +18,7 @@ class FormsTableSeeder extends Seeder
         $form->save();
 
         $form1 = new \App\Form();
-        $form->post_id = 1;
+        $form1->post_id = 1;
         $form1->question_form_id = 2;
         $form1->answer = 1;
         $form1->save();

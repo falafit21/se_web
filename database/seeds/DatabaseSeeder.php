@@ -14,12 +14,16 @@ class DatabaseSeeder extends Seeder
         //pet
         $this->call(PetSizesTableSeeder::class);
         $this->call(PetTypesTableSeeder::class);
-        $this->call(PetsTableSeeder::class);
+
 
         //user
         $this->call(UsersTableSeeder::class);
-
+        $this->call(PetsTableSeeder::class);
         //post
         $this->call(PostsTableSeeder::class);
+
+        //form
+        $this->call(QuestionFormsTableSeeder::class);
+        $this->call(FormsTableSeeder::class);
     }
 }

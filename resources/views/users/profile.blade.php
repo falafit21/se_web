@@ -60,13 +60,14 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
+
                             <li class="list-group-item">Pet 1's name</li>
                             <li class="list-group-item">Pet 2's name</li>
                             <li class="list-group-item">Pet 3's name</li>
 
                         </ul>
                     <div class="card">
-                        <a href="{{ route('pets.create') }}" style=""><button class="btn btn-info btn-block">create</button></a>
+                        <a href="{{ route('pet.create') }}" style=""><button class="btn btn-info btn-block">create</button></a>
                     </div>
 
                     </div>

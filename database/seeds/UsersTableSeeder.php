@@ -29,5 +29,13 @@ class UsersTableSeeder extends Seeder
         $user2->status = 1;
         $user2->role = "admin";
         $user2->save();
+
+        $user3 = new \App\User();
+        $user3->name = "Fish1 shukishi";
+        $user3->email = "Fish1@shukishi.com";
+        $user3->password = Hash::make('fish11234');
+        $user3->status = 1;
+        $user3->role = "user";
+        $user3->save();
     }
 }

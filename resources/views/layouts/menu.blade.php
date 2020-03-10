@@ -30,7 +30,11 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-
+                <li><a class="nav-link" href="{{ url('user') }}">Profile</a></li>
+{{--                @can('create', \App\Post::class)--}}
+                    <li><a class="nav-link" href="{{ url('/admin/createDoc') }}">create doctor</a></li>
+{{--                @endif--}}
+                <li><a class="nav-link" href="{{ url('/admin/viewMembers') }}">view all member</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

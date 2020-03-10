@@ -111,7 +111,7 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <button type="button" class="btn btn-primary" style="margin: 20px">view Doctor profile</button>
+{{--                            <a href="{{ url('docProfile') }}" class="btn btn-primary" style="margin: 20px">view Doctor profile</a>--}}
                         </div>
                     </div>
                 </div>
