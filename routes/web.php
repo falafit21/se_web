@@ -5,7 +5,7 @@ Route::get('/', function () {
     return view('/home');
 });
 
-Route::get('/user', 'UsersController@getUserProfile');
+Route::get('/user', 'UsersController@getUserProfile')->name("user");
 Route::resource('/post', 'PostsController');
 
 //comment
