@@ -11,7 +11,7 @@
                         <h4>Create post<i class="far fa-user"></i></h4>
                     </div>
                     <div class="card-body text-right">
-                        <form action="" method="post" class="text-left">
+                        <form action="{{ route('post.store') }}" method="POST" class="text-left">
                             <div class="form-group">
                                 <label for="title">title</label>
                                 <input type="text" class="form-control" id="title">
@@ -29,41 +29,42 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="choosePet">Choose Doctor</label>
-                                <select id="choosePet" class="form-control">
+                                <label for="chooseDoc">Choose Doctor</label>
+                                <select id="chooseDoc" class="form-control" name="chooseDoc">
                                     <option value="0">Dr. A</option>
                                     <option value="1">Dr. B</option>
                                     <option value="2" selected="selected">Dr. C</option>
                                 </select>
-                                <a href="{{ url('doctorLists') }}" class="btn btn-info">doctor list</a>
-
+                                <a href="{{ url('doctorLists') }}" target="_blank" class="btn btn-info">doctor list</a>
                             </div>
+                            <h5 style="margin-top: 50px" class="text-left">Pet Symptom</h5>
+                            <table class="table text-left">
+                                @foreach( $formsQuestion as $formQuestion )
+                                    <tr>
+                                        <td>{{ $formQuestion->question }}</td>
+                                        <td>
+                                            <div class="text-left">
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="yes{{ $loop->index }}"
+                                                           name="customRadio[{{ $loop->index }}]"
+                                                           class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                           for="yes{{ $loop->index }}">yes</label>
+                                                </div>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="no{{ $loop->index }}"
+                                                           name="customRadio[{{ $loop->index }}]"
+                                                           class="custom-control-input">
+                                                    <label class="custom-control-label"
+                                                           for="no{{ $loop->index }}">no</label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                            <a type="submit" class="btn btn-primary">Post</a>
                         </form>
-
-                        <h5 style="margin-top: 50px" class="text-left">Pet Symptom</h5>
-                        <table class="table text-left">
-                            @foreach( $formsQuestion as $formQuestion )
-                                <tr>
-                                    <td>{{ $formQuestion->question }}</td>
-                                    <td>
-                                        <div class="text-left">
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="yes1" name="customRadio"
-                                                       class="custom-control-input">
-                                                <label class="custom-control-label" for="yes1">yes</label>
-                                            </div>
-                                            <div class="custom-control custom-radio">
-                                                <input type="radio" id="no1" name="customRadio"
-                                                       class="custom-control-input">
-                                                <label class="custom-control-label" for="no1">no</label>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </table>
-
-                        <a href="#" class="btn btn-primary">Post</a>
                     </div>
                 </div>
 

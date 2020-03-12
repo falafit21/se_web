@@ -7,6 +7,7 @@ use App\Post;
 use App\QuestionForm;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -27,12 +28,20 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
-        //
+//        $request->validate([
+//
+//        ]);
+//        $post = new Post();
+//        $post->user_id = Auth::id();
+//        $post->request_ans_user_id = $request->input('chooseDoc');
+//        $post->question = $request->input('title');
+//        $post->detail = $request->input('detail');
+
     }
 
-    public function commentStore(Request $request, $post_id, $user_id){
+    public function commentStore(Request $request, $post_id){
         $use_post_id = Post::findOrFail($post_id);
-        $use_user_id = User::findOrFail($user_id);
+        $use_user_id = Auth::id();
 
         $request->validate([
             'answer' => ['required', 'min:1']
@@ -40,7 +49,7 @@ class PostsController extends Controller
 
         $comment = new Comment;
         $comment->post_id = $use_post_id->id;
-        $comment->user_id = $use_user_id->id;
+        $comment->user_id = $use_user_id;
         $comment->comment = $request->input('answer');
         $comment->save();
 

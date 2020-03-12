@@ -27,8 +27,7 @@
         </div>
 
         <form action="{{  route("post.comment.store", [
-                'post_id' => $post->id,
-                'user_id' => auth()->user()->id
+                'post_id' => $post->id
             ]) }}" style="margin-top: 30px;" method="POST">
 
             @csrf
@@ -37,9 +36,7 @@
                     <label for="answer">Answers : </label>
                     <textarea name="answer" id="answer" style="width: 100%" rows="4"
                               class="form-control @error('answer') is-invalid @enderror"
-                    >
-                        {{ old('answer') }}
-                    </textarea>
+                    >{{ old('answer') }}</textarea>
                     @error('answer')
                     <div class="alert alert-danger">{{$message}}</div>
                     @enderror

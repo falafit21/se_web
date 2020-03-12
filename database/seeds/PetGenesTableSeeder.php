@@ -11,15 +11,15 @@ class PetGenesTableSeeder extends Seeder
      */
     public function run()
     {
-        $gene = new \App\PetGenes;
+        $gene = new \App\PetGene;
         $gene->gene = "sulimov";
         $gene->save();
 
-        $gene1 = new \App\PetGenes;
+        $gene1 = new \App\PetGene;
         $gene1->gene = "borzoi";
         $gene1->save();
 
-        $gene2 = new \App\PetGenes;
+        $gene2 = new \App\PetGene;
         $gene2->gene = "borzoi";
         $gene2->save();
     }
