@@ -12,7 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         //pet
-        $this->call(PetSizesTableSeeder::class);
+        $this->call(PetGenesTableSeeder::class);
         $this->call(PetTypesTableSeeder::class);
 
 

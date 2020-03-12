@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePetSizesTable extends Migration
+class CreatePetGenesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreatePetSizesTable extends Migration
      */
     public function up()
     {
-        Schema::create('pet_sizes', function (Blueprint $table) {
+        Schema::create('pet_genes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('size');
+            $table->text('gene');
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreatePetSizesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pet_sizes');
+        Schema::dropIfExists('pet_genes');
     }
 }

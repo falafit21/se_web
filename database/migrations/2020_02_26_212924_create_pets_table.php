@@ -18,7 +18,7 @@ class CreatePetsTable extends Migration
             $table->string('name');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('pet_type_id')->unsigned();
-            $table->bigInteger('pet_size_id')->unsigned()->nullable();
+            $table->bigInteger('pet_gene_id')->unsigned()->nullable();
             $table->float('weight');
             $table->date('birth_date');
             $table->timestamps();
@@ -33,9 +33,9 @@ class CreatePetsTable extends Migration
                     ->on('pet_types')
                     ->onDelete('cascade');
 
-            $table->foreign('pet_size_id')
+            $table->foreign('pet_gene_id')
                     ->references('id')
-                    ->on('pet_sizes')
+                    ->on('pet_genes')
                     ->onDelete('cascade');
         });
     }
@@ -55,7 +55,7 @@ class CreatePetsTable extends Migration
             $table->dropForeign(['pet_type_id']);
         });
         Schema::table('pets', function(Blueprint $table){
-            $table->dropForeign(['pet_size_id']);
+            $table->dropForeign(['pet_genes_id']);
         });
         Schema::disableForeignKeyConstraints();
 
