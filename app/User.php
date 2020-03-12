@@ -30,7 +30,5 @@ class User extends Authenticatable
         return $this->hasMany(Comment::class);
     }
 
-    public function pet(){
-        return $this->hasOne(User::class);
-    }
+
 }

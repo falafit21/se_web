@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Pet;
+use App\PetGenes;
+use App\PetType;
+use App\User;
 use Illuminate\Http\Request;
 
 class PetsController extends Controller
@@ -18,11 +22,10 @@ class PetsController extends Controller
 
     public function create()
     {
-        return view('pets.create');
+        $genes = PetGenes::all();
+        $types = PetType::all();
+        return view('pets.create', ['genes' => $genes, 'types' => $types]);
     }
-//    public function createPet(){
-//
-//    }
 
     /**
      * Store a newly created resource in storage.
@@ -32,7 +35,28 @@ class PetsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $use_user_id = User::findOrFail(auth()->user()->id);
+        $pet_type_id = PetType::findOrFail($request->input('type')->id);
+        $pet_gene_id = PetGenes::findOrFail($request->input('gene')->id);
+        //fix
+        $request->validate([
+            'name' => ['required'],
+            'type' => ['required'],
+            'gene' => ['required'],
+            'birth-date-input' => ['required'],
+            'weight' => ['required'],
+        ]);
+
+        $pet = new Pet;
+        $pet->name = $request->input('name');
+        $pet->user_id = $use_user_id;
+        $pet->pet_type_id = $pet_type_id;
+        $pet->pet_gene_id = $pet_gene_id;
+        $pet->weight = $request->input('weight');
+        $pet->birth_date = $request->input('birth-date-input');
+
+        return redirect()->route('post.show', ['post' => 1]);
+
     }
 
     /**
