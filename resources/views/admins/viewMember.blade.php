@@ -16,7 +16,7 @@
                     @foreach($users as $user)
                     <tr>
                         <td>{{ $user->name }}</td>
-                        <td>{{ $user->updated_at }}}</td>
+                        <td>{{ $user->created_at }}</td>
                         <td class="text-right">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="block">
@@ -43,7 +43,7 @@
                     @foreach($doctors as $user)
                     <tr>
                         <td>{{ $user->name }}</td>
-                        <td>{{ $user->updated_at }}</td>
+                        <td>{{ $user->created_at }}</td>
                         <td class="text-right">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="block">
