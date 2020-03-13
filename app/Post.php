@@ -22,6 +22,6 @@ class Post extends Model
     }
 
     public function petGene(){
-        return $this->belongsTo(PetGenes::class);
+        return $this->belongsTo(PetGene::class);
     }
 }

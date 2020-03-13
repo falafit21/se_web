@@ -10,7 +10,7 @@ Route::resource('/post', 'PostsController');
 
 //comment
 //Route::resource('/comments', 'CommentController');
-Route::post('/posts/{post_id}/{user_id}/comment', 'PostsController@commentStore')->name('post.comment.store');
+Route::post('/posts/{post_id}/comment', 'PostsController@commentStore')->name('post.comment.store');
 
 //doctor
 Route::get('/docProfile', 'UsersController@getDocProfile');
