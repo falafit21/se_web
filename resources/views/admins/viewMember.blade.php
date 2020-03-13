@@ -3,7 +3,7 @@
     <div style="margin: 70px">
         <div class="row">
             <div class="col-6">
-                <h4>all user</h4>
+                <h4>All Users</h4>
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
@@ -13,9 +13,10 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($users as $user)
                     <tr>
-                        <td>Mark</td>
-                        <td>12/02/1254</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->updated_at }}}</td>
                         <td class="text-right">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="block">
@@ -23,41 +24,13 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Jacob</td>
-                        <td>12/02/1254</td>
-                        <td class="text-right">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="block">
-                                <label class="custom-control-label" for="block">block</label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Larry</td>
-                        <td>12/02/1254</td>
-                        <td class="text-right">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="block">
-                                <label class="custom-control-label" for="block">block</label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Larry</td>
-                        <td>12/02/1254</td>
-                        <td class="text-right">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="block">
-                                <label class="custom-control-label" for="block">block</label>
-                            </div>
-                        </td>
-                    </tr>
+                    @endforeach
+
                     </tbody>
                 </table>
             </div>
             <div class="col-6">
-                <h4>all doctor</h4>
+                <h4>All Doctors</h4>
                 <table class="table">
                     <thead class="thead-dark">
                     <tr>
@@ -67,9 +40,10 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($doctors as $user)
                     <tr>
-                        <td>Mark</td>
-                        <td>12/02/1254</td>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->updated_at }}</td>
                         <td class="text-right">
                             <div class="custom-control custom-switch">
                                 <input type="checkbox" class="custom-control-input" id="block">
@@ -77,26 +51,8 @@
                             </div>
                         </td>
                     </tr>
-                    <tr>
-                        <td>Jacob</td>
-                        <td>12/02/1254</td>
-                        <td class="text-right">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="block">
-                                <label class="custom-control-label" for="block">block</label>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Larry</td>
-                        <td>12/02/1254</td>
-                        <td class="text-right">
-                            <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="block">
-                                <label class="custom-control-label" for="block">block</label>
-                            </div>
-                        </td>
-                    </tr>
+                    @endforeach
+
                     </tbody>
                 </table>
             </div>

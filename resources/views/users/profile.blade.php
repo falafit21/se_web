@@ -60,10 +60,10 @@
                     </div>
                     <div class="card-body">
                         <ul class="list-group list-group-flush">
+                            @foreach($users as $user)
 
-                            <li class="list-group-item">Pet 1's name</li>
-                            <li class="list-group-item">Pet 2's name</li>
-                            <li class="list-group-item">Pet 3's name</li>
+                            <li class="list-group-item">{{ $user->name }}}</li>
+                            @endforeach
 
                         </ul>
                     <div class="card">
