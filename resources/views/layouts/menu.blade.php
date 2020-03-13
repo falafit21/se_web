@@ -23,7 +23,8 @@
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -31,10 +32,12 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li><a class="nav-link" href="{{ url('user') }}">Profile</a></li>
-{{--                @can('create', \App\Post::class)--}}
+                @can('createDoctor', App\User::class)
                     <li><a class="nav-link" href="{{ url('/admin/createDoc') }}">create doctor</a></li>
-{{--                @endif--}}
-                <li><a class="nav-link" href="{{ url('/admin/viewMembers') }}">view all member</a></li>
+                @endcan
+                @can('view', App\User::class, App\User::class)
+                    <li><a class="nav-link" href="{{ url('/admin/viewMembers') }}">view all member</a></li>
+                @endcan
             </ul>
 
             <!-- Right Side Of Navbar -->
@@ -51,7 +54,8 @@
                     @endif
                 @else
                     <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
 

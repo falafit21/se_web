@@ -6,6 +6,7 @@ use App\Comment;
 use App\Post;
 use App\QuestionForm;
 use App\User;
+use App\Pet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,10 +15,16 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all();
+        $pets = Pet::all();
+        $doctors = User::where('role', '=', 'doctor')->get();
         $formsQuestion = QuestionForm::all();
+
         return view('posts.index', [
             'posts' => $posts,
-            'formsQuestion' => $formsQuestion
+            'pets' => $pets,
+            'doctors' => $doctors,
+            'formsQuestion' => $formsQuestion,
+
         ]);
     }
 
