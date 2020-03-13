@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Pet;
-use App\PetGenes;
+use App\PetGene;
 use App\PetType;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PetsController extends Controller
 {
@@ -22,23 +23,16 @@ class PetsController extends Controller
 
     public function create()
     {
-        $genes = PetGenes::all();
+        $genes = PetGene::all();
         $types = PetType::all();
         return view('pets.create', ['genes' => $genes, 'types' => $types]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        $use_user_id = User::findOrFail(auth()->user()->id);
-        $pet_type_id = PetType::findOrFail($request->input('type')->id);
-        $pet_gene_id = PetGenes::findOrFail($request->input('gene')->id);
-        //fix
+        $type = $request->input('type');
+        $gene = $request->input('gene');
         $request->validate([
             'name' => ['required'],
             'type' => ['required'],
@@ -49,13 +43,14 @@ class PetsController extends Controller
 
         $pet = new Pet;
         $pet->name = $request->input('name');
-        $pet->user_id = $use_user_id;
-        $pet->pet_type_id = $pet_type_id;
-        $pet->pet_gene_id = $pet_gene_id;
+        $pet->user_id = Auth::id();
+        $pet->pet_type_id = $type;
+        $pet->pet_gene_id = $gene;
         $pet->weight = $request->input('weight');
         $pet->birth_date = $request->input('birth-date-input');
+        $pet->save();
 
-        return redirect()->route('post.show', ['post' => 1]);
+        return redirect()->route('user');
 
     }
 
