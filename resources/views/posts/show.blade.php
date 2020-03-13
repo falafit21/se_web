@@ -26,9 +26,7 @@
             </div>
         </div>
 
-        <form action="{{  route("post.comment.store", [
-                'post_id' => $post->id
-            ]) }}" style="margin-top: 30px;" method="POST">
+        <form action="{{  route('post.comment.store', ['post_id' => $post->id ]) }}" style="margin-top: 30px;" method="POST">
 
             @csrf
             <div class="row">

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Pet;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -12,7 +14,8 @@ class UsersController extends Controller
     }
 
     public function getUserProfile(){
-        return view('users.profile');
+        $user = Auth::user();
+        return view('users.profile',['user'=>$user]);
     }
 
     public function getDocProfile()
@@ -37,7 +40,7 @@ class UsersController extends Controller
 
     public function show($id)
     {
-        //
+        return view();
     }
 
     public function edit($id)
