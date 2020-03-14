@@ -12,7 +12,7 @@
                             <tbody style="color: black">
                             <tr>
                                 <th scope="row">TYPE</th>
-                                <td>{{$pet->gene}}</td>
+                                <td>{{$pet->petType->type}}</td>
                             </tr>
                             <tr>
                                 <th scope="row">NAME</th>
