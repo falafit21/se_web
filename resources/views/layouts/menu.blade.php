@@ -31,15 +31,20 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                <li><a class="nav-link" href="{{ url('user') }}">Profile</a></li>
-                @can('profileDoctor')
+                @can('profileUser', App\User::class)
                     <li><a class="nav-link" href="{{ url('user') }}">Profile</a></li>
+                @endcan
+                @can('profileDoctor', App\User::class)
+                    <li><a class="nav-link" href="{{ url('docProfile') }}">Profile</a></li>
                 @endcan
                 @can('createDoctor', App\User::class)
                     <li><a class="nav-link" href="{{ url('/admin/createDoc') }}">create doctor</a></li>
                 @endcan
                 @can('viewAny', App\User::class)
                     <li><a class="nav-link" href="{{ url('/admin/viewMembers') }}">view all member</a></li>
+                @endcan
+                @can('createTip' , App\User::class)
+                    <li><a class="nav-link" href="{{ url('createTip') }}">create tip</a></li>
                 @endcan
             </ul>
 

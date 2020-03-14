@@ -40,20 +40,21 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div style="margin-left: 40px; margin-right: 40px; margin-top: 10px; margin-bottom: 50px;">
             <h2>Create post</h2>
-            <form action="{{ route('post.store') }}" method="POST" class="text-left">
+            <form method="POST" action="{{ route('post.store') }}" class="text-left">
+                @csrf
                 <div class="form-group">
                     <label for="title">title</label>
-                    <input type="text" class="form-control" id="title">
+                    <input type="text" class="form-control" id="title" name="title">
                 </div>
                 <div class="form-group">
                     <label for="detail">detail</label>
-                    <textarea class="form-control" id="detail" rows="3"></textarea>
+                    <textarea class="form-control" id="detail" rows="3" name="detail"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="choosePet">Choose your pet</label>
-                    <select id="choosePet" class="form-control">
+                    <select id="choosePet" class="form-control" name="choosePet">
                         @foreach($pets as $pet)
-                            <option value="0">{{ $pet->name }}</option>
+                            <option value="{{ $pet->id }}">{{ $pet->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -61,7 +62,7 @@
                     <label for="chooseDoc">Choose Doctor</label>
                     <select id="chooseDoc" class="form-control" name="chooseDoc">
                         @foreach($doctors as $doctor)
-                            <option value="0">{{ $doctor->name }}</option>
+                            <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
                         @endforeach
                     </select>
                     <a href="{{ url('doctorLists') }}" target="_blank" class="btn btn-info">doctor list</a>
@@ -92,7 +93,7 @@
                         </tr>
                     @endforeach
                 </table>
-                <a type="submit" class="btn btn-primary">Post</a>
+                <button type="submit" class="btn btn-primary">Post</button>
             </form>
         </div>
     </div>
