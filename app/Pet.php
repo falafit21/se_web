@@ -10,7 +10,11 @@ class Pet extends Model
         return $this->belongsTo(PetSize::class);
     }
 
-    public function gene(){
+    public function petGene(){
         return $this->belongsTo(PetGene ::class);
+    }
+
+    public function petType(){
+        return $this->belongsTo(PetType::class);
     }
 }

@@ -3,7 +3,7 @@
 @section('content')
     <div style="margin-right: 200px; margin-left: 200px; margin-top: 50px">
         <h4>Create Pet</h4>
-        <form method="POST" action="{{ route("pet.store") }}">
+        <form method="POST" action="{{ route('pet.store') }}">
             @csrf
             <div class="form-group">
                 <label for="name">Name</label>
@@ -51,4 +51,9 @@
             </div>
         </form>
     </div>
+
 @endsection
+
+
+
+

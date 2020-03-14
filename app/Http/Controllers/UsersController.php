@@ -2,17 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Pet;
+use App\Post;
+use App\QuestionForm;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
     public function index()
     {
-        return view('admins.viewMember');
+
+
+        $doctors = User::where('role', '=', 'doctor')->get();
+        $users = User::where('role', '=', 'user')->get();
+
+
+        return view('admins.viewMember', [
+            'doctors' => $doctors,
+            'users' => $users,
+
+        ]);
+
     }
 
     public function getUserProfile(){
-        return view('users.profile');
+        $user = Auth::user();
+        return view('users.profile',['user'=>$user]);
     }
 
     public function getDocProfile()
@@ -35,9 +52,13 @@ class UsersController extends Controller
         //
     }
 
-    public function show($id)
+    public function show($users,$doctors)
     {
-        //
+        return view('admins.viewMember', [
+            'doctors' => $doctors,
+            'users' => $users,
+
+        ]);
     }
 
     public function edit($id)
