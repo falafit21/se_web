@@ -21,7 +21,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config('app.name', 'Laravel') }}
+            Pet Track
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -29,8 +29,8 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
+                <li><a class="nav-link" href="{{ url('/') }}">Board</a></li>
                 @can('profileUser', App\User::class)
                     <li><a class="nav-link" href="{{ url('user') }}">Profile</a></li>
                 @endcan
@@ -38,14 +38,15 @@
                     <li><a class="nav-link" href="{{ url('docProfile') }}">Profile</a></li>
                 @endcan
                 @can('createDoctor', App\User::class)
-                    <li><a class="nav-link" href="{{ url('/admin/createDoc') }}">create doctor</a></li>
+                    <li><a class="nav-link" href="{{ url('/admin/createDoc') }}">all doctor</a></li>
                 @endcan
                 @can('viewAny', App\User::class)
-                    <li><a class="nav-link" href="{{ url('/admin/viewMembers') }}">view all member</a></li>
+                    <li><a class="nav-link" href="{{ url('/admin/viewMembers') }}">all user</a></li>
                 @endcan
                 @can('createTip' , App\User::class)
                     <li><a class="nav-link" href="{{ url('petTip') }}">create tip</a></li>
                 @endcan
+
             </ul>
 
             <!-- Right Side Of Navbar -->
