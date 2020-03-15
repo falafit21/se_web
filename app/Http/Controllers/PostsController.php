@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\PetTip;
 use App\Post;
 use App\QuestionForm;
 use App\User;
@@ -15,7 +16,7 @@ class PostsController extends Controller
     public function index()
     {
         $posts = Post::all();
-        $pets = Pet::all();
+        $pets = Pet::where('user_id', '=', Auth::id())->get();
         $doctors = User::where('role', '=', 'doctor')->get();
         $formsQuestion = QuestionForm::all();
 
@@ -35,14 +36,21 @@ class PostsController extends Controller
 
     public function store(Request $request)
     {
-//        $request->validate([
-//
-//        ]);
-//        $post = new Post();
-//        $post->user_id = Auth::id();
-//        $post->request_ans_user_id = $request->input('chooseDoc');
-//        $post->question = $request->input('title');
-//        $post->detail = $request->input('detail');
+        $request->validate([
+            'chooseDoc' => ['required'],
+            'title' => ['required'],
+            'detail' => ['required'],
+            'choosePet' => ['required'],
+        ]);
+        $post = new Post();
+        $post->user_id = Auth::id();
+        $post->request_ans_user_id = $request->input('chooseDoc');
+        $post->question = $request->input('title');
+        $post->detail = $request->input('detail');
+        $post->pet_id = $request->input('choosePet');
+        $post->save();
+
+        return redirect()->route('post.index');
     }
 
     public function commentStore(Request $request, $post_id){
@@ -67,6 +75,10 @@ class PostsController extends Controller
         $post = Post::find($id);
         return view('posts.show', ['post' => $post]);
     }
+    public function createTip(){
+        return view('posts.createTip');
+    }
+
 
     public function edit($id)
     {

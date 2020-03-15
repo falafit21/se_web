@@ -132,8 +132,8 @@
             <div class="card post-card" style="margin-bottom: 10px">
                 <div class="card-body row">
                     <div class="col-11">
-                        <h5>{{$post->question}}</h5>
-                        <div>{{$post->detail}}</div>
+                        <h5>{{ $post->question }}</h5>
+                        <div>{{ $post->detail }}</div>
                     </div>
                     <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
                         <button class="btn btn-warning">edit</button>
@@ -165,8 +165,6 @@
             </div>
         </div>
     </div>
-
-
 </div>
 
 @endsection
