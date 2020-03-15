@@ -2,7 +2,9 @@
 
 @section('style')
     <style>
-
+        a {
+            text-decoration:none;
+        }
         .sidenav {
             height: 100%;
             width: 0;
@@ -35,11 +37,12 @@
         }
     </style>
 @endsection
+
 @section('content')
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div style="margin-left: 40px; margin-right: 40px; margin-top: 10px; margin-bottom: 50px;">
-            <h2>Create post</h2>
+            <h2>Create post </h2>
             <form method="POST" action="{{ route('post.store') }}" class="text-left">
                 @csrf
                 <div class="form-group">
@@ -60,12 +63,17 @@
                 </div>
                 <div class="form-group">
                     <label for="chooseDoc">Choose Doctor</label>
-                    <select id="chooseDoc" class="form-control" name="chooseDoc">
-                        @foreach($doctors as $doctor)
-                            <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
-                        @endforeach
-                    </select>
-                    <a href="{{ url('doctorLists') }}" target="_blank" class="btn btn-info">doctor list</a>
+                    <div class="row">
+                        <div class="col-10">
+                            <select id="chooseDoc" class="form-control" name="chooseDoc" >
+                                @foreach($doctors as $doctor)
+                                    <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <a href="{{ url('doctorLists') }}" target="_blank" class="btn btn-info col-2" style="background-color: #EB984E; color: white">doctor list</a>
+                    </div>
+
                 </div>
                 <h5 style="margin-top: 50px" class="text-left">Pet Symptom</h5>
                 <table class="table text-left">
@@ -99,10 +107,8 @@
     </div>
 
     <div class="container" style="margin-top: 50px">
-        @can('create', \App\Post::class)
-            <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Create post</span>
-        @endcan
-        <h2>Tips</h2>
+
+        <h2 style="color: white">Tips</h2>
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -129,23 +135,20 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-
-        <h2 style="margin-top: 50px">All Questions</h2>
+        @can('create', \App\Post::class)
+            <button type="button" class="btn btn-warning btn-lg btn-block" style="cursor:pointer; margin-top: 20px" onclick="openNav()">Create question</button>
+        @endcan
+        <h2 style="margin-top: 50px; color: white">All Questions</h2>
 
         @foreach($posts as $post)
-            <div class="card post-card" style="margin-top: 10px">
-                <a href="{{ route('post.show', ['post' => $post->id]) }}">
-                    <h4 class="card-header">
-                        {{ $post->question }}
-                    </h4>
+            <div class="card post-card border-light" style="margin-top: 10px">
+                <a href="{{ route('post.show', ['post' => $post->id]) }}" style="text-decoration: none; color: #1b1e21">
                     <div class="card-body">
-
-                        <p>{{ $post->detail }}</p>
+                        <p class="card-text"><small class="text-muted" style="font-size: 15px">{{ $post->user->name }}</small></p>
+                        <p style="font-size: 25px"><i class="fas fa-question" style="margin-right: 9px"></i>  {{ $post->question }}</p>
+                        <p style="font-size: 18px">{{ $post->detail }}</p>
                     </div>
                 </a>
-                <div class="card-footer text-muted text-right">
-                    {{ $post->user->name }}
-                </div>
             </div>
         @endforeach
     </div>

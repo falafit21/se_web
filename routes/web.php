@@ -2,7 +2,7 @@
 
 
 Route::get('/', function () {
-    return view('/home');
+    return redirect()->route('post.index');
 });
 
 Route::get('/user', 'UsersController@getUserProfile')->name("user");
@@ -17,9 +17,7 @@ Route::get('/docProfile', 'UsersController@getDocProfile');
 Route::get('/admin/createDoc', 'UsersController@createDoc');
 Route::resource('/doctorLists','DoctorListsController');
 
-Route::get('/createTip', 'PostsController@createTip');
-
-Route::resource('petTip', 'PetTipsController');
+Route::resource('/petTip', 'PetTipsController');
 
 //admin
 Route::get('/admin/viewMembers', 'UsersController@index');

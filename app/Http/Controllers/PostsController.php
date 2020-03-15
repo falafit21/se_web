@@ -75,10 +75,6 @@ class PostsController extends Controller
         $post = Post::find($id);
         return view('posts.show', ['post' => $post]);
     }
-    public function createTip(){
-        return view('posts.createTip');
-    }
-
 
     public function edit($id)
     {
