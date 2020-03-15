@@ -26,11 +26,39 @@
                             <tr>
                                 <th scope="row">WEIGHT</th>
                                 <td>
-                                    <span class="row" style="width: 250px; background-color: #93f8fc">
-                                        <input type="text" class="form-control col-8">
-                                        <button type="button" class="btn btn-primary col-4">คำนวณ</button>
-                                    </span>
+                                    {{$pet->weight}}
+{{--                                    <span class="row" style="width: 250px;">--}}
+
+                                        <button type="button" class="btn btn-primary col-4" data-toggle="modal" data-target="#myModal" style="width: 250px; margin-left: 1rem;">Update</button>
+                                        <div id="myModal" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+    <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Update your pet weight</h4>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div >weight <span class="col-xs-3"><input type="text" class="form-control col-8"></span></div>
+
+
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Update</button>
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                                </div>
+                                            </div>
+
+                                            </div>
+                                        </div>
+{{--                                    </span>--}}
                                 </td>
+                            </tr>
+                            <tr>
+                                <th>STATUS</th>
+                                <td>{{$pet->status}}</td>
                             </tr>
 
                             </tbody>
@@ -42,15 +70,16 @@
             </div>
             <div class="col-8">
                 <h2>vaccines table</h2>
-                <div class="card text-white bg-light text-center">
-                    <div class="card-body" >
+                <div class="card  bg-light text-center">
+                    <div class="card-body">
                         <table class="table table-borderless">
                             <tbody style="color: black">
                             <tr class="text-center">
                                 <th scope="row"></th>
-                                <td>ได้รับวันที่</td>
-                                <td>หมดอายุวันที่</td>
+                                <td>Received Date</td>
+                                <td>Expire Date</td>
                             </tr>
+
                             <tr>
                                 <th scope="row">vaccines 1</th>
                                 <td><input type="text" class="form-control"></td>
@@ -69,7 +98,56 @@
 
                             </tbody>
                         </table>
-                        <button type="button" class="btn btn-primary col-4" style="margin: 20px">add vaccines</button>
+                        <button type="button" class="btn btn-primary col-4" data-toggle="modal" data-target="#add" style="width: 250px; margin-left: 1rem;">Add Vaccine</button>
+                        <div id="add" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Add Vaccine</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container">
+                                            <form>
+                                                <div class="form-group row">
+                                                    <label for="vaccineName" class="col-sm-4 col-form-label">Vaccine Name</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" id="vaccineName">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="received" class="col-sm-4 col-form-label">Received Date</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" id="receive">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="expire" class="col-sm-4 col-form-label">Expire Date</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" id="expire">
+                                                    </div>
+                                                </div>
+
+                                            </form>
+
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Add</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>

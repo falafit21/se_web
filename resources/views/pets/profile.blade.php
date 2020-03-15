@@ -52,17 +52,22 @@
                             </tr>
                             <tr>
                                 <th scope="row">vaccines 1</th>
-                                <td>
-                                    <div class="input-group date" data-provide="datepicker">
-                                        <input type="text" class="form-control">
-                                        <div class="input-group-addon">
-                                            <span class="glyphicon glyphicon-th"></span>
-                                        </div>
-                                    </div>
-                                </td>
+                                <td><div class="input-append date form_datetime">
+                                        <input size="16" type="text" value="" readonly>
+                                        <span class="add-on"><i class="icon-th"></i></span>
+                                    </div></td>
                                 <td><input type="text" class="form-control"></td>
                             </tr>
-
+                            <tr>
+                                <th scope="row">vaccines 2</th>
+                                <td><input type="text" class="form-control"></td>
+                                <td><input type="text" class="form-control"></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">vaccines 3</th>
+                                <td><input type="text" class="form-control"></td>
+                                <td><input class="date form-control" type="text"></td>
+                            </tr>
 
                             </tbody>
                         </table>
@@ -78,10 +83,9 @@
 
 @section('script')
     <script type="text/javascript">
-        $('.datepicker').datepicker({
-            format: 'mm/dd/yyyy',
-            startDate: '-3d'
-        })
+        $(".form_datetime").datetimepicker({
+            format: "dd MM yyyy - hh:ii"
+        });
     </script>
 
 
