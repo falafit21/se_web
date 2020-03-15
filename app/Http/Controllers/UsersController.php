@@ -34,7 +34,8 @@ class UsersController extends Controller
 
     public function getDocProfile()
     {
-        return view('doctors.profile');
+        $user = Auth::user();
+        return view('doctors.profile',['user'=>$user]);
     }
 
     public function create()

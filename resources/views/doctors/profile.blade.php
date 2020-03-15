@@ -12,27 +12,27 @@
                             <tbody style="color: black">
                             <tr>
                                 <th scope="row">NAME</th>
-                                <td>Suvicha narongchai</td>
+                                <td>{{$user->name}}</td>
                             </tr>
                             <tr>
                                 <th scope="row">PHONE NUMBER</th>
-                                <td>084 5858267</td>
+                                <td>{{$user->getDoctor->phone_number}}</td>
                             </tr>
                             <tr>
                                 <th scope="row">EMAIL</th>
-                                <td>kitpavin@gmail.com</td>
+                                <td>{{$user->email}}</td>
                             </tr>
                             <tr>
                                 <th scope="row">GRADUATED FROM</th>
-                                <td>Kasetart University</td>
+                                <td>{{$user->doctor->graduated}}</td>
                             </tr>
                             <tr>
                                 <th scope="row">LICENSE NUMBER</th>
-                                <td>1264597846</td>
+                                <td>{{$user->doctor->license_number}}</td>
                             </tr>
                             <tr>
                                 <th scope="row">WORK AT</th>
-                                <td>Kasetsart Unversity</td>
+                                <td>{{$user->doctor->work_at}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -45,6 +45,7 @@
             </div>
             <div class="col-8">
                 <h2>Request Question</h2>
+                
                 <div class="card post-card" style="margin-top: 10px">
                     <div class="card-body">
                         <h5>question 1</h5>

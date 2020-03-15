@@ -24,4 +24,8 @@ class Post extends Model
     public function petGene(){
         return $this->belongsTo(PetGene::class);
     }
+
+    public function requestUser(){
+        return $this->hasMany(User::class);
+    }
 }

@@ -20,6 +20,7 @@ class UsersTableSeeder extends Seeder
         $user1->password = Hash::make('bell1234');
         $user1->status = 1;
         $user1->role = "doctor";
+        $user->doctor_info_id = 1;
         $user1->save();
 
         $user2 = new \App\User();

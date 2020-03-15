@@ -34,5 +34,15 @@ class User extends Authenticatable
         return $this->hasMany(Pet::class);
     }
 
+    public function getDoctor(){
+        return $this->belongsTo(DoctorInfo::class);
+    }
+
+    public function requestPost(){
+        return $this->belongsTo(Post::class);
+    }
+
+
+
 
 }
