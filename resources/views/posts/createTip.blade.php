@@ -2,7 +2,7 @@
 @section('content')
     <div style="margin-right: 200px; margin-left: 200px; margin-top: 50px">
         <h4>Create Tip</h4>
-        <form method="POST">
+        <form method="post" action="{{ route('petTip.store') }}">
             @csrf
             <div class="form-group">
                 <label for="title">title</label>

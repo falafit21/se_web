@@ -44,7 +44,7 @@
                     <li><a class="nav-link" href="{{ url('/admin/viewMembers') }}">view all member</a></li>
                 @endcan
                 @can('createTip' , App\User::class)
-                    <li><a class="nav-link" href="{{ url('createTip') }}">create tip</a></li>
+                    <li><a class="nav-link" href="{{ url('petTip') }}">create tip</a></li>
                 @endcan
             </ul>
 

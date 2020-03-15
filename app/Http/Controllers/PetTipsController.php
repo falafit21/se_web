@@ -7,14 +7,10 @@ use Illuminate\Http\Request;
 
 class PetTipsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return view('posts.createTip');
     }
 
     /**
@@ -27,21 +23,15 @@ class PetTipsController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-//        $tip = new PetTip();
-//        $tip->title = $request->input('title');
-//        $tip->detail = $request->input('detail');
-//        $tip->img_path = 'path';
-//        $tip->save();
-//
-        return redirect()->route('post');
+        $tip = new PetTip();
+        $tip->title = $request->input('title');
+        $tip->detail = $request->input('detail');
+        $tip->img_path = 'path';
+        $tip->save();
+
+        return redirect()->route('post.index');
     }
 
     /**
