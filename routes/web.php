@@ -2,7 +2,7 @@
 
 
 Route::get('/', function () {
-    return view('/home');
+    return redirect()->route('post.index');
 });
 
 Route::get('/user', 'UsersController@getUserProfile')->name("user");
