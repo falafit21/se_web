@@ -43,7 +43,6 @@ class PostsController extends Controller
 //        $post->request_ans_user_id = $request->input('chooseDoc');
 //        $post->question = $request->input('title');
 //        $post->detail = $request->input('detail');
-
     }
 
     public function commentStore(Request $request, $post_id){

@@ -14,8 +14,12 @@
 
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+<<<<<<< HEAD
         <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 {{--        <link href="{{ asset('css/public.css') }}" rel="stylesheet">--}}
+=======
+        <link href="{{ asset('css/public.css') }}" rel="stylesheet">
+>>>>>>> 690a6967f99ac96eb4dce2c28684931eca5fb1ef
 
         @yield('style')
     </head>

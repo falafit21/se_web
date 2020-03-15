@@ -62,7 +62,8 @@ class PetsController extends Controller
      */
     public function show($id)
     {
-        //
+        $pet = Pet::findOrFail($id);
+        return view('pets.show',['pet'=> $pet]);
     }
 
     /**

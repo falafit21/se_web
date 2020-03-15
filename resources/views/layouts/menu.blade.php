@@ -32,10 +32,13 @@
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
                 <li><a class="nav-link" href="{{ url('user') }}">Profile</a></li>
+                @can('profileDoctor')
+                    <li><a class="nav-link" href="{{ url('user') }}">Profile</a></li>
+                @endcan
                 @can('createDoctor', App\User::class)
                     <li><a class="nav-link" href="{{ url('/admin/createDoc') }}">create doctor</a></li>
                 @endcan
-                @can('view', App\User::class, App\User::class)
+                @can('viewAny', App\User::class)
                     <li><a class="nav-link" href="{{ url('/admin/viewMembers') }}">view all member</a></li>
                 @endcan
             </ul>

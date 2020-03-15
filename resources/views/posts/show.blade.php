@@ -11,42 +11,52 @@
             </h4>
             <div class="card-body">
                 <div class="row">
-                    <h5 class="col-11">
+                    <h5 class="col-10">
                         {{ $post->detail }}
                     </h5>
-                    <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
-                        <a href="{{ route('post.edit', ['post' => 2]) }}">
-                            <button class="btn btn-warning">edit</button>
-                        </a>
+
+                    <div class="col-2" style="display: flex; justify-content: center; align-items: center;">
+                        @can('update', $post->user)
+                            <a href="{{ route('post.edit', ['post' => 2]) }}" style="margin-right: 5px">
+                                <button class="btn btn-warning">edit</button>
+                            </a>
+                        @endcan
+                        @can('delete', $post->user)
+                            <a>
+                                <button class="btn btn-danger">delete</button>
+                            </a>
+                        @endcan
                     </div>
+
                 </div>
             </div>
             <div class="card-footer text-muted">
                 {{ $post->user->name }}
             </div>
         </div>
-
-        <form action="{{  route("post.comment.store", [
+        @can('view', $post->user)
+            <form action="{{  route("post.comment.store", [
                 'post_id' => $post->id
             ]) }}" style="margin-top: 30px;" method="POST">
 
-            @csrf
-            <div class="row">
-                <div class="col-10">
-                    <label for="answer">Answers : </label>
-                    <textarea name="answer" id="answer" style="width: 100%" rows="4"
-                              class="form-control @error('answer') is-invalid @enderror"
-                    >{{ old('answer') }}</textarea>
-                    @error('answer')
-                    <div class="alert alert-danger">{{$message}}</div>
-                    @enderror
+                @csrf
+                <div class="row">
+                    <div class="col-10">
+                        <label for="answer">Answers : </label>
+                        <textarea name="answer" id="answer" style="width: 100%" rows="4"
+                                  class="form-control @error('answer') is-invalid @enderror"
+                        >{{ old('answer') }}</textarea>
+                        @error('answer')
+                        <div class="alert alert-danger">{{$message}}</div>
+                        @enderror
+                    </div>
+                    <div class="col-2 text-center" style="display: flex; justify-content: center; align-items: center;">
+                        <button class="btn btn-info" type="submit">comment</button>
+                    </div>
                 </div>
-                <div class="col-2 text-center" style="display: flex; justify-content: center; align-items: center;">
-                    <button class="btn btn-info" type="submit">comment</button>
-                </div>
-            </div>
 
-        </form>
+            </form>
+        @endcan
         <hr>
         <!-- comment -->
         <ul class="list-group list-group-flush">
@@ -58,9 +68,16 @@
                             <h4>{{ $comment->comment }}</h4>
                             {{ $comment->created_at->diffForHumans() }}
                         </div>
+
                         <div class="col-1" style="display: flex; justify-content: center; align-items: center;">
-                            <button class="btn btn-warning">edit</button>
+                            @can('update', $comment->user)
+                                <button class="btn btn-warning">edit</button>
+                            @endcan
+                            @can('delete', $comment->user)
+                                <button class="btn btn-danger">delete</button>
+                            @endcan
                         </div>
+
                     </div>
                 </li>
             @endforeach

@@ -7,6 +7,7 @@ use App\Post;
 use App\QuestionForm;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -27,7 +28,8 @@ class UsersController extends Controller
     }
 
     public function getUserProfile(){
-        return view('users.profile');
+        $user = Auth::user();
+        return view('users.profile',['user'=>$user]);
     }
 
     public function getDocProfile()
