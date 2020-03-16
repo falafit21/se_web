@@ -15,8 +15,8 @@ class CreateVaccinesTable extends Migration
     {
         Schema::create('vaccines', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
             $table->bigInteger('pet_type_id')->unsigned();
+            $table->string('name');
             $table->integer('activate_range');
             $table->text('prevent_symptom');
             $table->timestamps();
