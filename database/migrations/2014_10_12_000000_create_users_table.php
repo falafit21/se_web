@@ -23,10 +23,10 @@ class CreateUsersTable extends Migration
             $table->string('img_path')->nullable();
             $table->boolean('status');
             $table->string('role');
-            $table->bigInteger('doctors_info_id')->unsigned()->nullable();
+            $table->bigInteger('doctor_info_id')->unsigned()->nullable();
             $table->timestamps();
 
-            $table->foreign('doctors_info_id')
+            $table->foreign('doctor_info_id')
                 ->references('id')
                 ->on('doctors_info')
                 ->onDelete('cascade');
@@ -42,7 +42,7 @@ class CreateUsersTable extends Migration
     {
         Schema::enableForeignKeyConstraints();
         Schema::table('users', function(Blueprint $table){
-            $table->dropForeign(['doctors_info_id']);
+            $table->dropForeign(['doctor_info_id']);
         });
         Schema::disableForeignKeyConstraints();
 

@@ -8,6 +8,7 @@ use App\QuestionForm;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\DoctorInfo;
 
 class UsersController extends Controller
 {
@@ -30,7 +31,10 @@ class UsersController extends Controller
 
     public function getDocProfile()
     {
-        return view('doctors.profile');
+        $user = Auth::user();
+        $doctor = DoctorInfo::findOrFail($user->doctor_info_id);
+        // $posts = Post::findOrFail($user->id);
+        return view('doctors.profile',['user'=>$user , 'doctor'=>$doctor]);
     }
 
     public function create()
