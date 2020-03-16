@@ -13,11 +13,8 @@ class UsersController extends Controller
 {
     public function index()
     {
-
-
         $doctors = User::where('role', '=', 'doctor')->get();
         $users = User::where('role', '=', 'user')->get();
-
 
         return view('admins.viewMember', [
             'doctors' => $doctors,
