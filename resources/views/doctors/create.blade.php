@@ -1,6 +1,6 @@
 @extends('layouts.master')
 @section('content')
-    <div style="margin-right: 200px; margin-left: 200px; margin-top: 50px">
+    <div style="margin-right: 200px; margin-left: 200px; margin-top: 50px; color: white">
         <h4>create doctor</h4>
         <form>
             <div class="form-group">

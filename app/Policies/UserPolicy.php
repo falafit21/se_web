@@ -9,6 +9,10 @@ class UserPolicy
 {
     use HandlesAuthorization;
 
+    public function viewOnlyUser(User $user){
+        return $user->role === "user" ;
+    }
+
     public function viewAny(User $user)
     {
         return $user->role === "admin";
@@ -33,9 +37,13 @@ class UserPolicy
         return $user->role === "doctor";
     }
 
+    public function createDoctor(User $user){
+        return $user->role === "admin";
+    }
+
     public function profileUser(User $user)
     {
-        return $user->role === "user";
+        return $user->role === "user" || $user->role === "admin";
     }
 
     public function update(User $user, User $model)

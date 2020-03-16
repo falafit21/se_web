@@ -92,7 +92,8 @@
                                     <div class="custom-control custom-radio">
                                         <input type="radio" id="no{{ $loop->index }}"
                                                name="customRadio[{{ $loop->index }}]"
-                                               class="custom-control-input">
+                                               class="custom-control-input"
+                                        >
                                         <label class="custom-control-label"
                                                for="no{{ $loop->index }}">no</label>
                                     </div>
@@ -105,52 +106,64 @@
             </form>
         </div>
     </div>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" style="background-color: #D7DBDD; height: 250px; ">
+            <div class="carousel-item active">
 
-    <div class="container" style="margin-top: 50px">
-
-        <h2 style="color: white">Tips</h2>
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner" style="background-color: #636b6f; height: 250px; ">
-                <div class="carousel-item active">
-
-                </div>
-                <div class="carousel-item">
-
-                </div>
-                <div class="carousel-item">
-
-                </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <div class="carousel-item">
+
+            </div>
+            <div class="carousel-item">
+
+            </div>
         </div>
-        @can('create', \App\Post::class)
-            <button type="button" class="btn btn-warning btn-lg btn-block" style="cursor:pointer; margin-top: 20px" onclick="openNav()">Create question</button>
-        @endcan
-        <h2 style="margin-top: 50px; color: white">All Questions</h2>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="" style="margin: 50px">
+{{--        <div class="row">--}}
+{{--            <div class="col-5">--}}
 
-        @foreach($posts as $post)
-            <div class="card post-card border-light" style="margin-top: 10px">
-                <a href="{{ route('post.show', ['post' => $post->id]) }}" style="text-decoration: none; color: #1b1e21">
-                    <div class="card-body">
-                        <p class="card-text"><small class="text-muted" style="font-size: 15px">{{ $post->user->name }}</small></p>
-                        <p style="font-size: 25px"><i class="fas fa-question" style="margin-right: 9px"></i>  {{ $post->question }}</p>
-                        <p style="font-size: 18px">{{ $post->detail }}</p>
+                @can('create', \App\Post::class)
+                    <button type="button" class="btn btn-warning btn-lg btn-block" style="cursor:pointer; margin-top: 20px"
+                            onclick="openNav()">Create question
+                    </button>
+                @endcan
+{{--            </div>--}}
+
+{{--            <div class="col-7">--}}
+{{--                <h2 style="color: white">All Questions</h2>--}}
+                @foreach($posts as $post)
+                    <div class="card post-card border-light" style="margin-top: 10px">
+                        <a href="{{ route('post.show', ['post' => $post->id]) }}"
+                           style="text-decoration: none; color: #1b1e21">
+                            <div class="card-body">
+                                <p class="card-text"><small class="text-muted"
+                                                            style="font-size: 15px">{{ $post->user->name }}</small></p>
+                                <p style="font-size: 25px"><i class="fas fa-question"
+                                                              style="margin-right: 9px"></i> {{ $post->question }}</p>
+                                <p style="font-size: 18px">{{ $post->detail }}</p>
+                            </div>
+                        </a>
                     </div>
+                @endforeach
+                <a href="" class="card" style="margin-top: 30px; text-decoration: none">
+                    <p class="text-center" style="margin: 15px; font-size: 20px">Read more</p>
                 </a>
-            </div>
-        @endforeach
+{{--            </div>--}}
+{{--        </div>--}}
     </div>
 @endsection
 

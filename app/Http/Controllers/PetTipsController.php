@@ -10,7 +10,8 @@ class PetTipsController extends Controller
 
     public function index()
     {
-        return view('posts.createTip');
+        $tips = PetTip::orderBy('id', 'desc')->get();
+        return view('posts.createTip', ['tips' => $tips]);
     }
 
     /**
@@ -31,7 +32,7 @@ class PetTipsController extends Controller
         $tip->img_path = 'path';
         $tip->save();
 
-        return redirect()->route('post.index');
+        return redirect()->route('petTip.index');
     }
 
     /**
