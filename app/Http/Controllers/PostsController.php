@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\Form;
 use App\PetTip;
 use App\Post;
 use App\QuestionForm;
@@ -15,7 +16,7 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::orderBy('id', 'desc')->take(3)->get();
         $pets = Pet::where('user_id', '=', Auth::id())->get();
         $doctors = User::where('role', '=', 'doctor')->get();
         $formsQuestion = QuestionForm::all();
@@ -48,7 +49,16 @@ class PostsController extends Controller
         $post->question = $request->input('title');
         $post->detail = $request->input('detail');
         $post->pet_id = $request->input('choosePet');
-        $post->save();
+
+        if($post->save()){
+            $recentPost_id = $post->latest()->first()->id;
+
+            $form = new Form();
+            $form->post_id = $recentPost_id;
+            $form->question_form_id = 1;
+            $form->answer = $request->input('yes1');
+            $form->save();
+        }
 
         return redirect()->route('post.index');
     }

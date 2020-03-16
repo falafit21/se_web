@@ -7,8 +7,7 @@
     <div class="container" style="margin-top: 30px">
         <div class="card">
             <div class="card-body">
-                <p class="card-text"><small class="text-muted" style="font-size: 15px">{{ $post->user->name }}</small>
-                </p>
+                <p class="card-text"><small class="text-muted" style="font-size: 15px">{{ $post->user->name }}</small></p>
                 <div class="row">
                     <p class="col-10" style="font-size: 25px;">
                         <i class="fas fa-question" style="margin-right: 9px"></i> {{ $post->question }}
@@ -16,7 +15,7 @@
                     <div class="col-2 text-right col-2" style="margin-top: 10px">
                         @can('update', $post->user)
                             <i class="far fa-edit" style="color: #F5B041; font-size: 20px"
-                                type="button" data-toggle="tooltip" data-placement="top" title="edit post"
+                               type="button" data-toggle="tooltip" data-placement="top" title="edit post"
                             ></i>
                         @endcan
                         @can('delete', $post->user)
@@ -26,7 +25,16 @@
                         @endcan
                     </div>
                 </div>
-                <p style="font-size: 18px">{{ $post->detail }}</p>
+                <p style="font-size: 18px; margin-bottom: 20px">{{ $post->detail }}</p>
+{{--                <div style="background-color: #1d68a7">--}}
+                    <a href="" style="margin-right: 20px" >
+                        <p><i style="font-size: 20px; margin-right: 8px" class="fab fa-wpforms"></i> Pet Symptom</p>
+                    </a>
+{{--                    <a >--}}
+{{--                        <p><i style="font-size: 20px; margin-right: 8px" class="fab fa-wpforms"></i> Pet Symptom</p>--}}
+{{--                    </a>--}}
+{{--                </div>--}}
+
             </div>
         </div>
         @can('view', $post->user)
@@ -37,7 +45,7 @@
                 @csrf
                 <div class="row">
                     <div class="col-10">
-                        <label for="answer">Answers : </label>
+                        <label for="answer" style="color: white">Answers : </label>
                         <textarea name="answer" id="answer" style="width: 100%" rows="3"
                                   class="form-control @error('answer') is-invalid @enderror"
                         >{{ old('answer') }}</textarea>
@@ -52,7 +60,7 @@
 
             </form>
         @endcan
-        <hr>
+        <hr style="background-color: white">
         <!-- comment -->
         <ul class="list-group list-group-flush">
             @foreach($post->comments as $comment)

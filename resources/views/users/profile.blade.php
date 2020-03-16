@@ -56,7 +56,8 @@
                             </tbody>
                         </table>
                         <div class=" text-right">
-                            <i class="far fa-edit" data-toggle="modal" data-target="#editModal" style="font-size: 18px; color: #F5B041"
+                            <i class="far fa-edit" data-toggle="modal" data-target="#editModal"
+                               style="font-size: 18px; color: #F5B041"
                                type="button" data-toggle="tooltip" data-placement="top" title="edit profile"
                             ></i>
                         </div>
@@ -64,15 +65,16 @@
                 </div>
 
                 <!-- Pet -->
-                <div class="card border-light text-center" style="margin-bottom: 20px">
-                    <div class="card-header text-center">
-                        <h4 class="col-5">My Pets</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="row row-cols-1 row-cols-md-3">
-                            @foreach($user->pets as $pet)
-                                <a href="{{ route('pet.show', ['pet'=>$pet->id]) }}"
-                                   style="text-decoration: none; color: #1b1e21">
+                @can('viewOnlyUser', App\User::class)
+                    <div class="card border-light text-center" style="margin-bottom: 20px">
+                        <div class="card-header text-center">
+                            <h4 class="">My Pets</h4>
+                        </div>
+                        <div class="card-body ">
+                            <div class="row row-cols-1 row-cols-md-3">
+                                @foreach($user->pets as $pet)
+                                    <a href="{{ route('pet.show', ['pet'=>$pet->id]) }}"
+                                       style="text-decoration: none; color: #1b1e21">
                                 <span class=" pet-card">
                                     <span class="card-body">
                                         @if( $pet->petType->type == 'dog' )
@@ -85,18 +87,19 @@
                                         <h8 style="text-align: center; margin-top:20px">{{$pet->name}}</h8>
                                     </span>
                                 </span>
+                                    </a>
+                                @endforeach
+                            </div>
+
+                            <div class="card">
+                                <a href="{{ route('pet.create') }}" style="">
+                                    <button class="btn btn-info btn-block">create</button>
                                 </a>
-                            @endforeach
-                        </div>
+                            </div>
 
-                        <div class="card">
-                            <a href="{{ route('pet.create') }}" style="">
-                                <button class="btn btn-info btn-block">create</button>
-                            </a>
                         </div>
-
                     </div>
-                </div>
+                @endcan
             </div>
             <div class="col-8">
                 <h2 style="color: white">My Posts</h2>
