@@ -31,15 +31,6 @@ class PetsController extends Controller
         return view('pets.create', ['genes' => $genes, 'types' => $types]);
     }
 
-    public function getVaccine(){
-        $vaccines = Vaccine::all();
-
-        return view('pets.show', [
-            'vaccines' => $vaccines,
-
-        ]);
-
-    }
 
     public function store(Request $request)
     {
@@ -83,6 +74,12 @@ class PetsController extends Controller
     {
         $pet = Pet::findOrFail($id);
         return view('pets.show',['pet'=> $pet]);
+
+        $vaccines = Vaccine::all();
+
+        return view('pets.show', [
+            'vaccines' => $vaccines
+        ]);
     }
 
     /**

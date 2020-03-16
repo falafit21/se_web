@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Vaccine extends Model
 {
+    public function petType(){
+        return $this->hasMany(PetType::class);
+    }
     public function pet(){
         return $this->hasMany(Pet::class);
     }

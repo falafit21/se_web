@@ -86,13 +86,14 @@
                     <div class="card-body">
                         <table class="table table-borderless">
                             <tbody style="color: black">
+
                             <tr class="text-center">
                                 <th scope="row"></th>
                                 <td>Received Date</td>
                                 <td>Expire Date</td>
                             </tr>
-                            @foreach($vaccines as $vaccine)
 
+                            @foreach($vaccines as $vaccine)
                             <tr>
                                 <th scope="row">{{ $vaccine->name }}</th>
                                 <td>
