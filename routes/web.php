@@ -25,6 +25,8 @@ Route::get('/admin/viewMembers', 'UsersController@index');
 //pet
 //Route::get('/pet/createPet','PetsController@createPet');
 Route::resource('/pet', 'PetsController');
+//Route::post('/pets/{id}/edit','PetsController')
+Route::get('/pets/vaccines','PetsControllers@getVaccines');
 
 //auth
 Auth::routes();

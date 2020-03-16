@@ -36,11 +36,23 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h4 class="modal-title">Update your pet weight</h4>
-                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    <a href=""><button type="button" class="close" data-dismiss="modal">&times;</button></a>
 
                                                 </div>
                                                 <div class="modal-body">
-                                                    <div >weight <span class="col-xs-3"><input type="text" class="form-control col-8"></span></div>
+                                                    <div class="container">
+                                                        <form action="">
+
+                                                            <div class="form-group row">
+                                                                <label for="weight" class="col-sm-4 col-form-label">Weight</label>
+                                                                <div class="col-sm-8">
+                                                                    <input type="text" class="form-control" id="weight" value="{{old('weight',$pet->weight)}}">
+                                                                </div>
+                                                            </div>
+
+                                                        </form>
+                                                    </div>
+
 
 
                                                 </div>
@@ -65,11 +77,11 @@
                         </table>
 
                     </div>
-                    <button type="button" class="btn btn-primary col-4" style="margin: 20px">edit pet profile</button>
+                    <a href="/pet/{{$pet->id}}/edit"><button type="button" class="btn btn-primary col-4" style="margin: 20px">edit pet profile</button></a>
                 </div>
             </div>
             <div class="col-8">
-                <h2>vaccines table</h2>
+                <h2>vaccines Schedule</h2>
                 <div class="card  bg-light text-center">
                     <div class="card-body">
                         <table class="table table-borderless">
@@ -79,26 +91,24 @@
                                 <td>Received Date</td>
                                 <td>Expire Date</td>
                             </tr>
+                            @foreach($vaccines as $vaccine)
 
                             <tr>
-                                <th scope="row">vaccines 1</th>
-                                <td><input type="text" class="form-control"></td>
+                                <th scope="row">{{ $vaccine->name }}</th>
+                                <td>
+
+                                        <input type="date" class="form-control" placeholder="MM/DD/YYYY">
+
+                                </td>
                                 <td><input type="text" class="form-control"></td>
                             </tr>
-                            <tr>
-                                <th scope="row">vaccines 2</th>
-                                <td><input type="text" class="form-control"></td>
-                                <td><input type="text" class="form-control"></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">vaccines 3</th>
-                                <td><input type="text" class="form-control"></td>
-                                <td><input class="date form-control" type="text"></td>
-                            </tr>
+                            @endforeach
+
 
                             </tbody>
                         </table>
                         <button type="button" class="btn btn-primary col-4" data-toggle="modal" data-target="#add" style="width: 250px; margin-left: 1rem;">Add Vaccine</button>
+
                         <div id="add" class="modal fade" role="dialog">
                             <div class="modal-dialog">
                                 <!-- Modal content-->
@@ -120,13 +130,16 @@
                                                 <div class="form-group row">
                                                     <label for="received" class="col-sm-4 col-form-label">Received Date</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="receive">
+
+                                                            <input type="date" class="form-control"  name="date" placeholder="MM/DD/YYYY" id="receive">
+
                                                     </div>
+
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="expire" class="col-sm-4 col-form-label">Expire Date</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="expire">
+                                                            <input type="date" class="form-control" name="date" placeholder="MM/DD/YYYY" id="expire">
                                                     </div>
                                                 </div>
 
@@ -157,5 +170,11 @@
 
 
 @section('script')
+    <script>
+
+
+        $('.datepicker').pickadate();
+
+    </script>
 
 @endsection
