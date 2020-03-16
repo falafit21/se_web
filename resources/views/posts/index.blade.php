@@ -140,8 +140,8 @@
 
     <div class="" style="margin: 50px">
         @can('viewAny', App\User::class)
-            <div class="row">
-                <div class="col-4">
+            <div class="row" >
+                <div class="col-3">
                     <div class="card border-light text-center" >
                         <div class="card-header text-center">
                             <h4>My Profile</h4>
@@ -180,7 +180,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-7" style=" margin-left: 30px;">
+                <div class="col-9" >
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
                         <ol class="carousel-indicators">
                             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

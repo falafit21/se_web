@@ -19,7 +19,6 @@ class UsersController extends Controller
         return view('admins.viewMember', [
             'doctors' => $doctors,
             'users' => $users,
-
         ]);
 
     }
@@ -41,7 +40,10 @@ class UsersController extends Controller
     // create doc
     public function createDoc ()
     {
-        return view('doctors.create');
+        $doctors = User::where('role', '=', 'doctor')->get();
+        return view('doctors.create',
+            ['doctors' => $doctors]
+        );
     }
 
     public function store(Request $request)
