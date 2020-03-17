@@ -64,7 +64,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         $user = new User;
         $user->fill([
             'name' => $data['name'],
@@ -73,7 +72,6 @@ class RegisterController extends Controller
 
         ]);
         $user->status = 1;
-        $user->role = 'user';
         $user->save();
         return $user;
     }

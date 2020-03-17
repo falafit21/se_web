@@ -43,31 +43,47 @@
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div style="margin-left: 40px; margin-right: 40px; margin-top: 10px; margin-bottom: 50px;">
-            <h4>create doctor</h4>
-            <form>
+            <h3>Create doctor</h3>
+            <form method="POST" action="{{ route('doctorLists.store') }}">
+                @csrf
+                <h5 style="margin-top: 50px">Step 1 : Basic info</h5>
                 <div class="form-group">
                     <label for="name">name</label>
-                    <input type="text" class="form-control" id="name">
+                    <input type="text" class="form-control" id="name" name="name">
                 </div>
                 <div class="form-group">
-                    <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email">
+                    <label for="email">E-mail address</label>
+                    <input type="email" class="form-control" id="email" name="email">
                 </div>
+                <div class="form-group">
+                    <label for="password">password</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">confirm password</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                </div>
+{{--                <hr>--}}
+                <h5 style="margin-top: 50px">Step 2 : Advance info</h5>
                 <div class="form-group">
                     <label for="phoneNumber">phone number</label>
-                    <input type="text" class="form-control" id="phoneNumber">
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
                 </div>
                 <div class="form-group">
                     <label for="graduatedFrom">graduated from</label>
-                    <input type="text" class="form-control" id="graduatedFrom">
+                    <input type="text" class="form-control" id="graduatedFrom" name="graduatedFrom">
                 </div>
                 <div class="form-group">
                     <label for="licenseNumber">license number</label>
-                    <input type="text" class="form-control" id="licenseNumber">
+                    <input type="text" class="form-control" id="licenseNumber" name="licenseNumber">
                 </div>
                 <div class="form-group">
                     <label for="workAt">work at</label>
-                    <input type="text" class="form-control" id="workAt">
+                    <input type="text" class="form-control" id="workAt" name="workAt">
+                </div>
+
+                <div class="form-group text-right">
+                    <button type="submit" class="btn btn-primary">Create</button>
                 </div>
             </form>
         </div>
@@ -82,7 +98,8 @@
             <thead class="thead-light">
             <tr>
                 <th scope="col" style="font-size: 20px">Name</th>
-                <th scope="col" style="font-size: 20px">create_at</th>
+                <th scope="col" style="font-size: 20px">Email</th>
+                <th scope="col" style="font-size: 20px" class="text-center">create_at</th>
                 <th scope="col" style="font-size: 20px"></th>
             </tr>
             </thead>
@@ -90,7 +107,8 @@
             @foreach($doctors as $user)
                 <tr>
                     <td>{{ $user->name }}</td>
-                    <td>{{ $user->created_at }}</td>
+                    <td>{{ $user->email }}</td>
+                    <td class="text-center">{{ $user->created_at }}</td>
                     <td class="text-right">
                         <div class="custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="block">

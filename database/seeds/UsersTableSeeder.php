@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder
         $user->email = "fish@shukishi.com";
         $user->password = Hash::make('fish1234');
         $user->status = 1;
-        $user->role = "user";
+//        $user->role = "user";
         $user->save();
 
         $user1 = new \App\User();
@@ -20,7 +20,7 @@ class UsersTableSeeder extends Seeder
         $user1->password = Hash::make('bell1234');
         $user1->status = 1;
         $user1->role = "doctor";
-        $user->doctor_info_id = 1;
+        $user1->doctor_info_id = 1;
         $user1->save();
 
         $user2 = new \App\User();
@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
         $user3->email = "Fish1@shukishi.com";
         $user3->password = Hash::make('fish11234');
         $user3->status = 1;
-        $user3->role = "user";
+//        $user3->role = "user";
         $user3->save();
     }
 }

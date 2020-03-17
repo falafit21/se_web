@@ -35,7 +35,7 @@
                     <li><a class="nav-link" href="{{ url('user') }}">Profile</a></li>
                 @endcan
                 @can('profileDoctor', App\User::class)
-                    <li><a class="nav-link" href="{{ url('docProfile') }}">Profile</a></li>
+                    <li><a class="nav-link" href="{{ url('/docProfile') }}">Profile</a></li>
                 @endcan
                 @can('createDoctor', App\User::class)
                     <li><a class="nav-link" href="{{ url('/admin/createDoc') }}">all doctor</a></li>

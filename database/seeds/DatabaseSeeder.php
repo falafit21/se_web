@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         //doctors info
         $this->call(DoctorsInfoTableSeeder::class);
+
         //pet
         $this->call(PetGenesTableSeeder::class);
         $this->call(PetTypesTableSeeder::class);

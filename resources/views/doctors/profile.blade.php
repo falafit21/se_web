@@ -46,9 +46,9 @@
         <div class="col-8">
             <h2>Request Question</h2>
 
-           
-            
-            
+
+
+
 
             <!-- <h2 style="margin-top: 50px">All Questions</h2>
             <div class="card post-card" style="margin-top: 10px">
