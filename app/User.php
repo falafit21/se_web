@@ -38,10 +38,6 @@ class User extends Authenticatable
         return $this->belongsTo(DoctorInfo::class);
     }
 
-    // public function requestedPosts(){
-    //     return $this->hasMany(Post::class,'request_ans_user_id');
-    // }
-
 
 
 

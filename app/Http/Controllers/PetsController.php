@@ -30,7 +30,7 @@ class PetsController extends Controller
     {
         $genes = PetGene::all();
         $types = PetType::all();
-        return view('pets.create', ['genes' => $genes, 'types' => $types]);
+        return view('pets.create', ['genes' => $genes , 'types' => $types]);
     }
 
 
@@ -77,6 +77,23 @@ class PetsController extends Controller
         ]);
     }
 
+    public function calculate(Request $request){
+        $vaccines = Vaccine::all();
+        $pets = Pet::all();
+
+        $receivedVaccines = ReceivedVaccine::findOrFail();
+        $receivedVaccines = $request->input('received_at');
+        $receivedVaccines->received_at = Carbon::received_at()->addMonths($receivedVaccines->expired_at);
+        $receivedVaccines->save();
+
+        return redirect()->route('pets.calculate',[
+                'receivedVaccined'=>$receivedVaccines,
+                'vaccines'=>$vaccines,
+                'pets'=>$pets
+            ]);
+    }
+
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -109,17 +126,23 @@ class PetsController extends Controller
     {
         $type = $request->input('type');
         $gene = $request->input('gene');
-
-        $pet = Pet::findOrFail($id);
-
+        $request->validate([
+            'name' => ['required'],
+            'type' => ['required'],
+            'gene' => ['required'],
+            'birth-date-input' => ['required'],
+            'weight' => ['required'],
+        ]);
+        $pet = Pet::findOrFail();
         $pet->name = $request->input('name');
+        $pet->user_id = Auth::id();
         $pet->pet_type_id = $type;
         $pet->pet_gene_id = $gene;
         $pet->weight = $request->input('weight');
         $pet->birth_date = $request->input('birth-date-input');
         $pet->save();
 
-        return redirect()->route('pet.show',['pet'=>$pet->id]);
+        return redirect()->route(['user','show']);
 
 
     }

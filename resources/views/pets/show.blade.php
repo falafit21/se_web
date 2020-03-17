@@ -84,41 +84,46 @@
                 <h2>vaccines Schedule</h2>
                 <div class="card  bg-light text-center">
                     <div class="card-body">
-                        <table class="table table-borderless">
-                            <tbody style="color: black">
+{{--                        <form action="{{  route("pet.calculate") }}" method="POST">--}}
+                            <table class="table table-borderless">
+                                <tbody style="color: black">
 
-                            <tr class="text-center">
-                                <th scope="row"></th>
-                                <td>Received Date</td>
-                                <td>Expire Date</td>
-                            </tr>
+                                <tr class="text-center">
+                                    <th scope="row"></th>
+                                    <td>Received Date</td>
+                                    <td>Expire Date</td>
+                                </tr>
 
-                            @foreach($vaccines as $vaccine)
-                            <tr>
-                                @if($pet->petType->type == 'dog' and $vaccine->pet_type_id == 1)
-                                    <th scope="row">{{ $vaccine->name }}</th>
-                                    <td>
+                                @foreach($vaccines as $vaccine)
+                                    <tr>
+                                        @if($pet->petType->type == 'dog' and $vaccine->pet_type_id == 1)
+                                            <th scope="row">{{ $vaccine->name }}</th>
+                                            <td>
 
-                                        <input type="date" class="form-control" placeholder="MM/DD/YYYY">
+                                                <input type="date" class="form-control" placeholder="MM/DD/YYYY">
 
-                                    </td>
-                                    <td><input type="text" class="form-control"></td>
-                                @elseif($pet->petType->type == 'cat' and $vaccine->pet_type_id == 2)
-                                    <th scope="row">{{ $vaccine->name }}</th>
-                                    <td>
+                                            </td>
+{{--                                            <td>{{$receivedVaccines->expire_at}}}</td>--}}
+                                        @elseif($pet->petType->type == 'cat' and $vaccine->pet_type_id == 2)
+                                            <th scope="row">{{ $vaccine->name }}</th>
+                                            <td>
 
-                                        <input type="date" class="form-control" placeholder="MM/DD/YYYY">
+                                                <input type="date" class="form-control" placeholder="MM/DD/YYYY">
 
-                                    </td>
-                                    <td><input type="text" class="form-control"></td>
-                                @endif
+                                            </td>
+{{--                                            <td><div>{{$receivedVaccines->expire_at}}}--}}
 
-                            </tr>
-                            @endforeach
+{{--                                                </div></td>--}}
+                                        @endif
+
+                                    </tr>
+                                @endforeach
 
 
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </form>
+
                         <button type="button" class="btn btn-primary col-4" data-toggle="modal" data-target="#add" style="width: 250px; margin-left: 1rem;">Add Vaccine</button>
 
                         <div id="add" class="modal fade" role="dialog">
@@ -132,7 +137,7 @@
                                     </div>
                                     <div class="modal-body">
                                         <div class="container">
-                                            <form>
+                                            <form onsubmit="return false">
                                                 <div class="form-group row">
                                                     <label for="vaccineName" class="col-sm-4 col-form-label">Vaccine Name</label>
                                                     <div class="col-sm-8">

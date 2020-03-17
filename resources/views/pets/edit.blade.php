@@ -3,7 +3,7 @@
 @section('content')
     <div style="margin-right: 200px; margin-left: 200px; margin-top: 50px">
         <h4>Edit Pet</h4>
-        <form method="POST" action="{{route('pets.update',['pet'=>$pet->id])}}" >
+        <form method="POST" action="{{action('PetsController@update',$pet['id'])}}}" >
             @method('PUT')
             @csrf
             <div class="form-group">

@@ -25,9 +25,12 @@ Route::get('/admin/viewMembers', 'UsersController@index');
 //pet
 //Route::get('/pet/createPet','PetsController@createPet');
 Route::resource('/pet', 'PetsController');
+Route::post('/pets/{pet_id}/update', 'PetsController@update')->name('pet.update');
+Route::get('pets/{vaccine_id}/date','PetsController@calculate')->name('pet.calculate');
 Route::post('/pet/{pet_id}/edit','PetsController@update');
-//Route::post('/pets/{id}/edit','PetsController')
-//Route::get('/pets/vaccines','PetsControllers@getVaccine');
-//auth
+Route::get('/pets/{pet_id}/edit', 'PetsController@edit')->name('pet.edit');
+
+
+
 Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');

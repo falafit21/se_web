@@ -9,7 +9,7 @@ class Vaccine extends Model
     public function pet(){
         return $this->hasMany(Pet::class);
     }
-    public function receivedvaccines(){
+    public function receivedvaccine(){
         return $this->belongsTo(ReceivedVaccine::class);
     }
 
