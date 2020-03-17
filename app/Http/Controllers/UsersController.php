@@ -14,18 +14,13 @@ class UsersController extends Controller
 {
     public function index()
     {
-
-
         $doctors = User::where('role', '=', 'doctor')->get();
         $users = User::where('role', '=', 'user')->get();
-
 
         return view('admins.viewMember', [
             'doctors' => $doctors,
             'users' => $users,
-
         ]);
-
     }
 
     public function getUserProfile(){
@@ -72,7 +67,11 @@ class UsersController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+        return redirect()->route('users.profile',['user'=>$user]);
     }
 
     public function destroy($id)

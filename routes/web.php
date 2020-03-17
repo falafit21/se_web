@@ -5,7 +5,8 @@ Route::get('/', function () {
     return redirect()->route('post.index');
 });
 
-Route::get('/user', 'UsersController@getUserProfile')->name("user");
+Route::get('/user/profile', 'UsersController@getUserProfile')->name("users.profile");
+Route::resource('/user', 'UsersController');
 Route::resource('/post', 'PostsController');
 
 //comment

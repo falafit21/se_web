@@ -32,7 +32,7 @@
             <ul class="navbar-nav mr-auto">
                 <li><a class="nav-link" href="{{ url('/') }}">Board</a></li>
                 @can('profileUser', App\User::class)
-                    <li><a class="nav-link" href="{{ url('user') }}">Profile</a></li>
+                    <li><a class="nav-link" href="{{ url('/user/profile') }}">Profile</a></li>
                 @endcan
                 @can('profileDoctor', App\User::class)
                     <li><a class="nav-link" href="{{ url('docProfile') }}">Profile</a></li>
