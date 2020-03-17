@@ -23,5 +23,13 @@ class PostsTableSeeder extends Seeder
         $post1->detail = "หนูซื้อบ้านอวกาศแมวมา ทำให้มันไม่ไปถ่ายในถาดเลย ทำไรดี ถ่ายแต่ในบ้านอวกาศ";
         $post1->pet_id = 1;
         $post1->save();
+
+        $post2 = new Post;
+        $post2->user_id = 1;
+        $post2->request_ans_user_id = 2;
+        $post2->question = "แมวไม่ยอมถ่ายมนถาดทำไรดี ???";
+        $post2->detail = "หนูซื้อบ้านอวกาศแมวมา ทำให้มันไม่ไปถ่ายในถาดเลย ทำไรดี ถ่ายแต่ในบ้านอวกาศ";
+        $post2->pet_id = 1;
+        $post2->save();
     }
 }

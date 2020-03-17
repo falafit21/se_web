@@ -20,14 +20,14 @@ class PostsController extends Controller
         $pets = Pet::where('user_id', '=', Auth::id())->get();
         $doctors = User::where('role', '=', 'doctor')->get();
         $formsQuestion = QuestionForm::all();
-        $user = Auth::user();
+//        $user = Auth::user();
 
         return view('posts.index', [
             'posts' => $posts,
             'pets' => $pets,
             'doctors' => $doctors,
             'formsQuestion' => $formsQuestion,
-            'user'=>$user
+//            'user'=>$user
         ]);
     }
 

@@ -109,7 +109,9 @@
         </div>
     </div>
 
-    @can('viewOnlyUseAndDoctor', App\User::class)
+
+
+{{--    @can('viewOnlyUserAndDoctor', App\User::class)--}}
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -136,82 +138,9 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-    @endcan
+{{--    @endcan--}}
 
     <div class="" style="margin: 50px">
-        @can('viewAny', App\User::class)
-            <div class="row" >
-                <div class="col-3">
-                    <div class="card border-light text-center" >
-                        <div class="card-header text-center">
-                            <h4>My Profile</h4>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-borderless text-left">
-                                <tbody style="color: black">
-                                <tr>
-                                    <th scope="row">NAME</th>
-                                    <td>{{$user->name}}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">EMAIL</th>
-                                    <td>{{$user->email}}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">STATUS</th>
-                                    @if($user->status==1)
-                                        <td>Normal</td>
-                                    @else
-                                        <td>Banned</td>
-                                    @endif
-                                </tr>
-                                <tr>
-                                    <th scope="row">PASSWORD</th>
-                                    <td><a href="">change password</a></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class=" text-right">
-                                <i class="far fa-edit" data-toggle="modal" data-target="#editModal"
-                                   style="font-size: 18px; color: #F5B041"
-                                   type="button" data-toggle="tooltip" data-placement="top" title="edit profile"
-                                ></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-9" >
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner" style="background-color: #D7DBDD; height: 325px; ">
-                            <div class="carousel-item active">
-
-                            </div>
-                            <div class="carousel-item">
-
-                            </div>
-                            <div class="carousel-item">
-
-                            </div>
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-
-        @endcan
         @can('create', \App\Post::class)
             <button type="button" class="btn btn-warning btn-lg btn-block" style="cursor:pointer; margin-top: 20px"
                     onclick="openNav()">Create question
