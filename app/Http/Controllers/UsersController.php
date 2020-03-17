@@ -25,15 +25,21 @@ class UsersController extends Controller
 
     public function getUserProfile(){
         $user = Auth::user();
-        return view('users.profile',['user'=>$user]);
+        return view('users.profile',
+            ['user' => $user]
+        );
+
     }
 
     public function getDocProfile()
     {
         $user = Auth::user();
-        $doctor = DoctorInfo::findOrFail($user->doctor_info_id);
+        $doctor = DoctorInfo::find($user->doctor_info_id);
         // $posts = Post::findOrFail($user->id);
-        return view('doctors.profile',['user'=>$user , 'doctor'=>$doctor]);
+        return view('doctors.profile', [
+                'user' => $user,
+                'doctor' => $doctor
+        ]);
     }
 
     public function create()
@@ -43,7 +49,10 @@ class UsersController extends Controller
     // create doc
     public function createDoc ()
     {
-        return view('doctors.create');
+        $doctors = User::where('role', '=', 'doctor')->get();
+        return view('doctors.create',
+            ['doctors' => $doctors]
+        );
     }
 
     public function store(Request $request)
@@ -56,7 +65,6 @@ class UsersController extends Controller
         return view('admins.viewMember', [
             'doctors' => $doctors,
             'users' => $users,
-
         ]);
     }
 

@@ -15,7 +15,7 @@ Route::post('/posts/{post_id}/comment', 'PostsController@commentStore')->name('p
 
 //doctor
 Route::get('/docProfile', 'UsersController@getDocProfile');
-Route::get('/admin/createDoc', 'UsersController@createDoc');
+Route::get('/admin/createDoc', 'UsersController@createDoc')->name('admin.createDoc');
 Route::resource('/doctorLists','DoctorListsController');
 
 Route::resource('/petTip', 'PetTipsController');

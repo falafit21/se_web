@@ -47,7 +47,7 @@
             max-height: 100%;
         }
 
-        .desc{
+        .desc {
             margin-left: 12px;
 
         }
@@ -69,53 +69,51 @@
             margin-top: 1.5em;
         }
 
-
-
     </style>
 @endsection
 
 @section('content')
     <div style="margin: 50px">
-        <div style="color:darkgrey; margin-top:2em; font-weight: bolder; text-align: center; margin-bottom: 30px;">
+        <div style="color:white; margin-top:2em; font-weight: bolder; text-align: center; margin-bottom: 30px;">
             <h1>Doctors lists</h1>
         </div>
         <div class="row">
-            @for ($i = 0; $i < 10; $i++)
+            @foreach($doctors as $doctor)
                 <div class="col-lg-4">
-                    <div class="card hovercard text-center" style="margin-bottom: 20px">
-                        <div class="card-header text-center">
-                            <h4>Suvicha narongchai</h4>
+                    <div class="card border-light text-center" style="margin-bottom: 20px">
+                        <div class="card-header text-center" style="font-size: 20px">
+                            {{ $doctor->name }}
                         </div>
                         <div class="card-body">
                             <table class="table table-borderless text-left">
                                 <tbody style="color: black">
                                 <tr>
                                     <th scope="row">PHONE NUMBER</th>
-                                    <td>084 5858267</td>
+                                    <td>{{ $doctor->doctorInfo->phone_number }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">EMAIL</th>
-                                    <td>kitpavin@gmail.com</td>
+                                    <td>{{ $doctor->email }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">GRADUATED FROM</th>
-                                    <td>Kasetart University</td>
+                                    <td>{{ $doctor->doctorInfo->graduated }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">LICENSE NUMBER</th>
-                                    <td>1264597846</td>
+                                    <td>{{ $doctor->doctorInfo->license_number }}</td>
                                 </tr>
                                 <tr>
                                     <th scope="row">WORK AT</th>
-                                    <td>Kasetsart Unversity</td>
+                                    <td>{{ $doctor->doctorInfo->work_at }}</td>
                                 </tr>
                                 </tbody>
                             </table>
-{{--                            <a href="{{ url('docProfile') }}" class="btn btn-primary" style="margin: 20px">view Doctor profile</a>--}}
+                            {{--                            <a href="{{ url('docProfile') }}" class="btn btn-primary" style="margin: 20px">view Doctor profile</a>--}}
                         </div>
                     </div>
                 </div>
-            @endfor
+            @endforeach
         </div>
     </div>
 
