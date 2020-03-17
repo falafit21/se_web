@@ -21,7 +21,6 @@ class UsersController extends Controller
             'users' => $users,
             'user' => $user
         ]);
-
     }
 
     public function getUserProfile()
@@ -78,7 +77,11 @@ class UsersController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $user = User::findOrFail($id);
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+        return redirect()->route('users.profile',['user'=>$user]);
     }
 
     public function destroy($id)
