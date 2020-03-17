@@ -52,7 +52,10 @@
                             </tr>
                             <tr>
                                 <th scope="row">vaccines 1</th>
-                                <td><input type="text" class="form-control"></td>
+                                <td><div class="input-append date form_datetime">
+                                        <input size="16" type="text" value="" readonly>
+                                        <span class="add-on"><i class="icon-th"></i></span>
+                                    </div></td>
                                 <td><input type="text" class="form-control"></td>
                             </tr>
                             <tr>
@@ -77,6 +80,13 @@
 @endsection
 
 
+
 @section('script')
+    <script type="text/javascript">
+        $(".form_datetime").datetimepicker({
+            format: "dd MM yyyy - hh:ii"
+        });
+    </script>
+
 
 @endsection

@@ -28,5 +28,9 @@ class DatabaseSeeder extends Seeder
         //form
         $this->call(QuestionFormsTableSeeder::class);
         $this->call(FormsTableSeeder::class);
+
+        //vaccine
+        $this->call(VaccinesTableSeeder::class);
+//        $this->call(ReceiveVaccinesTableSeeder::class);
     }
 }
