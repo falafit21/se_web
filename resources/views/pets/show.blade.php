@@ -77,7 +77,7 @@
                         </table>
 
                     </div>
-                    <a href="/pet/{{$pet->id}}/edit"><button type="button" class="btn btn-primary col-4" style="margin: 20px">edit pet profile</button></a>
+                    <a href="{{action('PetsController@edit',$pet['id'])}}"><button type="button" class="btn btn-primary col-4" style="margin: 20px">edit pet profile</button></a>
                 </div>
             </div>
             <div class="col-8">
@@ -95,13 +95,24 @@
 
                             @foreach($vaccines as $vaccine)
                             <tr>
-                                <th scope="row">{{ $vaccine->name }}</th>
-                                <td>
+                                @if($pet->petType->type == 'dog' and $vaccine->pet_type_id == 1)
+                                    <th scope="row">{{ $vaccine->name }}</th>
+                                    <td>
 
                                         <input type="date" class="form-control" placeholder="MM/DD/YYYY">
 
-                                </td>
-                                <td><input type="text" class="form-control"></td>
+                                    </td>
+                                    <td><input type="text" class="form-control"></td>
+                                @elseif($pet->petType->type == 'cat' and $vaccine->pet_type_id == 2)
+                                    <th scope="row">{{ $vaccine->name }}</th>
+                                    <td>
+
+                                        <input type="date" class="form-control" placeholder="MM/DD/YYYY">
+
+                                    </td>
+                                    <td><input type="text" class="form-control"></td>
+                                @endif
+
                             </tr>
                             @endforeach
 

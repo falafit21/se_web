@@ -10,6 +10,6 @@ class PetType extends Model
         return $this->hasMany(Pet::class);
     }
     public function vaccines(){
-        return $this->hasMany(Vaccine::class);
+        return $this->hasMany(Vaccine::class,'pet_type_id');
     }
 }

@@ -18,6 +18,7 @@ class CreateRecievedVaccinesTable extends Migration
             $table->bigInteger('pet_id')->unsigned();
             $table->bigInteger('vaccine_id')->unsigned();
             $table->date('received_at');
+            $table->date('expire_at');
             $table->timestamps();
 
             $table->foreign('pet_id')

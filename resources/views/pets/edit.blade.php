@@ -3,7 +3,7 @@
 @section('content')
     <div style="margin-right: 200px; margin-left: 200px; margin-top: 50px">
         <h4>Edit Pet</h4>
-        <form method="POST" action="{{ route('pets.update',['pet'=>$pet->id]) }}" >
+        <form method="POST" action="{{route('pets.update',['pet'=>$pet->id])}}" >
             @method('PUT')
             @csrf
             <div class="form-group">
@@ -29,20 +29,20 @@
             <div class="form-group">
                 <label for="birth-date-input" class="col-2 col-form-label">BirthDate</label>
                 <div>
-                    <input class="form-control" type="date" value="{{old('birth-date-input',$pet->birth-date-input)}}" id="birth-date-input" name="birth-date-input">
+                    <input class="form-control" type="date" value="{{$pet->birth_date}}" id="birth-date-input" name="birth-date-input">
                     <small id="fileHelp" class="form-text text-muted"></small>
                 </div>
             </div>
             <div class="form-group">
                 <label for="weight" class="col-2 col-form-label">Weight</label>
                 <div>
-                    <input type="text" class="form-control" id="weight" name="weight" value="{{old('weight',$weight->weight)}}">
+                    <input type="text" class="form-control" id="weight" name="weight" value="{{old('weight',$pet->weight)}}">
                     <small id="fileHelp" class="form-text text-muted"> Please answer in Kilograms Unit</small>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="offset-sm-11">
-                    <a href="/pet/{{$pet->id}}/edit"><button type="submit" class="btn btn-primary"></button>Edit</a>
+                    <a href="/edit"><button type="submit" class="btn btn-primary"></button>Update</a>
                 </div>
             </div>
         </form>

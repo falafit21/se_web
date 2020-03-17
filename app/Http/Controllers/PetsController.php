@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Pet;
 use App\PetGene;
 use App\PetType;
+use App\ReceivedVaccine;
 use App\User;
 use App\Vaccine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class PetsController extends Controller
 {
@@ -44,7 +46,6 @@ class PetsController extends Controller
             'weight' => ['required'],
         ]);
 
-
         $pet = new Pet;
         $pet->name = $request->input('name');
         $pet->user_id = Auth::id();
@@ -57,11 +58,6 @@ class PetsController extends Controller
         return redirect()->route('user');
 
 
-        $pets = new Pet;
-        $pets->weight = $request ->input('weight');
-        $pets -> save();
-        return redirect() ->route('pets.show',['pet'=>$pets->id]);
-
     }
 
     /**
@@ -73,12 +69,11 @@ class PetsController extends Controller
     public function show($id)
     {
         $pet = Pet::findOrFail($id);
-        return view('pets.show',['pet'=> $pet]);
-
         $vaccines = Vaccine::all();
 
         return view('pets.show', [
-            'vaccines' => $vaccines
+            'vaccines' => $vaccines,
+            'pet'=> $pet
         ]);
     }
 
@@ -90,8 +85,16 @@ class PetsController extends Controller
      */
     public function edit($id)
     {
+
         $pet = Pet::findOrFail($id);
-        return view('pets.edit',['pet'=>$pet]);
+        $genes = PetGene::all();
+        $types = PetType::all();
+        return view('pets.edit',[
+            'pet'=>$pet,
+            'genes'=> $genes,
+            'types' => $types
+
+        ]);
 
     }
 
@@ -106,23 +109,17 @@ class PetsController extends Controller
     {
         $type = $request->input('type');
         $gene = $request->input('gene');
-        $request->validate([
-            'name' => ['required'],
-            'type' => ['required'],
-            'gene' => ['required'],
-            'birth-date-input' => ['required'],
-            'weight' => ['required'],
-        ]);
-        $pet = Pet::findOrFail();
+
+        $pet = Pet::findOrFail($id);
+
         $pet->name = $request->input('name');
-        $pet->user_id = Auth::id();
         $pet->pet_type_id = $type;
         $pet->pet_gene_id = $gene;
         $pet->weight = $request->input('weight');
         $pet->birth_date = $request->input('birth-date-input');
         $pet->save();
 
-        return redirect()->route(['user','show']);
+        return redirect()->route('pet.show',['pet'=>$pet->id]);
 
 
     }
