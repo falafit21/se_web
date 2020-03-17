@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\DoctorInfo;
+use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class DoctorListsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view('doctors.doctorList');
+        $doctors = User::where('role', '=', 'doctor')->get();
+        return view('doctors.doctorList', [
+            'doctors' => $doctors
+        ]);
     }
 
     /**
@@ -26,15 +29,29 @@ class DoctorListsController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+//        $request->validate();
+
+        $docInfo = new DoctorInfo;
+        $docInfo->phone_number = $request->input('phoneNumber');
+        $docInfo->graduated = $request->input('graduatedFrom');
+        $docInfo->work_at = $request->input('workAt');
+        $docInfo->license_number = $request->input('licenseNumber');
+        if($docInfo->save()){
+            $recentDocInfo_id = $docInfo->latest()->first()->id;
+
+            $user = new User;
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = Hash::make($request->input('password'));
+            $user->role = "doctor";
+            $user->status = 1;
+            $user->doctor_info_id = $recentDocInfo_id;
+            $user->save();
+        }
+        return  redirect()->route('admin.createDoc');
+
     }
 
     /**

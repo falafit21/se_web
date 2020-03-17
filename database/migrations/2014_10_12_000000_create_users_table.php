@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('img_path')->nullable();
             $table->boolean('status');
-            $table->string('role');
+            $table->enum('role', ['admin', 'doctor', 'user'])->default('user');
             $table->bigInteger('doctor_info_id')->unsigned()->nullable();
             $table->timestamps();
 

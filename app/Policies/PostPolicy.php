@@ -41,7 +41,7 @@ class PostPolicy
      */
     public function create(User $user)
     {
-        return $user->role === "user" || $user->role === "admin";
+        return $user->role === "user";
     }
 
     /**
