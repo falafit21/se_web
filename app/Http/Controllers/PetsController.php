@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ExampleVaccine;
 use App\Pet;
 use App\PetGene;
 use App\PetType;
@@ -68,7 +69,7 @@ class PetsController extends Controller
     {
         $pet = Pet::findOrFail($id);
         $currentType = Pet::find($id)->petType->id;
-        $vaccineInCurrentType = Vaccine::where('pet_type_id', '=' , $currentType)->get();
+        $vaccineInCurrentType = ExampleVaccine::where('pet_type_id', '=' , $currentType)->get();
         $types = PetType::all();
         $recieve_vaccines = RecievedVaccines::where('pet_id', '=' , $id)->get();
         return view('pets.show', [
