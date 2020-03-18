@@ -105,9 +105,7 @@ class PostsController extends Controller
 
     public function destroy($id)
     {
-        $petTips = PetTip::findOrFail($id);
-        $petTips = delete();
-        return redirect()->route('posts.createTip',['petTips'=>$petTips->id]);
+        
 
 
     }
