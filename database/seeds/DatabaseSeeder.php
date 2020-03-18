@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         //vaccine
         $this->call(VaccinesTableSeeder::class);
         $this->call(ExampleVaccinesSeeder::class);
+        $this->call(ReceiveVaccinesTableSeeder::class);
 //        $this->call(ReceiveVaccinesTableSeeder::class);
     }
 }
