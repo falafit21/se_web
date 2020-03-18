@@ -105,7 +105,7 @@ class PostsController extends Controller
 
     public function destroy($id)
     {
-        
+
 
 
     }

@@ -131,7 +131,7 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner bg" style="height: 325px;background-color: #818182">
             <div class="carousel-item active" id="couBg">
-                <img src="/images/petTipsBg1.png" style="max-height: 325px;width: 1000px"/>
+{{--                <img src="/images/petTipsBg1.png" style="max-height: 325px;width: 1000px"/>--}}
             </div>
             @foreach( $petTips as $tip )
                 <div class="carousel-item ">
@@ -193,32 +193,8 @@
 @endsection
 
 @section('script')
+
     <script>
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "700px";
-            document.getElementById("main").style.marginLeft = "700px";
-            document.body.style.backgroundColor = "rgba(0,0,0,0)";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0px";
-            document.getElementById("main").style.marginLeft = "0px";
-            document.body.style.backgroundColor = "white";
-        }
-
-        $(function () {
-            $("abc").slice(0, 1).show();
-            $("#loadMore").on('click', function (e) {
-                e.preventDefault();
-                $("abc:hidden").slice(0, 1).slideDown();
-                if ($("abc:hidden").length == 0) {
-                    $("#load").fadeOut('slow');
-                }
-                $('html,body').animate({
-                    scrollTop: $(this).offset().top
-                }, 1500);
-            });
-        });
 
         $('a[href=#top]').click(function () {
             $('body,html').animate({
