@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Pet;
 use App\PetTip;
 
 use Illuminate\Http\Request;
@@ -12,12 +13,10 @@ class PetTipsController extends Controller
     {
 
         $tips = PetTip::orderBy('id','desc')->get();
+        $petTips = PetTip::all();
         return view('posts.createTip', ['tips' => $tips]);
     }
 
-    public function showTip(){
-
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -26,7 +25,7 @@ class PetTipsController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     public function store(Request $request)
@@ -82,7 +81,18 @@ class PetTipsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $petTip = PetTip::findOrFail($id);
+//        $tips = PetTip::orderBy('id', 'desc')->get();
+        $petTip->delete();
+        return redirect()->route('petTip.index');
+//        return view('petTip.index');
+//        $allPetTip = PetTip::all();
+
+//        return redirect()->route('posts.createTip',['petTips' => $allPetTip]);
+
+
+
+
 
     }
 }
