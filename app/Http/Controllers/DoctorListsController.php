@@ -32,7 +32,6 @@ class DoctorListsController extends Controller
     public function store(Request $request)
     {
 //        $request->validate();
-
         $docInfo = new DoctorInfo;
         $docInfo->phone_number = $request->input('phoneNumber');
         $docInfo->graduated = $request->input('graduatedFrom');
