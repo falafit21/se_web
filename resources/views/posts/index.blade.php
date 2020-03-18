@@ -51,10 +51,7 @@
             -moz-transition: all 600ms ease-in-out;
             -o-transition: all 600ms ease-in-out;
         }
-        .bg {
 
-
-        }
     </style>
 @endsection
 
@@ -127,21 +124,26 @@
             </form>
         </div>
     </div>
-
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <div class="carousel-inner bg" style="height: 325px;background-color: #818182">
-            <div class="carousel-item active" id="couBg">
-{{--                <img src="/images/petTipsBg1.png" style="max-height: 325px;width: 1000px"/>--}}
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" style="height: 450px;background-color: #818182">
+            <div class="carousel-item active" style="height: 500px;">
+                <img class="d-block w-100" src="/images/petTipsBg1.png"  style="max-height: 500px" alt="First slide">
             </div>
+
             @foreach( $petTips as $tip )
                 <div class="carousel-item ">
                     <div class="container"
-                         style=" padding-top:2em;color: #ffffff;margin-left: 2rem;padding-right:6em;">
+                         style=" padding-top:3.5em;color: #ffffff;">
                         <div>
-                            <h3 style="text-align: center;margin-top: 2.5em">{{$tip->title}}</h3>
+                            <h3 style="text-align: center;margin-top: 2.5em ;font-weight: bold;font-size: 26px">{{$tip->title}}</h3>
                         </div>
                         <div>
-                            <h4 style="text-align: center;">{{$tip->detail}}</h4>
+                            <h4 style="text-align: center;margin-top: 1em ;">{{$tip->detail}}</h4>
                         </div>
                     </div>
                 </div>
@@ -157,6 +159,7 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+
     {{--    @endcan--}}
 
     <div class="" style="margin: 50px">
@@ -193,8 +196,32 @@
 @endsection
 
 @section('script')
-
     <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "700px";
+            document.getElementById("main").style.marginLeft = "700px";
+            document.body.style.backgroundColor = "rgba(0,0,0,0)";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0px";
+            document.getElementById("main").style.marginLeft = "0px";
+            document.body.style.backgroundColor = "white";
+        }
+
+        $(function () {
+            $("abc").slice(0, 1).show();
+            $("#loadMore").on('click', function (e) {
+                e.preventDefault();
+                $("abc:hidden").slice(0, 1).slideDown();
+                if ($("abc:hidden").length == 0) {
+                    $("#load").fadeOut('slow');
+                }
+                $('html,body').animate({
+                    scrollTop: $(this).offset().top
+                }, 1500);
+            });
+        });
 
         $('a[href=#top]').click(function () {
             $('body,html').animate({
