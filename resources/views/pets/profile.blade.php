@@ -4,8 +4,8 @@
         <div class="row">
             <div class="col-4">
                 <div class="card bg-light">
-                    <div class="card-header text-center">
-                        <h4>pet profile <i class="far fa-user" style="margin-left: 10px"></i></h4>
+                    <div class="card-header text-center" style="font-size: 20px">
+                       pet profile
                     </div>
                     <div class="card-body">
                         <table class="table table-borderless">
@@ -52,7 +52,10 @@
                             </tr>
                             <tr>
                                 <th scope="row">vaccines 1</th>
-                                <td><input type="text" class="form-control"></td>
+                                <td><div class="input-append date form_datetime">
+                                        <input size="16" type="text" value="" readonly>
+                                        <span class="add-on"><i class="icon-th"></i></span>
+                                    </div></td>
                                 <td><input type="text" class="form-control"></td>
                             </tr>
                             <tr>
@@ -76,7 +79,10 @@
     </div>
 @endsection
 
-
 @section('script')
-
+    <script type="text/javascript">
+        $(".form_datetime").datetimepicker({
+            format: "dd MM yyyy - hh:ii"
+        });
+    </script>
 @endsection

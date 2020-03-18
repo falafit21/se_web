@@ -41,7 +41,7 @@
                     <li><a class="nav-link" href="{{ url('/admin/createDoc') }}">all doctor</a></li>
                 @endcan
                 @can('viewAny', App\User::class)
-                    <li><a class="nav-link" href="{{ url('/admin/viewMembers') }}">all user</a></li>
+                    <li><a class="nav-link" href="{{ url('/admin/viewMembers') }}">all profile</a></li>
                 @endcan
                 @can('createTip' , App\User::class)
                     <li><a class="nav-link" href="{{ url('petTip') }}">create tip</a></li>

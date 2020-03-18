@@ -104,11 +104,11 @@
             </tr>
             </thead>
             <tbody>
-            @foreach($doctors as $user)
+            @foreach($doctors as $doctor)
                 <tr>
-                    <td>{{ $user->name }}</td>
-                    <td>{{ $user->email }}</td>
-                    <td class="text-center">{{ $user->created_at }}</td>
+                    <td>{{ $doctor->name }}</td>
+                    <td>{{ $doctor->email }}</td>
+                    <td class="text-center">{{ $doctor->created_at }}</td>
                     <td class="text-right">
                         <div class="custom-control custom-switch">
                             <input type="checkbox" class="custom-control-input" id="block">

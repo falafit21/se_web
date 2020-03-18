@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pet;
+use App\PetTip;
 use App\Post;
 use App\QuestionForm;
 use App\User;
@@ -14,16 +15,17 @@ class UsersController extends Controller
 {
     public function index()
     {
-        $doctors = User::where('role', '=', 'doctor')->get();
         $users = User::where('role', '=', 'user')->get();
-
+        $user = Auth::user();
         return view('admins.viewMember', [
-            'doctors' => $doctors,
             'users' => $users,
+            'user' => $user
         ]);
+
     }
 
-    public function getUserProfile(){
+    public function getUserProfile()
+    {
         $user = Auth::user();
         return view('users.profile',
             ['user' => $user]
@@ -37,8 +39,8 @@ class UsersController extends Controller
         $doctor = DoctorInfo::find($user->doctor_info_id);
         // $posts = Post::findOrFail($user->id);
         return view('doctors.profile', [
-                'user' => $user,
-                'doctor' => $doctor
+            'user' => $user,
+            'doctor' => $doctor
         ]);
     }
 
@@ -46,8 +48,9 @@ class UsersController extends Controller
     {
         //
     }
+
     // create doc
-    public function createDoc ()
+    public function createDoc()
     {
         $doctors = User::where('role', '=', 'doctor')->get();
         return view('doctors.create',
@@ -60,7 +63,7 @@ class UsersController extends Controller
         //
     }
 
-    public function show($users,$doctors)
+    public function show($users, $doctors)
     {
         return view('admins.viewMember', [
             'doctors' => $doctors,

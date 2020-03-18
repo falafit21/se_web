@@ -16,7 +16,8 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->take(3)->get();
+        $posts = Post::orderBy('id', 'desc')->get();
+        $petTips = PetTip::all();
         $pets = Pet::where('user_id', '=', Auth::id())->get();
         $doctors = User::where('role', '=', 'doctor')->get();
         $formsQuestion = QuestionForm::all();
@@ -27,7 +28,8 @@ class PostsController extends Controller
             'pets' => $pets,
             'doctors' => $doctors,
             'formsQuestion' => $formsQuestion,
-            'user'=>$user
+            'user'=>$user,
+            'petTips'=>$petTips
         ]);
     }
 
@@ -99,6 +101,10 @@ class PostsController extends Controller
 
     public function destroy($id)
     {
-        //
+        $petTips = PetTip::findOrFail($id);
+        $petTips = delete();
+        return redirect()->route('posts.createTip',['petTips'=>$petTips->id]);
+
+
     }
 }

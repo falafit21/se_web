@@ -5,34 +5,45 @@ namespace App\Http\Controllers;
 use App\Pet;
 use App\PetGene;
 use App\PetType;
-use App\User;
+use App\RecievedVaccines;
+use App\Vaccine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class PetsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        return view('pets.profile');
+        return view('pets.show');
     }
 
     public function create()
     {
         $genes = PetGene::all();
         $types = PetType::all();
-        return view('pets.create', ['genes' => $genes, 'types' => $types]);
+        return view('pets.create', ['genes' => $genes , 'types' => $types]);
     }
 
+    public function vaccineStore(Request $request, $pet_id){
+        $request->validate([
+            'vaccineFor' => ['required'],
+            'vaccineName' => ['required'],
+            'activateRange' => ['required'],
+            'PreventSymptom' => ['required'],
+        ]);
+        $vaccine = new Vaccine;
+        $vaccine->pet_type_id = $request->input('vaccineFor');
+        $vaccine->name = $request->input('vaccineName');
+        $vaccine->activate_range = $request->input('activateRange');
+        $vaccine->prevent_symptom = $request->input('PreventSymptom');
+        $vaccine->save();
+        return redirect()->route('pet.show', ['pet' => $pet_id]);
+    }
 
     public function store(Request $request)
     {
-        $type = $request->input('type');
-        $gene = $request->input('gene');
         $request->validate([
             'name' => ['required'],
             'type' => ['required'],
@@ -44,27 +55,45 @@ class PetsController extends Controller
         $pet = new Pet;
         $pet->name = $request->input('name');
         $pet->user_id = Auth::id();
-        $pet->pet_type_id = $type;
-        $pet->pet_gene_id = $gene;
+        $pet->pet_type_id = $request->input('type');
+        $pet->pet_gene_id = $request->input('gene');
         $pet->weight = $request->input('weight');
         $pet->birth_date = $request->input('birth-date-input');
         $pet->save();
 
-        return redirect()->route('user');
-
+        return redirect()->route('users.profile');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $pet = Pet::findOrFail($id);
-        return view('pets.show',['pet'=> $pet]);
+        $vaccines = Vaccine::all();
+        $types = PetType::all();
+        $recieve_vaccines = RecievedVaccines::all();
+        return view('pets.show', [
+            'vaccines' => $vaccines,
+            'pet'=> $pet,
+            'types' => $types,
+            'recieve_vaccines' => $recieve_vaccines
+        ]);
     }
+
+    public function calculate(Request $request){
+//        $vaccines = Vaccine::all();
+//        $pets = Pet::all();
+//
+//        $recievedVaccines = RecievedVaccines::findOrFail();
+//        $recievedVaccines = $request->input('received_at');
+//        $recievedVaccines->received_at = Carbon::received_at()->addMonths($recievedVaccines->expired_at);
+//        $recievedVaccines->save();
+//
+//        return redirect()->route('pets.calculate',[
+//                'recievedVaccines'=>$recievedVaccines,
+//                'vaccines'=>$vaccines,
+//                'pets'=>$pets
+//            ]);
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -74,7 +103,14 @@ class PetsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pet = Pet::findOrFail($id);
+        $genes = PetGene::all();
+        $types = PetType::all();
+        return view('pets.edit',[
+            'pet'=>$pet,
+            'genes'=> $genes,
+            'types' => $types
+        ]);
     }
 
     /**
@@ -86,7 +122,27 @@ class PetsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $type = $request->input('type');
+        $gene = $request->input('gene');
+        $request->validate([
+            'name' => ['required'],
+            'type' => ['required'],
+            'gene' => ['required'],
+            'birth-date-input' => ['required'],
+            'weight' => ['required'],
+        ]);
+        $pet = Pet::findOrFail();
+        $pet->name = $request->input('name');
+        $pet->user_id = Auth::id();
+        $pet->pet_type_id = $type;
+        $pet->pet_gene_id = $gene;
+        $pet->weight = $request->input('weight');
+        $pet->birth_date = $request->input('birth-date-input');
+        $pet->save();
+
+        return redirect()->route(['user','show']);
+
+
     }
 
     /**
