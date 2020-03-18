@@ -101,7 +101,10 @@
             <a href="{{ route('post.show', ['post' => $post->id]) }}" style="text-decoration: none; color: #1b1e21">
                 <div class="card post-card border-light" style="margin-bottom: 5px">
                     <div class="card-body">
-                        <p class="card-text"><small class="text-muted" style="font-size: 15px">{{ $post->created_at->diffForHumans() }}</small>
+                        <p class="card-text">
+                            <small class="text-muted" style="font-size: 15px">
+                                {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                            </small>
                         </p>
                         <p style="font-size: 22px"><i class="fas fa-question" style="margin-right: 9px"></i> {{ $post->question }}</p>
                         <p style="font-size: 15px">{{ $post->detail }}</p>
