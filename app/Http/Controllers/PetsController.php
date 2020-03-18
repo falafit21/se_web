@@ -27,19 +27,19 @@ class PetsController extends Controller
     }
 
     public function vaccineStore(Request $request, $pet_id){
-        $request->validate([
-            'vaccineFor' => ['required'],
-            'vaccineName' => ['required'],
-            'activateRange' => ['required'],
-            'PreventSymptom' => ['required'],
-        ]);
-        $vaccine = new Vaccine;
-        $vaccine->pet_type_id = $request->input('vaccineFor');
-        $vaccine->name = $request->input('vaccineName');
-        $vaccine->activate_range = $request->input('activateRange');
-        $vaccine->prevent_symptom = $request->input('PreventSymptom');
-        $vaccine->save();
-        return redirect()->route('pet.show', ['pet' => $pet_id]);
+//        $request->validate([
+//            'vaccineFor' => ['required'],
+//            'vaccineName' => ['required'],
+//            'activateRange' => ['required'],
+//            'PreventSymptom' => ['required'],
+//        ]);
+//        $vaccine = new Vaccine;
+//        $vaccine->pet_type_id = $request->input('vaccineFor');
+//        $vaccine->name = $request->input('vaccineName');
+//        $vaccine->activate_range = $request->input('activateRange');
+//        $vaccine->prevent_symptom = $request->input('PreventSymptom');
+//        $vaccine->save();
+//        return redirect()->route('pet.show', ['pet' => $pet_id]);
     }
 
     public function store(Request $request)
@@ -67,11 +67,12 @@ class PetsController extends Controller
     public function show($id)
     {
         $pet = Pet::findOrFail($id);
-        $vaccines = Vaccine::all();
+        $currentType = Pet::find($id)->petType->id;
+        $vaccineInCurrentType = Vaccine::where('pet_type_id', '=' , $currentType)->get();
         $types = PetType::all();
-        $recieve_vaccines = RecievedVaccines::all();
+        $recieve_vaccines = RecievedVaccines::where('pet_id', '=' , $id)->get();
         return view('pets.show', [
-            'vaccines' => $vaccines,
+            'vaccinesInCurrentType' => $vaccineInCurrentType,
             'pet'=> $pet,
             'types' => $types,
             'recieve_vaccines' => $recieve_vaccines

@@ -72,79 +72,47 @@
                                 <td class="text-center">manage</td>
                             </tr>
 
-                            @foreach($vaccines as $vaccine)
+                            @foreach($recieve_vaccines as $recieve_vaccine)
                                 <tr>
-                                    @if($pet->petType->type == 'dog' and $vaccine->pet_type_id == 1)
+                                    @if($recieve_vaccine->pet->petType->type == 'dog' and $recieve_vaccine->vaccine->pet_type_id == 1)
                                         <td scope="row" class="text-left">
-                                            <b>{{ $vaccine->name }}</b>
+                                            <b>{{ $recieve_vaccine->vaccine->name }}</b>
                                             <div style="font-size: 12px;">
-                                                activate {{ $vaccine->activate_range }} months
+                                                activate {{ $recieve_vaccine->vaccine->activate_range }} months
                                             </div>
                                         </td>
-
                                         <td>
-
-                                            @foreach($recieve_vaccines as $recieve_vaccine)
-                                                @if($recieve_vaccine->pet_id == $pet->id && $recieve_vaccine->vaccine_id == $vaccine->id)
-                                                    {{ $recieve_vaccine->received_at }}
-                                                @else
-                                                    no data
-                                                @endif
-                                            @endforeach
+                                            {{ $recieve_vaccine->received_at }}
                                         </td>
-
                                         <td>
-                                            {{--                                                @if($recieve_vaccine->pet_id == $pet->id && $recieve_vaccine->vaccine_id == $vaccine->id)--}}
-                                            {{--                                                    {{ \Carbon\Carbon::parse($recieve_vaccine->received_at)->addMonth($vaccine->activate_range)->toDateString() }}--}}
-                                            {{--                                                @else--}}
-                                            {{--                                                    no data--}}
-                                            {{--                                                @endif--}}
+                                            {{ \Carbon\Carbon::parse($recieve_vaccine->received_at)->addMonth($recieve_vaccine->vaccine->activate_range)->toDateString() }}
                                         </td>
                                         <td style="font-size: 20px" class="row-center">
                                             <i class="fas fa-stethoscope col-2" type="button"></i>
-                                            {{--                                                @if($recieve_vaccine->pet_id == $pet->id && $recieve_vaccine->vaccine_id == $vaccine->id)--}}
-                                            {{--                                                    <i class="fas fa-pen col-2" style="color: #F5B041" type="button"--}}
-                                            {{--                                                       data-toggle="modal" data-target="#edit-{{ $vaccine->id }}"></i>--}}
-                                            {{--                                                @else--}}
-                                            {{--                                                    <i class="fas fa-plus col-2" style="color: #2ECC71;" type="button"--}}
-                                            {{--                                                       data-toggle="modal"--}}
-                                            {{--                                                       data-target="#addReceived-{{ $vaccine->id }}"></i>--}}
-                                            {{--                                                @endif--}}
+                                            <i class="fas fa-pen col-2" style="color: #F5B041" type="button"
+                                               data-toggle="modal"
+                                               data-target="#edit-{{ $recieve_vaccine->vaccine->id }}"></i>
                                             <i class="fas fa-trash-alt col-2" style="color: #E74C3C"
                                                type="button"></i>
                                         </td>
-                                        {{--                                                                                <td>{{$recievedVaccines->expire_at}}}</td>--}}
-                                    @elseif($pet->petType->type == 'cat' and $vaccine->pet_type_id == 2)
+                                    @elseif($recieve_vaccine->pet->petType->type == 'cat' and $recieve_vaccine->vaccine->pet_type_id == 2)
                                         <td scope="row" class="text-left">
-                                            <b>{{ $vaccine->name }}</b>
+                                            <b>{{ $recieve_vaccine->vaccine->name }}</b>
                                             <div style="font-size: 12px;">
-                                                activate {{ $vaccine->activate_range }} months
+                                                activate {{ $recieve_vaccine->vaccine->activate_range }} months
                                             </div>
                                         </td>
                                         <td>
-                                            {{--                                                @if($recieve_vaccine->pet_id == $pet->id && $recieve_vaccine->vaccine_id == $vaccine->id)--}}
-                                            {{--                                                    {{ $recieve_vaccine->received_at }}--}}
-                                            {{--                                                @else--}}
-                                            {{--                                                    no data--}}
-                                            {{--                                                @endif--}}
+                                            {{ $recieve_vaccine->received_at }}
                                         </td>
                                         <td>
-                                            {{--                                                @if($recieve_vaccine->pet_id == $pet->id && $recieve_vaccine->vaccine_id == $vaccine->id)--}}
-                                            {{--                                                    {{ \Carbon\Carbon::parse($recieve_vaccine->received_at)->addMonth($vaccine->activate_range) }}--}}
-                                            {{--                                                @else--}}
-                                            {{--                                                    no data--}}
-                                            {{--                                                @endif--}}
+                                            {{ \Carbon\Carbon::parse($recieve_vaccine->received_at)->addMonth($recieve_vaccine->vaccine->activate_range)->toDateString() }}
                                         </td>
                                         <td style="font-size: 20px" class="row-center">
                                             <i class="fas fa-stethoscope col-2" type="button"></i>
-                                            {{--                                                @if($recieve_vaccine->pet_id == $pet->id && $recieve_vaccine->vaccine_id == $vaccine->id)--}}
-                                            {{--                                                    <i class="fas fa-pen col-2" style="color: #F5B041" type="button"--}}
-                                            {{--                                                       data-toggle="modal" data-target="#edit-{{ $vaccine->id }}"></i>--}}
-                                            {{--                                                @else--}}
-                                            {{--                                                    <i class="fas fa-plus col-2" style="color: #2ECC71;" type="button"--}}
-                                            {{--                                                       data-toggle="modal"--}}
-                                            {{--                                                       data-target="#addReceived-{{ $vaccine->id }}"></i>--}}
-                                            {{--                                                @endif--}}
+                                            <i class="fas fa-pen col-2" style="color: #F5B041" type="button"
+                                               data-toggle="modal"
+                                               data-target="#edit-{{ $recieve_vaccine->vaccine->id }}"></i>
                                             <i class="fas fa-trash-alt col-2" style="color: #E74C3C"
                                                type="button"></i>
                                         </td>
@@ -154,7 +122,7 @@
                             </tbody>
                         </table>
 
-                        // edit modal
+                        // add modal
                         <div id="add" class="modal fade" role="dialog" style="color: black">
                             <div class="modal-dialog">
                                 <!-- Modal content-->
@@ -172,8 +140,15 @@
                                                 <label for="vaccineName" class="col-sm-4 col-form-label text-left">Vaccine
                                                     Name</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="vaccineName"
-                                                           name="vaccineName">
+                                                    <datalist id="vaccineName">
+                                                        @if ($pet->petType->id = 1)
+                                                            @foreach($vaccinesInCurrentType as $vaccineInCurrentType)
+                                                                <option value="{{ $vaccineInCurrentType->name }}">
+                                                            @endforeach
+                                                        @endif
+                                                    </datalist>
+                                                    <input type="search" class="form-control" id="vaccineName"
+                                                           name="vaccineName" list="vaccineName">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -197,15 +172,12 @@
                                                 <div class="col-sm-2 col-form-label">months</div>
                                             </div>
                                             <div class="form-group row">
-                                                <label for="vaccineFor" class="col-sm-4 col-form-label text-left">Vaccine
-                                                    for</label>
+                                                <label for="receivedDate"
+                                                       class="col-sm-4 col-form-label text-left">Received
+                                                    Date</label>
                                                 <div class="col-sm-8">
-                                                    <select id="vaccineFor" class="form-control" name="vaccineFor">
-                                                        @foreach($types as $type)
-                                                            <option
-                                                                value="{{ $type->id }}">{{ $type->type }}</option>
-                                                        @endforeach
-                                                    </select>
+                                                    <input type="date" class="form-control"
+                                                           id="receivedDate" name="receivedDate">
                                                 </div>
                                             </div>
                                             <div class="text-right">
@@ -218,67 +190,22 @@
                                 </div>
                             </div>
                         </div>
+
                         // edit modal
-                        @foreach($vaccines as $vaccine)
-                            @foreach($recieve_vaccines as $recieve_vaccine)
-                                <div id="edit-{{ $vaccine->id }}" class="modal fade" role="dialog" style="color: black">
-                                    <div class="modal-dialog">
-                                        <!-- Modal content-->
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title">Edit {{ $vaccine->name  }} received</h4>
-                                                <button type="button" class="close" data-dismiss="modal">&times;
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form method="POST">
-                                                    @csrf
-                                                    <div class="form-group row">
-                                                        <label for="receivedDate"
-                                                               class="col-sm-4 col-form-label text-left">Received
-                                                            Date</label>
-                                                        <div class="col-sm-8">
-                                                            @if($recieve_vaccine->pet_id == $pet->id && $recieve_vaccine->vaccine_id == $vaccine->id)
-                                                                <input type="date" class="form-control"
-                                                                       placeholder="MM/DD/YYYY"
-                                                                       value="{{ $recieve_vaccine->received_at }}"
-                                                                       id="receivedDate" name="receivedDate">
-                                                            @else
-                                                                no data
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    @if($recieve_vaccine->pet_id == $pet->id && $recieve_vaccine->vaccine_id == $vaccine->id)
-                                                        <p>activate {{ $vaccine->activate_range }} months</p>
-                                                    @else
-                                                        no data
-                                                    @endif
-                                                    <div class="text-right">
-                                                        <button type="submit" class="btn btn-primary"
-                                                                style="margin-top: 20px">edit date
-                                                        </button>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endforeach
-                        // add received
-                        @foreach($vaccines as $vaccine)
-                            <div id="addReceived-{{ $vaccine->id }}" class="modal fade" role="dialog"
+                        @foreach($recieve_vaccines as $recieve_vaccine)
+                            <div id="edit-{{ $recieve_vaccine->vaccine->id }}" class="modal fade" role="dialog"
                                  style="color: black">
                                 <div class="modal-dialog">
+                                    <!-- Modal content-->
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h4 class="modal-title">Add Received {{ $vaccine->name  }} date</h4>
-                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Edit {{ $recieve_vaccine->vaccine->name }}
+                                                received</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;
+                                            </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="POST" action="{{ route('received.vaccine.date.store',[
-                                                'pet' => $pet->id,
-                                            ])}}">
+                                            <form method="POST">
                                                 @csrf
                                                 <div class="form-group row">
                                                     <label for="receivedDate"
@@ -286,13 +213,14 @@
                                                         Date</label>
                                                     <div class="col-sm-8">
                                                         <input type="date" class="form-control"
+                                                               value="{{ $recieve_vaccine->received_at }}"
                                                                id="receivedDate" name="receivedDate">
                                                     </div>
                                                 </div>
-                                                <p>activate {{ $vaccine->activate_range }} months</p>
+                                                <p>activate {{ $recieve_vaccine->vaccine->activate_range }} months</p>
                                                 <div class="text-right">
                                                     <button type="submit" class="btn btn-primary"
-                                                            style="margin-top: 20px">Add Received Date
+                                                            style="margin-top: 20px">edit date
                                                     </button>
                                                 </div>
                                             </form>
@@ -301,6 +229,7 @@
                                 </div>
                             </div>
                         @endforeach
+
                     </div>
                 </div>
             </div>
