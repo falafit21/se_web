@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pet;
+use App\PetTip;
 use App\Post;
 use App\QuestionForm;
 use App\User;
@@ -20,6 +21,7 @@ class UsersController extends Controller
             'users' => $users,
             'user' => $user
         ]);
+
     }
 
     public function getUserProfile()

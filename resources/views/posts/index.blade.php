@@ -36,6 +36,25 @@
                 font-size: 18px;
             }
         }
+
+        #loadMore:hover {
+            background-color: #fff;
+            color: #33739E;
+        }
+
+        #loadMore {
+            text-align: center;
+            background-color: #33739E;
+            color: #fff;
+            transition: all 600ms ease-in-out;
+            -webkit-transition: all 600ms ease-in-out;
+            -moz-transition: all 600ms ease-in-out;
+            -o-transition: all 600ms ease-in-out;
+        }
+        .bg {
+
+
+        }
     </style>
 @endsection
 
@@ -109,45 +128,48 @@
         </div>
     </div>
 
-
-
-{{--    @can('viewOnlyUserAndDoctor', App\User::class)--}}
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner" style="background-color: #D7DBDD; height: 250px; ">
-                <div class="carousel-item active">
-
-                </div>
-                <div class="carousel-item">
-
-                </div>
-                <div class="carousel-item">
-
-                </div>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner bg" style="height: 325px;background-color: #818182">
+            <div class="carousel-item active" id="couBg">
+                <img src="/images/petTipsBg1.png" style="max-height: 325px;width: 1000px"/>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            @foreach( $petTips as $tip )
+                <div class="carousel-item ">
+                    <div class="container"
+                         style=" padding-top:2em;color: #ffffff;margin-left: 2rem;padding-right:6em;">
+                        <div>
+                            <h3 style="text-align: center;margin-top: 2.5em">{{$tip->title}}</h3>
+                        </div>
+                        <div>
+                            <h4 style="text-align: center;">{{$tip->detail}}</h4>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
         </div>
-{{--    @endcan--}}
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    {{--    @endcan--}}
 
     <div class="" style="margin: 50px">
+        @can('viewAny', App\User::class, App\PetTip::class)
+        @endcan
+
         @can('create', \App\Post::class)
             <button type="button" class="btn btn-warning btn-lg btn-block" style="cursor:pointer; margin-top: 20px"
                     onclick="openNav()">Create question
             </button>
         @endcan
         @foreach($posts as $post)
-            <div class="card post-card border-light" style="margin-top: 10px">
+            <div class="card post-card border-light abc" style="margin-top: 10px">
                 <a href="{{ route('post.show', ['post' => $post->id]) }}"
                    style="text-decoration: none; color: #1b1e21">
                     <div class="card-body">
@@ -160,9 +182,13 @@
                 </a>
             </div>
         @endforeach
-        <a href="" class="card" style="margin-top: 30px; text-decoration: none">
+        <a href="" class="card" id="loadMore" style="margin-top: 30px; text-decoration: none">
             <p class="text-center" style="margin: 15px; font-size: 20px">Read more</p>
         </a>
+
+        <p class="totop" style="text-align: right">
+            <a href="#top">Back to top</a>
+        </p>
     </div>
 @endsection
 
@@ -179,5 +205,35 @@
             document.getElementById("main").style.marginLeft = "0px";
             document.body.style.backgroundColor = "white";
         }
+
+        $(function () {
+            $("abc").slice(0, 1).show();
+            $("#loadMore").on('click', function (e) {
+                e.preventDefault();
+                $("abc:hidden").slice(0, 1).slideDown();
+                if ($("abc:hidden").length == 0) {
+                    $("#load").fadeOut('slow');
+                }
+                $('html,body').animate({
+                    scrollTop: $(this).offset().top
+                }, 1500);
+            });
+        });
+
+        $('a[href=#top]').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 600);
+            return false;
+        });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('.totop a').fadeIn();
+            } else {
+                $('.totop a').fadeOut();
+            }
+        });
     </script>
 @endsection
+
