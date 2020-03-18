@@ -126,9 +126,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input type="name" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter Name">
+                        <input type="name" class="form-control" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter Name" value="{{$user->name}}">
                         <br>
-                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="{{$user->email}}">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
