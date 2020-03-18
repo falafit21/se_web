@@ -10,4 +10,8 @@ class RecievedVaccines extends Model
         return $this->belongsTo(Vaccine::class);
     }
 
+    public function pet(){
+        return $this->belongsTo(Pet::class);
+    }
+
 }

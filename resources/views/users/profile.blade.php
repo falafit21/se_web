@@ -104,6 +104,10 @@
                         <p class="card-text">
                             <small class="text-muted" style="font-size: 15px">
                                 {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 91f3b427900f6f0d84c7382fd4cddd147c41b0e7
                             </small>
                         </p>
                         <p style="font-size: 22px"><i class="fas fa-question" style="margin-right: 9px"></i> {{ $post->question }}</p>
