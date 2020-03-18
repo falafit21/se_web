@@ -96,7 +96,11 @@ class PostsController extends Controller
 
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->question = $request->input('question');
+        $post->detail = $request->input('detail');
+        $post->save();
+        return redirect()->route('post.show',['post'=>$post]);
     }
 
     public function destroy($id)
