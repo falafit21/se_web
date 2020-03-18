@@ -4,15 +4,18 @@ namespace App\Policies;
 
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Auth;
 
 class UserPolicy
 {
     use HandlesAuthorization;
 
-    public function viewOnlyUseAndDoctor(User $user)
+    public function viewOnlyUserAndDoctor(User $user)
     {
-        return $user->role === "user" || $user->role === "doctor";
+        return $user->role !== "admin";
     }
+
+
 
     public function viewOnlyUser(User $user)
     {

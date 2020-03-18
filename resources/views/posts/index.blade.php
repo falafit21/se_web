@@ -1,4 +1,3 @@
-
 @extends('layouts.master')
 
 @section('style')
@@ -6,6 +5,7 @@
         a {
             text-decoration: none;
         }
+
         .sidenav {
             height: 100%;
             width: 0;
@@ -18,6 +18,7 @@
             transition: 0.5s;
             padding-top: 60px;
         }
+
         .sidenav .closebtn {
             position: absolute;
             top: 0;
@@ -25,18 +26,22 @@
             font-size: 36px;
             margin-left: 50px;
         }
+
         @media screen and (max-height: 450px) {
             .sidenav {
                 padding-top: 15px;
             }
+
             .sidenav a {
                 font-size: 18px;
             }
         }
+
         #loadMore:hover {
             background-color: #fff;
             color: #33739E;
         }
+
         #loadMore {
             text-align: center;
             background-color: #33739E;
@@ -46,7 +51,7 @@
             -moz-transition: all 600ms ease-in-out;
             -o-transition: all 600ms ease-in-out;
         }
-        .bg{
+        .bg {
 
 
         }
@@ -123,123 +128,41 @@
         </div>
     </div>
 
-    @can('viewOnlyUseAndDoctor', App\User::class)
-        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner" style="background-color: #D7DBDD; height: 250px; ">
-                <div class="carousel-item active">
-
-                </div>
-                <div class="carousel-item">
-
-                </div>
-                <div class="carousel-item">
-
-                </div>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner bg" style="height: 325px;background-color: #818182">
+            <div class="carousel-item active" id="couBg">
+                <img src="/images/petTipsBg1.png" style="max-height: 325px;width: 1000px"/>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            @foreach( $petTips as $tip )
+                <div class="carousel-item ">
+                    <div class="container"
+                         style=" padding-top:2em;color: #ffffff;margin-left: 2rem;padding-right:6em;">
+                        <div>
+                            <h3 style="text-align: center;margin-top: 2.5em">{{$tip->title}}</h3>
+                        </div>
+                        <div>
+                            <h4 style="text-align: center;">{{$tip->detail}}</h4>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+
         </div>
-    @endcan
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    {{--    @endcan--}}
 
     <div class="" style="margin: 50px">
-        @can('viewAny', App\User::class,App\PetTip::class)
-            <div class="row" >
-                <div class="col-3">
-                    <div class="card border-light text-center" >
-                        <div class="card-header text-center">
-                            <h4>My Profile</h4>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-borderless text-left">
-                                <tbody style="color: black">
-                                <tr>
-                                    <th scope="row">NAME</th>
-                                    <td>{{$user->name}}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">EMAIL</th>
-                                    <td>{{$user->email}}</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">STATUS</th>
-                                    @if($user->status==1)
-                                        <td>Normal</td>
-                                    @else
-                                        <td>Banned</td>
-                                    @endif
-                                </tr>
-                                <tr>
-                                    <th scope="row">PASSWORD</th>
-                                    <td><a href="">change password</a></td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            <div class=" text-right">
-                                <i class="far fa-edit" data-toggle="modal" data-target="#editModal"
-                                   style="font-size: 18px; color: #F5B041"
-                                   type="button" data-toggle="tooltip" data-placement="top" title="edit profile"
-                                ></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-9" >
-                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-{{--                        <ol class="carousel-indicators">--}}
-{{--                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>--}}
-{{--                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>--}}
-{{--                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>--}}
-{{--                        </ol>--}}
-                        <div class="carousel-inner bg" style="height: 325px;background-color: #818182">
-
-{{--                            @for($i = 0; $i < 3;$i++)--}}
-                            <div class="carousel-item active" id="couBg">
-                                <img src="/images/petTipsBg1.png" style="max-height: 325px;width: 1000px"/>
-
-                            </div>
-
-                            @foreach( $petTips as $tip )
-                                <div class="carousel-item " >
-{{--                                    <img src="images/petTipsBG.png" class="img-responsive" alt="">--}}
-                                    <div class="container" style=" padding-top:2em;color: #ffffff;margin-left: 2rem;padding-right:6em;">
-                                        <div>
-                                            <h3 style="text-align: center;margin-top: 2.5em">{{$tip->title}}</h3>
-                                        </div>
-                                        <div>
-                                            <h4 style="text-align: center;">{{$tip->detail}}</h4>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            @endforeach
-{{--                                                        @endfor--}}
-
-                        </div>
-                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Previous</span>
-                        </a>
-                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="sr-only">Next</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-
+        @can('viewAny', App\User::class, App\PetTip::class)
         @endcan
+
         @can('create', \App\Post::class)
             <button type="button" class="btn btn-warning btn-lg btn-block" style="cursor:pointer; margin-top: 20px"
                     onclick="openNav()">Create question
@@ -263,9 +186,9 @@
             <p class="text-center" style="margin: 15px; font-size: 20px">Read more</p>
         </a>
 
-            <p class="totop" style="text-align: right">
-                <a href="#top">Back to top</a>
-            </p>
+        <p class="totop" style="text-align: right">
+            <a href="#top">Back to top</a>
+        </p>
     </div>
 @endsection
 
@@ -276,6 +199,7 @@
             document.getElementById("main").style.marginLeft = "700px";
             document.body.style.backgroundColor = "rgba(0,0,0,0)";
         }
+
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0px";
             document.getElementById("main").style.marginLeft = "0px";

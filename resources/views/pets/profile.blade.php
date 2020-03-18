@@ -4,8 +4,8 @@
         <div class="row">
             <div class="col-4">
                 <div class="card bg-light">
-                    <div class="card-header text-center">
-                        <h4>pet profile <i class="far fa-user" style="margin-left: 10px"></i></h4>
+                    <div class="card-header text-center" style="font-size: 20px">
+                       pet profile
                     </div>
                     <div class="card-body">
                         <table class="table table-borderless">
@@ -79,14 +79,10 @@
     </div>
 @endsection
 
-
-
 @section('script')
     <script type="text/javascript">
         $(".form_datetime").datetimepicker({
             format: "dd MM yyyy - hh:ii"
         });
     </script>
-
-
 @endsection

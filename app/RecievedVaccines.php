@@ -4,9 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ReceivedVaccine extends Model
+class RecievedVaccines extends Model
 {
     public function vaccine(){
-        return $this->hasMany(Vaccine::class);
+        return $this->belongsTo(Vaccine::class);
     }
+
 }
