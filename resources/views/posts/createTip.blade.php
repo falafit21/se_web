@@ -36,9 +36,14 @@
                                 ></i>
 {{--                            @endcan--}}
 {{--                            @can('delete', $post->user)--}}
+{{--                            <form id="deleteForm" onsubmit="return confirm('Are you sure to delete this post?')"--}}
+{{--                                  action="{{ route('posts.destroy', ['petTips' => $petTips->id]) }}" method="post">--}}
+{{--                                @method('DELETE')--}}
+{{--                                @csrf--}}
                                 <i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px"
-                                   type="button" data-toggle="tooltip" data-placement="top" title="delete post"
+                                          type="button" data-toggle="tooltip" data-placement="top" title="delete post"
                                 ></i>
+{{--                            </form>--}}
 {{--                            @endcan--}}
                         </div>
                     </div>

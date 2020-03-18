@@ -19,6 +19,7 @@ Route::get('/admin/createDoc', 'UsersController@createDoc')->name('admin.createD
 Route::resource('/doctorLists','DoctorListsController');
 
 Route::resource('/petTip', 'PetTipsController');
+//Route::get('/petTips/tip', 'PetTipsController@show');
 
 //admin
 Route::get('/admin/viewMembers', 'UsersController@index');

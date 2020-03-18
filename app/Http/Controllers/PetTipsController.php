@@ -3,15 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\PetTip;
+
 use Illuminate\Http\Request;
 
 class PetTipsController extends Controller
 {
-
     public function index()
     {
-        $tips = PetTip::orderBy('id', 'desc')->get();
+
+        $tips = PetTip::orderBy('id','desc')->get();
         return view('posts.createTip', ['tips' => $tips]);
+    }
+
+    public function showTip(){
+
     }
 
     /**
@@ -78,5 +83,11 @@ class PetTipsController extends Controller
     public function destroy($id)
     {
         //
+
     }
 }
+
+
+
+
+

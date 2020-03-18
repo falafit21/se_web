@@ -1,3 +1,4 @@
+
 @extends('layouts.master')
 
 @section('style')
@@ -5,7 +6,6 @@
         a {
             text-decoration: none;
         }
-
         .sidenav {
             height: 100%;
             width: 0;
@@ -18,7 +18,6 @@
             transition: 0.5s;
             padding-top: 60px;
         }
-
         .sidenav .closebtn {
             position: absolute;
             top: 0;
@@ -26,15 +25,30 @@
             font-size: 36px;
             margin-left: 50px;
         }
-
         @media screen and (max-height: 450px) {
             .sidenav {
                 padding-top: 15px;
             }
-
             .sidenav a {
                 font-size: 18px;
             }
+        }
+        #loadMore:hover {
+            background-color: #fff;
+            color: #33739E;
+        }
+        #loadMore {
+            text-align: center;
+            background-color: #33739E;
+            color: #fff;
+            transition: all 600ms ease-in-out;
+            -webkit-transition: all 600ms ease-in-out;
+            -moz-transition: all 600ms ease-in-out;
+            -o-transition: all 600ms ease-in-out;
+        }
+        .bg{
+
+
         }
     </style>
 @endsection
@@ -139,7 +153,7 @@
     @endcan
 
     <div class="" style="margin: 50px">
-        @can('viewAny', App\User::class)
+        @can('viewAny', App\User::class,App\PetTip::class)
             <div class="row" >
                 <div class="col-3">
                     <div class="card border-light text-center" >
@@ -182,21 +196,35 @@
                 </div>
                 <div class="col-9" >
                     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-                        <ol class="carousel-indicators">
-                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-                        </ol>
-                        <div class="carousel-inner" style="background-color: #D7DBDD; height: 325px; ">
-                            <div class="carousel-item active">
+{{--                        <ol class="carousel-indicators">--}}
+{{--                            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>--}}
+{{--                            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>--}}
+{{--                            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>--}}
+{{--                        </ol>--}}
+                        <div class="carousel-inner bg" style="height: 325px;background-color: #818182">
+
+{{--                            @for($i = 0; $i < 3;$i++)--}}
+                            <div class="carousel-item active" id="couBg">
+                                <img src="/images/petTipsBg1.png" style="max-height: 325px;width: 1000px"/>
 
                             </div>
-                            <div class="carousel-item">
 
-                            </div>
-                            <div class="carousel-item">
+                            @foreach( $petTips as $tip )
+                                <div class="carousel-item " >
+{{--                                    <img src="images/petTipsBG.png" class="img-responsive" alt="">--}}
+                                    <div class="container" style=" padding-top:2em;color: #ffffff;margin-left: 2rem;padding-right:6em;">
+                                        <div>
+                                            <h3 style="text-align: center;margin-top: 2.5em">{{$tip->title}}</h3>
+                                        </div>
+                                        <div>
+                                            <h4 style="text-align: center;">{{$tip->detail}}</h4>
+                                        </div>
+                                    </div>
 
-                            </div>
+                                </div>
+                            @endforeach
+{{--                                                        @endfor--}}
+
                         </div>
                         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -218,7 +246,7 @@
             </button>
         @endcan
         @foreach($posts as $post)
-            <div class="card post-card border-light" style="margin-top: 10px">
+            <div class="card post-card border-light abc" style="margin-top: 10px">
                 <a href="{{ route('post.show', ['post' => $post->id]) }}"
                    style="text-decoration: none; color: #1b1e21">
                     <div class="card-body">
@@ -231,9 +259,13 @@
                 </a>
             </div>
         @endforeach
-        <a href="" class="card" style="margin-top: 30px; text-decoration: none">
+        <a href="" class="card" id="loadMore" style="margin-top: 30px; text-decoration: none">
             <p class="text-center" style="margin: 15px; font-size: 20px">Read more</p>
         </a>
+
+            <p class="totop" style="text-align: right">
+                <a href="#top">Back to top</a>
+            </p>
     </div>
 @endsection
 
@@ -244,11 +276,40 @@
             document.getElementById("main").style.marginLeft = "700px";
             document.body.style.backgroundColor = "rgba(0,0,0,0)";
         }
-
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0px";
             document.getElementById("main").style.marginLeft = "0px";
             document.body.style.backgroundColor = "white";
         }
+
+        $(function () {
+            $("abc").slice(0, 1).show();
+            $("#loadMore").on('click', function (e) {
+                e.preventDefault();
+                $("abc:hidden").slice(0, 1).slideDown();
+                if ($("abc:hidden").length == 0) {
+                    $("#load").fadeOut('slow');
+                }
+                $('html,body').animate({
+                    scrollTop: $(this).offset().top
+                }, 1500);
+            });
+        });
+
+        $('a[href=#top]').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 600);
+            return false;
+        });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('.totop a').fadeIn();
+            } else {
+                $('.totop a').fadeOut();
+            }
+        });
     </script>
 @endsection
+

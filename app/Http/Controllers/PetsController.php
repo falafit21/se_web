@@ -6,7 +6,6 @@ use App\Pet;
 use App\PetGene;
 use App\PetType;
 use App\ReceivedVaccine;
-use App\User;
 use App\Vaccine;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
