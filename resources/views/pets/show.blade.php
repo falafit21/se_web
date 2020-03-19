@@ -87,14 +87,37 @@
                                         <td>
                                             {{ \Carbon\Carbon::parse($recieve_vaccine->received_at)->addMonth($recieve_vaccine->vaccine->activate_range)->toDateString() }}
                                         </td>
-                                        <td style="font-size: 20px" class="row-center">
-                                            <i class="fas fa-stethoscope col-2" type="button"></i>
-                                            <i class="fas fa-pen col-2" style="color: #F5B041" type="button"
-                                               data-toggle="modal"
-                                               data-target="#edit-{{ $recieve_vaccine->vaccine->id }}"></i>
-                                            <i class="fas fa-trash-alt col-2" style="color: #E74C3C"
-                                               type="button"></i>
-                                        </td>
+                                        <form id="deleteForm"
+                                              onsubmit="return confirm('Are you sure to delete this vaccine ?')"
+                                              action="{{ route('vaccines.vaccineDestroy', [
+                                                    'vaccine' => $recieve_vaccine->id,
+                                                    'pet' => $pet->id
+                                              ]) }}"
+                                              method="post" class="col-1">
+                                            @method('DELETE')
+                                            @csrf
+                                            <td style="font-size: 20px;" class="row-center">
+                                                <button class="fas fa-stethoscope"
+                                                        type="button"
+                                                        style="background-color: transparent; border:none">
+                                                </button>
+                                                <button class="fas fa-pen "
+                                                        style="color: #F5B041; background-color: transparent; border:none"
+                                                        type="button"
+                                                        data-toggle="modal"
+                                                        data-target="#edit-{{ $recieve_vaccine->vaccine->id }}">
+                                                </button>
+                                                <button class="fas fa-trash-alt"
+                                                        style="color: #E74C3C; background-color: transparent; border:none"
+                                                        type="submit" data-toggle="tooltip" data-placement="top"
+                                                        title="delete post">
+                                                </button>
+                                            </td>
+                                        </form>
+
+                                        {{--                                        <i class="fas fa-trash-alt col-2" style="color: #E74C3C"--}}
+                                        {{--                                           type="button"></i>--}}
+
                                     @elseif($recieve_vaccine->pet->petType->type == 'cat' and $recieve_vaccine->vaccine->pet_type_id == 2)
                                         <td scope="row" class="text-left">
                                             <b>{{ $recieve_vaccine->vaccine->name }}</b>
@@ -108,14 +131,33 @@
                                         <td>
                                             {{ \Carbon\Carbon::parse($recieve_vaccine->received_at)->addMonth($recieve_vaccine->vaccine->activate_range)->toDateString() }}
                                         </td>
-                                        <td style="font-size: 20px" class="row-center">
-                                            <i class="fas fa-stethoscope col-2" type="button"></i>
-                                            <i class="fas fa-pen col-2" style="color: #F5B041" type="button"
-                                               data-toggle="modal"
-                                               data-target="#edit-{{ $recieve_vaccine->vaccine->id }}"></i>
-                                            <i class="fas fa-trash-alt col-2" style="color: #E74C3C"
-                                               type="button"></i>
-                                        </td>
+                                        <form id="deleteForm"
+                                              onsubmit="return confirm('Are you sure to delete this vaccine ?')"
+                                              action="{{ route('vaccines.vaccineDestroy', [
+                                                    'vaccine' => $recieve_vaccine->id,
+                                                    'pet' => $pet->id
+                                              ]) }}"
+                                              method="post" class="col-1">
+                                            @method('DELETE')
+                                            @csrf
+                                            <td style="font-size: 20px;" class="row-center">
+                                                <button class="fas fa-stethoscope"
+                                                        type="button"
+                                                        style="background-color: transparent; border:none">
+                                                </button>
+                                                <button class="fas fa-pen "
+                                                        style="color: #F5B041; background-color: transparent; border:none"
+                                                        type="button"
+                                                        data-toggle="modal"
+                                                        data-target="#edit-{{ $recieve_vaccine->vaccine->id }}">
+                                                </button>
+                                                <button class="fas fa-trash-alt"
+                                                        style="color: #E74C3C; background-color: transparent; border:none"
+                                                        type="submit" data-toggle="tooltip" data-placement="top"
+                                                        title="delete post">
+                                                </button>
+                                            </td>
+                                        </form>
                                     @endif
                                 </tr>
                             @endforeach
@@ -132,7 +174,7 @@
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                     </div>
                                     <div class="modal-body">
-                                        <form method="POST" action="{{ route('pet.vaccine.store',[
+                                        <form method="POST" action="{{ route('pet.vaccine.store', [
                                                 'pet' => $pet->id
                                             ])}}">
                                             @csrf
@@ -141,11 +183,9 @@
                                                     Name</label>
                                                 <div class="col-sm-8">
                                                     <datalist id="vaccineName">
-                                                        @if ($pet->petType->id = 1)
-                                                            @foreach($vaccinesInCurrentType as $vaccineInCurrentType)
-                                                                <option value="{{ $vaccineInCurrentType->name }}">
-                                                            @endforeach
-                                                        @endif
+                                                        @foreach($vaccinesInCurrentType as $vaccineInCurrentType)
+                                                            <option value="{{ $vaccineInCurrentType->name }}">
+                                                        @endforeach
                                                     </datalist>
                                                     <input type="search" class="form-control" id="vaccineName"
                                                            name="vaccineName" list="vaccineName">

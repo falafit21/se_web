@@ -35,8 +35,8 @@ Route::get('/pets/{pet_id}/edit', 'PetsController@edit')->name('pet.edit');
 //vaccine
 Route::resource('/vaccines', 'VaccinesController');
 Route::post('/pet/{pet}/vaccine', 'PetsController@vaccineStore')->name('pet.vaccine.store');
-Route::post('/vaccine/{pet}/receivedDate', 'VaccinesController@receivedVaccineDateStore')->name('received.vaccine.date.store');
-
+//Route::post('/vaccine/{pet}/receivedDate', 'VaccinesController@receivedVaccineDateStore')->name('received.vaccine.date.store');
+Route::delete('/vaccines/{vaccine}/{pet}', 'VaccinesController@vaccineDestroy')->name('vaccines.vaccineDestroy');
 
 Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');

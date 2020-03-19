@@ -28,19 +28,29 @@ class PetsController extends Controller
     }
 
     public function vaccineStore(Request $request, $pet_id){
-//        $request->validate([
-//            'vaccineFor' => ['required'],
-//            'vaccineName' => ['required'],
-//            'activateRange' => ['required'],
-//            'PreventSymptom' => ['required'],
-//        ]);
-//        $vaccine = new Vaccine;
-//        $vaccine->pet_type_id = $request->input('vaccineFor');
-//        $vaccine->name = $request->input('vaccineName');
-//        $vaccine->activate_range = $request->input('activateRange');
-//        $vaccine->prevent_symptom = $request->input('PreventSymptom');
-//        $vaccine->save();
-//        return redirect()->route('pet.show', ['pet' => $pet_id]);
+        $request->validate([
+            'vaccineName' => ['required'],
+            'activateRange' => ['required'],
+            'PreventSymptom' => ['required'],
+            'receivedDate' => ['required']
+        ]);
+        $pet_type_id = Pet::find($pet_id)->pet_type_id;
+
+        $vaccine = new Vaccine;
+        $vaccine->pet_type_id = $pet_type_id;
+        $vaccine->name = $request->input('vaccineName');
+        $vaccine->activate_range = $request->input('activateRange');
+        $vaccine->prevent_symptom = $request->input('PreventSymptom');
+        if($vaccine->save()){
+            $recentVaccine_id = $vaccine->latest()->first()->id;
+
+            $recieved_vaccine = new RecievedVaccines;
+            $recieved_vaccine->pet_id = $pet_id;
+            $recieved_vaccine->vaccine_id = $recentVaccine_id;
+            $recieved_vaccine->received_at = $request->input('receivedDate');
+            $recieved_vaccine->save();
+        }
+        return redirect()->route('pet.show', ['pet' => $pet_id]);
     }
 
     public function store(Request $request)
@@ -80,21 +90,7 @@ class PetsController extends Controller
         ]);
     }
 
-    public function calculate(Request $request){
-//        $vaccines = Vaccine::all();
-//        $pets = Pet::all();
-//
-//        $recievedVaccines = RecievedVaccines::findOrFail();
-//        $recievedVaccines = $request->input('received_at');
-//        $recievedVaccines->received_at = Carbon::received_at()->addMonths($recievedVaccines->expired_at);
-//        $recievedVaccines->save();
-//
-//        return redirect()->route('pets.calculate',[
-//                'recievedVaccines'=>$recievedVaccines,
-//                'vaccines'=>$vaccines,
-//                'pets'=>$pets
-//            ]);
-    }
+
 
     public function edit($id)
     {
@@ -132,7 +128,7 @@ class PetsController extends Controller
 
 
     }
-    
+
     public function destroy($id)
     {
         //
