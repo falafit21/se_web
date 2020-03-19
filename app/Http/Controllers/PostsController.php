@@ -103,24 +103,21 @@ class PostsController extends Controller
         return redirect()->route('post.show',['post'=>$post]);
     }
  
-    public function destroy($id){
+
+    public function commentUpdate(Request $request, $post_id){
+        $post = Post::findOrFail($post_id);
+        $comment= Comment::findOrFail($request->input('id'));
+        $comment->comment = $request->input('comment');
+        $comment->save();
+        
+        return redirect()->route('post.show',['post'=>$post]);
     }
 
-<<<<<<< HEAD
-    public function commentUpdate(Request $request, $id,$comment_id){
-        $post = Post::findOrFail($id);
-        $comment= Comment::findOrFail($comment_id);
-        $comment->comment = $request->input('comment');
-        
-        return redirect()->route('post.show',['post'=>$post,'comment'=>$comment]);
-
-=======
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
         $post -> delete();
         return redirect()->route('post.index');
->>>>>>> f5c3c560beaf3cc1094afedff5b6d543336d580c
     }
 
 }
