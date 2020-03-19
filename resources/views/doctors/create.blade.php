@@ -47,14 +47,27 @@
             <form method="POST" action="{{ route('doctorLists.store') }}">
                 @csrf
                 <h5 style="margin-top: 50px">Step 1 : Basic info</h5>
+
                 <div class="form-group">
                     <label for="name">name</label>
-                    <input type="text" class="form-control" id="name" name="name">
+                    <input type="text" class="form-control @error('name') is-invalid @enderror"  id="name" name="name" >
+                    @error('name')
+                         <span class="invalid-feedback" role="alert">
+                               <strong>{{ $message }}</strong>
+                         </span>
+                     @enderror
                 </div>
+
                 <div class="form-group">
                     <label for="email">E-mail address</label>
-                    <input type="email" class="form-control" id="email" name="email">
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email">
+                    @error('email')
+                        <span class="invalid-feedback" role="alert">
+                             <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
+
                 <div class="form-group">
                     <label for="password">password</label>
                     <input type="password" class="form-control" id="password" name="password">
@@ -63,7 +76,7 @@
                     <label for="confirmPassword">confirm password</label>
                     <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
                 </div>
-{{--                <hr>--}}
+
                 <h5 style="margin-top: 50px">Step 2 : Advance info</h5>
                 <div class="form-group">
                     <label for="phoneNumber">phone number</label>
