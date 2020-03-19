@@ -287,7 +287,7 @@
                             </div>
                         </div>
 
-                        // edit modal
+                        // edit vaccine modal
                         @foreach($recieve_vaccines as $recieve_vaccine)
                             <div id="edit-{{ $recieve_vaccine->vaccine->id }}" class="modal fade" role="dialog"
                                  style="color: black">
@@ -301,9 +301,10 @@
                                             </button>
                                         </div>
                                         <div class="modal-body">
-                                            <form method="POST">
-                                                @csrf
+                                            <form method="POST" action="{{ route('pet.vaccine.update',['pet'=>$pet->id]) }}">
+                                                @method('PUT')
                                                 <div class="form-group row">
+                                                    <input type="hidden" id="vaccineId" name="vaccineId" value="{{$recieve_vaccine->vaccine->id}}">
                                                     <label for="vaccineName"
                                                            class="col-sm-4 col-form-label text-left">Vaccine
                                                         name</label>
@@ -325,8 +326,7 @@
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="activateRange"
-                                                           class="col-sm-4 col-form-label text-left">Received
-                                                        Date</label>
+                                                           class="col-sm-4 col-form-label text-left">Activate range</label>
                                                     <div class="col-sm-8">
                                                         <input type="number" class="form-control"
                                                                value="{{ $recieve_vaccine->vaccine->activate_range }}"

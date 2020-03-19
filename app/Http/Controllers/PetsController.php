@@ -53,6 +53,16 @@ class PetsController extends Controller
         return redirect()->route('pet.show', ['pet' => $pet_id]);
     }
 
+    public function vaccineUpdate(Request $request, $pet_id){
+        $pet = Pet::findOrFail($pet_id);
+        $vaccine = Vaccine::findOrFail($request->input('vaccineId'));
+        $vaccine->name = $request->input('vaccineName');
+        $vaccine->activate_range = $request->input('activateRange');
+        $vaccine->save();
+
+        return redirect()->route('pet.show', ['pet' => $pet]);
+    }
+
     public function store(Request $request)
     {
         $request->validate([
