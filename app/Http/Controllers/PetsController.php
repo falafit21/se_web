@@ -11,7 +11,6 @@ use App\Vaccine;
 use App\WeightStatuses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 class PetsController extends Controller
 {
@@ -95,23 +94,14 @@ class PetsController extends Controller
         ]);
     }
 
-
     public function update(Request $request, $id)
     {
-//        $type = $request->input('type');
-//        $gene = $request->input('gene');
         $pet = Pet::findOrFail($id);
-//        $pet->name = $request->input('name');
-//        $pet->user_id = Auth::id();
-//        $pet->pet_type_id = $type;
-//        $pet->pet_gene_id = $gene;
         $pet->weight = $request->input('weight');
         $pet->birth_date = $request->input('birth-date-input');
         $pet->save();
 
         return redirect()->route('pet.show',['pet'=>$pet]);
-
-
     }
 
     public function destroy($id)
