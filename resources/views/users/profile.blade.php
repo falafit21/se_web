@@ -77,6 +77,8 @@
                                     <img width="80" height="75" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Creative-Tail-Animal-dog.svg/1024px-Creative-Tail-Animal-dog.svg.png">
                                     @elseif( $pet->petType->type == 'cat' )
                                     <img width="80" height="75" src="https://image.flaticon.com/icons/png/512/141/141782.png">
+                                    @elseif( $pet->petType->type == 'rabbit' )
+                                    <img width="80" height="75" src="https://cdn.pixabay.com/photo/2018/12/28/16/27/rabbit-3899900_1280.jpg">
                                     @endif
                                     <h8 style="text-align: center; margin-top:20px">{{$pet->name}}</h8>
                                 </span>

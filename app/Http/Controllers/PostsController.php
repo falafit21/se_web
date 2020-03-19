@@ -102,13 +102,16 @@ class PostsController extends Controller
         $post->save();
         return redirect()->route('post.show',['post'=>$post]);
     }
+ 
+    public function destroy($id){
+    }
 
-    public function destroy($id)
-    {
-        $petTips = PetTip::findOrFail($id);
-        $petTips = delete();
-        return redirect()->route('posts.createTip',['petTips'=>$petTips->id]);
-
+    public function commentUpdate(Request $request, $id,$comment_id){
+        $post = Post::findOrFail($id);
+        $comment= Comment::findOrFail($comment_id);
+        $comment->comment = $request->input('comment');
+        
+        return redirect()->route('post.show',['post'=>$post,'comment'=>$comment]);
 
     }
 }
