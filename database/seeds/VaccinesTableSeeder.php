@@ -26,65 +26,6 @@ class VaccinesTableSeeder extends Seeder
         $vaccine1->prevent_symptom ="Add Immune system";
         $vaccine1->save();
 
-        $vaccine2 = new App\Vaccine();
-        $vaccine2->name = "Leptospirosis";
-        $vaccine2->pet_type_id = 1;
-        $vaccine2->activate_range=12;
-        $vaccine2->prevent_symptom ="y prevent leptospirosis ";
-        $vaccine2->save();
-
-        $vaccine3 = new App\Vaccine();
-        $vaccine3->name = "Canine Influenza";;
-        $vaccine3->pet_type_id = 1;
-        $vaccine3->activate_range=12;
-        $vaccine3->prevent_symptom ="prevention from dog flu";
-        $vaccine3->save();
-
-        $vaccine4 = new App\Vaccine();
-        $vaccine4->name = "Lyme Disease";
-        $vaccine4->pet_type_id = 1;
-        $vaccine4->activate_range=12;
-        $vaccine4->prevent_symptom ="Prevention from Lyme Disease";
-        $vaccine4->save();
-
-        $vaccine5 = new App\Vaccine();
-        $vaccine5->name = "Bordetella (Kennel Cough)";
-        $vaccine5->pet_type_id = 1;
-        $vaccine5->activate_range="6";
-        $vaccine5->prevent_symptom ="Prevention from Bordetella";
-        $vaccine5->save();
-
-        //cat
-
-        $vaccine6 = new App\Vaccine();
-        $vaccine6->name ="Rabies";
-        $vaccine6->pet_type_id = 2;
-        $vaccine6->activate_range=12;
-        $vaccine6->prevent_symptom ="Add immune system";
-        $vaccine6->save();
-
-        $vaccine7 = new App\Vaccine();
-        $vaccine7->name ="Feline Combo";
-        $vaccine7->pet_type_id = 2;
-        $vaccine7->activate_range=36;
-        $vaccine7->prevent_symptom ="Prevention from feline";
-        $vaccine7->save();
-
-        $vaccine8 = new App\Vaccine();
-        $vaccine8->name ="FeLV";
-        $vaccine8->pet_type_id = 2;
-        $vaccine8->activate_range=12;
-        $vaccine8->prevent_symptom ="Prevention from anemia in cat. ";
-        $vaccine8->save();
-
-        $vaccine9 = new App\Vaccine();
-        $vaccine9->name ="Bordetella";
-        $vaccine9->pet_type_id = 2;
-        $vaccine9->activate_range=12;
-        $vaccine9->prevent_symptom ="prevention of disease caused by Bordetella bronchiseptica. ";
-        $vaccine9->save();
-
-
 
     }
 }

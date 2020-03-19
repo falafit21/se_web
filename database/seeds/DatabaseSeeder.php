@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
         $this->call(DoctorsInfoTableSeeder::class);
 
         //pet
-        $this->call(PetGenesTableSeeder::class);
         $this->call(PetTypesTableSeeder::class);
-
+        $this->call(PetGenesTableSeeder::class);
+        $this->call(WeightStatusesSeeder::class);
 
         //user
         $this->call(UsersTableSeeder::class);
@@ -31,6 +31,8 @@ class DatabaseSeeder extends Seeder
 
         //vaccine
         $this->call(VaccinesTableSeeder::class);
+        $this->call(ExampleVaccinesSeeder::class);
+        $this->call(ReceiveVaccinesTableSeeder::class);
 //        $this->call(ReceiveVaccinesTableSeeder::class);
 
         //pet tips

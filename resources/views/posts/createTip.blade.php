@@ -24,34 +24,30 @@
         @foreach($tips as $tip)
             <div class="card" style="margin-bottom: 10px">
                 <div class="card-body">
-{{--                    <p class="card-text"><small class="text-muted" style="font-size: 15px">{{ $post->user->name }}</small></p>--}}
+                    {{--                    <p class="card-text"><small class="text-muted" style="font-size: 15px">{{ $post->user->name }}</small></p>--}}
                     <div class="row">
-                        <p class="col-10" style="font-size: 25px;">
+                        <p class="col-11" style="font-size: 25px;">
                             <i class="far fa-sticky-note"></i> {{ $tip->title }}
                         </p>
-                        <div class="col-2 text-right col-2" style="margin-top: 10px">
-{{--                            @can('update', $post->user)--}}
-                                <i class="far fa-edit" style="color: #F5B041; font-size: 20px"
-                                   type="button" data-toggle="tooltip" data-placement="top" title="edit post"
-                                ></i>
-{{--                            @endcan--}}
-{{--                            @can('delete', $post->user)--}}
+                        <div class="row col-1" style="margin-top: 10px;">
+                            <i class="far fa-edit" style="color: #F5B041; font-size: 20px;"
+                               type="button" data-toggle="tooltip" data-placement="top" title="edit post"
+                            ></i>
                             <form id="deleteForm" onsubmit="return confirm('Are you sure to delete this post?')"
                                   action="{{ route('petTip.destroy', ['petTip' => $tip->id]) }}" method="post">
                                 @method('DELETE')
                                 @csrf
-                                <button type="submit" style="background-color: Transparent;border:none;"><i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px"
-                                                         type="button" data-toggle="tooltip" data-placement="top" title="delete post"
-                                    ></i></button>
-
+                                <button type="submit" style="background-color: Transparent;border:none;">
+                                    <i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px"
+                                        type="button" data-toggle="tooltip" data-placement="top" title="delete post"
+                                    ></i>
+                                </button>
                             </form>
-{{--                            @endcan--}}
                         </div>
                     </div>
                     <p style="font-size: 18px; margin-bottom: 20px">{{ $tip->detail }}</p>
                 </div>
             </div>
         @endforeach
-
     </div>
 @endsection

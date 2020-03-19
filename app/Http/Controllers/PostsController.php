@@ -106,6 +106,7 @@ class PostsController extends Controller
     public function destroy($id){
     }
 
+<<<<<<< HEAD
     public function commentUpdate(Request $request, $id,$comment_id){
         $post = Post::findOrFail($id);
         $comment= Comment::findOrFail($comment_id);
@@ -113,5 +114,13 @@ class PostsController extends Controller
         
         return redirect()->route('post.show',['post'=>$post,'comment'=>$comment]);
 
+=======
+    public function destroy($id)
+    {
+        $post = Post::findOrFail($id);
+        $post -> delete();
+        return redirect()->route('post.index');
+>>>>>>> f5c3c560beaf3cc1094afedff5b6d543336d580c
     }
+
 }

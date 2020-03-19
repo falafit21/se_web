@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\ExampleVaccine;
 use App\Pet;
 use App\PetGene;
 use App\PetType;
 use App\RecievedVaccines;
 use App\Vaccine;
+use App\WeightStatuses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 class PetsController extends Controller
 {
@@ -28,17 +29,27 @@ class PetsController extends Controller
 
     public function vaccineStore(Request $request, $pet_id){
         $request->validate([
-            'vaccineFor' => ['required'],
             'vaccineName' => ['required'],
             'activateRange' => ['required'],
             'PreventSymptom' => ['required'],
+            'receivedDate' => ['required']
         ]);
+        $pet_type_id = Pet::find($pet_id)->pet_type_id;
+
         $vaccine = new Vaccine;
-        $vaccine->pet_type_id = $request->input('vaccineFor');
+        $vaccine->pet_type_id = $pet_type_id;
         $vaccine->name = $request->input('vaccineName');
         $vaccine->activate_range = $request->input('activateRange');
         $vaccine->prevent_symptom = $request->input('PreventSymptom');
-        $vaccine->save();
+        if($vaccine->save()){
+            $recentVaccine_id = $vaccine->latest()->first()->id;
+
+            $recieved_vaccine = new RecievedVaccines;
+            $recieved_vaccine->pet_id = $pet_id;
+            $recieved_vaccine->vaccine_id = $recentVaccine_id;
+            $recieved_vaccine->received_at = $request->input('receivedDate');
+            $recieved_vaccine->save();
+        }
         return redirect()->route('pet.show', ['pet' => $pet_id]);
     }
 
@@ -67,90 +78,32 @@ class PetsController extends Controller
     public function show($id)
     {
         $pet = Pet::findOrFail($id);
-        $vaccines = Vaccine::all();
+        $currentType = Pet::find($id)->petType->id;
+        $currentGene = Pet::find($id)->pet_gene_id;
+        $vaccineInCurrentType = ExampleVaccine::where('pet_type_id', '=' , $currentType)->get();
         $types = PetType::all();
-        $recieve_vaccines = RecievedVaccines::all();
+        $recieve_vaccines = RecievedVaccines::where('pet_id', '=' , $id)->get();
+        $current_weight_statuses = WeightStatuses::where('pet_gene_id', '=', $currentGene)->get();
+
         return view('pets.show', [
-            'vaccines' => $vaccines,
+            'vaccinesInCurrentType' => $vaccineInCurrentType,
             'pet'=> $pet,
             'types' => $types,
-            'recieve_vaccines' => $recieve_vaccines
+            'recieve_vaccines' => $recieve_vaccines,
+            'weight_status' => $current_weight_statuses
         ]);
     }
 
-    public function calculate(Request $request){
-//        $vaccines = Vaccine::all();
-//        $pets = Pet::all();
-//
-//        $recievedVaccines = RecievedVaccines::findOrFail();
-//        $recievedVaccines = $request->input('received_at');
-//        $recievedVaccines->received_at = Carbon::received_at()->addMonths($recievedVaccines->expired_at);
-//        $recievedVaccines->save();
-//
-//        return redirect()->route('pets.calculate',[
-//                'recievedVaccines'=>$recievedVaccines,
-//                'vaccines'=>$vaccines,
-//                'pets'=>$pets
-//            ]);
-    }
-
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        $pet = Pet::findOrFail($id);
-        $genes = PetGene::all();
-        $types = PetType::all();
-        return view('pets.edit',[
-            'pet'=>$pet,
-            'genes'=> $genes,
-            'types' => $types
-        ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        $type = $request->input('type');
-        $gene = $request->input('gene');
-        $request->validate([
-            'name' => ['required'],
-            'type' => ['required'],
-            'gene' => ['required'],
-            'birth-date-input' => ['required'],
-            'weight' => ['required'],
-        ]);
-        $pet = Pet::findOrFail();
-        $pet->name = $request->input('name');
-        $pet->user_id = Auth::id();
-        $pet->pet_type_id = $type;
-        $pet->pet_gene_id = $gene;
+        $pet = Pet::findOrFail($id);
         $pet->weight = $request->input('weight');
         $pet->birth_date = $request->input('birth-date-input');
         $pet->save();
 
-        return redirect()->route(['user','show']);
-
-
+        return redirect()->route('pet.show',['pet'=>$pet]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //

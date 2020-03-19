@@ -17,8 +17,17 @@
                     @can('update', $post->user)
                     <i class="far fa-edit" style="color: #F5B041; font-size: 20px" type="button" data-toggle="modal" data-target="#editPostModal" data-placement="top" title="edit post"></i>
                     @endcan
+
                     @can('delete', $post->user)
-                    <i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px" type="button" data-toggle="tooltip" data-placement="top" title="delete post"></i>
+                            <form id="deleteForm" onsubmit="return confirm('Are you sure to delete this post?')"
+                                  action="{{ route('post.destroy', ['post' => $post->id]) }}" method="post">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" style="background-color: Transparent;border:none;">
+                                     <i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px" type="button" data-toggle="tooltip" data-placement="top" title="delete post"></i>
+                                </button>
+                             </form>
+
                     @endcan
                 </div>
             </div>
@@ -66,7 +75,15 @@
                     <i class="far fa-edit" style="color: #F5B041; font-size: 20px" type="button" data-toggle="tooltip" data-target="#editCommentModal" data-placement="top" title="edit comment"></i>
                     @endcan
                     @can('delete', $comment->user)
-                    <i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px" type="button" data-toggle="tooltip" data-placement="top" title="delete comment"></i>
+{{--                            <form id="deleteForm" onsubmit="return confirm('Are you sure to delete this Comment?')"--}}
+{{--                                  action="{{ route('post.destroy', ['deleteComment' => $comment->id]) }}" method="post">--}}
+{{--                                @method('DELETE')--}}
+{{--                                @csrf--}}
+{{--                                <button type="submit" style="background-color: Transparent;border:none;">--}}
+{{--                                    <i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px" type="button" data-toggle="tooltip" data-placement="top" title="delete comment"></i>--}}
+{{--                                </button>--}}
+{{--                            </form>--}}
+
                     @endcan
                 </div>
             </div>
