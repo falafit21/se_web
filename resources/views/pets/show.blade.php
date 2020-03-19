@@ -71,7 +71,6 @@
                                 <td>Expire Date</td>
                                 <td class="text-center">manage</td>
                             </tr>
-
                             @foreach($recieve_vaccines as $recieve_vaccine)
                                 <tr>
                                     @if($recieve_vaccine->pet->petType->type == 'dog' and $recieve_vaccine->vaccine->pet_type_id == 1)
@@ -99,7 +98,9 @@
                                             <td style="font-size: 20px;" class="row-center">
                                                 <button class="fas fa-stethoscope"
                                                         type="button"
-                                                        style="background-color: transparent; border:none">
+                                                        style="background-color: transparent; border:none"
+                                                        data-toggle="modal"
+                                                        data-target="#info-{{ $recieve_vaccine->vaccine->id }}">
                                                 </button>
                                                 <button class="fas fa-pen "
                                                         style="color: #F5B041; background-color: transparent; border:none"
@@ -143,7 +144,9 @@
                                             <td style="font-size: 20px;" class="row-center">
                                                 <button class="fas fa-stethoscope"
                                                         type="button"
-                                                        style="background-color: transparent; border:none">
+                                                        style="background-color: transparent; border:none"
+                                                        data-toggle="modal"
+                                                        data-target="#info-{{ $recieve_vaccine->vaccine->id }}">
                                                 </button>
                                                 <button class="fas fa-pen "
                                                         style="color: #F5B041; background-color: transparent; border:none"
@@ -248,6 +251,15 @@
                                             <form method="POST">
                                                 @csrf
                                                 <div class="form-group row">
+                                                    <label for="vaccineName"
+                                                           class="col-sm-4 col-form-label text-left">Vaccine name</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control"
+                                                               value="{{ $recieve_vaccine->vaccine->name }}"
+                                                               id="vaccineName" name="vaccineName">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
                                                     <label for="receivedDate"
                                                            class="col-sm-4 col-form-label text-left">Received
                                                         Date</label>
@@ -257,7 +269,16 @@
                                                                id="receivedDate" name="receivedDate">
                                                     </div>
                                                 </div>
-                                                <p>activate {{ $recieve_vaccine->vaccine->activate_range }} months</p>
+                                                <div class="form-group row">
+                                                    <label for="activateRange"
+                                                           class="col-sm-4 col-form-label text-left">Received
+                                                        Date</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="number" class="form-control"
+                                                               value="{{ $recieve_vaccine->vaccine->activate_range }}"
+                                                               id="activateRange" name="activateRange">
+                                                    </div>
+                                                </div>
                                                 <div class="text-right">
                                                     <button type="submit" class="btn btn-primary"
                                                             style="margin-top: 20px">edit date
@@ -270,6 +291,36 @@
                             </div>
                         @endforeach
 
+                        // show info model
+                        @foreach($recieve_vaccines as $recieve_vaccine)
+                            <div id="info-{{ $recieve_vaccine->vaccine->id }}" class="modal fade" role="dialog"
+                                 style="color: black">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h4 class="modal-title">Vaccine's infomation</h4>
+                                            <button type="button" class="close" data-dismiss="modal">&times;
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>
+                                                {{ $recieve_vaccine->vaccine->name }} vaccine
+                                                <div style="font-size: 12px;">
+                                                    activate {{ $recieve_vaccine->vaccine->activate_range }} months
+                                                </div>
+                                            </h4>
+                                            <hr/>
+                                            <p style="font-size: 16px">
+                                                {{ $recieve_vaccine->vaccine->prevent_symptom }}
+                                            </p>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>

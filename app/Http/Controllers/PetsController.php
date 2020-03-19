@@ -82,6 +82,8 @@ class PetsController extends Controller
         $vaccineInCurrentType = ExampleVaccine::where('pet_type_id', '=' , $currentType)->get();
         $types = PetType::all();
         $recieve_vaccines = RecievedVaccines::where('pet_id', '=' , $id)->get();
+
+
         return view('pets.show', [
             'vaccinesInCurrentType' => $vaccineInCurrentType,
             'pet'=> $pet,
