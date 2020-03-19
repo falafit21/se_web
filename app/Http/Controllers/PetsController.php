@@ -28,19 +28,19 @@ class PetsController extends Controller
     }
 
     public function vaccineStore(Request $request, $pet_id){
-//        $request->validate([
-//            'vaccineFor' => ['required'],
-//            'vaccineName' => ['required'],
-//            'activateRange' => ['required'],
-//            'PreventSymptom' => ['required'],
-//        ]);
-//        $vaccine = new Vaccine;
-//        $vaccine->pet_type_id = $request->input('vaccineFor');
-//        $vaccine->name = $request->input('vaccineName');
-//        $vaccine->activate_range = $request->input('activateRange');
-//        $vaccine->prevent_symptom = $request->input('PreventSymptom');
-//        $vaccine->save();
-//        return redirect()->route('pet.show', ['pet' => $pet_id]);
+        $request->validate([
+            'vaccineFor' => ['required'],
+            'vaccineName' => ['required'],
+            'activateRange' => ['required'],
+            'PreventSymptom' => ['required'],
+        ]);
+        $vaccine = new Vaccine;
+        $vaccine->pet_type_id = $request->input('vaccineFor');
+        $vaccine->name = $request->input('vaccineName');
+        $vaccine->activate_range = $request->input('activateRange');
+        $vaccine->prevent_symptom = $request->input('PreventSymptom');
+        $vaccine->save();
+        return redirect()->route('pet.show', ['pet' => $pet_id]);
     }
 
     public function store(Request $request)

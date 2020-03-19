@@ -49,7 +49,7 @@
                             </tr>
                             <tr>
                                 <th scope="row">PASSWORD</th>
-                                <td><a href="">change password</a></td>
+                                <td><a href="" data-target="#changePW" data-toggle="modal" type="button" data-toggle="tooltip" data-placement="top" title="edit Password">change password</a></td>
                             </tr>
                             </tbody>
                         </table>
@@ -58,6 +58,8 @@
                         </div>
                     </div>
                 </div>
+
+
 
                 <!-- Pet -->
                 @can('viewOnlyUser', App\User::class)
@@ -113,6 +115,103 @@
                 @endforeach
             </div>
         </div>
+
+        <!--Edit Password-->
+        <div class="modal fade" id="changePW" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form class="form-horizontal" method="POST" action="{{ route('user.changePassword',['user'=>$user->id])}}">
+                        {{ csrf_field() }}
+
+                        <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
+                            <label for="new-password" class="col-md-4 control-label">Current Password</label>
+
+                            <div class="col-md-6">
+                                <input id="current-password" type="password" class="form-control" name="current-password" required>
+
+                                @if ($errors->has('current-password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('current-password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
+                            <label for="new-password" class="col-md-4 control-label">New Password</label>
+
+                            <div class="col-md-6">
+                                <input id="new-password" type="password" class="form-control" name="new-password" required>
+
+                                @if ($errors->has('new-password'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('new-password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="new-password-confirm" class="col-md-4 control-label">Confirm New Password</label>
+
+                            <div class="col-md-6">
+                                <input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                                <button type="submit" class="btn btn-primary">
+                                    Change Password
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+
+
+{{--                    <form action="{{ route('user.update',['user'=>$user->id])}}" method="post">--}}
+{{--                        @method('PUT')--}}
+{{--                        @csrf--}}
+{{--                        <div class="modal-header">--}}
+{{--                            <h5 class="modal-title" id="editModalLabel">Change Password</h5>--}}
+{{--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
+{{--                                <span aria-hidden="true">&times;</span>--}}
+{{--                            </button>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-body">--}}
+{{--                            <div class="form-group row">--}}
+{{--                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('New Password') }}</label>--}}
+
+{{--                                <div class="col-md-6">--}}
+{{--                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">--}}
+
+{{--                                    @error('password')--}}
+{{--                                    <span class="invalid-feedback" role="alert">--}}
+{{--                                        <strong>{{ $message }}</strong>--}}
+{{--                                    </span>--}}
+{{--                                    @enderror--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+
+{{--                            <div class="form-group row">--}}
+{{--                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm New Password') }}</label>--}}
+
+{{--                                <div class="col-md-6">--}}
+{{--                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="modal-footer">--}}
+{{--                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>--}}
+{{--                            <button type="submit" class="btn btn-primary">Save changes</button>--}}
+{{--                        </div>--}}
+{{--                    </form>--}}
+
+                </div>
+            </div>
+        </div>
+
 
         <!-- Modal edit -->
         <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
