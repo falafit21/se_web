@@ -15,12 +15,12 @@ class CreateWeightStatusesTable extends Migration
     {
         Schema::create('weight_statuses', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('pet_genes_id')->unsigned()->nullable();
+            $table->bigInteger('pet_gene_id')->unsigned()->nullable();
             $table->float('breakpoint_start_weight')->nullable();
             $table->float('breakpoint_end_weight')->nullable();
             $table->timestamps();
 
-            $table->foreign('pet_genes_id')
+            $table->foreign('pet_gene_id')
                 ->references('id')
                 ->on('pet_genes')
                 ->onDelete('cascade');
@@ -36,7 +36,7 @@ class CreateWeightStatusesTable extends Migration
     {
         Schema::enableForeignKeyConstraints();
         Schema::table('weight_statuses', function(Blueprint $table){
-            $table->dropForeign(['pet_genes_id']);
+            $table->dropForeign(['pet_gene_id']);
         });
         Schema::disableForeignKeyConstraints();
 

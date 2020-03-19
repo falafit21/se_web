@@ -20,15 +20,35 @@
             <div class="form-group">
                 <label for="gene">Genes</label>
                 <select id="gene" class="form-control" name="gene">
-                    @foreach($genes as $gene)
-                        <option value="{{ $gene->id }}">{{ $gene->gene }}</option>
-                    @endforeach
+                    <optgroup label="Dog gene">
+                        @foreach($genes as $gene)
+                            @if($gene->pet_type_id == 1)
+                                <option value="{{ $gene->id }}">{{ $gene->gene }}</option>
+                            @endif
+                        @endforeach
+                    </optgroup>
+                    <optgroup label="Cat gene">
+                        @foreach($genes as $gene)
+                            @if($gene->pet_type_id == 2)
+                                <option value="{{ $gene->id }}">{{ $gene->gene }}</option>
+                            @endif
+                        @endforeach
+                    </optgroup>
+                    <optgroup label="Rabbit gene">
+                        @foreach($genes as $gene)
+                            @if($gene->pet_type_id == 3)
+                                <option value="{{ $gene->id }}">{{ $gene->gene }}</option>
+                            @endif
+                        @endforeach
+                    </optgroup>
+
                 </select>
             </div>
             <div class="form-group">
                 <label for="birth-date-input">BirthDate</label>
                 <div>
-                    <input class="form-control" type="date" value="2011-08-19" id="birth-date-input" name="birth-date-input">
+                    <input class="form-control" type="date" value="2011-08-19" id="birth-date-input"
+                           name="birth-date-input">
                     <small id="fileHelp" class="form-text text-muted"></small>
                 </div>
             </div>

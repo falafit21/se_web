@@ -185,58 +185,58 @@
                 </a>
             </div>
         @endforeach
-        <a href="" class="card" id="loadMore" style="margin-top: 30px; text-decoration: none">
-            <p class="text-center" style="margin: 15px; font-size: 20px">Read more</p>
-        </a>
+{{--        <a href="" class="card" id="loadMore" style="margin-top: 30px; text-decoration: none">--}}
+{{--            <p class="text-center" style="margin: 15px; font-size: 20px">Read more</p>--}}
+{{--        </a>--}}
 
-        <p class="totop" style="text-align: right">
-            <a href="#top">Back to top</a>
-        </p>
-    </div>
-@endsection
+        <p class="totop" style="text-align: center; padding-top: 25px">
+                <a href="#top"><i class="fa fa-chevron-circle-up" style="font-size:60px"></i></a>
+            </p>
+        </div>
+    @endsection
 
-@section('script')
-    <script>
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "700px";
-            document.getElementById("main").style.marginLeft = "700px";
-            document.body.style.backgroundColor = "rgba(0,0,0,0)";
-        }
-
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0px";
-            document.getElementById("main").style.marginLeft = "0px";
-            document.body.style.backgroundColor = "white";
-        }
-
-        $(function () {
-            $("abc").slice(0, 1).show();
-            $("#loadMore").on('click', function (e) {
-                e.preventDefault();
-                $("abc:hidden").slice(0, 1).slideDown();
-                if ($("abc:hidden").length == 0) {
-                    $("#load").fadeOut('slow');
-                }
-                $('html,body').animate({
-                    scrollTop: $(this).offset().top
-                }, 1500);
-            });
-        });
-
-        $('a[href=#top]').click(function () {
-            $('body,html').animate({
-                scrollTop: 0
-            }, 600);
-            return false;
-        });
-
-        $(window).scroll(function () {
-            if ($(this).scrollTop() > 50) {
-                $('.totop a').fadeIn();
-            } else {
-                $('.totop a').fadeOut();
+    @section('script')
+        <script>
+            function openNav() {
+                document.getElementById("mySidenav").style.width = "700px";
+                document.getElementById("main").style.marginLeft = "700px";
+                document.body.style.backgroundColor = "rgba(0,0,0,0)";
             }
-        });
-    </script>
-@endsection
+
+            function closeNav() {
+                document.getElementById("mySidenav").style.width = "0px";
+                document.getElementById("main").style.marginLeft = "0px";
+                document.body.style.backgroundColor = "white";
+            }
+
+            $(function () {
+                $("abc").slice(0, 1).show();
+                $("#loadMore").on('click', function (e) {
+                    e.preventDefault();
+                    $("abc:hidden").slice(0, 1).slideDown();
+                    if ($("abc:hidden").length == 0) {
+                        $("#load").fadeOut('slow');
+                    }
+                    $('html,body').animate({
+                        scrollTop: $(this).offset().top
+                    }, 1500);
+                });
+            });
+
+            $('a[href=#top]').click(function () {
+                $('body,html').animate({
+                    scrollTop: 0
+                }, 600);
+                return false;
+            });
+
+            $(window).scroll(function () {
+                if ($(this).scrollTop() > 50) {
+                    $('.totop a').fadeIn();
+                } else {
+                    $('.totop a').fadeOut();
+                }
+            });
+        </script>
+    @endsection
 

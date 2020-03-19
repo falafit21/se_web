@@ -5,11 +5,11 @@
             <div class="col-3">
                 <div class="card bg-light">
                     <div class="card-header text-center">
-                        <h4>{{$pet->name}} profile</h4>
+                        <h4>Pet profile</h4>
                     </div>
                     <div class="card-body">
                         <table class="table table-borderless text-left">
-                            <tbody style="color: black">
+                            <tbody style="color: black; font-size: 15px">
                             <tr>
                                 <th scope="row">NAME</th>
                                 <td>{{$pet->name}}</td>
@@ -26,26 +26,32 @@
                             <tr>
                                 <th scope="row">WEIGHT</th>
                                 <td>
-                                    {{$pet->weight}}
+                                    {{$pet->weight}} kg.
                                 </td>
                             </tr>
                             <tr>
                                 <th>GENE</th>
                                 <td>{{$pet->petGene->gene}}</td>
                             </tr>
+
                             <tr>
                                 <th>STATUS</th>
-                                <td>-----------------</td>
+                                @if($pet->weight <= $weight_status[0]->breakpoint_start_weight)
+                                    <td>Underweight</td>
+                                @elseif($pet->weight >= $weight_status[0]->breakpoint_end_weight)
+                                    <td>Overweight</td>
+                                @else
+                                    <td>Fit weight</td>
+                                @endif
                             </tr>
+
                             </tbody>
                         </table>
-                        <a href="{{action('PetsController@edit', $pet['id'])}}">
-                            <div class=" text-right">
-                                <i class="far fa-edit" data-toggle="modal" data-target="#editModal"
-                                   style="font-size: 18px; color: #F5B041" type="button" data-toggle="tooltip"
-                                   data-placement="top" title="edit profile"></i>
-                            </div>
-                        </a>
+                        <div class=" text-right">
+                            <i class="far fa-edit" data-toggle="modal" data-target="#editProfile"
+                               style="font-size: 18px; color: #F5B041" type="button" data-toggle="tooltip"
+                               data-placement="top" title="edit profile"></i>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -167,6 +173,53 @@
                             </tbody>
                         </table>
 
+                        // edit profile
+                        <div class="modal fade" id="editProfile" role="dialog" aria-labelledby="editModalLabel"
+                             aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <form method="POST" action="{{ route('pet.update', [$pet['id']] ) }}">
+                                        @method('PUT')
+                                        @csrf
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="editModalLabel" style="color: #1b1e21">Edit
+                                                Profile</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body" style="color: black">
+                                            <div class="form-group row">
+                                                <label for="birth-date-input" class="col-sm-4 col-form-label text-left">BirthDate</label>
+                                                <div class="col-sm-8">
+                                                    <input class="form-control" type="date"
+                                                           value="{{$pet->birth_date}}"
+                                                           id="birth-date-input"
+                                                           name="birth-date-input">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="weight"
+                                                       class="col-sm-4 col-form-label text-left">Weight</label>
+                                                <p class="col-5">
+                                                    <input type="number" class="form-control" id="weight"
+                                                           name="weight" value="{{old('weight', $pet->weight)}}">
+                                                    <small id="fileHelp" class="form-text text-muted"> Please answer
+                                                        in Kilograms Unit</small>
+                                                </p>
+                                                <p class="col-3 col-form-label">
+                                                    kilograms
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
                         // add modal
                         <div id="add" class="modal fade" role="dialog" style="color: black">
                             <div class="modal-dialog">
@@ -252,7 +305,8 @@
                                                 @csrf
                                                 <div class="form-group row">
                                                     <label for="vaccineName"
-                                                           class="col-sm-4 col-form-label text-left">Vaccine name</label>
+                                                           class="col-sm-4 col-form-label text-left">Vaccine
+                                                        name</label>
                                                     <div class="col-sm-8">
                                                         <input type="text" class="form-control"
                                                                value="{{ $recieve_vaccine->vaccine->name }}"
@@ -330,7 +384,11 @@
 
 
 @section('script')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script>
+
         $('.datepicker').pickadate();
         createEditableSelect(document.forms[0].myText);
     </script>
