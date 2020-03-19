@@ -16,7 +16,7 @@
                             </tr>
                             <tr>
                                 <th scope="row">TYPE</th>
-                                <td class="">{{$pet->petType->type}}</td>
+{{--                                <td class="">{{$pet->petType->type}}</td>--}}
                             </tr>
                             <tr>
                                 <th scope="row">BIRTH DATE</th>
@@ -31,7 +31,7 @@
                             </tr>
                             <tr>
                                 <th>GENE</th>
-                                <td>{{$pet->petGene->gene}}</td>
+{{--                                <td>{{$pet->petGene->gene}}</td>--}}
                             </tr>
                             <tr>
                                 <th>STATUS</th>
@@ -39,13 +39,13 @@
                             </tr>
                             </tbody>
                         </table>
-                        <a href="{{action('PetsController@edit', $pet['id'])}}">
+{{--                        <a href="{{action('PetsController@edit', $pet['id'])}}">--}}
                             <div class=" text-right">
-                                <i class="far fa-edit" data-toggle="modal" data-target="#editModal"
+                                <i class="far fa-edit" data-toggle="modal" data-target="#editProfile"
                                    style="font-size: 18px; color: #F5B041" type="button" data-toggle="tooltip"
                                    data-placement="top" title="edit profile"></i>
                             </div>
-                        </a>
+{{--                        </a>--}}
                     </div>
                 </div>
             </div>
@@ -121,6 +121,67 @@
                             @endforeach
                             </tbody>
                         </table>
+
+{{--                        // edit profile--}}
+                        <div class="modal fade" id="editProfile" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <form method="POST" action="{{route('pet.update',[$pet['id']])}}" >
+                                                @method('PUT')
+                                                @csrf
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="editModalLabel" style="color: #1b1e21">Edit Profile</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table class="table table-borderless text-center">
+                                                        <tbody style="color: black">
+                                                        <tr>
+                                                            <th scope="row"><label for="name">Name</label></th>
+                                                            <td><input class="form-control" id="name" name="name" value="{{old('name',$pet->name)}}"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row"><label for="type">Genre</label></th>
+                                                            <td><select id="type" class="form-control" name="type">
+                                                                    @foreach($types as $type)
+                                                                        <option value="{{ $type->id }}">{{ $type->type }}</option>
+                                                                    @endforeach
+                                                                </select></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row"><label for="gene">Genes</label></th>
+                                                            <td><select id="gene" class="form-control" name="gene">
+                                                                    {{--                                                            @foreach($genes as $gene)--}}
+                                                                    {{--                                                               <option value="{{ $gene->id }}">{{ $gene->gene }}</option>--}}
+                                                                    {{--                                                            @endforeach--}}
+                                                                </select></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row"><label for="birth-date-input">BirthDate</label></th>
+                                                            <td><input class="form-control" type="date" value="{{$pet->birth_date}}" id="birth-date-input" name="birth-date-input">
+                                                                <small id="fileHelp" class="form-text text-muted"></small></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th scope="row"><label for="weight">Weight</label></th>
+                                                            <td><input type="text" class="form-control" id="weight" name="weight" value="{{old('weight',$pet->weight)}}">
+                                                                <small id="fileHelp" class="form-text text-muted"> Please answer in Kilograms Unit</small></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                                </div>
+
+
+                                            </form>
+
+                                        </div>
+                                    </div>
+                        </div>
 
                         // add modal
                         <div id="add" class="modal fade" role="dialog" style="color: black">
@@ -239,7 +300,11 @@
 
 
 @section('script')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
     <script>
+
         $('.datepicker').pickadate();
         createEditableSelect(document.forms[0].myText);
     </script>

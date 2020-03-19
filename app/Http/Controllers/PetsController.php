@@ -80,46 +80,23 @@ class PetsController extends Controller
         ]);
     }
 
-    public function calculate(Request $request){
-//        $vaccines = Vaccine::all();
-//        $pets = Pet::all();
-//
-//        $recievedVaccines = RecievedVaccines::findOrFail();
-//        $recievedVaccines = $request->input('received_at');
-//        $recievedVaccines->received_at = Carbon::received_at()->addMonths($recievedVaccines->expired_at);
-//        $recievedVaccines->save();
-//
-//        return redirect()->route('pets.calculate',[
-//                'recievedVaccines'=>$recievedVaccines,
-//                'vaccines'=>$vaccines,
-//                'pets'=>$pets
-//            ]);
-    }
-
     public function edit($id)
     {
-        $pet = Pet::findOrFail($id);
-        $genes = PetGene::all();
-        $types = PetType::all();
-        return view('pets.edit',[
-            'pet'=>$pet,
-            'genes'=> $genes,
-            'types' => $types
-        ]);
+        //
     }
 
     public function update(Request $request, $id)
     {
         $type = $request->input('type');
         $gene = $request->input('gene');
-        $request->validate([
-            'name' => ['required'],
-            'type' => ['required'],
-            'gene' => ['required'],
-            'birth-date-input' => ['required'],
-            'weight' => ['required'],
-        ]);
-        $pet = Pet::findOrFail();
+//        $request->validate([
+//            'name' => ['required'],
+//            'type' => ['required'],
+//            'gene' => ['required'],
+//            'birth-date-input' => ['required'],
+//            'weight' => ['required'],
+//        ]);
+        $pet = Pet::findOrFail($id);
         $pet->name = $request->input('name');
         $pet->user_id = Auth::id();
         $pet->pet_type_id = $type;
@@ -128,11 +105,11 @@ class PetsController extends Controller
         $pet->birth_date = $request->input('birth-date-input');
         $pet->save();
 
-        return redirect()->route(['user','show']);
+        return redirect()->route('pet.show',['pet'=>$pet]);
 
 
     }
-    
+
     public function destroy($id)
     {
         //
