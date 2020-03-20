@@ -4,8 +4,10 @@
 Route::get('/', function () {
     return redirect()->route('post.index');
 });
+//Route::get('/changePassword','UsersController@showChangePasswordForm');
+Route::put('/changePassword','UsersController@changePassword')->name('users.changePassword');
 
-Route::post('/user/profile/changePassword','UsersController@changePassword')->name('user.changePassword');
+//Route::post('/user/profile/changePassword','UsersController@showChangePasswordForm')->name('user.changePassword');
 
 Route::get('/user/profile', 'UsersController@getUserProfile')->name("users.profile");
 Route::resource('/user', 'UsersController');
@@ -16,9 +18,12 @@ Route::post('/posts/{post_id}/comment', 'PostsController@commentStore')->name('p
 Route::put('/posts/{post_id}/commentedit', 'PostsController@commentUpdate')->name('post.comment.update');
 
 //doctor
+Route::post('/docProfile/updateProfile/','UsersController@updateDoctor')->name('doctors.updateDoctor');
 Route::get('/docProfile', 'UsersController@getDocProfile');
 Route::get('/admin/createDoc', 'UsersController@createDoc')->name('admin.createDoc');
 Route::resource('/doctorLists','DoctorListsController');
+Route::resource('/doctor','Doctorscontroller');
+Route::post('/doctor/profile/changePassword','DoctorListsController@changePassword')->name('doctor.changePassword');
 
 //pet tip
 Route::resource('/petTip', 'PetTipsController');
