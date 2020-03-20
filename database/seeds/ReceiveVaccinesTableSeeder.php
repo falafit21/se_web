@@ -11,7 +11,6 @@ class ReceiveVaccinesTableSeeder extends Seeder
      */
     public function run()
     {
-
         $v = new \App\RecievedVaccines();
         $v->pet_id = 1;
         $v->vaccine_id = 1;
@@ -23,6 +22,5 @@ class ReceiveVaccinesTableSeeder extends Seeder
         $v1->vaccine_id = 2;
         $v1->received_at = \Carbon\Carbon::create('2018', '10', '10');
         $v1->save();
-
     }
 }

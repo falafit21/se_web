@@ -82,14 +82,8 @@ class PetTipsController extends Controller
     public function destroy($id)
     {
         $petTip = PetTip::findOrFail($id);
-//
         $petTip->delete();
         return redirect()->route('petTip.index');
-//
-
-
-
-
     }
 }
 

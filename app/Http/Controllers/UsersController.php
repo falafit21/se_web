@@ -111,7 +111,7 @@ class UsersController extends Controller
         $user->password = bcrypt($request->get('new-password'));
         $user->save();
 
-        return redirect()->->with("success","Password changed successfully !");
+//        return redirect()->route('',[])->with("success","Password changed successfully !");
 
     }
 

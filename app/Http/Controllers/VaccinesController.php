@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\RecievedVaccines;
+use App\Vaccine;
 use Illuminate\Http\Request;
 
 class VaccinesController extends Controller
@@ -44,15 +45,6 @@ class VaccinesController extends Controller
 //        return redirect()->route('pet.show', ['pet' => 2]);
     }
 
-    public function receivedVaccineDateStore(Request $request,  $pet_id){
-//        $request->validate();
-        $receivedVaccine = new RecievedVaccines;
-        $receivedVaccine->pet_id = $pet_id;
-        $receivedVaccine->vaccine_id = 3;
-        $receivedVaccine->received_at = $request->input('receivedDate');
-        $receivedVaccine->save();
-        return redirect()->route('pet.show', ['pet' => $pet_id]);
-    }
 
     /**
      * Display the specified resource.
@@ -96,6 +88,16 @@ class VaccinesController extends Controller
      */
     public function destroy($id)
     {
-        //
+    }
+
+    public function vaccineDestroy($recieve_vaccine_id, $pet_id)
+    {
+
+        $recieved_vaccine = RecievedVaccines::find($recieve_vaccine_id);
+        $recieved_vaccine->delete();
+        $vaccine = Vaccine::find($recieve_vaccine_id);
+        $vaccine->delete();
+        return redirect()->route('pet.show', ['pet' => $pet_id]);
+
     }
 }

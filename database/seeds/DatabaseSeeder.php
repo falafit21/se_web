@@ -15,8 +15,9 @@ class DatabaseSeeder extends Seeder
         $this->call(DoctorsInfoTableSeeder::class);
 
         //pet
-        $this->call(PetGenesTableSeeder::class);
         $this->call(PetTypesTableSeeder::class);
+        $this->call(PetGenesTableSeeder::class);
+        $this->call(WeightStatusesSeeder::class);
 
         //user
         $this->call(UsersTableSeeder::class);
