@@ -17,7 +17,7 @@ class CreatePetTipsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->text('detail');
-            $table->string('img_path');
+            $table->string('img_path')->nullable();
             $table->timestamps();
         });
     }

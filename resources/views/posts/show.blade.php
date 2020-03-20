@@ -19,27 +19,23 @@
                     @endcan
 
                     @can('delete', $post->user)
-                            <form id="deleteForm" onsubmit="return confirm('Are you sure to delete this post?')"
-                                  action="{{ route('post.destroy', ['post' => $post->id]) }}" method="post">
-                                @method('DELETE')
-                                @csrf
-                                <button type="submit" style="background-color: Transparent;border:none;">
-                                     <i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px" type="button" data-toggle="tooltip" data-placement="top" title="delete post"></i>
-                                </button>
-                             </form>
+                    <form id="deleteForm" onsubmit="return confirm('Are you sure to delete this post?')" action="{{ route('post.destroy', ['post' => $post->id]) }}" method="post">
+                        @method('DELETE')
+                        @csrf
+                        <button type="submit" style="background-color: Transparent;border:none;">
+                            <i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px" type="button" data-toggle="tooltip" data-placement="top" title="delete post"></i>
+                        </button>
+                    </form>
 
                     @endcan
                 </div>
             </div>
             <p style="font-size: 18px; margin-bottom: 20px">{{ $post->detail }}</p>
-            {{-- <div style="background-color: #1d68a7">--}}
+
             <a href="" style="margin-right: 20px">
                 <p><i style="font-size: 20px; margin-right: 8px" class="fab fa-wpforms"></i> Pet Symptom</p>
             </a>
-            {{-- <a >--}}
-            {{-- <p><i style="font-size: 20px; margin-right: 8px" class="fab fa-wpforms"></i> Pet Symptom</p>--}}
-            {{-- </a>--}}
-            {{-- </div>--}}
+
 
         </div>
     </div>
@@ -63,6 +59,7 @@
     </form>
     @endcan
     <hr style="background-color: white">
+
     <!-- comment -->
     <ul class="list-group list-group-flush">
         @foreach($post->comments as $comment)
@@ -72,17 +69,17 @@
                 <h4 class="col-10">{{ $comment->comment }}</h4>
                 <div class="col-2 text-right">
                     @can('update', $comment->user)
-                    <i class="far fa-edit" style="color: #F5B041; font-size: 20px" type="button" data-toggle="tooltip" data-placement="top" title="edit comment"></i>
+                    <i class="far fa-edit" style="color: #F5B041; font-size: 20px" type="button" data-id="{{$comment->id}}" data-comment="{{$comment->comment}}" data-toggle="modal" data-target="#editCommentModal" data-placement="top" title="edit comment"></i>
                     @endcan
                     @can('delete', $comment->user)
-{{--                            <form id="deleteForm" onsubmit="return confirm('Are you sure to delete this Comment?')"--}}
-{{--                                  action="{{ route('post.destroy', ['deleteComment' => $comment->id]) }}" method="post">--}}
-{{--                                @method('DELETE')--}}
-{{--                                @csrf--}}
-{{--                                <button type="submit" style="background-color: Transparent;border:none;">--}}
-{{--                                    <i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px" type="button" data-toggle="tooltip" data-placement="top" title="delete comment"></i>--}}
-{{--                                </button>--}}
-{{--                            </form>--}}
+                    {{-- <form id="deleteForm" onsubmit="return confirm('Are you sure to delete this Comment?')"--}}
+                    {{-- action="{{ route('post.destroy', ['deleteComment' => $comment->id]) }}" method="post">--}}
+                    {{-- @method('DELETE')--}}
+                    {{-- @csrf--}}
+                    {{-- <button type="submit" style="background-color: Transparent;border:none;">--}}
+                    {{-- <i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px" type="button" data-toggle="tooltip" data-placement="top" title="delete comment"></i>--}}
+                    {{-- </button>--}}
+                    {{-- </form>--}}
 
                     @endcan
                 </div>
@@ -122,6 +119,33 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal comment -->
+    <div class="modal fade" id="editCommentModal" tabindex="-1" role="dialog" aria-labelledby="editCommentModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('post.comment.update',['post_id' => $post->id])}}" method="post">
+                    @method('PUT')
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editCommentModalLabel">Edit Comment</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="id">
+                        <input type="text" class="form-control" id="comment" name="comment" placeholder="Enter comment">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 @endsection
 
@@ -129,4 +153,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<script>
+    $('#editCommentModal').on('show.bs.modal', function(event) {
+        var button = $(event.relatedTarget);
+        var comment = button.data('comment');
+        var id = button.data('id')
+        var modal = $(this);
+
+        modal.find('.modal-body #comment').val(comment);
+        modal.find('.modal-body #id').val(id);
+    })
+</script>
 @endsection
