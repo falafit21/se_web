@@ -91,8 +91,8 @@
                         <a href="{{ url('doctorLists') }}" target="_blank" class="btn btn-info col-2"
                            style="background-color: #EB984E; color: white">doctor list</a>
                     </div>
-
                 </div>
+
                 <h5 style="margin-top: 50px" class="text-left">Pet Symptom</h5>
                 <table class="table text-left">
                     @foreach( $formsQuestion as $formQuestion )
@@ -124,6 +124,7 @@
             </form>
         </div>
     </div>
+
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>

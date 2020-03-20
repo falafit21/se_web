@@ -203,12 +203,12 @@
                                                        class="col-sm-4 col-form-label text-left">Weight</label>
                                                 <p class="col-5">
                                                     <input type="number" class="form-control" id="weight"
-                                                           name="weight" value="{{old('weight', $pet->weight)}}">
+                                                           name="weight" value="{{$pet->weight}}">
                                                     <small id="fileHelp" class="form-text text-muted"> Please answer
                                                         in Kilograms Unit</small>
                                                 </p>
                                                 <p class="col-3 col-form-label">
-                                                    kilograms
+                                                    Kilograms
                                                 </p>
                                             </div>
                                         </div>
@@ -302,6 +302,7 @@
                                         </div>
                                         <div class="modal-body">
                                             <form method="POST" action="{{ route('pet.vaccine.update',['pet'=>$pet->id]) }}">
+                                                @csrf
                                                 @method('PUT')
                                                 <div class="form-group row">
                                                     <input type="hidden" id="vaccineId" name="vaccineId" value="{{$recieve_vaccine->vaccine->id}}">

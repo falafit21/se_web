@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Pet;
+use App\PetGene;
 use App\PetTip;
+use App\PetType;
 use App\Post;
 use App\QuestionForm;
 use App\User;
@@ -27,9 +29,13 @@ class UsersController extends Controller
     public function getUserProfile()
     {
         $user = Auth::user();
-        return view('users.profile',
-            ['user' => $user]
-        );
+        $genes = PetGene::all();
+        $types = PetType::all();
+        return view('users.profile', [
+            'user' => $user,
+            'genes' => $genes,
+            'types' => $types
+        ]);
 
     }
 
@@ -38,9 +44,11 @@ class UsersController extends Controller
         $user = Auth::user();
         $doctor = DoctorInfo::find($user->doctor_info_id);
         // $posts = Post::findOrFail($user->id);
+        $posts = Post::all();
         return view('doctors.profile', [
             'user' => $user,
-            'doctor' => $doctor
+            'doctor' => $doctor,
+            'posts' => $posts
         ]);
     }
 
@@ -82,7 +90,7 @@ class UsersController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->save();
-        return redirect()->route('users.profile',['user'=>$user]);
+        return redirect()->route('users.profile', ['user' => $user]);
     }
 
     public function destroy($id)

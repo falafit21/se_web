@@ -41,7 +41,6 @@
     </div>
     @can('view', $post->user)
     <form action="{{  route('post.comment.store', ['post_id' => $post->id]) }}" style="margin-top: 30px;" method="POST">
-
         @csrf
         <div class="row">
             <div class="col-10">
@@ -125,6 +124,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form action="{{ route('post.comment.update',['post_id' => $post->id])}}" method="post">
+                    @csrf
                     @method('PUT')
                     <div class="modal-header">
                         <h5 class="modal-title" id="editCommentModalLabel">Edit Comment</h5>
