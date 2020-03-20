@@ -5,7 +5,7 @@ Route::get('/', function () {
     return redirect()->route('post.index');
 });
 
-Route::put('/changePassword','UsersController@changePassword')->name('changePassword');
+Route::post('/user/profile/changePassword','UsersController@changePassword')->name('user.changePassword');
 
 Route::get('/user/profile', 'UsersController@getUserProfile')->name("users.profile");
 Route::resource('/user', 'UsersController');

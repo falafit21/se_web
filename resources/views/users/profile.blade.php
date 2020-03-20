@@ -124,91 +124,70 @@
                 <div class="modal-content">
                     <form class="form-horizontal" method="POST" action="{{ route('user.changePassword',['user'=>$user->id])}}">
                         {{ csrf_field() }}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editPostModalLabel">Edit Password</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                        <table class="table table-borderless text-left">
+                            <tbody style="color: black">
+                            <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
+                                <tr>
+                                    <th scope="row"><label for="new-password" class="col-md-6 control-label">Current Password</label></th>
+                                    <td>
 
-                        <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
-                            <label for="new-password" class="col-md-4 control-label">Current Password</label>
+                                            <input id="current-password" type="password" class="form-control" name="current-password" required>
 
-                            <div class="col-md-6">
-                                <input id="current-password" type="password" class="form-control" name="current-password" required>
+                                            @if ($errors->has('current-password'))
+                                                <span class="help-block">
+                                            <strong>{{ $errors->first('current-password') }}</strong>
+                                        </span>
+                                            @endif
 
-                                @if ($errors->has('current-password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('current-password') }}</strong>
-                                    </span>
-                                @endif
+                                    </td>
+
+                                </tr>
                             </div>
+                            <div class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
+                                <tr>
+                                    <th scope="row">
+                                        <label for="new-password" class="col-md-6 control-label">New Password</label>
+                                    </th>
+                                        <td>
+                                            <input id="new-password" type="password" class="form-control" name="new-password" required>
+
+                                                @if ($errors->has('new-password'))
+                                                <span class="help-block">
+                                                <strong>{{ $errors->first('new-password') }}</strong>
+                                                 </span>
+                                                @endif
+
+                                        </td>
+                                </tr>
+                            </div>
+                                <tr>
+                                    <th scope="row">
+                                        <label for="new-password-confirm" class="col-md-6 control-label">Confirmed New Password</label>
+                                    </th>
+                                    <td>
+                                        <input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" required>
+                                    </td>
+                                </tr>
+
+
+
+                            </tbody>
+                        </table>
+                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
 
-                        <div class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
-                            <label for="new-password" class="col-md-4 control-label">New Password</label>
 
-                            <div class="col-md-6">
-                                <input id="new-password" type="password" class="form-control" name="new-password" required>
-
-                                @if ($errors->has('new-password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('new-password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="new-password-confirm" class="col-md-4 control-label">Confirm New Password</label>
-
-                            <div class="col-md-6">
-                                <input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" required>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Change Password
-                                </button>
-                            </div>
-                        </div>
                     </form>
-
-
-
-{{--                    <form action="{{ route('user.update',['user'=>$user->id])}}" method="post">--}}
-{{--                        @method('PUT')--}}
-{{--                        @csrf--}}
-{{--                        <div class="modal-header">--}}
-{{--                            <h5 class="modal-title" id="editModalLabel">Change Password</h5>--}}
-{{--                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">--}}
-{{--                                <span aria-hidden="true">&times;</span>--}}
-{{--                            </button>--}}
-{{--                        </div>--}}
-{{--                        <div class="modal-body">--}}
-{{--                            <div class="form-group row">--}}
-{{--                                <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('New Password') }}</label>--}}
-
-{{--                                <div class="col-md-6">--}}
-{{--                                    <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">--}}
-
-{{--                                    @error('password')--}}
-{{--                                    <span class="invalid-feedback" role="alert">--}}
-{{--                                        <strong>{{ $message }}</strong>--}}
-{{--                                    </span>--}}
-{{--                                    @enderror--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-
-{{--                            <div class="form-group row">--}}
-{{--                                <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm New Password') }}</label>--}}
-
-{{--                                <div class="col-md-6">--}}
-{{--                                    <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">--}}
-{{--                                </div>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="modal-footer">--}}
-{{--                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>--}}
-{{--                            <button type="submit" class="btn btn-primary">Save changes</button>--}}
-{{--                        </div>--}}
-{{--                    </form>--}}
 
                 </div>
             </div>
