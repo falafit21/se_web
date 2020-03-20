@@ -22,9 +22,7 @@ class PetsController extends Controller
 
     public function create()
     {
-        $genes = PetGene::all();
-        $types = PetType::all();
-        return view('pets.create', ['genes' => $genes , 'types' => $types]);
+
     }
 
     public function vaccineStore(Request $request, $pet_id){
@@ -44,23 +42,31 @@ class PetsController extends Controller
         if($vaccine->save()){
             $recentVaccine_id = $vaccine->latest()->first()->id;
 
-            $recieved_vaccine = new RecievedVaccines;
-            $recieved_vaccine->pet_id = $pet_id;
-            $recieved_vaccine->vaccine_id = $recentVaccine_id;
-            $recieved_vaccine->received_at = $request->input('receivedDate');
-            $recieved_vaccine->save();
+            $received_vaccine = new RecievedVaccines;
+            $received_vaccine->pet_id = $pet_id;
+            $received_vaccine->vaccine_id = $recentVaccine_id;
+            $received_vaccine->received_at = $request->input('receivedDate');
+            $received_vaccine->save();
         }
         return redirect()->route('pet.show', ['pet' => $pet_id]);
     }
 
     public function vaccineUpdate(Request $request, $pet_id){
-        $pet = Pet::findOrFail($pet_id);
-        $vaccine = Vaccine::findOrFail($request->input('vaccineId'));
+        $vaccine_id = $request->input('vaccineId');
+
+        $vaccine = Vaccine::findOrFail($vaccine_id);
+
+        $all_received_vaccine = RecievedVaccines::where('vaccine_id', "=", $vaccine_id)->get();
+        $received_vaccine_id = $all_received_vaccine[0]->id;
+        $received_vaccine = RecievedVaccines::find($received_vaccine_id);
+
         $vaccine->name = $request->input('vaccineName');
+        $received_vaccine->received_at = $request->input('receivedDate');
         $vaccine->activate_range = $request->input('activateRange');
         $vaccine->save();
+        $received_vaccine->save();
 
-        return redirect()->route('pet.show', ['pet' => $pet]);
+        return redirect()->route('pet.show', ['pet' => $pet_id]);
     }
 
     public function store(Request $request)

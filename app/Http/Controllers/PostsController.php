@@ -102,14 +102,14 @@ class PostsController extends Controller
         $post->save();
         return redirect()->route('post.show',['post'=>$post]);
     }
- 
+
 
     public function commentUpdate(Request $request, $post_id){
         $post = Post::findOrFail($post_id);
         $comment= Comment::findOrFail($request->input('id'));
         $comment->comment = $request->input('comment');
         $comment->save();
-        
+
         return redirect()->route('post.show',['post'=>$post]);
     }
 
@@ -118,6 +118,12 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         $post -> delete();
         return redirect()->route('post.index');
+    }
+
+    public function destroyComment($comment_id){
+        $comment = Comment::findOrFail($comment_id);
+        $comment -> delete();
+        return redirect()->route('post.index',['comment'=>$comment_id]);
     }
 
 }

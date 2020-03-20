@@ -10,17 +10,20 @@ Route::put('/changePassword','UsersController@changePassword')->name('users.chan
 //Route::post('/user/profile/changePassword','UsersController@showChangePasswordForm')->name('user.changePassword');
 
 Route::get('/user/profile', 'UsersController@getUserProfile')->name("users.profile");
+Route::put('/user/doctor/update/{doctor_id}','UsersController@updateProfile')->name("user.update.doctor");
 Route::resource('/user', 'UsersController');
 Route::resource('/post', 'PostsController');
 
 //comment
 Route::post('/posts/{post_id}/comment', 'PostsController@commentStore')->name('post.comment.store');
 Route::put('/posts/{post_id}/commentedit', 'PostsController@commentUpdate')->name('post.comment.update');
+Route::delete('/posts/{comment_id}/comment/','PostsController@destroyComment')->name('post.comment.destroy');
 
 //doctor
-Route::post('/docProfile/updateProfile/','UsersController@updateDoctor')->name('doctors.updateDoctor');
+
 Route::get('/docProfile', 'UsersController@getDocProfile');
 Route::get('/admin/createDoc', 'UsersController@createDoc')->name('admin.createDoc');
+Route::put('doctor/edit/doctor ','UsersController@editDocProfile')->name('doctor.editDocProfile');
 Route::resource('/doctorLists','DoctorListsController');
 Route::resource('/doctor','Doctorscontroller');
 Route::post('/doctor/profile/changePassword','DoctorListsController@changePassword')->name('doctor.changePassword');
@@ -39,6 +42,7 @@ Route::resource('/pet', 'PetsController');
 Route::get('pets/{vaccine_id}/date','PetsController@calculate')->name('pet.calculate');
 Route::post('/pet/{pet_id}/edit','PetsController@update');
 Route::get('/pets/{pet_id}/edit', 'PetsController@edit')->name('pet.edit');
+
 
 //vaccine
 Route::resource('/vaccines', 'VaccinesController');

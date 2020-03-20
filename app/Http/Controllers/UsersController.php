@@ -2,6 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Pet;
+use App\PetGene;
+use App\PetTip;
+use App\PetType;
+use App\Post;
+use App\QuestionForm;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,9 +32,47 @@ class UsersController extends Controller
     public function getUserProfile()
     {
         $user = Auth::user();
-        return view('users.profile',
-            ['user' => $user]
-        );
+        $genes = PetGene::all();
+        $types = PetType::all();
+        return view('users.profile', [
+            'user' => $user,
+            'genes' => $genes,
+            'types' => $types
+        ]);
+
+    }
+    public function editDocProfile(Request $request){
+        $user = Auth::user();
+        dd($user);
+//        $user->name = $request->input('name');
+//        $user->email = $request->input('email');
+//        $user->save();
+//
+//        $doctor = DoctorInfo::find($user->doctor_info_id);
+//        $doctor->phone_number = $request->input('phone_number');
+//        $doctor->work_at = $request->input('work_at');
+//        $doctor->save();
+//
+//        return redirect()->route('doctors.profile',[
+//            'user'=>$user,
+//            'doctor'=>$doctor
+//
+//        ]);
+    }
+
+    public function updateProfile(Request $request, $id){
+        $user = DoctorInfo::findOrFail($id);
+        $find_user = User::findOrFail($user->id);
+        $find_user->name = $request->input('name');
+        $find_user->email = $request->input('email');
+        $find_user->save();
+
+//        $doctor = DoctorInfo::find($user->doctor_info_id);
+        $user->phone_number = $request->input('phone_number');
+        $user->work_at = $request->input('work_at');
+        $user->save();
+//        dd($find_user);
+//
 
     }
 
@@ -37,9 +81,11 @@ class UsersController extends Controller
         $user = Auth::user();
         $doctor = DoctorInfo::find($user->doctor_info_id);
         // $posts = Post::findOrFail($user->id);
+        $posts = Post::all();
         return view('doctors.profile', [
             'user' => $user,
-            'doctor' => $doctor
+            'doctor' => $doctor,
+            'posts' => $posts
         ]);
     }
 
@@ -81,22 +127,12 @@ class UsersController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->save();
-        return redirect()->route('users.profile',['user'=>$user]);
+        return redirect()->route('users.profile', ['user' => $user]);
     }
 
-    public function updateDoctor(Request $request,$id){
-        $doctor = DoctorInfo::findOrFail($id);
-        $user =  User::findOrFail($id);
-        $user->name = $request->input('name');
-        $user->email = $request->input('email');
-        $doctor->phone_number = $request->input('phone_number');
-        $doctor->work_at = $request->input('work_at');
-        $doctor->save();
-        return redirect()->route('doctors.profile',['doctor'=>$doctor,'user'=>$user]);
+    public function showChangePasswordForm(){
+        return view('changepassword');
     }
-//    public function showChangePasswordForm(){
-//        return view('changepassword');
-//    }
     public function __construct()
     {
         $this->middleware('auth');

@@ -78,7 +78,7 @@ class DoctorsController extends Controller
         $doctor->work_at = $request->input('work_at');
         $user->save();
         $doctor->save();
-        return 
+
 
     }
 

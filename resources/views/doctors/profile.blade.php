@@ -1,15 +1,15 @@
 @extends('layouts.master')
 @section('content')
-<div style="margin: 50px">
-    <div class="row">
-        <div class="col-4">
-            <div class="card bg-light">
-                <div class="card-header text-center">
-                    <h4>Doctor profile<i class="far fa-user" style="margin-left: 10px"></i></h4>
-                </div>
-                <div class="card-body">
-                    <table class="table table-borderless">
-                        <tbody style="color: black">
+    <div style="margin: 50px">
+        <div class="row">
+            <div class="col-4">
+                <div class="card bg-light">
+                    <div class="card-header text-center">
+                        <h4>Doctor profile<i class="far fa-user" style="margin-left: 10px"></i></h4>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-borderless">
+                            <tbody style="color: black">
                             <tr>
                                 <th scope="row">NAME</th>
                                 <td>{{$doctor->user->name}}</td>
@@ -41,10 +41,64 @@
                             data-placement="top" title="edit profile">Edit profile</button>
                     <button type="button" class="btn btn-primary text-right" style="margin: 20px"  data-target="#changePassword" data-toggle="modal" type="button" data-toggle="tooltip" data-placement="top" title="change Password">change password</button>
                 </div>
-
             </div>
 
         </div>
+            <!-- Modal edit Profile -->
+            <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <form action="{{ route('user.update.doctor',['doctor_id' => $doctor->id])}}" method="post">
+                            @method('PUT')
+                            @csrf
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editModalLabel">Edit Profile</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <table class="table table-borderless">
+                                    <tbody style="color: black">
+                                    <tr>
+                                        <th>Name</th>
+                                        <td>
+                                            <input type="name" class="form-control" id="name" name="name" aria-describedby="emailHelp"
+                                                   placeholder="Enter Name" value="{{$user->name}}">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>E-mail</th>
+                                        <td><input type="email" class="form-control" id="email" name="email"
+                                                   aria-describedby="emailHelp" placeholder="Enter email" value="{{$user->email}}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Phone Number</th>
+                                        <td><input type="text" class="form-control" id="email" name="email"
+                                                   aria-describedby="emailHelp" placeholder="Enter email" value="{{$doctor->phone_number}}"></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Work at</th>
+                                        <td><input type="text" class="form-control" id="email" name="email"
+                                                   aria-describedby="emailHelp" placeholder="Enter email" value="{{$doctor->work_at}}"></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+
 
         <!--change Password-->
         <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
@@ -122,34 +176,29 @@
     </div>
 
 
-        <div class="col-8">
-            <h2>Request Question</h2>
 
-
-
-
-
-            <!-- <h2 style="margin-top: 50px">All Questions</h2>
-            <div class="card post-card" style="margin-top: 10px">
-                <div class="card-body">
-                    <h5>question 1</h5>
-                    <p>question detail 1</p>
-                </div>
+            <div class="col-8">
+                <h2>Request Question</h2>
+                @foreach($posts as $post)
+                    @if($post->requestDoctor->role == 'doctor' && $post->requestDoctor->id == $doctor->user->id)
+                        <a href="{{ route('post.show', ['post' => $post->id]) }}"
+                           style="text-decoration: none; color: #1b1e21">
+                            <div class="card post-card border-light" style="margin-bottom: 10px">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <small class="text-muted" style="font-size: 15px">
+                                            {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                                        </small>
+                                    </p>
+                                    <p style="font-size: 22px"><i class="fas fa-question"
+                                                                  style="margin-right: 9px"></i> {{ $post->question }}
+                                    </p>
+                                    <p style="font-size: 15px">{{ $post->detail }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    @endif
+                @endforeach
             </div>
-            <div class="card post-card" style="margin-top: 10px">
-                <div class="card-body">
-                    <h5>question 2 </h5>
-                    <p>question detail 2</p>
-                </div>
-            </div>
-            <div class="card post-card" style="margin-top: 10px">
-                <div class="card-body">
-                    <h5>question 3</h5>
-                    <p>question detail 3 </p>
-                </div>
-            </div> -->
-{{--        </div>--}}
-    </div>
-
-
+        </div>
 @endsection

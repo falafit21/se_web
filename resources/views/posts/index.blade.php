@@ -91,8 +91,8 @@
                         <a href="{{ url('doctorLists') }}" target="_blank" class="btn btn-info col-2"
                            style="background-color: #EB984E; color: white">doctor list</a>
                     </div>
-
                 </div>
+
                 <h5 style="margin-top: 50px" class="text-left">Pet Symptom</h5>
                 <table class="table text-left">
                     @foreach( $formsQuestion as $formQuestion )
@@ -124,14 +124,15 @@
             </form>
         </div>
     </div>
+
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
-        <div class="carousel-inner" style="height: 450px;background-color: #818182;background-image: url('{{asset('images/petTipBG.png')}}');">
-            <div class="carousel-item active" style="height: 500px;">
+        <div class="carousel-inner" style="height: 380px;background-color: #818182;background-image: url('{{asset('images/petTipBG.png')}}');">
+            <div class="carousel-item active" style="height: 380px;">
                 <img class="d-block w-100" src="/images/petTipsBg1.png"  style="max-height: 500px" alt="First slide">
             </div>
 

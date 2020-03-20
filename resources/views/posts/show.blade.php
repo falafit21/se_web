@@ -41,7 +41,6 @@
     </div>
     @can('view', $post->user)
     <form action="{{  route('post.comment.store', ['post_id' => $post->id]) }}" style="margin-top: 30px;" method="POST">
-
         @csrf
         <div class="row">
             <div class="col-10">
@@ -72,14 +71,27 @@
                     <i class="far fa-edit" style="color: #F5B041; font-size: 20px" type="button" data-id="{{$comment->id}}" data-comment="{{$comment->comment}}" data-toggle="modal" data-target="#editCommentModal" data-placement="top" title="edit comment"></i>
                     @endcan
                     @can('delete', $comment->user)
-                    {{-- <form id="deleteForm" onsubmit="return confirm('Are you sure to delete this Comment?')"--}}
-                    {{-- action="{{ route('post.destroy', ['deleteComment' => $comment->id]) }}" method="post">--}}
-                    {{-- @method('DELETE')--}}
-                    {{-- @csrf--}}
-                    {{-- <button type="submit" style="background-color: Transparent;border:none;">--}}
-                    {{-- <i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px" type="button" data-toggle="tooltip" data-placement="top" title="delete comment"></i>--}}
-                    {{-- </button>--}}
-                    {{-- </form>--}}
+                            <form id="deleteForm"
+                                  onsubmit="return confirm('Are you sure to delete this comment ?')"
+                                  action="{{ route('post.comment.destroy', ['comment_id' => $comment->id]) }}"
+                                  method="post" class="col-1">
+                                @method('DELETE')
+                                @csrf
+                                <td style="font-size: 20px;" class="row-center">
+                                    <button class="fas fa-stethoscope"
+                                            type="button"
+                                            style="background-color: transparent; border:none"
+                                            data-toggle="modal"
+                                            data-target="#info-{{ $comment->id }}">
+                                    </button>
+
+                                    <button class="fas fa-trash-alt"
+                                            style="color: #E74C3C; background-color: transparent; border:none"
+                                            type="submit" data-toggle="tooltip" data-placement="top"
+                                            title="delete post">
+                                    </button>
+                                </td>
+                            </form>
 
                     @endcan
                 </div>
@@ -125,6 +137,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form action="{{ route('post.comment.update',['post_id' => $post->id])}}" method="post">
+                    @csrf
                     @method('PUT')
                     <div class="modal-header">
                         <h5 class="modal-title" id="editCommentModalLabel">Edit Comment</h5>
