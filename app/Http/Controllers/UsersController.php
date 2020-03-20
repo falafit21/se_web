@@ -71,6 +71,7 @@ class UsersController extends Controller
         $user->phone_number = $request->input('phone_number');
         $user->work_at = $request->input('work_at');
         $user->save();
+        return redirect()->route('doctors.profile',['find_user' => $user->id]);
 //        dd($find_user);
 //
 
