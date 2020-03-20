@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="col-8">
                 <h2>Request Question</h2>
                 @foreach($posts as $post)
@@ -65,8 +65,6 @@
                             </div>
                         </a>
                     @endif
-
-
                 @endforeach
             </div>
         </div>
