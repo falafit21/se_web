@@ -13,7 +13,8 @@
         <!-- Post -->
         <div class="card">
             <div class="card-body">
-                <p class="card-text"><small class="text-muted" style="font-size: 15px">{{ $post->user->name }}</small>
+                <p class="card-text"><small class="text-muted"
+                                            style="font-size: 15px; margin-left: 33px">{{ $post->user->name }}</small>
                 </p>
                 <div class="row">
                     <p class="col-11" style="font-size: 25px;">
@@ -40,8 +41,10 @@
                         @endcan
                     </div>
                 </div>
-                <p style="font-size: 18px; margin-bottom: 20px">{{ $post->detail }}</p>
-                <a onclick="myFunction()" style="margin-right: 20px; margin-bottom: 20px" type="button">
+                <p style="font-size: 18px; margin-bottom: 20px; margin-left: 33px">{{ $post->detail }}</p>
+
+                <a onclick="myFunction()" style="margin-right: 20px; margin-bottom: 20px; margin-left: 33px"
+                   type="button">
                     <i style="font-size: 20px; margin-right: 8px" class="fab fa-wpforms"></i> Pet Symptom
                 </a>
                 <div>
@@ -53,7 +56,7 @@
                                 @if($form->post_id == $post->id)
                                     <tr>
                                         <th style="background-color: #D5D8DC">{{ $form->questionForm->question}}</th>
-                                        <td  style="">{{ $form->answer }}</td>
+                                        <td style="">{{ $form->answer }}</td>
                                     </tr>
                                 @endif
                             @endforeach
@@ -87,33 +90,65 @@
         <!-- comment -->
         <ul class="list-group list-group-flush">
             @foreach($post->comments as $comment)
-                <li class="list-group-item">
-                    <h6>{{ $comment->user->name }}</h6>
-                    <div class="row">
-                        <h4 class="col-10">{{ $comment->comment }}</h4>
-                        <div class="col-2 text-right">
-                            @can('update', $comment->user)
-                                <i class="far fa-edit" style="color: #F5B041; font-size: 20px" type="button"
-                                   data-id="{{$comment->id}}" data-comment="{{$comment->comment}}" data-toggle="modal"
-                                   data-target="#editCommentModal" data-placement="top" title="edit comment"></i>
-                            @endcan
-                            {{--                            @can('delete', $comment->user)--}}
-                            {{--                                <form id="deleteForm" onsubmit="return confirm('Are you sure to delete this Comment?')"--}}
-                            {{--                                      action="{{ route('post.destroy', ['deleteComment' => $comment->id]) }}"--}}
-                            {{--                                      method="post">--}}
-                            {{--                                    @method('DELETE')--}}
-                            {{--                                    @csrf--}}
-                            {{--                                    <button type="submit" style="background-color: Transparent;border:none;">--}}
-                            {{--                                        <i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px"--}}
-                            {{--                                           type="button" data-toggle="tooltip" data-placement="top"--}}
-                            {{--                                           title="delete comment"></i>--}}
-                            {{--                                    </button>--}}
-                            {{--                                </form>--}}
-                            {{--                            @endcan--}}
+                @if($comment->user->role == 'doctor')
+                    <li class="list-group-item" style="background-color: #FDEBD0">
+                        <h6><i class="fas fa-stethoscope" style="margin-right: 10px; font-size: 20px"></i>{{ $comment->user->name }}</h6>
+                        <div class="row">
+                            <h4 class="col-10">{{ $comment->comment }}</h4>
+                            <div class="col-2 text-right">
+                                @can('update', $comment->user)
+                                    <i class="far fa-edit" style="color: #F5B041; font-size: 20px" type="button"
+                                       data-id="{{$comment->id}}" data-comment="{{$comment->comment}}"
+                                       data-toggle="modal"
+                                       data-target="#editCommentModal" data-placement="top" title="edit comment"></i>
+                                @endcan
+                                {{--                            @can('delete', $comment->user)--}}
+                                {{--                                <form id="deleteForm" onsubmit="return confirm('Are you sure to delete this Comment?')"--}}
+                                {{--                                      action="{{ route('post.destroy', ['deleteComment' => $comment->id]) }}"--}}
+                                {{--                                      method="post">--}}
+                                {{--                                    @method('DELETE')--}}
+                                {{--                                    @csrf--}}
+                                {{--                                    <button type="submit" style="background-color: Transparent;border:none;">--}}
+                                {{--                                        <i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px"--}}
+                                {{--                                           type="button" data-toggle="tooltip" data-placement="top"--}}
+                                {{--                                           title="delete comment"></i>--}}
+                                {{--                                    </button>--}}
+                                {{--                                </form>--}}
+                                {{--                            @endcan--}}
+                            </div>
                         </div>
-                    </div>
-                    {{ $comment->created_at->diffForHumans() }}
-                </li>
+                        {{ $comment->created_at->diffForHumans() }}
+                    </li>
+                @else
+                    <li class="list-group-item" >
+                        <h6>{{ $comment->user->name }}</h6>
+                        <div class="row">
+                            <h4 class="col-10">{{ $comment->comment }}</h4>
+                            <div class="col-2 text-right">
+                                @can('update', $comment->user)
+                                    <i class="far fa-edit" style="color: #F5B041; font-size: 20px" type="button"
+                                       data-id="{{$comment->id}}" data-comment="{{$comment->comment}}"
+                                       data-toggle="modal"
+                                       data-target="#editCommentModal" data-placement="top" title="edit comment"></i>
+                                @endcan
+                                {{--                            @can('delete', $comment->user)--}}
+                                {{--                                <form id="deleteForm" onsubmit="return confirm('Are you sure to delete this Comment?')"--}}
+                                {{--                                      action="{{ route('post.destroy', ['deleteComment' => $comment->id]) }}"--}}
+                                {{--                                      method="post">--}}
+                                {{--                                    @method('DELETE')--}}
+                                {{--                                    @csrf--}}
+                                {{--                                    <button type="submit" style="background-color: Transparent;border:none;">--}}
+                                {{--                                        <i class="fas fa-trash-alt" style="color: #E74C3C; font-size: 20px"--}}
+                                {{--                                           type="button" data-toggle="tooltip" data-placement="top"--}}
+                                {{--                                           title="delete comment"></i>--}}
+                                {{--                                    </button>--}}
+                                {{--                                </form>--}}
+                                {{--                            @endcan--}}
+                            </div>
+                        </div>
+                        {{ $comment->created_at->diffForHumans() }}
+                    </li>
+                @endif
             @endforeach
         </ul>
 
