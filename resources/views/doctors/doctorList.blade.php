@@ -1,22 +1,6 @@
 @extends('layouts.master')
 @section('style')
     <style>
-        /*.card {*/
-        /*    padding-top: 20px;*/
-        /*    margin: 10px 0 20px 0;*/
-        /*    background-color: rgba(214, 224, 226, 0.2);*/
-        /*    border-top-width: 0;*/
-        /*    border-bottom-width: 2px;*/
-        /*    -webkit-border-radius: 3px;*/
-        /*    -moz-border-radius: 3px;*/
-        /*    border-radius: 3px;*/
-        /*    -webkit-box-shadow: none;*/
-        /*    -moz-box-shadow: none;*/
-        /*    box-shadow: none;*/
-        /*    -webkit-box-sizing: border-box;*/
-        /*    -moz-box-sizing: border-box;*/
-        /*    box-sizing: border-box;*/
-        /*}*/
 
         .card .card-heading.image img {
             display: inline-block;

@@ -80,9 +80,11 @@ class UsersController extends Controller
     {
         $doctors = User::where('role', '=', 'doctor')->get();
         $users = User::where('role', '=', 'user')->get();
+        $user = Auth::user();
         return view('doctors.create', [
             'doctors' => $doctors,
-            'users' => $users
+            'users' => $users,
+            'user' => $user
         ]);
     }
 
