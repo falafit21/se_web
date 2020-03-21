@@ -61,9 +61,11 @@ class UsersController extends Controller
     public function createDoc()
     {
         $doctors = User::where('role', '=', 'doctor')->get();
-        return view('doctors.create',
-            ['doctors' => $doctors]
-        );
+        $users = User::where('role', '=', 'user')->get();
+        return view('doctors.create', [
+            'doctors' => $doctors,
+            'users' => $users
+        ]);
     }
 
     public function store(Request $request)
