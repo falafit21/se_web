@@ -72,7 +72,10 @@ class PetTipsController extends Controller
     {
         $petTip = PetTip::findOrFail($id);
         $petTip->title = $request->input('title');
-        
+        $petTip->detail = $request->input('detail');
+        $petTip->save();
+        return redirect()->route('posts.createTip',['petTip'=> $petTip]);
+
     }
 
     /**

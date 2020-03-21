@@ -29,7 +29,7 @@ class Post extends Model
         return $this->belongsTo(PetGene::class);
     }
 
-    // public function requestUser(){
-    //     return $this->belongsTo(User::class,'request_ans_user_id');
-    // }
+    public function forms(){
+        return $this->hasMany(Form::class);
+    }
 }

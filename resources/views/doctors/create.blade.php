@@ -102,37 +102,71 @@
         </div>
     </div>
 
-    <div style="margin-left: 200px; margin-right: 200px; margin-top: 50px; color: white;">
-        <button type="button" class="btn btn-warning btn-lg btn-block" style="cursor:pointer; margin-bottom: 50px"
-                onclick="openNav()">Create doctor
-        </button>
-        <h4>All Doctors</h4>
-        <table class="table table-light">
-            <thead class="thead-light">
-            <tr>
-                <th scope="col" style="font-size: 20px">Name</th>
-                <th scope="col" style="font-size: 20px">Email</th>
-                <th scope="col" style="font-size: 20px" class="text-center">create_at</th>
-                <th scope="col" style="font-size: 20px"></th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($doctors as $doctor)
-                <tr>
-                    <td>{{ $doctor->name }}</td>
-                    <td>{{ $doctor->email }}</td>
-                    <td class="text-center">{{ $doctor->created_at }}</td>
-                    <td class="text-right">
-                        <div class="custom-control custom-switch">
-                            <input type="checkbox" class="custom-control-input" id="block">
-                            <label class="custom-control-label" for="block">block</label>
-                        </div>
-                    </td>
-                </tr>
-            @endforeach
+    <div class="row" style="margin: 50px; color: white;">
+        <div class="col-4">
 
-            </tbody>
-        </table>
+        </div>
+        <div class="col-4">
+            <button type="button" class="btn btn-warning btn-lg btn-block" style="cursor:pointer; margin-bottom: 20px"
+                    onclick="openNav()">Create doctor
+            </button>
+            <h5>All Doctors</h5>
+            <table class="table table-light">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col" style="font-size: 20px">Name</th>
+                    <th scope="col" style="font-size: 20px">Email</th>
+                    <th scope="col" style="font-size: 20px" class="text-center">create_at</th>
+                    <th scope="col" style="font-size: 20px"></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($doctors as $doctor)
+                    <tr>
+                        <td>{{ $doctor->name }}</td>
+                        <td>{{ $doctor->email }}</td>
+                        <td class="text-center">{{ $doctor->created_at }}</td>
+                        <td class="text-right">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="block">
+                                <label class="custom-control-label" for="block">block</label>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-4">
+            <h5>All Doctors</h5>
+            <table class="table table-light">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col" style="font-size: 20px">Name</th>
+                    <th scope="col" style="font-size: 20px">Email</th>
+                    <th scope="col" style="font-size: 20px" class="text-center">create_at</th>
+                    <th scope="col" style="font-size: 20px"></th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($users as $user)
+                    <tr>
+                        <td>{{ $user->name }}</td>
+                        <td>{{ $user->email }}</td>
+                        <td class="text-center">{{ $user->created_at }}</td>
+                        <td class="text-right">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="block">
+                                <label class="custom-control-label" for="block">block</label>
+                            </div>
+                        </td>
+                    </tr>
+                @endforeach
+
+                </tbody>
+            </table>
+        </div>
     </div>
 
 

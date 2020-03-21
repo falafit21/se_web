@@ -96,28 +96,11 @@
                 <h5 style="margin-top: 50px" class="text-left">Pet Symptom</h5>
                 <table class="table text-left">
                     @foreach( $formsQuestion as $formQuestion )
-                        <tr>
-                            <td>{{ $formQuestion->question }}</td>
-                            <td>
-                                <div class="text-left">
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="yes{{ $loop->index }}"
-                                               name="customRadio[{{ $loop->index }}]"
-                                               class="custom-control-input">
-                                        <label class="custom-control-label"
-                                               for="yes{{ $loop->index }}">yes</label>
-                                    </div>
-                                    <div class="custom-control custom-radio">
-                                        <input type="radio" id="no{{ $loop->index }}"
-                                               name="customRadio[{{ $loop->index }}]"
-                                               class="custom-control-input"
-                                        >
-                                        <label class="custom-control-label"
-                                               for="no{{ $loop->index }}">no</label>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
+                        <div class="form-group">
+                            <label for="{{ $formQuestion->id }}">{{ $formQuestion->question }}</label>
+                            <textarea class="form-control" id="{{ $formQuestion->id }}" rows="2"
+                                      name="{{ $formQuestion->id }}"></textarea>
+                        </div>
                     @endforeach
                 </table>
                 <button type="submit" class="btn btn-primary">Post</button>
@@ -186,93 +169,60 @@
                 </a>
             </div>
         @endforeach
-{{--        <a href="" class="card" id="loadMore" style="margin-top: 30px; text-decoration: none">--}}
-{{--            <p class="text-center" style="margin: 15px; font-size: 20px">Read more</p>--}}
-{{--        </a>--}}
+        {{--        <a href="" class="card" id="loadMore" style="margin-top: 30px; text-decoration: none">--}}
+        {{--            <p class="text-center" style="margin: 15px; font-size: 20px">Read more</p>--}}
+        {{--        </a>--}}
 
         <p class="totop" style="text-align: center; padding-top: 25px">
-                <a href="#top"><i class="fa fa-chevron-circle-up" style="font-size:60px"></i></a>
-            </p>
-        </div>
-
-
-    <!-- Modal editTips -->
-    <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="editPostModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <form action="{{ route('post.update',['tip'=>$tip->id])}}" method="post">
-                    @method('PUT')
-                    @csrf
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="editPostModalLabel">Edit Post</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <input type="text" class="form-control" id="question" name="question" placeholder="Enter Question" value="{{$post->question}}">
-                        <br>
-                        <input type="text" class="form-control" id="detail" name="detail" placeholder="Enter Detail" value="{{$post->detail}}">
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
-                    </div>
-
-                </form>
-
-
-            </div>
-        </div>
+            <a href="#top"><i class="fa fa-chevron-circle-up" style="font-size:60px"></i></a>
+        </p>
     </div>
 
 
+@endsection
 
-    @endsection
+@section('script')
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "700px";
+            document.getElementById("main").style.marginLeft = "700px";
+            document.body.style.backgroundColor = "rgba(0,0,0,0)";
+        }
 
-    @section('script')
-        <script>
-            function openNav() {
-                document.getElementById("mySidenav").style.width = "700px";
-                document.getElementById("main").style.marginLeft = "700px";
-                document.body.style.backgroundColor = "rgba(0,0,0,0)";
-            }
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0px";
+            document.getElementById("main").style.marginLeft = "0px";
+            document.body.style.backgroundColor = "white";
+        }
 
-            function closeNav() {
-                document.getElementById("mySidenav").style.width = "0px";
-                document.getElementById("main").style.marginLeft = "0px";
-                document.body.style.backgroundColor = "white";
-            }
-
-            $(function () {
-                $("abc").slice(0, 1).show();
-                $("#loadMore").on('click', function (e) {
-                    e.preventDefault();
-                    $("abc:hidden").slice(0, 1).slideDown();
-                    if ($("abc:hidden").length == 0) {
-                        $("#load").fadeOut('slow');
-                    }
-                    $('html,body').animate({
-                        scrollTop: $(this).offset().top
-                    }, 1500);
-                });
-            });
-
-            $('a[href=#top]').click(function () {
-                $('body,html').animate({
-                    scrollTop: 0
-                }, 600);
-                return false;
-            });
-
-            $(window).scroll(function () {
-                if ($(this).scrollTop() > 50) {
-                    $('.totop a').fadeIn();
-                } else {
-                    $('.totop a').fadeOut();
+        $(function () {
+            $("abc").slice(0, 1).show();
+            $("#loadMore").on('click', function (e) {
+                e.preventDefault();
+                $("abc:hidden").slice(0, 1).slideDown();
+                if ($("abc:hidden").length == 0) {
+                    $("#load").fadeOut('slow');
                 }
+                $('html,body').animate({
+                    scrollTop: $(this).offset().top
+                }, 1500);
             });
-        </script>
-    @endsection
+        });
+
+        $('a[href=#top]').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 600);
+            return false;
+        });
+
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('.totop a').fadeIn();
+            } else {
+                $('.totop a').fadeOut();
+            }
+        });
+    </script>
+@endsection
 

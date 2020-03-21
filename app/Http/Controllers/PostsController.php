@@ -11,6 +11,7 @@ use App\User;
 use App\Pet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class PostsController extends Controller
 {
@@ -47,6 +48,7 @@ class PostsController extends Controller
             'choosePet' => ['required'],
         ]);
         $post = new Post();
+
         $post->user_id = Auth::id();
         $post->request_ans_user_id = $request->input('chooseDoc');
         $post->question = $request->input('title');
@@ -55,12 +57,15 @@ class PostsController extends Controller
 
         if($post->save()){
             $recentPost_id = $post->latest()->first()->id;
+            $questionCount = DB::table('question_forms')->max('id');
+            foreach (range(1, $questionCount) as $questionOrder) {
+                $form = new Form();
+                $form->post_id = $recentPost_id;
+                $form->question_form_id = $questionOrder;
+                $form->answer = $request->input($questionOrder);
+                $form->save();
+            }
 
-            $form = new Form();
-            $form->post_id = $recentPost_id;
-            $form->question_form_id = 1;
-            $form->answer = $request->input('yes1');
-            $form->save();
         }
 
         return redirect()->route('post.index');
@@ -86,7 +91,11 @@ class PostsController extends Controller
     public function show($id)
     {
         $post = Post::find($id);
-        return view('posts.show', ['post' => $post]);
+        $forms = Form::all();
+        return view('posts.show', [
+            'post' => $post,
+            'forms' => $forms,
+        ]);
     }
 
     public function edit($id)
