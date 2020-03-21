@@ -220,21 +220,21 @@
                                 @method('PUT')
                                 @csrf
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="editModalLabel">Edit Profile</h5>
+                                    <h5 class="modal-title" id="editModalLabel" style="color: #1b1e21">Edit Profile</h5>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
                                     <div class="form-group row">
-                                        <label for="name" class="col-sm-2 col-form-label text-left">Name</label>
+                                        <label for="name" class="col-sm-2 col-form-label text-left" style="color: #1b1e21">Name</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp"
                                                    placeholder="Enter Name" value="{{$user->name}}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="email" class="col-sm-2 col-form-label text-left">Email</label>
+                                        <label for="email" class="col-sm-2 col-form-label text-left" style="color: #1b1e21">Email</label>
                                         <div class="col-sm-10">
                                             <input type="email" class="form-control" id="email" name="email"
                                                    aria-describedby="emailHelp" placeholder="Enter email" value="{{$user->email}}">

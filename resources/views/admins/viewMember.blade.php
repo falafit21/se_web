@@ -3,7 +3,7 @@
     <div style="margin-left: 200px; margin-right: 200px; margin-top: 50px; color: white;">
         <div class="card border-light text-center" style=" margin-left: 250px; margin-right: 250px; margin-top: 50px;">
             <div class="card-header text-center" style="color: black">
-                <h4>My Profile </h4>
+                <h4>My Profile</h4>
             </div>
             <div class="card-body">
                 <table class="table table-borderless text-center">
@@ -38,7 +38,7 @@
             </div>
         </div>
 
-{{--        edit profile--}}
+        edit profile
 
         <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
