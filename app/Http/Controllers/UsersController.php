@@ -41,7 +41,7 @@ class UsersController extends Controller
         ]);
 
     }
-
+// doctor
     public function updateProfile(Request $request, $id){
         $user = Auth::user();
         $user->name = $request->input('name');
@@ -112,7 +112,7 @@ class UsersController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->save();
-        return redirect()->route('users.profile', ['user' => $user]);
+        return redirect()->back();
     }
 
     public function showChangePasswordForm(){
