@@ -369,8 +369,6 @@
                                             <p style="font-size: 16px">
                                                 {{ $recieve_vaccine->vaccine->prevent_symptom }}
                                             </p>
-
-
                                         </div>
                                     </div>
                                 </div>

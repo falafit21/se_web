@@ -129,4 +129,10 @@ class PostsController extends Controller
         return redirect()->route('post.index');
     }
 
+    public function destroyComment($comment_id){
+        $comment = Comment::findOrFail($comment_id);
+        $comment -> delete();
+        return redirect()->back();
+    }
+
 }
