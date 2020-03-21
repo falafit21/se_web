@@ -258,15 +258,23 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <input type="name" class="form-control" id="name" name="name" aria-describedby="emailHelp"
-                                   placeholder="Enter Name" value="{{$user->name}}">
-                            <br>
-                            <input type="email" class="form-control" id="email" name="email"
-                                   aria-describedby="emailHelp" placeholder="Enter email" value="{{$user->email}}">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-2 col-form-label text-left">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp"
+                                           placeholder="Enter Name" value="{{$user->name}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-2 col-form-label text-left">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="email" name="email"
+                                           aria-describedby="emailHelp" placeholder="Enter email" value="{{$user->email}}">
+                                </div>
+                            </div>
+                            <div class="form-group text-right">
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
                         </div>
                     </form>
 

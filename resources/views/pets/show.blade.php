@@ -190,8 +190,8 @@
                                         </div>
                                         <div class="modal-body" style="color: black">
                                             <div class="form-group row">
-                                                <label for="birth-date-input" class="col-sm-4 col-form-label text-left">BirthDate</label>
-                                                <div class="col-sm-8">
+                                                <label for="birth-date-input" class="col-sm-3 col-form-label text-left">BirthDate</label>
+                                                <div class="col-sm-9">
                                                     <input class="form-control" type="date"
                                                            value="{{$pet->birth_date}}"
                                                            id="birth-date-input"
@@ -200,8 +200,8 @@
                                             </div>
                                             <div class="form-group row">
                                                 <label for="weight"
-                                                       class="col-sm-4 col-form-label text-left">Weight</label>
-                                                <p class="col-5">
+                                                       class="col-sm-3 col-form-label text-left">Weight</label>
+                                                <p class="col-6">
                                                     <input type="number" class="form-control" id="weight"
                                                            name="weight" value="{{$pet->weight}}">
                                                     <small id="fileHelp" class="form-text text-muted"> Please answer
@@ -211,16 +211,16 @@
                                                     Kilograms
                                                 </p>
                                             </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                            <div class="form-group text-right">
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
                         </div>
 
-                        // add modal
+{{--                        add modal--}}
                         <div id="add" class="modal fade" role="dialog" style="color: black">
                             <div class="modal-dialog">
                                 <!-- Modal content-->
