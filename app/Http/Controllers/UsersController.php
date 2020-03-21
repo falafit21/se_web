@@ -41,40 +41,20 @@ class UsersController extends Controller
         ]);
 
     }
-    public function editDocProfile(Request $request){
-        $user = Auth::user();
-        dd($user);
-//        $user->name = $request->input('name');
-//        $user->email = $request->input('email');
-//        $user->save();
-//
-//        $doctor = DoctorInfo::find($user->doctor_info_id);
-//        $doctor->phone_number = $request->input('phone_number');
-//        $doctor->work_at = $request->input('work_at');
-//        $doctor->save();
-//
-//        return redirect()->route('doctors.profile',[
-//            'user'=>$user,
-//            'doctor'=>$doctor
-//
-//        ]);
-    }
 
     public function updateProfile(Request $request, $id){
-        $user = DoctorInfo::findOrFail($id);
-        $find_user = User::findOrFail($user->id);
-        $find_user->name = $request->input('name');
-        $find_user->email = $request->input('email');
-        $find_user->save();
-
-//        $doctor = DoctorInfo::find($user->doctor_info_id);
-        $user->phone_number = $request->input('phone_number');
-        $user->work_at = $request->input('work_at');
+        $user = Auth::user();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
         $user->save();
-        return redirect()->route('doctors.profile',['find_user' => $user->id]);
-//        dd($find_user);
-//
 
+        $doctor = DoctorInfo::find($user->doctor_info_id);
+        $doctor->phone_number = $request->input('phone_number');
+        $doctor->work_at = $request->input('work_at');
+        $doctor->save();
+        return redirect()->back();
+//                dd($doctor);
+//                dd($user);
     }
 
     public function getDocProfile()

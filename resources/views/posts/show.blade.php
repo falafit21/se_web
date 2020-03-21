@@ -73,7 +73,7 @@
                     @can('delete', $comment->user)
                             <form id="deleteForm"
                                   onsubmit="return confirm('Are you sure to delete this comment ?')"
-                                  action="{{ route('post.comment.destroy', ['comment_id' => $comment->id]) }}"
+                                  action="{{route('post.comment.destroy', ['comment_id' => $comment->id]) }}"
                                   method="post" class="col-1">
                                 @method('DELETE')
                                 @csrf

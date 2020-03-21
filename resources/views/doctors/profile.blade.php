@@ -49,7 +49,7 @@
                  aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                        <form action="{{ route('user.update.doctor',['doctor_id' => $doctor->id])}}" method="post">
+                        <form action="{{ route('user.update.doctor',['doctor_id'=>$doctor->id])}}" method="post">
                             @method('PUT')
                             @csrf
                             <div class="modal-header">
@@ -65,23 +65,23 @@
                                         <th>Name</th>
                                         <td>
                                             <input type="name" class="form-control" id="name" name="name" aria-describedby="emailHelp"
-                                                   placeholder="Enter Name" value="{{$user->name}}">
+                                                   placeholder="Enter Name" value="{{$doctor->user->name}}">
                                         </td>
                                     </tr>
                                     <tr>
                                         <th>E-mail</th>
                                         <td><input type="email" class="form-control" id="email" name="email"
-                                                   aria-describedby="emailHelp" placeholder="Enter email" value="{{$user->email}}"></td>
+                                                   aria-describedby="emailHelp" placeholder="Enter email" value="{{$doctor->user->email}}"></td>
                                     </tr>
                                     <tr>
                                         <th>Phone Number</th>
-                                        <td><input type="text" class="form-control" id="email" name="email"
-                                                   aria-describedby="emailHelp" placeholder="Enter email" value="{{$doctor->phone_number}}"></td>
+                                        <td><input type="text" class="form-control" id="phone_number" name="phone_number"
+                                                   aria-describedby="emailHelp" placeholder="Enter your phone number" value="{{$doctor->phone_number}}"></td>
                                     </tr>
                                     <tr>
                                         <th>Work at</th>
-                                        <td><input type="text" class="form-control" id="email" name="email"
-                                                   aria-describedby="emailHelp" placeholder="Enter email" value="{{$doctor->work_at}}"></td>
+                                        <td><input type="text" class="form-control" id="work_at" name="work_at"
+                                                   aria-describedby="emailHelp" placeholder="Enter your work place" value="{{$doctor->work_at}}"></td>
                                     </tr>
                                     </tbody>
                                 </table>

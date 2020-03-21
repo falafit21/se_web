@@ -123,7 +123,7 @@ class PostsController extends Controller
     public function destroyComment($comment_id){
         $comment = Comment::findOrFail($comment_id);
         $comment -> delete();
-        return redirect()->route('post.index',['comment'=>$comment_id]);
+        return redirect()->back();
     }
 
 }
