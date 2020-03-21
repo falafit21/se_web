@@ -194,6 +194,41 @@
                 <a href="#top"><i class="fa fa-chevron-circle-up" style="font-size:60px"></i></a>
             </p>
         </div>
+
+
+    <!-- Modal editTips -->
+    <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="editPostModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('post.update',['tip'=>$tip->id])}}" method="post">
+                    @method('PUT')
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="editPostModalLabel">Edit Post</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <input type="text" class="form-control" id="question" name="question" placeholder="Enter Question" value="{{$post->question}}">
+                        <br>
+                        <input type="text" class="form-control" id="detail" name="detail" placeholder="Enter Detail" value="{{$post->detail}}">
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save changes</button>
+                    </div>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
     @endsection
 
     @section('script')

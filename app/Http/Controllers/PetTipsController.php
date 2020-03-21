@@ -70,7 +70,9 @@ class PetTipsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $petTip = PetTip::findOrFail($id);
+        $petTip->title = $request->input('title');
+        
     }
 
     /**
