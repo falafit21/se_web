@@ -36,13 +36,13 @@
                             </tr>
                             <tr>
                                 <th scope="row">PASSWORD</th>
-                                <td><a data-toggle="modal" data-target="#changePassword" style="font-size: 18px; color: #F5B041" type="button" data-toggle="tooltip" data-placement="top" title="change Password" >change password</a></td>
+                                <td><a href=" " data-toggle="modal" data-target="#changePassword" style="font-size: 18px; color: #F5B041"  data-toggle="tooltip" data-placement="top" title="change Password" >change password</a></td>
 
                             </tr>
                             </tbody>
                         </table>
                         <div class=" text-right">
-                            <i class="far fa-edit" data-toggle="modal" data-target="#editProfile" style="font-size: 18px; color: #F5B041" type="button" data-toggle="tooltip" data-placement="top" title="edit profile"></i>
+                            <i class="far fa-edit" data-toggle="modal" data-target="#editProfile" style="font-size: 18px; color: #F5B041"  data-toggle="tooltip" data-placement="top" title="edit profile"></i>
                         </div>
                     </div>
                 </div>
