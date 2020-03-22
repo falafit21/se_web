@@ -1,6 +1,4 @@
 <?php
-
-
 Route::get('/', function () {
     return redirect()->route('post.index');
 });
