@@ -41,8 +41,9 @@
 
 @section('content')
 
-{{--    change password model--}}
-    <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    {{--    change password model--}}
+    <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
 
@@ -69,13 +70,14 @@
                     </div>
                     <div class="modal-body">
                         {{ csrf_field() }}
-                        <div class="card-body" >
+                        <div class="card-body">
                             <table class="table table-borderless">
                                 <tbody style="color: black">
                                 <tr>
                                     <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
-                                        <td><label for="new-password" >Current Password</label></td>
-                                        <td><input id="current-password" type="password" class="form-control" name="current-password" required>
+                                        <td><label for="new-password">Current Password</label></td>
+                                        <td><input id="current-password" type="password" class="form-control"
+                                                   name="current-password" required>
 
                                             @if ($errors->has('current-password'))
                                                 <span class="help-block">
@@ -86,16 +88,19 @@
                                 </tr>
                                 <tr>
                                     <div class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
-                                        <th><label for="new-password" >New Password</label></th>
-                                        <td><input id="new-password" type="password" class="form-control" name="new-password" required>
+                                        <th><label for="new-password">New Password</label></th>
+                                        <td><input id="new-password" type="password" class="form-control"
+                                                   name="new-password" required>
                                             @if ($errors->has('new-password'))
-                                                <span class="help-block"><strong>{{ $errors->first('new-password') }}</strong></span>
+                                                <span
+                                                    class="help-block"><strong>{{ $errors->first('new-password') }}</strong></span>
                                             @endif</td>
                                     </div>
                                 </tr>
                                 <tr>
                                     <th><label for="new-password-confirm">Confirm New Password</label></th>
-                                    <td><input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" required></td>
+                                    <td><input id="new-password-confirm" type="password" class="form-control"
+                                               name="new-password_confirmation" required></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -111,7 +116,7 @@
 
         </div>
     </div>
-{{--create doc section--}}
+    {{--create doc section--}}
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div style="margin-left: 40px; margin-right: 40px; margin-top: 10px; margin-bottom: 50px;">
@@ -122,19 +127,20 @@
 
                 <div class="form-group">
                     <label for="name">name</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror"  id="name" name="name" >
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
                     @error('name')
-                         <span class="invalid-feedback" role="alert">
+                    <span class="invalid-feedback" role="alert">
                                <strong>{{ $message }}</strong>
                          </span>
-                     @enderror
+                    @enderror
                 </div>
 
                 <div class="form-group">
                     <label for="email">E-mail address</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email">
+                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
+                           name="email">
                     @error('email')
-                        <span class="invalid-feedback" role="alert">
+                    <span class="invalid-feedback" role="alert">
                              <strong>{{ $message }}</strong>
                         </span>
                     @enderror
@@ -175,8 +181,8 @@
     </div>
 
     <div class="row" style="margin: 40px; color: white;">
-        <div class="col-3" >
-            <div class="card border-light text-center" >
+        <div class="col-3">
+            <div class="card border-light text-center">
                 <div class="card-header text-center" style="color: black">
                     <h4>My Profile</h4>
                 </div>
@@ -195,7 +201,8 @@
                             <th scope="row" class="text-left">PASSWORD</th>
                             <td><a href="" data-toggle="modal" data-target="#changePassword"
                                    style="font-size: 15px;"
-                                   type="button" data-toggle="tooltip" data-placement="top" title="edit password">change password</a></td>
+                                   type="button" data-toggle="tooltip" data-placement="top" title="edit password">change
+                                    password</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -228,8 +235,13 @@
                         <td>{{ $doctor->email }}</td>
                         <td class="text-right">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="block">
-                                <label class="custom-control-label" for="block">block</label>
+                                @if($user->status == 1)
+                                    <input type="checkbox"  class="custom-control-input" id="{{ $doctor->id }}">
+                                    <label class="custom-control-label" for="{{ $doctor->id }}">block</label>
+                                @else
+                                    <input type="checkbox" checked class="custom-control-input" id="{{ $doctor->id }}">
+                                    <label class="custom-control-label" for="{{ $doctor->id }}">unblock</label>
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -255,8 +267,13 @@
                         <td>{{ $user->email }}</td>
                         <td class="text-right">
                             <div class="custom-control custom-switch">
-                                <input type="checkbox" class="custom-control-input" id="block">
-                                <label class="custom-control-label" for="block">block</label>
+                                @if($user->status == 1)
+                                    <input type="checkbox"  class="custom-control-input" id="{{ $user->id }}">
+                                    <label class="custom-control-label" for="{{ $user->id }}">block</label>
+                                @else
+                                    <input type="checkbox" checked class="custom-control-input" id="{{ $user->id }}">
+                                    <label class="custom-control-label" for="{{ $user->id }}">unblock</label>
+                                @endif
                             </div>
                         </td>
                     </tr>
@@ -283,5 +300,7 @@
             document.getElementById("main").style.marginLeft = "0px";
             document.body.style.backgroundColor = "white";
         }
+
+
     </script>
 @endsection
