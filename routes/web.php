@@ -32,6 +32,7 @@ Route::resource('/petTip', 'PetTipsController');
 
 //admin
 Route::get('/admin/viewMembers', 'UsersController@index');
+Route::get('/admin/updateStatus', 'UsersController@updateStatus')->name('user.update.status');
 
 //pet
 Route::get('/pet/createPet','PetsController@createPet');

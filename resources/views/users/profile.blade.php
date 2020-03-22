@@ -182,7 +182,7 @@
 
                 <!-- Pet -->
                 @can('viewOnlyUser', App\User::class)
-                    <div class="card border-light text-center" style="margin-bottom: 20px">
+                    <div class="card border-light text-center" style="margin-bottom: 20px" >
                         <div class="card-header text-center">
                             <h4 class="">My Pets</h4>
                         </div>
@@ -206,7 +206,7 @@
                                 @endforeach
                             </div>
 
-                            <div class="card">
+                            <div class="card" {{ $user->status ? "" : "hidden" }}>
                                 <a onclick="openNav()">
                                     <button class="btn btn-info btn-block">create</button>
                                 </a>

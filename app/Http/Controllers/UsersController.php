@@ -39,8 +39,8 @@ class UsersController extends Controller
             'genes' => $genes,
             'types' => $types
         ]);
-
     }
+
 // doctor
     public function updateProfile(Request $request, $id){
         $user = Auth::user();
@@ -113,6 +113,14 @@ class UsersController extends Controller
         $user->email = $request->input('email');
         $user->save();
         return redirect()->back();
+    }
+
+    public function updateStatus(Request $request){
+        $user = User::findOrFail($request->user_id);
+        $user->status = $request->status;
+        $user->save();
+
+        return response()->json(['message' => 'User status updated successfully.']);
     }
 
     public function showChangePasswordForm(){
