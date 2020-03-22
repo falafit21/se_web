@@ -208,6 +208,7 @@
         modal.find('.modal-body #comment').val(comment);
         modal.find('.modal-body #id').val(id);
     })
+    
 
     function myFunction() {
         var dots = document.getElementById("dots");

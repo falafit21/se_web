@@ -36,7 +36,7 @@ class PostsController extends Controller
 
     public function create()
     {
-        //
+        
     }
 
     public function store(Request $request)
@@ -65,9 +65,7 @@ class PostsController extends Controller
                 $form->answer = $request->input($questionOrder);
                 $form->save();
             }
-
         }
-
         return redirect()->route('post.index');
     }
 
@@ -118,7 +116,6 @@ class PostsController extends Controller
         $comment= Comment::findOrFail($request->input('id'));
         $comment->comment = $request->input('comment');
         $comment->save();
-
         return redirect()->route('post.show',['post'=>$post]);
     }
 
