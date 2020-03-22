@@ -1,10 +1,8 @@
 <?php
-
-
 Route::get('/', function () {
     return redirect()->route('post.index');
 });
-
+//Route::get('/changePassword','UsersController@showChangePasswordForm');
 Route::put('/changePassword','UsersController@changePassword')->name('users.changePassword');
 
 //Route::post('/user/profile/changePassword','UsersController@showChangePasswordForm')->name('user.changePassword');
