@@ -113,6 +113,7 @@
                                                         type="button"
                                                         data-toggle="modal"
                                                         data-target="#edit-{{ $recieve_vaccine->vaccine->id }}">
+
                                                 </button>
                                                 <button class="fas fa-trash-alt"
                                                         style="color: #E74C3C; background-color: transparent; border:none"

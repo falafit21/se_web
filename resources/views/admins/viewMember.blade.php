@@ -26,17 +26,53 @@
                     </tr>
                     <tr>
                         <th scope="row">PASSWORD</th>
-                        <td><a href="" data-toggle="modal" data-target="#chsngePassword"
+                        <td><a href="" data-toggle="modal" data-target="#changePassword"
                                style="font-size: 18px;"
                                type="button" data-toggle="tooltip" data-placement="top" title="edit password">change password</a></td>
                     </tr>
                     </tbody>
                 </table>
                 <div class=" text-right">
-                    <i class="far fa-edit" data-toggle="modal" data-target="#editModal"
-                       style="font-size: 18px; color: #F5B041"
-                       type="button" data-toggle="tooltip" data-placement="top" title="edit profile"
-                    ></i>
+                    <i class="far fa-edit" data-toggle="modal" data-target="#editProfile" style="font-size: 18px; color: #F5B041" type="button" data-toggle="tooltip" data-placement="top" title="edit profile"></i>
+                </div>
+            </div>
+        </div>
+
+        edit profile
+
+        <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <form action="{{ route('user.update',['user'=>$user->id])}}" method="post">
+                        @method('PUT')
+                        @csrf
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editModalLabel">Edit Profile</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group row">
+                                <label for="name" class="col-sm-2 col-form-label text-left">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp"
+                                           placeholder="Enter Name" value="{{$user->name}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="email" class="col-sm-2 col-form-label text-left">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="email" name="email"
+                                           aria-describedby="emailHelp" placeholder="Enter email" value="{{$user->email}}">
+                                </div>
+                            </div>
+                            <div class="form-group text-right">
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>

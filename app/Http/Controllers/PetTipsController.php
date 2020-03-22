@@ -13,7 +13,6 @@ class PetTipsController extends Controller
     {
 
         $tips = PetTip::orderBy('id','desc')->get();
-        $petTips = PetTip::all();
         return view('posts.createTip', ['tips' => $tips]);
     }
 
@@ -70,7 +69,12 @@ class PetTipsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $tip = PetTip::findOrFail($id);
+        $tip->title = $request->input('title');
+        $tip->detail = $request->input('detail');
+        $tip->save();
+        return redirect()->back();
+
     }
 
     /**
