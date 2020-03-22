@@ -15,8 +15,6 @@ class UserPolicy
         return $user->role !== "admin";
     }
 
-
-
     public function viewOnlyUser(User $user)
     {
         return $user->role === "user";
@@ -25,6 +23,10 @@ class UserPolicy
     public function viewAny(User $user)
     {
         return $user->role === "admin";
+    }
+
+    public function viewOnlyMe(User $user){
+        return $user->id = Auth::user()->id;
     }
 
     public function view(User $user, User $model)

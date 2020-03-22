@@ -79,7 +79,22 @@
                     @foreach($pets as $pet)
                     <option value="{{ $pet->id }}">{{ $pet->name }}</option>
                     @endforeach
-                </select>
+                </table>
+                <button type="submit" class="btn btn-primary">Post</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner"
+             style="height: 380px;background-color: #818182;background-image: url('{{asset('images/petTipBG.png')}}');">
+            <div class="carousel-item active" style="height: 380px;">
+                <img class="d-block w-100" src="/images/petTipsBg1.png" style="max-height: 500px" alt="First slide">
             </div>
             <div class="form-group">
                 <label for="chooseDoc">Choose Doctor</label>
@@ -120,54 +135,38 @@
             <img class="d-block w-100" src="/images/petTipsBg1.png" style="max-height: 500px" alt="First slide">
         </div>
 
-        @foreach( $petTips as $tip )
-        <div class="carousel-item ">
-            <div class="container" style=" padding-top:3.5em;color: #ffffff;">
-                <div>
-                    <h3 style="text-align: center;margin-top: 3.6em ;font-weight: bold;font-size: 26px">{{$tip->title}}</h3>
-                </div>
-                <div>
-                    <h4 style="text-align: center;margin-top: 1em ;">{{$tip->detail}}</h4>
-                </div>
+    {{--    @endcan--}}
+
+    <div class="" style="margin: 50px">
+        @can('viewAny', App\User::class, App\PetTip::class)
+        @endcan
+
+        @can('create', \App\Post::class)
+            <button type="button" class="btn btn-warning btn-lg btn-block" style="cursor:pointer; margin-top: 20px"
+                    onclick="openNav()" {{ $user->status ? "" : "hidden" }}>
+                Create question
+            </button>
+        @endcan
+        @foreach($posts as $post)
+            <div class="card post-card border-light abc" style="margin-top: 10px">
+                <a href="{{ route('post.show', ['post' => $post->id]) }}"
+                   style="text-decoration: none; color: #1b1e21">
+                    <div class="card-body">
+                        <p class="card-text"><small class="text-muted"
+                                                    style="font-size: 15px">{{ $post->user->name }}</small></p>
+                        <p style="font-size: 25px"><i class="fas fa-question"
+                                                      style="margin-right: 9px"></i> {{ $post->question }}</p>
+                        <p style="font-size: 18px">{{ $post->detail }}</p>
+                    </div>
+                </a>
             </div>
         </div>
         @endforeach
 
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
 
-{{-- @endcan--}}
 
-<div class="" style="margin: 50px">
-    @can('viewAny', App\User::class, App\PetTip::class)
-    @endcan
-
-    @can('create', \App\Post::class)
-    <button type="button" class="btn btn-warning btn-lg btn-block" style="cursor:pointer; margin-top: 20px" onclick="openNav()">Create question
-    </button>
-    @endcan
-    @foreach($posts as $post)
-    <div class="card post-card border-light abc" style="margin-top: 10px">
-        <a href="{{ route('post.show', ['post' => $post->id]) }}" style="text-decoration: none; color: #1b1e21">
-            <div class="card-body">
-                <p class="card-text"><small class="text-muted" style="font-size: 15px">{{ $post->user->name }}</small></p>
-                <p style="font-size: 25px"><i class="fas fa-question" style="margin-right: 9px"></i> {{ $post->question }}</p>
-                <p style="font-size: 18px">{{ $post->detail }}</p>
-            </div>
-        </a>
-    </div>
-    @endforeach
-    {{-- <a href="" class="card" id="loadMore" style="margin-top: 30px; text-decoration: none">--}}
-    {{-- <p class="text-center" style="margin: 15px; font-size: 20px">Read more</p>--}}
-    {{-- </a>--}}
+@endsection
 
     <p class="totop" style="text-align: center; padding-top: 25px">
         <a href="#top"><i class="fa fa-chevron-circle-up" style="font-size:60px"></i></a>

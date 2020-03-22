@@ -39,9 +39,9 @@ class UsersController extends Controller
             'genes' => $genes,
             'types' => $types
         ]);
-
     }
 
+// doctor
     public function updateProfile(Request $request, $id){
         $user = Auth::user();
         $user->name = $request->input('name');
@@ -80,9 +80,11 @@ class UsersController extends Controller
     {
         $doctors = User::where('role', '=', 'doctor')->get();
         $users = User::where('role', '=', 'user')->get();
+        $user = Auth::user();
         return view('doctors.create', [
             'doctors' => $doctors,
-            'users' => $users
+            'users' => $users,
+            'user' => $user
         ]);
     }
 
@@ -110,7 +112,15 @@ class UsersController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->save();
-        return redirect()->route('users.profile', ['user' => $user]);
+        return redirect()->back();
+    }
+
+    public function updateStatus(Request $request){
+        $user = User::findOrFail($request->user_id);
+        $user->status = $request->status;
+        $user->save();
+
+        return response()->json(['message' => 'User status updated successfully.']);
     }
 
     public function showChangePasswordForm(){

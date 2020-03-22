@@ -32,9 +32,10 @@ Route::resource('/petTip', 'PetTipsController');
 
 //admin
 Route::get('/admin/viewMembers', 'UsersController@index');
+Route::get('/admin/updateStatus', 'UsersController@updateStatus')->name('user.update.status');
 
 //pet
-//Route::get('/pet/createPet','PetsController@createPet');
+Route::get('/pet/createPet','PetsController@createPet');
 Route::resource('/pet', 'PetsController');
 //Route::post('/pets/{pet_id}/update', 'PetsController@update')->name('pet.update');
 Route::get('pets/{vaccine_id}/date','PetsController@calculate')->name('pet.calculate');
