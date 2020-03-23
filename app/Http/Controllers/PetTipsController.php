@@ -29,6 +29,10 @@ class PetTipsController extends Controller
 
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'title'=>['required'],
+            'detail'=>['required']
+        ]);
         $tip = new PetTip();
         $tip->title = $request->input('title');
         $tip->detail = $request->input('detail');
