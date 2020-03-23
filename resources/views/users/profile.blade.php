@@ -89,7 +89,7 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div style="margin-left: 40px; margin-right: 40px; margin-top: 10px; margin-bottom: 50px;">
         <h2>Create pet </h2>
-        <form method="POST" action="{{ route('pet.store') }}">
+        <form method="POST" enctype="multipart/form-data" action="{{ route('pet.store') }}">
             @csrf
             <div class="form-group">
                 <label for="name">Name</label>
