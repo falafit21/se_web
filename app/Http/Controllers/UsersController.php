@@ -132,13 +132,9 @@ class UsersController extends Controller
         return response()->json(['message' => 'User status updated successfully.']);
     }
 
-<<<<<<< HEAD
 //    public function showChangePasswordForm(){
 //        return view('changepassword');
 //    }
-=======
-    
->>>>>>> b1b4396bc093a7ecacaadf25833eafeab40c57ed
     public function __construct()
     {
         $this->middleware('auth');
