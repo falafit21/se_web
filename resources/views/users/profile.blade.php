@@ -143,7 +143,6 @@
                     <input type="text" class="form-control" id="weight" name="weight">
                     <small id="fileHelp"> Please answer in Kilograms Unit</small>
                 </div>
-<<<<<<< HEAD
                 <div>
                     <label for="img">Image</label>
                     <input type="file" id="img" name="img" class="btn btn-outline-info form-control-file">
@@ -151,18 +150,11 @@
                     <div class="alert alert-danger">{{$message}}</div>
                     @enderror
                 </div>
-                <br>
-                <div class="form-group row">
+            </div>
+            <div class="form-group row">
                     <div class="offset-sm-10">
                         <button type="submit" class="btn btn-primary">Create</button>
                     </div>
-=======
-            </div>
-            <div class="form-group row">
-                <div class="offset-sm-10">
-                    <button type="submit" class="btn btn-primary">Create</button>
->>>>>>> b1b4396bc093a7ecacaadf25833eafeab40c57ed
-                </div>
             </div>
         </form>
     </div>
