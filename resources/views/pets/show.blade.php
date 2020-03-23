@@ -221,7 +221,7 @@
                             </div>
                         </div>
 
-{{--                        add modal--}}
+                        {{--                        add modal--}}
                         <div id="add" class="modal fade" role="dialog" style="color: black">
                             <div class="modal-dialog">
                                 <!-- Modal content-->
