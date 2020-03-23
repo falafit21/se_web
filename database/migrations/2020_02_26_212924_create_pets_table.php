@@ -21,6 +21,7 @@ class CreatePetsTable extends Migration
             $table->bigInteger('pet_gene_id')->unsigned()->nullable();
             $table->float('weight');
             $table->date('birth_date');
+            $table->string('img')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')

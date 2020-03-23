@@ -11,6 +11,7 @@ use App\Vaccine;
 use App\WeightStatuses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image as Image;
 
 class PetsController extends Controller
 {
@@ -61,7 +62,9 @@ class PetsController extends Controller
             'gene' => ['required'],
             'birth-date-input' => ['required'],
             'weight' => ['required'],
+            'img' => ['required']
         ]);
+
 
         $pet = new Pet;
         $pet->name = $request->input('name');
@@ -70,6 +73,7 @@ class PetsController extends Controller
         $pet->pet_gene_id = $request->input('gene');
         $pet->weight = $request->input('weight');
         $pet->birth_date = $request->input('birth-date-input');
+        $pet->img = $request->file('img')->store('public/imgs');
         $pet->save();
 
         return redirect()->route('users.profile');
@@ -126,4 +130,5 @@ class PetsController extends Controller
     {
         //
     }
+
 }

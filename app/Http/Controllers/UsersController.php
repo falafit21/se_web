@@ -123,9 +123,9 @@ class UsersController extends Controller
         return response()->json(['message' => 'User status updated successfully.']);
     }
 
-    public function showChangePasswordForm(){
-        return view('changepassword');
-    }
+//    public function showChangePasswordForm(){
+//        return view('changepassword');
+//    }
     public function __construct()
     {
         $this->middleware('auth');
@@ -155,6 +155,25 @@ class UsersController extends Controller
         return redirect()->back()->with("success","Password changed successfully !");
 
     }
+    public function imageUpload()
+    {
+        return view('load');
+    }
+    public function imageUploadPost(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+        $imageName = time().'.'.$request->image->extension();
+
+        $request->image->move(public_path('imgs'), $imageName);
+
+        return back()
+            ->with('success','You have successfully upload image.')
+            ->with('image',$imageName);
+
+    }
 
 
 
@@ -164,4 +183,5 @@ class UsersController extends Controller
     {
         //
     }
+
 }

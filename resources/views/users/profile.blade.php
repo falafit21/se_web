@@ -89,7 +89,7 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div style="margin-left: 40px; margin-right: 40px; margin-top: 10px; margin-bottom: 50px;">
             <h2>Create pet </h2>
-            <form method="POST" action="{{ route('pet.store') }}">
+            <form method="POST" enctype="multipart/form-data" action="{{ route('pet.store') }}">
                 @csrf
                 <div class="form-group">
                     <label for="name">Name</label>
@@ -145,6 +145,14 @@
                         <small id="fileHelp"> Please answer in Kilograms Unit</small>
                     </div>
                 </div>
+                <div>
+                    <label for="img">Image</label>
+                    <input type="file" id="img" name="img" class="btn btn-outline-info form-control-file">
+                    @error('img')
+                    <div class="alert alert-danger">{{$message}}</div>
+                    @enderror
+                </div>
+                <br>
                 <div class="form-group row">
                     <div class="offset-sm-10">
                         <button type="submit" class="btn btn-primary">Create</button>
@@ -204,13 +212,14 @@
                                     <a href="{{ route('pet.show', ['pet'=>$pet->id]) }}" style="text-decoration: none; color: #1b1e21">
                             <span class=" pet-card">
                                 <span class="card-body">
-                                    @if( $pet->petType->type == 'dog' )
-                                        <img width="80" height="75" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Creative-Tail-Animal-dog.svg/1024px-Creative-Tail-Animal-dog.svg.png">
-                                    @elseif( $pet->petType->type == 'cat' )
-                                    <img width="80" height="75" src="https://image.flaticon.com/icons/png/512/141/141782.png">
-                                    @elseif( $pet->petType->type == 'rabbit' )
-                                    <img width="80" height="75" src="https://cdn.pixabay.com/photo/2018/12/28/16/27/rabbit-3899900_1280.jpg">
-                                    @endif
+                                    <img src="{{Storage::url($pet->img)}}" alt="" width="80" height="75" srcset="">
+{{--                                    @if( $pet->petType->type == 'dog' )--}}
+{{--                                        <img width="80" height="75" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Creative-Tail-Animal-dog.svg/1024px-Creative-Tail-Animal-dog.svg.png">--}}
+{{--                                    @elseif( $pet->petType->type == 'cat' )--}}
+{{--                                    <img width="80" height="75" src="https://image.flaticon.com/icons/png/512/141/141782.png">--}}
+{{--                                    @elseif( $pet->petType->type == 'rabbit' )--}}
+{{--                                    <img width="80" height="75" src="https://cdn.pixabay.com/photo/2018/12/28/16/27/rabbit-3899900_1280.jpg">--}}
+{{--                                    @endif--}}
                                     <h8 style="text-align: center; margin-top:20px">{{$pet->name}}</h8>
                                 </span>
                             </span>

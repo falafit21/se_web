@@ -115,7 +115,7 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner"
-             style="height: 380px;background-color: #818182;background-image: url('{{asset('images/petTipBG.png')}}');">
+             style="height: 380px;background-color: #818182;background-image: url('{{asset('imgs/petTipBG.png')}}');">
             <div class="carousel-item active" style="height: 380px;">
                 <img class="d-block w-100" src="/images/petTipsBg1.png" style="max-height: 500px" alt="First slide">
             </div>
@@ -144,6 +144,7 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+
 
     {{--    @endcan--}}
 
@@ -184,6 +185,7 @@
 @endsection
 
 @section('script')
+
     <script>
         function openNav() {
             document.getElementById("mySidenav").style.width = "700px";

@@ -19,6 +19,7 @@
 
         <link href="{{ asset('css/public.css') }}" rel="stylesheet">
 
+
         @yield('style')
     </head>
     <body style="background-color: #34495E">
