@@ -146,14 +146,24 @@
                         <label for="question" class="col-sm-3 col-form-label text-left">Post
                             title</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="question" name="question" placeholder="Enter Question" value="{{ $post->question }}">
+                            <input type="text" class="form-control {{ $errors->has('question') ? ' has-error' : '' }}" id="question" name="question" placeholder="Enter Question" value="{{ $post->question }}" required>
+                            @if ($errors->has('question'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('question') }}</strong>
+                            </span>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="detail" class="col-sm-3 col-form-label text-left">Post
                             detail</label>
                         <div class="col-sm-9">
-                            <textarea type="text" class="form-control" id="detail" name="detail" placeholder="Enter Detail">{{ $post->detail }}</textarea>
+                            <textarea type="text" class="form-control {{ $errors->has('detail') ? ' has-error' : '' }}" id="detail" name="detail" placeholder="Enter Detail" required>{{ $post->detail }}</textarea>
+                            @if ($errors->has('detail'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('detail') }}</strong>
+                            </span>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group text-right">
@@ -165,7 +175,7 @@
     </div>
 </div>
 
-<!-- Modal comment -->
+<!-- Modal edit comment -->
 <div class="modal fade" id="editCommentModal" tabindex="-1" role="dialog" aria-labelledby="editCommentModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -180,7 +190,13 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" name="id" id="id">
-                    <input type="text" class="form-control" id="comment" name="comment" placeholder="Enter comment">
+                    <input type="text" class="form-control {{ $errors->has('comment') ? ' has-error' : '' }}" id="comment" name="comment" placeholder="Enter comment" required>
+                    @if ($errors->has('comment'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('comment') }}</strong>
+                    </span>
+                    @endif
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -207,6 +223,7 @@
         modal.find('.modal-body #comment').val(comment);
         modal.find('.modal-body #id').val(id);
     })
+
 
     function myFunction() {
         var dots = document.getElementById("dots");

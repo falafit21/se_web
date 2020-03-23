@@ -101,6 +101,10 @@ class PetsController extends Controller
     public function update(Request $request, $id)
     {
         $pet = Pet::findOrFail($id);
+        $request->validate([
+            'weight' => ['required'],
+            'birth-date-input' => ['required']
+        ]);
         $pet->weight = $request->input('weight');
         $pet->birth_date = $request->input('birth-date-input');
         $pet->save();
@@ -116,6 +120,12 @@ class PetsController extends Controller
         $all_received_vaccine = RecievedVaccines::where('vaccine_id', "=", $vaccine_id)->get();
         $received_vaccine_id = $all_received_vaccine[0]->id;
         $received_vaccine = RecievedVaccines::find($received_vaccine_id);
+
+        $request->validate([
+            'vaccineName' => ['required'],
+            'activateRange' => ['required'],
+            'receivedDate' => ['required']
+        ]);
 
         $vaccine->name = $request->input('vaccineName');
         $received_vaccine->received_at = $request->input('receivedDate');
