@@ -194,7 +194,7 @@
                         </div>
                     </div>
 
-
+                    <!-- Add vaccine -->
                     <div id="add" class="modal fade" role="dialog" style="color: black">
                         <div class="modal-dialog">
                             <!-- Modal content-->
@@ -217,22 +217,37 @@
                                                     <option value="{{ $vaccineInCurrentType->name }}">
                                                         @endforeach
                                                 </datalist>
-                                                <input type="search" class="form-control" id="vaccineName" name="vaccineName" list="vaccineName">
+                                                <input type="search" class="form-control {{ $errors->has('vaccineName') ? ' has-error' : '' }}" id="vaccineName" name="vaccineName" list="vaccineName" required>
+                                                @if ($errors->has('vaccineName'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('vaccineName') }}</strong>
+                                                </span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="PreventSymptom" class="col-sm-4 col-form-label text-left">Prevent
                                                 symptom</label>
                                             <div class="col-sm-8">
-                                                <textarea type="text" class="form-control" name="PreventSymptom" id="PreventSymptom">
+                                                <textarea type="text" class="form-control {{ $errors->has('PreventSymptom') ? ' has-error' : '' }}" name="PreventSymptom" id="PreventSymptom" required>
                                                         </textarea>
+                                                @if ($errors->has('PreventSymptom'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('PreventSymptom') }}</strong>
+                                                </span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <label for="activateRange" class="col-sm-4 col-form-label text-left">Activate
                                                 range</label>
                                             <div class="col-sm-6">
-                                                <input type="number" class="form-control" id="activateRange" name="activateRange">
+                                                <input type="number" class="form-control {{ $errors->has('activateRange') ? ' has-error' : '' }}" id="activateRange" name="activateRange" required>
+                                                @if ($errors->has('activateRange'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('activateRange') }}</strong>
+                                                </span>
+                                                @endif
                                             </div>
                                             <div class="col-sm-2 col-form-label">months</div>
                                         </div>
@@ -240,7 +255,12 @@
                                             <label for="receivedDate" class="col-sm-4 col-form-label text-left">Received
                                                 Date</label>
                                             <div class="col-sm-8">
-                                                <input type="date" class="form-control" id="receivedDate" name="receivedDate">
+                                                <input type="date" class="form-control {{ $errors->has('receivedDate') ? ' has-error' : '' }}" id="receivedDate" name="receivedDate" required>
+                                                @if ($errors->has('receivedDate'))
+                                                <span class="help-block">
+                                                    <strong>{{ $errors->first('receivedDate') }}</strong>
+                                                </span>
+                                                @endif
                                             </div>
                                         </div>
                                         <div class="text-right">
