@@ -106,6 +106,10 @@ class PostsController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::findOrFail($id);
+        $validatedData = $request->validate([
+            'question' => 'required',
+            'detail' => 'required'
+        ]);
         $post->question = $request->input('question');
         $post->detail = $request->input('detail');
         $post->save();
@@ -115,6 +119,9 @@ class PostsController extends Controller
 
     public function commentUpdate(Request $request, $post_id){
         $post = Post::findOrFail($post_id);
+        $validatedData = $request->validate([
+            'comment' => 'required'
+        ]);
         $comment= Comment::findOrFail($request->input('id'));
         $comment->comment = $request->input('comment');
         $comment->save();

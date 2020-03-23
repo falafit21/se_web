@@ -74,6 +74,10 @@ class PetTipsController extends Controller
     public function update(Request $request, $id)
     {
         $tip = PetTip::findOrFail($id);
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'detail' => 'required'
+        ]);
         $tip->title = $request->input('title');
         $tip->detail = $request->input('detail');
         $tip->save();

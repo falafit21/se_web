@@ -44,6 +44,12 @@ class UsersController extends Controller
 // doctor
     public function updateProfile(Request $request, $id){
         $user = Auth::user();
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+            'work_at' => 'required'
+        ]);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->save();
@@ -53,8 +59,7 @@ class UsersController extends Controller
         $doctor->work_at = $request->input('work_at');
         $doctor->save();
         return redirect()->back();
-//                dd($doctor);
-//                dd($user);
+
     }
 
     public function getDocProfile()
@@ -109,6 +114,10 @@ class UsersController extends Controller
     public function update(Request $request, $id)
     {
         $user =  User::findOrFail($id);
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required'
+        ]);
         $user->name = $request->input('name');
         $user->email = $request->input('email');
         $user->save();
@@ -123,13 +132,12 @@ class UsersController extends Controller
         return response()->json(['message' => 'User status updated successfully.']);
     }
 
-    public function showChangePasswordForm(){
-        return view('changepassword');
-    }
+    
     public function __construct()
     {
         $this->middleware('auth');
     }
+    
     public function changePassword(Request $request){
 
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {
@@ -155,10 +163,6 @@ class UsersController extends Controller
         return redirect()->back()->with("success","Password changed successfully !");
 
     }
-
-
-
-
 
     public function destroy($id)
     {

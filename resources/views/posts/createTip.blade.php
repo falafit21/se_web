@@ -76,13 +76,22 @@
                                 <tr>
                                     <th>Title</th>
                                     <td>
-                                        <input type="name" class="form-control" id="title" name="title" aria-describedby="emailHelp" placeholder="Enter Name" value="{{$tip->title}}">
+                                        <input type="title" class="form-control {{ $errors->has('title') ? ' has-error' : '' }}" id="title" name="title" aria-describedby="emailHelp" placeholder="Enter title" value="{{$tip->title}}" required>
+                                        @if ($errors->has('title'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('title') }}</strong>
+                                        </span>
+                                        @endif
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>Detail</th>
-
-                                    <td><textarea type="text" class="form-control" id="detail" name="detail" aria-describedby="emailHelp" placeholder="Tips Detail">{{$tip->detail}}</textarea>
+                                    <td><textarea type="text" class="form-control {{ $errors->has('detail') ? ' has-error' : '' }}" id="detail" name="detail" aria-describedby="emailHelp" placeholder="Tips Detail" required>{{$tip->detail}}</textarea>
+                                        @if ($errors->has('detail'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('detail') }}</strong>
+                                        </span>
+                                        @endif
                                     </td>
                                 </tr>
                             </tbody>
