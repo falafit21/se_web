@@ -50,3 +50,7 @@ Route::delete('/vaccines/{vaccine}/{pet}', 'VaccinesController@vaccineDestroy')-
 
 Auth::routes();
 //Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/image-upload', 'UsersController@imageUpload')->name('image.upload');
+Route::post('/image-upload', 'UsersController@imageUploadPost')->name('image.upload.post');
+
