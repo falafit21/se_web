@@ -93,11 +93,11 @@
             @csrf
             <div class="form-group">
                 <label for="name">Name</label>
-                <input class="form-control" id="name" name="name">
+                <input class="form-control" id="name" name="name" required>
             </div>
             <div class="form-group">
                 <label for="type">Genre</label>
-                <select id="type" class="form-control" name="type">
+                <select id="type" class="form-control" name="type" required>
                     @foreach($types as $type)
                     <option value="{{ $type->id }}">{{ $type->type }}</option>
                     @endforeach
@@ -105,7 +105,7 @@
             </div>
             <div class="form-group">
                 <label for="gene">Genes</label>
-                <select id="gene" class="form-control" name="gene">
+                <select id="gene" class="form-control" name="gene" required> 
                     <optgroup label="Dog gene">
                         @foreach($genes as $gene)
                         @if($gene->pet_type_id == 1)
@@ -133,14 +133,14 @@
             <div class="form-group">
                 <label for="birth-date-input">BirthDate</label>
                 <div>
-                    <input class="form-control" type="date" value="2011-08-19" id="birth-date-input" name="birth-date-input">
+                    <input class="form-control" type="date" value="2011-08-19" id="birth-date-input" name="birth-date-input" required>
                     <small id="fileHelp" class="form-text text-muted"></small>
                 </div>
             </div>
             <div class="form-group">
                 <label for="weight">Weight</label>
                 <div>
-                    <input type="text" class="form-control" id="weight" name="weight">
+                    <input type="text" class="form-control" id="weight" name="weight" required>
                     <small id="fileHelp"> Please answer in Kilograms Unit</small>
                 </div>
             </div>

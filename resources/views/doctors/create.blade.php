@@ -129,41 +129,38 @@
 
                 <div class="form-group">
                     <label for="name">name</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name">
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" required>
                     @error('name')
                     <span class="invalid-feedback" role="alert">
                                <strong>{{ $message }}</strong>
                          </span>
                     @enderror
                 </div>
-
-
-
                 <div class="form-group">
                     <label for="password">password</label>
-                    <input type="password" class="form-control" id="password" name="password">
+                    <input type="password" class="form-control" id="password" name="password" required>
                 </div>
                 <div class="form-group">
                     <label for="confirmPassword">confirm password</label>
-                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                    <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required>
                 </div>
 
                 <h5 style="margin-top: 50px">Step 2 : Advance info</h5>
                 <div class="form-group">
                     <label for="phoneNumber">phone number</label>
-                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+                    <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required>
                 </div>
                 <div class="form-group">
                     <label for="graduatedFrom">graduated from</label>
-                    <input type="text" class="form-control" id="graduatedFrom" name="graduatedFrom">
+                    <input type="text" class="form-control" id="graduatedFrom" name="graduatedFrom" required>
                 </div>
                 <div class="form-group">
                     <label for="licenseNumber">license number</label>
-                    <input type="text" class="form-control" id="licenseNumber" name="licenseNumber">
+                    <input type="text" class="form-control" id="licenseNumber" name="licenseNumber" required>
                 </div>
                 <div class="form-group">
                     <label for="workAt">work at</label>
-                    <input type="text" class="form-control" id="workAt" name="workAt">
+                    <input type="text" class="form-control" id="workAt" name="workAt" required>
                 </div>
 
                 <div class="form-group text-right">
@@ -228,14 +225,14 @@
                                         <label for="name" class="col-sm-2 col-form-label text-left" style="color: #1b1e21">Name</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" id="name" name="name" aria-describedby="emailHelp"
-                                                   placeholder="Enter Name" value="{{$user->name}}">
+                                                   placeholder="Enter Name" value="{{$user->name}}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="email" class="col-sm-2 col-form-label text-left" style="color: #1b1e21">Email</label>
                                         <div class="col-sm-10">
                                             <input type="email" class="form-control" id="email" name="email"
-                                                   aria-describedby="emailHelp" placeholder="Enter email" value="{{$user->email}}">
+                                                   aria-describedby="emailHelp" placeholder="Enter email" value="{{$user->email}}" required>
                                         </div>
                                     </div>
                                     <div class="form-group text-right">
@@ -340,6 +337,10 @@
                 });
             });
         });
+
+        document.getElementById('name').setCustomValidity('Please enter doctor name');
+        document.getElementById('email').setCustomValidity('Please enter doctor email');
+
 
     </script>
 @endsection

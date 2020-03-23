@@ -64,15 +64,15 @@
                 @csrf
                 <div class="form-group">
                     <label for="title">title</label>
-                    <input type="text" class="form-control" id="title" name="title">
+                    <input type="text" class="form-control" id="title" name="title" required>
                 </div>
                 <div class="form-group">
                     <label for="detail">detail</label>
-                    <textarea class="form-control" id="detail" rows="3" name="detail"></textarea>
+                    <textarea class="form-control" id="detail" rows="3" name="detail" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="choosePet">Choose your pet</label>
-                    <select id="choosePet" class="form-control" name="choosePet">
+                    <select id="choosePet" class="form-control" name="choosePet" required>
                         @foreach($pets as $pet)
                             <option value="{{ $pet->id }}">{{ $pet->name }}</option>
                         @endforeach
@@ -82,7 +82,7 @@
                     <label for="chooseDoc">Choose Doctor</label>
                     <div class="row">
                         <div class="col-10">
-                            <select id="chooseDoc" class="form-control" name="chooseDoc">
+                            <select id="chooseDoc" class="form-control" name="chooseDoc" required>
                                 @foreach($doctors as $doctor)
                                     <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
                                 @endforeach
@@ -99,7 +99,7 @@
                         <div class="form-group">
                             <label for="{{ $formQuestion->id }}">{{ $formQuestion->question }}</label>
                             <textarea class="form-control" id="{{ $formQuestion->id }}" rows="2"
-                                      name="{{ $formQuestion->id }}"></textarea>
+                                      name="{{ $formQuestion->id }}" required></textarea>
                         </div>
                     @endforeach
                 </table>
