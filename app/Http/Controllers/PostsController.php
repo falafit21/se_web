@@ -90,9 +90,11 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         $forms = Form::all();
+        $user = Auth::user();
         return view('posts.show', [
             'post' => $post,
             'forms' => $forms,
+            'user' => $user
         ]);
     }
 
