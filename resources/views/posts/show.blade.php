@@ -58,7 +58,7 @@
     </div>
 
     @can('view', $post->user)
-    <form action="{{  route('post.comment.store', ['post_id' => $post->id]) }}" style="margin-top: 30px;" method="POST">
+    <form action="{{  route('post.comment.store', ['post_id' => $post->id]) }}" style="margin-top: 30px;" method="POST" {{ $user->status ? "" : "hidden" }}>
         @csrf
         <div class="row">
             <div class="col-10">
@@ -74,7 +74,6 @@
         </div>
     </form>
     @endcan
-    <hr style="background-color: white">
     <p style="margin-bottom: 30px"></p>
 
     <!-- comment -->
