@@ -220,7 +220,7 @@
                 <h2 style="color: white">My Posts</h2>
                 @foreach($user->posts as $post)
                     <a href="{{ route('post.show', ['post' => $post->id]) }}" style="text-decoration: none; color: #1b1e21">
-                        <div class="card post-card border-light" style="margin-bottom: 5px">
+                        <div class="card post-card border-light" style="margin-bottom: 10px">
                             <div class="card-body">
                                 <p class="card-text">
                                     <small class="text-muted" style="font-size: 15px">
