@@ -71,6 +71,18 @@
 @endsection
 
 @section('content')
+    <div class="panel-body">
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+    </div>
 
     {{--    create pet--}}
     <div id="mySidenav" class="sidenav">
@@ -244,18 +256,7 @@
 
 
                     <form method="POST" action="{{ route('users.changePassword',['user'=>$user->id]) }}" method="post">
-                        <div class="panel-body">
-                            @if (session('error'))
-                                <div class="alert alert-danger">
-                                    {{ session('error') }}
-                                </div>
-                            @endif
-                            @if (session('success'))
-                                <div class="alert alert-success">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                        </div>
+
                         @method('PUT')
                         @csrf
                         <div class="modal-header">

@@ -40,14 +40,7 @@
 @endsection
 
 @section('content')
-
-    {{--    change password model--}}
-    <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-
-                <div class="panel-body">
+ <div class="panel-body">
                     @if (session('error'))
                         <div class="alert alert-danger">
                             {{ session('error') }}
@@ -59,6 +52,13 @@
                         </div>
                     @endif
                 </div>
+    {{--    change password model--}}
+    <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+
                 <form method="POST" action="{{ route('users.changePassword',['user'=>$user->id]) }}" method="post">
                     @method('PUT')
                     @csrf
@@ -137,16 +137,7 @@
                     @enderror
                 </div>
 
-                <div class="form-group">
-                    <label for="email">E-mail address</label>
-                    <input type="email" class="form-control @error('email') is-invalid @enderror" id="email"
-                           name="email">
-                    @error('email')
-                    <span class="invalid-feedback" role="alert">
-                             <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>
+
 
                 <div class="form-group">
                     <label for="password">password</label>
