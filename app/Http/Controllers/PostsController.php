@@ -36,7 +36,7 @@ class PostsController extends Controller
 
     public function create()
     {
-        
+
     }
 
     public function store(Request $request)
@@ -46,6 +46,7 @@ class PostsController extends Controller
             'title' => ['required'],
             'detail' => ['required'],
             'choosePet' => ['required'],
+            'img' =>['nullable|sometimes']
         ]);
         $post = new Post();
 
@@ -54,6 +55,7 @@ class PostsController extends Controller
         $post->question = $request->input('title');
         $post->detail = $request->input('detail');
         $post->pet_id = $request->input('choosePet');
+        $post->img = $request->file('img')->store('public/posts');
 
         if($post->save()){
             $recentPost_id = $post->latest()->first()->id;

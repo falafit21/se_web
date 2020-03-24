@@ -61,7 +61,7 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div style="margin-left: 40px; margin-right: 40px; margin-top: 10px; margin-bottom: 50px;">
         <h2>Create post </h2>
-        <form method="POST" action="{{ route('post.store') }}" class="text-left">
+        <form method="POST" enctype="multipart/form-data" action="{{ route('post.store') }}" class="text-left">
             @csrf
             <div class="form-group">
                 <label for="title">title</label>
@@ -111,6 +111,13 @@
                     </div>
                     <a href="{{ url('doctorLists') }}" target="_blank" class="btn btn-info col-2" style="background-color: #EB984E; color: white">doctor list</a>
                 </div>
+            </div>
+            <div>
+                <label for="img">Image</label>
+                <input type="file" id="img" name="img" class="btn btn-outline-info form-control-file">
+                @error('img')
+                <div class="alert alert-danger">{{$message}}</div>
+                @enderror
             </div>
 
             <h5 style="margin-top: 50px" class="text-left">Pet Symptom</h5>
@@ -232,6 +239,6 @@
         }
     });
 
-   
+
 </script>
 @endsection
