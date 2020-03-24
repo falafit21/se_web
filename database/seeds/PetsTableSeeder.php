@@ -20,5 +20,6 @@ class PetsTableSeeder extends Seeder
         $pet->birth_date = "1997-10-10";
         $pet->img = "public/imgs/dog1.jpg";
         $pet->save();
+        
     }
 }
