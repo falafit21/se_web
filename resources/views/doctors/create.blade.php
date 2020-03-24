@@ -361,8 +361,7 @@
             $.ajax({
                 type: "GET",
                 dataType: "json",
-                url: '{{ route('
-                user.update.status ') }}',
+                url: '{{ route('user.update.status') }}',
                 data: {
                     'status': status,
                     'user_id': userId
