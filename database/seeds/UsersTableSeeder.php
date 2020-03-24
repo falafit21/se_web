@@ -42,7 +42,7 @@ class UsersTableSeeder extends Seeder
         $user4 = new \App\User();
         $user4->name = "DR.Jing shukishi";
         $user4->email = "Jing@shukishi.com";
-        $user4->password = Hash::make('Jing234');
+        $user4->password = Hash::make('Jing1234');
         $user4->status = 1;
         $user4->role = "doctor";
         $user4->doctor_info_id = 2;
@@ -51,12 +51,18 @@ class UsersTableSeeder extends Seeder
         $user5 = new \App\User();
         $user5->name = "Dr.Mook shukishi";
         $user5->email = "Mook@shukishi.com";
-        $user5->password = Hash::make('Jing234');
+        $user5->password = Hash::make('mook1234');
         $user5->status = 1;
         $user5->role = "doctor";
         $user5->doctor_info_id = 3;
         $user5->save();
 
-        $
+        $user6 = new \App\User();
+        $user6->name = "earth shukishi";
+        $user6->email = "earth@shukishi.com";
+        $user6->password = Hash::make('earth1234');
+        $user6->status = 1;
+//        $user3->role = "user";
+        $user6->save();
     }
 }
