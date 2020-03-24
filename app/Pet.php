@@ -25,4 +25,8 @@ class Pet extends Model
     public function recievedVaccines(){
         return $this->hasMany(RecievedVaccines::class);
     }
+
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
 }

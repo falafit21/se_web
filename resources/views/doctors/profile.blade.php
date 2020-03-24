@@ -71,7 +71,7 @@
                                 {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
                             </small>
                         </p>
-                        <p style="font-size: 22px"><i class="fas fa-question" style="margin-right: 9px"></i> {{ $post->question }}
+                        <p style="font-size: 22px"> {{ $post->question }}
                         </p>
                         <p style="font-size: 15px">{{ $post->detail }}</p>
                     </div>

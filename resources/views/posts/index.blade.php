@@ -183,8 +183,18 @@
     <div class="card post-card border-light abc" style="margin-top: 10px">
         <a href="{{ route('post.show', ['post' => $post->id]) }}" style="text-decoration: none; color: #1b1e21">
             <div class="card-body">
-                <p class="card-text"><small class="text-muted" style="font-size: 15px">{{ $post->user->name }}</small></p>
-                <p style="font-size: 25px"><i class="fas fa-question" style="margin-right: 9px"></i> {{ $post->question }}</p>
+                <p class="card-text"></p>
+                <div class="row">
+                    <p style="font-size: 25px" class="col-8"><i class="fas fa-paw" style="margin-right: 13px"></i>{{ $post->question }}</p>
+                    <p class="text-muted text-right col-4" style="font-size: 15px">
+                        <i class="fas fa-user" style="margin-right: 6px"></i>
+                        {{ $post->user->name }}
+                        <i class="fas fa-dog" style="margin-right: 6px; margin-left: 10px"></i>
+                        {{ $post->pet->name }}
+                    </p>
+
+                </div>
+
                 <p style="font-size: 18px">{{ $post->detail }}</p>
             </div>
         </a>
@@ -232,6 +242,6 @@
         }
     });
 
-   
+
 </script>
 @endsection

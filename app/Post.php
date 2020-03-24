@@ -13,6 +13,10 @@ class Post extends Model
         return $this->belongsTo(User::class,'user_id');
     }
 
+    public function pet(){
+        return $this->belongsTo(Pet::class);
+    }
+
     public function requestDoctor(){
         return $this->belongsTo(User::class, 'request_ans_user_id');
     }
