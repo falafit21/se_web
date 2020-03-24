@@ -104,8 +104,8 @@ class WeightStatusesSeeder extends Seeder
 
         $weight_statuses15 = new \App\WeightStatuses;
         $weight_statuses15->pet_gene_id = 16;
-        $weight_statuses15->breakpoint_start_weight = 8;
-        $weight_statuses15->breakpoint_end_weight = 5.5;
+        $weight_statuses15->breakpoint_start_weight = 5.5;
+        $weight_statuses15->breakpoint_end_weight = 8;
         $weight_statuses15->save();
 
         $weight_statuses16 = new \App\WeightStatuses;
