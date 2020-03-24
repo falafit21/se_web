@@ -226,20 +226,6 @@
             document.body.style.backgroundColor = "white";
         }
 
-        $(function () {
-            $("abc").slice(0, 1).show();
-            $("#loadMore").on('click', function (e) {
-                e.preventDefault();
-                $("abc:hidden").slice(0, 1).slideDown();
-                if ($("abc:hidden").length == 0) {
-                    $("#load").fadeOut('slow');
-                }
-                $('html,body').animate({
-                    scrollTop: $(this).offset().top
-                }, 1500);
-            });
-        });
-
         $('a[href=#top]').click(function () {
             $('body,html').animate({
                 scrollTop: 0
@@ -260,3 +246,4 @@
        
     </script>
 @endsection
+

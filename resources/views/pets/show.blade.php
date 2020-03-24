@@ -147,7 +147,7 @@
                     <div class="modal fade" id="editProfile" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
-                                <form method="POST" action="{{ route('pet.update', [$pet['id']] ) }}">
+                                <form method="POST" enctype="multipart/form-data" action="{{ route('pet.update', [$pet['id']] ) }}">
                                     @method('PUT')
                                     @csrf
                                     <div class="modal-header">
@@ -185,6 +185,24 @@
                                                 Kilograms
                                             </p>
                                         </div>
+{{--                                        <div class="form-group row">--}}
+{{--                                            <label for="img" class="col-sm-3 col-form-label text-left">Image</label>--}}
+{{--                                            <div class="col-sm-9">--}}
+{{--                                                <img src="{{ Storage::url('/public/imgs'.$pet->img) }}"/>--}}
+{{--                                                <input type="file" name="img" class="form-control @error('img') is-invalid @enderror"--}}
+{{--                                                        value="{{ old('imgs', isset($pet) ? $pet->img : '') }}"/>--}}
+{{--                                                @error('img')--}}
+{{--                                                <span class="help-block">--}}
+{{--                                                    <strong>{{ $message }}</strong>--}}
+{{--                                                </span>--}}
+{{--                                                @enderror--}}
+{{--                                                @if(isset($pet))--}}
+{{--                                                    <label>Image</label>--}}
+{{--                                                    <img src="{{Storage::url($pet->img)}} " width="80" height="75" alt="">--}}
+{{--                                                @endif--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+
                                         <div class="form-group text-right">
                                             <button type="submit" class="btn btn-primary">Save changes</button>
                                         </div>
