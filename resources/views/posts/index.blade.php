@@ -150,7 +150,7 @@
             @foreach( $petTips as $tip )
                 <div class="carousel-item ">
                     <div class="container"
-                         style=" padding-top:3.5em;color: #ffffff;">
+                         style=" padding-top:3.5em;color: #ffffff;background-image: url('{{asset('imgs/petTipBG.png')}}');">
                         <div>
                             <h3 style="text-align: center;margin-top: 3.6em ;font-weight: bold;font-size: 26px">{{$tip->title}}</h3>
                         </div>
@@ -243,7 +243,7 @@
 
         document.getElementById('title').setCustomValidity('Please enter your question');
         document.getElementById('detail').setCustomValidity('Please enter your detail');
-       
+
     </script>
 @endsection
 

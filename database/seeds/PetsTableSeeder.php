@@ -18,6 +18,17 @@ class PetsTableSeeder extends Seeder
         $pet->pet_gene_id = 1;
         $pet->weight = 25.2;
         $pet->birth_date = "1997-10-10";
+        $pet->img = "public/imgs/dog1.jpg";
+        $pet->save();
+
+        $pet = new \App\Pet();
+        $pet->name = "Dambo";
+        $pet->user_id = 7;
+        $pet->pet_type_id = 1;
+        $pet->pet_gene_id = 1;
+        $pet->weight = 7;
+        $pet->birth_date = "1997-10-10";
+        $pet->img = "public/imgs/dog2.jpg";
         $pet->save();
     }
 }

@@ -64,5 +64,6 @@ class UsersTableSeeder extends Seeder
         $user6->status = 1;
 //        $user3->role = "user";
         $user6->save();
+
     }
 }
