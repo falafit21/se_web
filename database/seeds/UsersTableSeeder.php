@@ -57,6 +57,6 @@ class UsersTableSeeder extends Seeder
         $user5->doctor_info_id = 3;
         $user5->save();
 
-        $
+
     }
 }
