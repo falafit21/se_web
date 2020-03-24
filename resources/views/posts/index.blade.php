@@ -56,6 +56,8 @@
 @endsection
 
 @section('content')
+
+<!-- creat post -->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div style="margin-left: 40px; margin-right: 40px; margin-top: 10px; margin-bottom: 50px;">
@@ -64,29 +66,49 @@
                 @csrf
                 <div class="form-group">
                     <label for="title">title</label>
-                    <input type="text" class="form-control" id="title" name="title">
+                    <input type="text" class="form-control {{ $errors->has('title') ? ' has-error' : '' }}" id="title" name="title" required>
+                    @if ($errors->has('title'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('title') }}</strong>
+                    </span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="detail">detail</label>
-                    <textarea class="form-control" id="detail" rows="3" name="detail"></textarea>
+                    <textarea class="form-control {{ $errors->has('detail') ? ' has-error' : '' }}" id="detail" rows="3" name="detail" required></textarea>
+                    @if ($errors->has('detail'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('detail') }}</strong>
+                    </span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="choosePet">Choose your pet</label>
-                    <select id="choosePet" class="form-control" name="choosePet">
+                    <select id="choosePet" class="form-control {{ $errors->has('choosePet') ? ' has-error' : '' }}" name="choosePet" required>
                         @foreach($pets as $pet)
                             <option value="{{ $pet->id }}">{{ $pet->name }}</option>
                         @endforeach
                     </select>
+                    @if ($errors->has('choosePet'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('choosePet') }}</strong>
+                    </span>
+                    @endif
                 </div>
                 <div class="form-group">
                     <label for="chooseDoc">Choose Doctor</label>
                     <div class="row">
                         <div class="col-10">
-                            <select id="chooseDoc" class="form-control" name="chooseDoc">
+                            <select id="chooseDoc" class="form-control {{ $errors->has('chooseDoc') ? ' has-error' : '' }}" name="chooseDoc" required>
                                 @foreach($doctors as $doctor)
                                     <option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('chooseDoc'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('chooseDoc') }}</strong>
+                    </span>
+                    @endif
                         </div>
                         <a href="{{ url('doctorLists') }}" target="_blank" class="btn btn-info col-2"
                            style="background-color: #EB984E; color: white">doctor list</a>
@@ -98,8 +120,13 @@
                     @foreach( $formsQuestion as $formQuestion )
                         <div class="form-group">
                             <label for="{{ $formQuestion->id }}">{{ $formQuestion->question }}</label>
-                            <textarea class="form-control" id="{{ $formQuestion->id }}" rows="2"
-                                      name="{{ $formQuestion->id }}"></textarea>
+                            <textarea class="form-control {{ $errors->has('comment') ? ' has-error' : '' }}" id="{{ $formQuestion->id }}" rows="2"
+                                      name="{{ $formQuestion->id }}" required></textarea>
+                                      @if ($errors->has('comment'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('comment') }}</strong>
+                    </span>
+                    @endif
                         </div>
                     @endforeach
                 </table>
@@ -213,6 +240,10 @@
                 $('.totop a').fadeOut();
             }
         });
+
+        document.getElementById('title').setCustomValidity('Please enter your question');
+        document.getElementById('detail').setCustomValidity('Please enter your detail');
+       
     </script>
 @endsection
 

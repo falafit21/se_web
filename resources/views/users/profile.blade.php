@@ -93,19 +93,29 @@
             @csrf
             <div class="form-group">
                 <label for="name">Name</label>
-                <input class="form-control" id="name" name="name">
+                <input class="form-control {{ $errors->has('name') ? ' has-error' : '' }}" id="name" name="name" required>
+                @if ($errors->has('name'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('name') }}</strong>
+                </span>
+                @endif
             </div>
             <div class="form-group">
                 <label for="type">Genre</label>
-                <select id="type" class="form-control" name="type">
+                <select id="type" class="form-control {{ $errors->has('type') ? ' has-error' : '' }}" name="type" required>
                     @foreach($types as $type)
                     <option value="{{ $type->id }}">{{ $type->type }}</option>
                     @endforeach
                 </select>
+                @if ($errors->has('type'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('type') }}</strong>
+                </span>
+                @endif
             </div>
             <div class="form-group">
                 <label for="gene">Genes</label>
-                <select id="gene" class="form-control" name="gene">
+                <select id="gene" class="form-control {{ $errors->has('gene') ? ' has-error' : '' }}" name="gene" required>
                     <optgroup label="Dog gene">
                         @foreach($genes as $gene)
                         @if($gene->pet_type_id == 1)
@@ -129,19 +139,34 @@
                     </optgroup>
 
                 </select>
+                @if ($errors->has('gene'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('gene') }}</strong>
+                </span>
+                @endif
             </div>
             <div class="form-group">
                 <label for="birth-date-input">BirthDate</label>
                 <div>
-                    <input class="form-control" type="date" value="2011-08-19" id="birth-date-input" name="birth-date-input">
+                    <input class="form-control {{ $errors->has('birth-date-input') ? ' has-error' : '' }}" type="date" value="2011-08-19" id="birth-date-input" name="birth-date-input" required>
                     <small id="fileHelp" class="form-text text-muted"></small>
+                    @if ($errors->has('birth-date-input'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('birth-date-input') }}</strong>
+                    </span>
+                    @endif
                 </div>
             </div>
             <div class="form-group">
                 <label for="weight">Weight</label>
                 <div>
-                    <input type="text" class="form-control" id="weight" name="weight">
+                    <input type="text" class="form-control {{ $errors->has('weight') ? ' has-error' : '' }}" id="weight" name="weight" required>
                     <small id="fileHelp"> Please answer in Kilograms Unit</small>
+                    @if ($errors->has('weight'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('weight') }}</strong>
+                    </span>
+                    @endif
                 </div>
                 <div>
                     <label for="img">Image</label>
@@ -387,5 +412,7 @@
         document.getElementById("main").style.marginLeft = "0px";
         document.body.style.backgroundColor = "white";
     }
+
+    
 </script>
 @endsection
