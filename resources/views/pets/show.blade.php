@@ -4,8 +4,8 @@
         <div class="row">
             <div class="col-3">
                 <div class="card bg-light">
-                    <div class="card-header text-center">
-                        <h4>Pet profile</h4>
+                    <div class="card-header text-center" style="font-size: 20px">
+                        Pet profile
                     </div>
                     <div class="card-body">
                         <table class="table table-borderless text-left">
@@ -37,19 +37,33 @@
                             <tr>
                                 <th>STATUS</th>
                                 @if($pet->weight <= $weight_status[0]->breakpoint_start_weight)
-                                    <td>Underweight</td>
+                                    <td>
+                                        <h4><span class="badge badge-secondary" style="background-color: #F8C471;">Underweight</span>
+                                        </h4>
+                                    </td>
                                 @elseif($pet->weight >= $weight_status[0]->breakpoint_end_weight)
-                                    <td>Overweight</td>
+                                    <td>
+                                        <h4><span class="badge badge-secondary" style="background-color: #EC7063;">Overweight</span>
+                                        </h4>
+                                    </td>
                                 @else
-                                    <td>Fit weight</td>
+                                    <td>
+                                        <h4><span class="badge badge-secondary" style="background-color: #CDDC39;">Fit weight</span>
+                                        </h4>
+                                    </td>
                                 @endif
                             </tr>
                             <tr>
-                                <th></th>
+                                <th>
+                                    <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                            data-target="#weightHistory">weight history
+                                    </button>
+                                </th>
                                 <td>
-                                    <i class="fas fa-info-circle" style="margin-right: 5px"></i> recomment <br/>
+                                    <i class="fas fa-info-circle" style="margin-right: 7px"></i>suitable<br/>
                                     <div style="margin-left: 22px">
-                                        {{ $weight_status[0]->breakpoint_start_weight }} - {{ $weight_status[0]->breakpoint_end_weight }} kg.
+                                        {{ $weight_status[0]->breakpoint_start_weight }}
+                                        - {{ $weight_status[0]->breakpoint_end_weight }} kg.
                                     </div>
                                 </td>
                             </tr>
@@ -76,7 +90,8 @@
                                 <td></td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add"
-                                            style="margin-left: 1rem;">add vaccine <i class="fas fa-plus"></i>
+                                            style="margin-left: 1rem;">add vaccine <i class="fas fa-plus"
+                                                                                      style="margin-left: 5px"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -449,6 +464,59 @@
                                 </div>
                             </div>
                         @endforeach
+
+                        {{-- weightHistory--}}
+                        <div id="weightHistory" class="modal fade" role="dialog"
+                             style="color: black">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Weight History</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Weight</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($weight_Histories as $weight_History)
+                                                <tr>
+                                                    <td>{{$weight_History->weight}} kg</td>
+                                                    <td>{{$weight_History->created_at->toDateString()}}</td>
+                                                    @if($weight_History->weight <= $weight_status[0]->breakpoint_start_weight)
+                                                        <td>
+                                                            <h4><span class="badge badge-secondary"
+                                                                      style="background-color: #F8C471;">Underweight</span>
+                                                            </h4>
+                                                        </td>
+                                                    @elseif($weight_History->weight >= $weight_status[0]->breakpoint_end_weight)
+                                                        <td>
+                                                            <h4><span class="badge badge-secondary"
+                                                                      style="background-color: #EC7063;">Overweight</span>
+                                                            </h4>
+                                                        </td>
+                                                    @else
+                                                        <td>
+                                                            <h4><span class="badge badge-secondary"
+                                                                      style="background-color: #CDDC39;">Fit weight</span>
+                                                            </h4>
+                                                        </td>
+                                                    @endif
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -464,5 +532,7 @@
     <script>
         $('.datepicker').pickadate();
         createEditableSelect(document.forms[0].myText);
+
+
     </script>
 @endsection

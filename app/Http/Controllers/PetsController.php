@@ -8,6 +8,7 @@ use App\PetGene;
 use App\PetType;
 use App\RecievedVaccines;
 use App\Vaccine;
+use App\WeightHistory;
 use App\WeightStatuses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -88,13 +89,14 @@ class PetsController extends Controller
         $types = PetType::all();
         $recieve_vaccines = RecievedVaccines::where('pet_id', '=' , $id)->get();
         $current_weight_statuses = WeightStatuses::where('pet_gene_id', '=', $currentGene)->get();
-
+        $weight_Histories = WeightHistory::where("pet_id", "=", $id)->get();
         return view('pets.show', [
             'vaccinesInCurrentType' => $vaccineInCurrentType,
             'pet'=> $pet,
             'types' => $types,
             'recieve_vaccines' => $recieve_vaccines,
-            'weight_status' => $current_weight_statuses
+            'weight_status' => $current_weight_statuses,
+            'weight_Histories' => $weight_Histories
         ]);
     }
 
@@ -109,6 +111,11 @@ class PetsController extends Controller
         $pet->birth_date = $request->input('birth-date-input');
 //        $pet->img = $request->file('img')->store('public/imgs');
         $pet->save();
+
+        $weightHistory = new WeightHistory;
+        $weightHistory->weight = $request->input('weight');
+        $weightHistory->pet_id = $id;
+        $weightHistory->save();
 
         return redirect()->route('pet.show',['pet'=>$pet]);
     }
