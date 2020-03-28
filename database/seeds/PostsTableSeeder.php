@@ -27,6 +27,7 @@ class PostsTableSeeder extends Seeder
         $post2 = new Post;
         $post2->user_id = 7;
         $post2->request_ans_user_id = 6;
+        $post2->doc_already_ans = 1;
         $post2->question = "หมาที่บ้านอาเจียนเป็นเลือด ??";
         $post2->detail = "เมื่อประมาณอาทิตย์ที่แล้วหมาของผมมันไปกินอาหาร ของหมาข้างบ้าน ทำให้ 2-3 วันต่อมา มันมีอาการอาเจียนเป็นเลือด ควรทำอย่างไรดี";
         $post2->pet_id = 2;

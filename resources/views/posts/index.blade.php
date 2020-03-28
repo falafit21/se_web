@@ -164,7 +164,7 @@
             <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
         <div class="carousel-inner"
-             style="height: 380px;background-color: #818182;background-image: url('{{asset('imgs/petTipBG.png')}}');">
+             style="height: 380px;background-color: #192730; background-image: url('{{asset('imgs/petTipBG.png')}}');">
             <div class="carousel-item active" style="height: 380px;">
                 <img class="d-block w-100" src="/images/petTipsBg1.png" style="max-height: 500px" alt="First slide">
             </div>
@@ -172,7 +172,7 @@
             @foreach( $petTips as $tip )
                 <div class="carousel-item ">
                     <div class="container"
-                         style=" padding-top:3.5em;color: #ffffff;background-image: url('{{asset('imgs/petTipBG.png')}}');">
+                         style=" padding-top:3.5em; color: white; background-image: url('{{asset('imgs/petTipBG.png')}}');">
                         <div>
                             <h3 style="text-align: center;margin-top: 3.6em ;font-weight: bold;font-size: 26px">{{$tip->title}}</h3>
                         </div>
