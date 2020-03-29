@@ -18,7 +18,8 @@
 {{--        </ul>--}}
 {{--    </div>--}}
 {{--</nav>--}}
-<nav class="navbar navbar-expand-lg sticky-top navbar-light navbar-dark" style="background-color: #192730;">
+<nav class="navbar navbar-expand-lg navbar-light navbar-dark" style="background-color: #192730;">
+{{--    navbar navbar-expand-md navbar-light bg-dark--}}
     <div class="container" style="color: white">
         <a class="navbar-brand" href="{{ url('/') }}">
             Pet Track

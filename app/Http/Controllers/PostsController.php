@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comment;
+use App\DoctorInfo;
 use App\Form;
 use App\PetTip;
 use App\Post;
@@ -88,8 +89,40 @@ class PostsController extends Controller
             $post->doc_already_ans = 1;
             $post->save();
         }
-
         return redirect()->route('post.show', ['post' => $use_post_id->id]);
+    }
+
+    public function commentStoreNew(Request $request, $post_id){
+        $use_post_id = Post::findOrFail($post_id);
+        $use_user_id = Auth::id();
+
+        $request->validate([
+            'answer' => ['required', 'min:1']
+        ]);
+
+        $comment = new Comment;
+        $comment->post_id = $use_post_id->id;
+        $comment->user_id = $use_user_id;
+        $comment->comment = $request->input('answer');
+        $comment->save();
+
+        $post = Post::find($post_id);
+        if($use_user_id == $post->request_ans_user_id){
+            $post->doc_already_ans = 1;
+            $post->save();
+        }
+
+        $user = Auth::user();
+        $doctor = DoctorInfo::find($user->doctor_info_id);
+        $posts = Post::all();
+        $requestQuestion = Post::where('doc_already_ans', '=', null)->get();
+        $answeredPost = Post::where('doc_already_ans', '=', 1)->get();
+        return view('doctors.profile', [
+            'user' => $user,
+            'doctor' => $doctor,
+            'requestQuestion' => $requestQuestion,
+            'answeredPost' => $answeredPost
+        ]);
     }
 
     public function show($id)

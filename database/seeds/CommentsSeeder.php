@@ -22,5 +22,11 @@ class CommentsSeeder extends Seeder
         $comment->user_id = 4;
         $comment->comment = "ต้องไปพบหมอแล้วนะ ปล่อยไปจะเป็นอันตราย";
         $comment->save();
+
+        $comment = new \App\Comment;
+        $comment->post_id = 3;
+        $comment->user_id = 6;
+        $comment->comment = "ต้องมาพบหมอแล้วนะ ปล่อยไปจะเป็นอันตราย";
+        $comment->save();
     }
 }

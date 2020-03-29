@@ -1,13 +1,5 @@
 @extends('layouts.master')
 
-@section('style')
-    <style>
-        #more {
-            display: none;
-        }
-    </style>
-@endsection
-
 @section('content')
     <div class="container" style="margin-top: 30px">
         <!-- Post -->
@@ -55,7 +47,7 @@
                 </a>
                 <div>
                     <div id="dots"></div>
-                    <div id="more">
+                    <div id="more" style="display: none">
                         <div class="row">
                             <div class="col-2">
                                 <i class="fas fa-dog" style="margin-left: 50px; margin-right: 7px;"></i> pet detail
@@ -92,9 +84,6 @@
                                 </table>
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Pet;
 use App\PetGene;
 use App\PetTip;
@@ -69,6 +70,7 @@ class UsersController extends Controller
          $posts = Post::all();
         $requestQuestion = Post::where('doc_already_ans', '=', null)->get();
         $answeredPost = Post::where('doc_already_ans', '=', 1)->get();
+
         return view('doctors.profile', [
             'user' => $user,
             'doctor' => $doctor,

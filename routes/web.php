@@ -14,6 +14,7 @@ Route::resource('/post', 'PostsController');
 
 //comment
 Route::post('/posts/{post_id}/comment', 'PostsController@commentStore')->name('post.comment.store');
+Route::post('/posts/{post_id}/comment/new', 'PostsController@commentStoreNew')->name('post.comment.store.new');
 Route::put('/posts/{post_id}/commentedit', 'PostsController@commentUpdate')->name('post.comment.update');
 Route::delete('posts/{comment_id}/comment','PostsController@destroyComment')->name('post.comment.destroy');
 
