@@ -18,8 +18,9 @@
 {{--        </ul>--}}
 {{--    </div>--}}
 {{--</nav>--}}
-<nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-light navbar-dark" style="background-color: #192730;">
+{{--    navbar navbar-expand-md navbar-light bg-dark--}}
+    <div class="container" style="color: white">
         <a class="navbar-brand" href="{{ url('/') }}">
             Pet Track
         </a>
@@ -29,7 +30,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav mr-auto" style="color: white">
                 <li><a class="nav-link" href="{{ url('/') }}">Board</a></li>
                 @can('profileUser', App\User::class)
                     <li><a class="nav-link" href="{{ url('/user/profile') }}">Profile</a></li>

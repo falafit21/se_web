@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PetsTableSeeder::class);
         //post
         $this->call(PostsTableSeeder::class);
+        $this->call(CommentsSeeder::class);
 
         //form
         $this->call(QuestionFormsTableSeeder::class);

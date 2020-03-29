@@ -29,4 +29,8 @@ class Pet extends Model
     public function posts(){
         return $this->hasMany(Post::class);
     }
+
+    public function weightHistories(){
+        return $this->hasMany(WeightHistory::class);
+    }
 }

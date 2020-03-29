@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Pet;
 use App\PetGene;
 use App\PetTip;
@@ -66,12 +67,15 @@ class UsersController extends Controller
     {
         $user = Auth::user();
         $doctor = DoctorInfo::find($user->doctor_info_id);
-        // $posts = Post::findOrFail($user->id);
-        $posts = Post::all();
+         $posts = Post::all();
+        $requestQuestion = Post::where('doc_already_ans', '=', null)->get();
+        $answeredPost = Post::where('doc_already_ans', '=', 1)->get();
+
         return view('doctors.profile', [
             'user' => $user,
             'doctor' => $doctor,
-            'posts' => $posts
+            'requestQuestion' => $requestQuestion,
+            'answeredPost' => $answeredPost
         ]);
     }
 
@@ -139,7 +143,7 @@ class UsersController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function changePassword(Request $request){
 
         if (!(Hash::check($request->get('current-password'), Auth::user()->password))) {

@@ -17,6 +17,7 @@ class CreatePostsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned();
             $table->bigInteger('request_ans_user_id')->unsigned();
+            $table->bigInteger('doc_already_ans')->nullable();
             $table->string('question');
             $table->text('detail');
             $table->bigInteger('pet_id')->unsigned();

@@ -13,21 +13,18 @@
 {{--        <link rel="dns-prefetch" href="//fonts.gstatic.com">--}}
 {{--        <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">--}}
 
-
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
         <link href="{{ asset('css/public.css') }}" rel="stylesheet">
 
-
         @yield('style')
     </head>
-    <body style="background-color: #34495E">
+    <body style="background-color: #243B55">
         @include('layouts.menu')
         <div style="margin-bottom: 100px">
             @yield('content')
         </div>
-
 
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

@@ -42,7 +42,7 @@ class UsersTableSeeder extends Seeder
         $user4 = new \App\User();
         $user4->name = "DR.Jing shukishi";
         $user4->email = "Jing@shukishi.com";
-        $user4->password = Hash::make('Jing1234');
+        $user4->password = Hash::make('jing1234');
         $user4->status = 1;
         $user4->role = "doctor";
         $user4->doctor_info_id = 2;
