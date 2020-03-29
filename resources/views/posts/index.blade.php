@@ -241,6 +241,9 @@
             $('.totop a').fadeOut();
         }
     });
+    document.getElementById("title").oninvalid = function () {
+    this.setCustomValidity(this.value ? '' : 'Please enter your title');
+};
 
 
 </script>
