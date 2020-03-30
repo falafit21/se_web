@@ -156,7 +156,6 @@
                             <tr>
                                 <th>Work at</th>
                                 <td><input type="text" class="form-control {{ $errors->has('work_at') ? ' has-error' : '' }}" id="work_at" name="work_at" aria-describedby="emailHelp" placeholder="Enter your work place" value="{{$doctor->work_at}}" oninvalid="this.setCustomValidity('Please enter your work place')" oninput="setCustomValidity('')" required>
-
                                     @if ($errors->has('work_at'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('work_at') }}</strong>
