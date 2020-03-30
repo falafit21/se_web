@@ -61,6 +61,16 @@ class PetsTableSeeder extends Seeder
         $pet4->img = "public/imgs/cat2.jpeg";
         $pet4->save();
 
+        $pet5 = new \App\Pet();
+        $pet5->name = "Ginger";
+        $pet5->user_id = 1;
+        $pet5->pet_type_id = 3;
+        $pet5->pet_gene_id = 34;
+        $pet5->weight = 4.6;
+        $pet5->birth_date = "2012-02-08";
+        $pet5->img = "public/imgs/rabbit.jpg";
+        $pet5->save();
+
 
     }
 }
