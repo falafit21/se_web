@@ -8,6 +8,18 @@
     }
 </style>
 @section('content')
+    <div class="panel-body">
+        @if (session('error'))
+            <div class="alert alert-danger">
+                {{ session('error') }}
+            </div>
+        @endif
+        @if (session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif
+    </div>
     <div style="margin: 50px; color: white">
         <div class="row">
             <div class="col-4">
@@ -221,14 +233,11 @@
             </div>
         </div>
     </div>
-
-    <!--change Password-->
-    <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-         aria-hidden="true">
+{{--change password--}}
+    <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="POST" action="{{ route('users.changePassword',['user'=>$user->id]) }}"
-                      method="post">
+                <form method="POST" action="{{ route('users.changePassword',['user'=>$user->id]) }}" method="post">
                     @method('PUT')
                     @csrf
                     <div class="modal-header">
@@ -243,45 +252,31 @@
                             <table class="table table-borderless">
                                 <tbody style="color: black">
                                 <tr>
-                                    <div
-                                        class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
+                                    <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
                                         <td><label for="new-password">Current Password</label></td>
-                                        <td><input id="current-password" type="password" class="form-control"
-                                                   name="current-password"
-                                                   oninvalid="this.setCustomValidity('Please enter your current password')"
-                                                   oninput="setCustomValidity('')" required>
+                                        <td><input id="current-password" type="password" class="form-control" name="current-password" oninvalid="this.setCustomValidity('Please enter your current password')" oninput="setCustomValidity('')" required>
                                             @if ($errors->has('current-password'))
                                                 <span class="help-block">
-                                                            <strong>{{ $errors->first('current-password') }}</strong>
-                                                        </span>
-                                            @endif
-                                        </td>
+                                                    <strong>{{ $errors->first('current-password') }}</strong>
+                                                </span>
+                                            @endif</td>
                                     </div>
                                 </tr>
                                 <tr>
-                                    <div
-                                        class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
+                                    <div class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
                                         <th><label for="new-password">New Password</label></th>
-                                        <td>
-                                            <input id="new-password" type="password" class="form-control"
-                                                   name="new-password"
-                                                   oninvalid="this.setCustomValidity('Please enter your new password')"
-                                                   oninput="setCustomValidity('')" required>
+                                        <td><input id="new-password" type="password" class="form-control" name="new-password" oninvalid="this.setCustomValidity('Please enter your new password')" oninput="setCustomValidity('')" required>
                                             @if ($errors->has('new-password'))
-                                                <span
-                                                    class="help-block"><strong>{{ $errors->first('new-password') }}</strong>
-                                                        </span>
-                                            @endif
-                                        </td>
+                                                <span class="help-block"><strong>{{ $errors->first('new-password') }}</strong></span>
+                                            @endif</td>
                                     </div>
                                 </tr>
                                 <tr>
                                     <th><label for="new-password-confirm">Confirm New Password</label></th>
-                                    <td><input id="new-password-confirm" type="password" class="form-control"
-                                               name="new-password_confirmation"
-                                               oninvalid="this.setCustomValidity('Please confirm your new password')"
-                                               oninput="setCustomValidity('')" required></td>
+                                    <td><input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" oninvalid="this.setCustomValidity('Please confirm your new password')" oninput="setCustomValidity('')" required></td>
                                 </tr>
+
+
                                 </tbody>
                             </table>
 
@@ -292,7 +287,9 @@
                         <button type="submit" class="btn btn-primary">Save changes</button>
                     </div>
                 </form>
+
             </div>
+
         </div>
     </div>
 
