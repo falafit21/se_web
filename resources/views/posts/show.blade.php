@@ -212,7 +212,7 @@
                                 <input type="text"
                                        class="form-control {{ $errors->has('question') ? ' has-error' : '' }}"
                                        id="question" name="question" placeholder="Enter Question"
-                                       value="{{ $post->question }}" required>
+                                       value="{{ $post->question }}" oninvalid="this.setCustomValidity('Please enter your question')" oninput="setCustomValidity('')" required>
                                 @if ($errors->has('question'))
                                     <span class="help-block">
                                 <strong>{{ $errors->first('question') }}</strong>
@@ -226,7 +226,7 @@
                             <div class="col-sm-9">
                                 <textarea type="text"
                                           class="form-control {{ $errors->has('detail') ? ' has-error' : '' }}"
-                                          id="detail" name="detail" placeholder="Enter Detail"
+                                          id="detail" name="detail" placeholder="Enter Detail" oninvalid="this.setCustomValidity('Please enter detail')" oninput="setCustomValidity('')"
                                           required>{{ $post->detail }}</textarea>
                                 @if ($errors->has('detail'))
                                     <span class="help-block">
@@ -261,7 +261,7 @@
                     <div class="modal-body">
                         <input type="hidden" name="id" id="id">
                         <input type="text" class="form-control {{ $errors->has('comment') ? ' has-error' : '' }}"
-                               id="comment" name="comment" placeholder="Enter comment" required>
+                               id="comment" name="comment" placeholder="Enter comment" oninvalid="this.setCustomValidity('Please enter comment')" oninput="setCustomValidity('')" required>
                         @if ($errors->has('comment'))
                             <span class="help-block">
                         <strong>{{ $errors->first('comment') }}</strong>

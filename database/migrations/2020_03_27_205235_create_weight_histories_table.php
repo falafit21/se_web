@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateExampleVaccinesTable extends Migration
+class CreateWeightHistoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateExampleVaccinesTable extends Migration
      */
     public function up()
     {
-        Schema::create('example_vaccines', function (Blueprint $table) {
+        Schema::create('weight_histories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('pet_type_id')->unsigned();
-            $table->string('name');
+            $table->float('weight');
+            $table->bigInteger('pet_id')->unsigned();;
             $table->timestamps();
 
-            $table->foreign('pet_type_id')
+            $table->foreign('pet_id')
                 ->references('id')
-                ->on('pet_types')
+                ->on('pets')
                 ->onDelete('cascade');
         });
     }
@@ -34,11 +34,11 @@ class CreateExampleVaccinesTable extends Migration
     public function down()
     {
         Schema::enableForeignKeyConstraints();
-        Schema::table('example_vaccines', function(Blueprint $table){
-            $table->dropForeign(['pet_type_id']);
+        Schema::table('weight_histories', function (Blueprint $table) {
+            $table->dropForeign(['pet_id']);
         });
         Schema::disableForeignKeyConstraints();
 
-        Schema::dropIfExists('example_vaccines');
+        Schema::dropIfExists('weight_histories');
     }
 }

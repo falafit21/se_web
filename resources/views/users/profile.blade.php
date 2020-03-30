@@ -93,7 +93,7 @@
             @csrf
             <div class="form-group">
                 <label for="name">Name</label>
-                <input class="form-control {{ $errors->has('name') ? ' has-error' : '' }}" id="name" name="name" required>
+                <input class="form-control {{ $errors->has('name') ? ' has-error' : '' }}" id="name" name="name" oninvalid="this.setCustomValidity('Please enter your pet name')" oninput="setCustomValidity('')" required>
                 @if ($errors->has('name'))
                 <span class="help-block">
                     <strong>{{ $errors->first('name') }}</strong>
@@ -148,7 +148,7 @@
             <div class="form-group">
                 <label for="birth-date-input">BirthDate</label>
                 <div>
-                    <input class="form-control {{ $errors->has('birth-date-input') ? ' has-error' : '' }}" type="date" value="2011-08-19" id="birth-date-input" name="birth-date-input" required>
+                    <input class="form-control {{ $errors->has('birth-date-input') ? ' has-error' : '' }}" type="date" value="2011-08-19" id="birth-date-input" name="birth-date-input" oninvalid="this.setCustomValidity('Please enter your pet birthdate')" oninput="setCustomValidity('')" required>
                     <small id="fileHelp" class="form-text text-muted"></small>
                     @if ($errors->has('birth-date-input'))
                     <span class="help-block">
@@ -160,7 +160,7 @@
             <div class="form-group">
                 <label for="weight">Weight</label>
                 <div>
-                    <input type="text" class="form-control {{ $errors->has('weight') ? ' has-error' : '' }}" id="weight" name="weight" required>
+                    <input type="text" class="form-control {{ $errors->has('weight') ? ' has-error' : '' }}" id="weight" name="weight" oninvalid="this.setCustomValidity('Please enter your pet weight')" oninput="setCustomValidity('')" required>
                     <small id="fileHelp"> Please answer in Kilograms Unit</small>
                     @if ($errors->has('weight'))
                     <span class="help-block">
@@ -170,20 +170,23 @@
                 </div>
                 <div>
                     <label for="img">Image</label>
-                    <input type="file" id="img" name="img" class="btn btn-outline-info form-control-file">
-                    @error('img')
-                    <div class="alert alert-danger">{{$message}}</div>
-                    @enderror
+                    <input type="file" id="img" name="img" class="btn btn-outline-info form-control-file {{ $errors->has('img') ? ' has-error' : '' }}" oninvalid="this.setCustomValidity('Please add your pet photo')" oninput="setCustomValidity('')" required>
+                    @if ($errors->has('img'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('img') }}</strong>
+                    </span>
+                    @endif
                 </div>
             </div>
             <div class="form-group row">
-                    <div class="offset-sm-10">
-                        <button type="submit" class="btn btn-primary">Create</button>
-                    </div>
+                <div class="offset-sm-10">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </div>
             </div>
         </form>
     </div>
 </div>
+
 <div style="margin: 50px">
     <div class="row">
         <div class="col-4">
@@ -236,13 +239,13 @@
                             <span class=" pet-card">
                                 <span class="card-body">
                                     <img src="{{Storage::url($pet->img)}}" alt="" width="80" height="75" srcset="">
-{{--                                    @if( $pet->petType->type == 'dog' )--}}
-{{--                                        <img width="80" height="75" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Creative-Tail-Animal-dog.svg/1024px-Creative-Tail-Animal-dog.svg.png">--}}
-{{--                                    @elseif( $pet->petType->type == 'cat' )--}}
-{{--                                    <img width="80" height="75" src="https://image.flaticon.com/icons/png/512/141/141782.png">--}}
-{{--                                    @elseif( $pet->petType->type == 'rabbit' )--}}
-{{--                                    <img width="80" height="75" src="https://cdn.pixabay.com/photo/2018/12/28/16/27/rabbit-3899900_1280.jpg">--}}
-{{--                                    @endif--}}
+                                    {{-- @if( $pet->petType->type == 'dog' )--}}
+                                    {{-- <img width="80" height="75" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Creative-Tail-Animal-dog.svg/1024px-Creative-Tail-Animal-dog.svg.png">--}}
+                                    {{-- @elseif( $pet->petType->type == 'cat' )--}}
+                                    {{-- <img width="80" height="75" src="https://image.flaticon.com/icons/png/512/141/141782.png">--}}
+                                    {{-- @elseif( $pet->petType->type == 'rabbit' )--}}
+                                    {{-- <img width="80" height="75" src="https://cdn.pixabay.com/photo/2018/12/28/16/27/rabbit-3899900_1280.jpg">--}}
+                                    {{-- @endif--}}
 
                                     <h8 style="text-align: center; margin-top:20px">{{$pet->name}}</h8>
                                 </span>
@@ -302,8 +305,7 @@
                                     <tr>
                                         <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
                                             <td><label for="new-password">Current Password</label></td>
-                                            <td><input id="current-password" type="password" class="form-control" name="current-password" required>
-
+                                            <td><input id="current-password" type="password" class="form-control" name="current-password" oninvalid="this.setCustomValidity('Please enter your current password')" oninput="setCustomValidity('')" required>
                                                 @if ($errors->has('current-password'))
                                                 <span class="help-block">
                                                     <strong>{{ $errors->first('current-password') }}</strong>
@@ -314,7 +316,7 @@
                                     <tr>
                                         <div class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
                                             <th><label for="new-password">New Password</label></th>
-                                            <td><input id="new-password" type="password" class="form-control" name="new-password" required>
+                                            <td><input id="new-password" type="password" class="form-control" name="new-password" oninvalid="this.setCustomValidity('Please enter your new password')" oninput="setCustomValidity('')" required>
                                                 @if ($errors->has('new-password'))
                                                 <span class="help-block"><strong>{{ $errors->first('new-password') }}</strong></span>
                                                 @endif</td>
@@ -322,7 +324,7 @@
                                     </tr>
                                     <tr>
                                         <th><label for="new-password-confirm">Confirm New Password</label></th>
-                                        <td><input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" required></td>
+                                        <td><input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" oninvalid="this.setCustomValidity('Please confirm your new password')" oninput="setCustomValidity('')" required></td>
                                     </tr>
 
 
@@ -363,7 +365,7 @@
                     <div class="form-group row">
                         <label for="name" class="col-sm-2 col-form-label text-left">Name</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control {{ $errors->has('name') ? ' has-error' : '' }}" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter Name" value="{{$user->name}}" required>
+                            <input type="text" class="form-control {{ $errors->has('name') ? ' has-error' : '' }}" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter Name" value="{{$user->name}}" oninvalid="this.setCustomValidity('Please enter your name')" oninput="setCustomValidity('')" required>
                             @if ($errors->has('name'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('name') }}</strong>
@@ -374,7 +376,7 @@
                     <div class="form-group row">
                         <label for="email" class="col-sm-2 col-form-label text-left">Email</label>
                         <div class="col-sm-10">
-                            <input type="email" class="form-control {{ $errors->has('email') ? ' has-error' : '' }}" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="{{$user->email}}" required>
+                            <input type="email" class="form-control {{ $errors->has('email') ? ' has-error' : '' }}" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="{{$user->email}}" oninvalid="this.setCustomValidity('Please enter your email')" oninput="setCustomValidity('')" required>
                             @if ($errors->has('email'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>
@@ -411,7 +413,5 @@
         document.getElementById("main").style.marginLeft = "0px";
         document.body.style.backgroundColor = "white";
     }
-
-
 </script>
 @endsection

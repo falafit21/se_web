@@ -36,7 +36,7 @@ class PostsController extends Controller
 
     public function create()
     {
-        
+
     }
 
     public function store(Request $request)
@@ -82,6 +82,12 @@ class PostsController extends Controller
         $comment->user_id = $use_user_id;
         $comment->comment = $request->input('answer');
         $comment->save();
+
+        $post = Post::find($post_id);
+        if($use_user_id == $post->request_ans_user_id){
+            $post->doc_already_ans = 1;
+            $post->save();
+        }
 
         return redirect()->route('post.show', ['post' => $use_post_id->id]);
     }

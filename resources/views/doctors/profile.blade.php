@@ -16,9 +16,9 @@
     <div class="row">
         <div class="col-4">
             <div class="card bg-light">
-                <div class="card-header text-center">
-                    <h4 style="color: black">Doctor profile<i class="far fa-user" style="margin-left: 10px"></i></h4>
-                </div>
+                <h4 class="card-header text-center" style="color: black">
+                    Doctor profile
+                </h4>
                 <div class="card-body">
                     <table class="table table-borderless">
                         <tbody style="color: black">
@@ -47,6 +47,15 @@
                                 <td>{{$doctor->work_at}}</td>
                             </tr>
                             <tr>
+                                <th scope="row">ANSWERED QUESTION</th>
+                                <td>
+                                    <a type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#answeredQuestion">
+                                        detail
+                                        {{-- <span class="badge badge-light">{{ count($answeredPost) }}</span>--}}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th scope="row">PASSWORD</th>
                                 <td><a href=" " data-toggle="modal" data-target="#changePassword" style="font-size: 18px; color: #F5B041" data-toggle="tooltip" data-placement="top" title="change Password">change password</a></td>
 
@@ -60,25 +69,36 @@
             </div>
         </div>
         <div class="col-8">
-            <h2>Request Question</h2>
-            @foreach($posts as $post)
+            <h2>Request Question
+                {{-- <span class="badge badge-light">{{ count($requestQuestion) }}</span>--}}
+            </h2>
+            @foreach($requestQuestion as $post)
             @if($post->requestDoctor->role == 'doctor' && $post->requestDoctor->id == $doctor->user->id)
             <a href="{{ route('post.show', ['post' => $post->id]) }}" style="text-decoration: none; color: #1b1e21">
                 <div class="card post-card border-light" style="margin-bottom: 10px">
                     <div class="card-body">
-                        <p class="card-text">
-                            <small class="text-muted" style="font-size: 15px">
-                                {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
-                            </small>
-                        </p>
-                        <p style="font-size: 22px"> {{ $post->question }}
-                        </p>
-                        <p style="font-size: 15px">{{ $post->detail }}</p>
+                        <div class="row">
+                            <p class="col-9" style="font-size: 25px;">
+                                {{ $post->question }}
+                            </p>
+                            <p class="text-muted text-right col-3" style="font-size: 15px;">
+                                <i class="fas fa-user" style="margin-right: 6px"></i>
+                                {{ $post->user->name }}
+                                <br>
+                                <i class="fas fa-dog" style="margin-right: 6px"></i>
+                                {{ $post->pet->name }}
+                            </p>
+                        </div>
+                        <p style="font-size: 18px">{{ $post->detail }}</p>
+                        <small class="text-muted" style="font-size: 13px">
+                            {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                        </small>
                     </div>
                 </div>
             </a>
             @endif
             @endforeach
+
         </div>
     </div>
 
@@ -104,7 +124,7 @@
                             <tr>
                                 <th>Name</th>
                                 <td>
-                                    <input type="name" class="form-control {{ $errors->has('name') ? ' has-error' : '' }}" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter Name" value="{{$doctor->user->name}}" required>
+                                    <input type="name" class="form-control {{ $errors->has('name') ? ' has-error' : '' }}" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter Name" value="{{$doctor->user->name}}" oninvalid="this.setCustomValidity('Please enter your name')" oninput="setCustomValidity('')" required>
                                     @if ($errors->has('name'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -114,7 +134,7 @@
                             </tr>
                             <tr>
                                 <th>E-mail</th>
-                                <td><input type="email" class="form-control {{ $errors->has('email') ? ' has-error' : '' }}" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="{{$doctor->user->email}}" required>
+                                <td><input type="email" class="form-control {{ $errors->has('email') ? ' has-error' : '' }}" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="{{$doctor->user->email}}" oninvalid="this.setCustomValidity('Please enter your email')" oninput="setCustomValidity('')" required>
                                     @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -124,7 +144,7 @@
                             </tr>
                             <tr>
                                 <th>Phone Number</th>
-                                <td><input type="text" class="form-control {{ $errors->has('phone_number') ? ' has-error' : '' }}" id="phone_number" name="phone_number" aria-describedby="emailHelp" placeholder="Enter your phone number" value="{{$doctor->phone_number}}" required>
+                                <td><input type="text" class="form-control {{ $errors->has('phone_number') ? ' has-error' : '' }}" id="phone_number" name="phone_number" aria-describedby="emailHelp" placeholder="Enter your phone number" value="{{$doctor->phone_number}}" oninvalid="this.setCustomValidity('Please enter your phone number')" oninput="setCustomValidity('')" required>
 
                                     @if ($errors->has('phone_number'))
                                     <span class="help-block">
@@ -135,7 +155,7 @@
                             </tr>
                             <tr>
                                 <th>Work at</th>
-                                <td><input type="text" class="form-control {{ $errors->has('work_at') ? ' has-error' : '' }}" id="work_at" name="work_at" aria-describedby="emailHelp" placeholder="Enter your work place" value="{{$doctor->work_at}}" required>
+                                <td><input type="text" class="form-control {{ $errors->has('work_at') ? ' has-error' : '' }}" id="work_at" name="work_at" aria-describedby="emailHelp" placeholder="Enter your work place" value="{{$doctor->work_at}}" oninvalid="this.setCustomValidity('Please enter your work place')" oninput="setCustomValidity('')" required>
 
                                     @if ($errors->has('work_at'))
                                     <span class="help-block">
@@ -162,8 +182,6 @@
 <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-
-
             <form method="POST" action="{{ route('users.changePassword',['user'=>$user->id]) }}" method="post">
                 @method('PUT')
                 @csrf
@@ -181,8 +199,7 @@
                                 <tr>
                                     <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
                                         <td><label for="new-password">Current Password</label></td>
-                                        <td><input id="current-password" type="password" class="form-control" name="current-password" required>
-
+                                        <td><input id="current-password" type="password" class="form-control" name="current-password" oninvalid="this.setCustomValidity('Please enter your current password')" oninput="setCustomValidity('')" required>
                                             @if ($errors->has('current-password'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('current-password') }}</strong>
@@ -193,7 +210,7 @@
                                 <tr>
                                     <div class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
                                         <th><label for="new-password">New Password</label></th>
-                                        <td><input id="new-password" type="password" class="form-control" name="new-password" required>
+                                        <td><input id="new-password" type="password" class="form-control" name="new-password" oninvalid="this.setCustomValidity('Please enter your new password')" oninput="setCustomValidity('')" required>
                                             @if ($errors->has('new-password'))
                                             <span class="help-block"><strong>{{ $errors->first('new-password') }}</strong></span>
                                             @endif</td>
@@ -201,7 +218,7 @@
                                 </tr>
                                 <tr>
                                     <th><label for="new-password-confirm">Confirm New Password</label></th>
-                                    <td><input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" required></td>
+                                    <td><input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" oninvalid="this.setCustomValidity('Please confirm your new password')" oninput="setCustomValidity('')" required></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -213,6 +230,48 @@
                     <button type="submit" class="btn btn-primary">Save changes</button>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+{{-- answeres question model--}}
+<div class="modal fade bd-example-modal-xl" id="answeredQuestion" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Answered question</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="model-body container" style="margin-top: 10px">
+                @foreach($answeredPost as $post)
+                @if($post->requestDoctor->role == 'doctor' && $post->requestDoctor->id == $doctor->user->id)
+                <a href="{{ route('post.show', ['post' => $post->id]) }}" style="text-decoration: none; color: #1b1e21" target="_blank">
+                    <div class="card post-card border-light" style="margin-bottom: 10px; background-color: #D5D8DC">
+                        <div class="card-body">
+                            <div class="row">
+                                <p class="col-9" style="font-size: 25px;">
+                                    {{ $post->question }}
+                                </p>
+                                <p class="text-muted text-right col-3" style="font-size: 15px;">
+                                    <i class="fas fa-user" style="margin-right: 6px"></i>
+                                    {{ $post->user->name }}
+                                    <br>
+                                    <i class="fas fa-dog" style="margin-right: 6px"></i>
+                                    {{ $post->pet->name }}
+                                </p>
+                            </div>
+                            <p style="font-size: 18px">{{ $post->detail }}</p>
+                            <small class="text-muted" style="font-size: 13px">
+                                {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                            </small>
+                        </div>
+                    </div>
+                </a>
+                @endif
+                @endforeach
+            </div>
         </div>
     </div>
 </div>

@@ -52,12 +52,11 @@
     </div>
     @endif
 </div>
+
 {{-- change password model--}}
 <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-
-
             <form method="POST" action="{{ route('users.changePassword',['user'=>$user->id]) }}" method="post">
                 @method('PUT')
                 @csrf
@@ -75,7 +74,7 @@
                                 <tr>
                                     <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
                                         <td><label for="new-password">Current Password</label></td>
-                                        <td><input id="current-password" type="password" class="form-control" name="current-password" required>
+                                        <td><input id="current-password" type="password" class="form-control" name="current-password" oninvalid="this.setCustomValidity('Please enter your current password')" oninput="setCustomValidity('')" required>
 
                                             @if ($errors->has('current-password'))
                                             <span class="help-block">
@@ -87,7 +86,7 @@
                                 <tr>
                                     <div class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
                                         <th><label for="new-password">New Password</label></th>
-                                        <td><input id="new-password" type="password" class="form-control" name="new-password" required>
+                                        <td><input id="new-password" type="password" class="form-control" name="new-password" oninvalid="this.setCustomValidity('Please enter your new password')" oninput="setCustomValidity('')" required>
                                             @if ($errors->has('new-password'))
                                             <span class="help-block"><strong>{{ $errors->first('new-password') }}</strong></span>
                                             @endif</td>
@@ -95,7 +94,7 @@
                                 </tr>
                                 <tr>
                                     <th><label for="new-password-confirm">Confirm New Password</label></th>
-                                    <td><input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" required></td>
+                                    <td><input id="new-password-confirm" type="password" class="form-control" name="new-password_confirmation" oninvalid="this.setCustomValidity('Please confirm your new password')" oninput="setCustomValidity('')" required></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -124,16 +123,25 @@
 
             <div class="form-group">
                 <label for="name">name</label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" required>
-                @error('name')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" oninvalid="this.setCustomValidity('Please enter doctor name')" oninput="setCustomValidity('')" required>
+                @if ($errors->has('name'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('name') }}</strong>
                 </span>
-                @enderror
+                @endif
+            </div>
+            <div class="form-group">
+                <label for="email">email</label>
+                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" oninvalid="this.setCustomValidity('Please enter doctor email')" oninput="setCustomValidity('')" required>
+                @if ($errors->has('email'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('email') }}</strong>
+                </span>
+                @endif
             </div>
             <div class="form-group">
                 <label for="password">password</label>
-                <input type="password" class="form-control {{ $errors->has('password') ? ' has-error' : '' }}" id="password" name="password" required>
+                <input type="password" class="form-control {{ $errors->has('password') ? ' has-error' : '' }}" id="password" name="password" oninvalid="this.setCustomValidity('Please enter password')" oninput="setCustomValidity('')"  required>
                 @if ($errors->has('password'))
                 <span class="help-block">
                     <strong>{{ $errors->first('password') }}</strong>
@@ -142,7 +150,7 @@
             </div>
             <div class="form-group">
                 <label for="confirmPassword">confirm password</label>
-                <input type="password" class="form-control {{ $errors->has('confirmPassword') ? ' has-error' : '' }}" id="confirmPassword" name="confirmPassword" required>
+                <input type="password" class="form-control {{ $errors->has('confirmPassword') ? ' has-error' : '' }}" id="confirmPassword" name="confirmPassword" oninvalid="this.setCustomValidity('Please confirm password')" oninput="setCustomValidity('')" required>
                 @if ($errors->has('confirmPassword'))
                 <span class="help-block">
                     <strong>{{ $errors->first('confirmPassword') }}</strong>
@@ -153,7 +161,7 @@
             <h5 style="margin-top: 50px">Step 2 : Advance info</h5>
             <div class="form-group">
                 <label for="phoneNumber">phone number</label>
-                <input type="text" class="form-control {{ $errors->has('phoneNumber') ? ' has-error' : '' }}" id="phoneNumber" name="phoneNumber" required>
+                <input type="text" class="form-control {{ $errors->has('phoneNumber') ? ' has-error' : '' }}" id="phoneNumber" name="phoneNumber" oninvalid="this.setCustomValidity('Please enter doctor phone number')" oninput="setCustomValidity('')" required>
                 @if ($errors->has('phoneNumber'))
                 <span class="help-block">
                     <strong>{{ $errors->first('phoneNumber') }}</strong>
@@ -162,7 +170,7 @@
             </div>
             <div class="form-group">
                 <label for="graduatedFrom">graduated from</label>
-                <input type="text" class="form-control {{ $errors->has('graduatedFrom') ? ' has-error' : '' }}" id="graduatedFrom" name="graduatedFrom" required>
+                <input type="text" class="form-control {{ $errors->has('graduatedFrom') ? ' has-error' : '' }}" id="graduatedFrom" name="graduatedFrom" oninvalid="this.setCustomValidity('Please enter doctor graduated from')" oninput="setCustomValidity('')" required>
                 @if ($errors->has('graduatedFrom'))
                 <span class="help-block">
                     <strong>{{ $errors->first('graduatedFrom') }}</strong>
@@ -171,7 +179,7 @@
             </div>
             <div class="form-group">
                 <label for="licenseNumber">license number</label>
-                <input type="text" class="form-control {{ $errors->has('licenseNumber') ? ' has-error' : '' }}" id="licenseNumber" name="licenseNumber" required>
+                <input type="text" class="form-control {{ $errors->has('licenseNumber') ? ' has-error' : '' }}" id="licenseNumber" name="licenseNumber" oninvalid="this.setCustomValidity('Please enter doctor license number')" oninput="setCustomValidity('')" required>
                 @if ($errors->has('licenseNumber'))
                 <span class="help-block">
                     <strong>{{ $errors->first('licenseNumber') }}</strong>
@@ -180,7 +188,7 @@
             </div>
             <div class="form-group">
                 <label for="workAt">work at</label>
-                <input type="text" class="form-control {{ $errors->has('workAt') ? ' has-error' : '' }}" id="workAt" name="workAt" required>
+                <input type="text" class="form-control {{ $errors->has('workAt') ? ' has-error' : '' }}" id="workAt" name="workAt" oninvalid="this.setCustomValidity('Please enter doctor work place')" oninput="setCustomValidity('')" required>
                 @if ($errors->has('workAt'))
                 <span class="help-block">
                     <strong>{{ $errors->first('workAt') }}</strong>
@@ -229,7 +237,6 @@
     </div>
 
     {{-- edit profile--}}
-
     <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -246,7 +253,7 @@
                         <div class="form-group row">
                             <label for="name" class="col-sm-2 col-form-label text-left" style="color: #1b1e21">Name</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control {{ $errors->has('name') ? ' has-error' : '' }}" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter Name" value="{{$user->name}}" required>
+                                <input type="text" class="form-control {{ $errors->has('name') ? ' has-error' : '' }}" id="name" name="name" aria-describedby="emailHelp" placeholder="Enter Name" value="{{$user->name}}" oninvalid="this.setCustomValidity('Please enter your name')" oninput="setCustomValidity('')" required>
                                 @if ($errors->has('name'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('name') }}</strong>
@@ -257,7 +264,7 @@
                         <div class="form-group row">
                             <label for="email" class="col-sm-2 col-form-label text-left" style="color: #1b1e21">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" class="form-control {{ $errors->has('email') ? ' has-error' : '' }}" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="{{$user->email}}" required>
+                                <input type="email" class="form-control {{ $errors->has('email') ? ' has-error' : '' }}" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email" value="{{$user->email}}" oninvalid="this.setCustomValidity('Please enter your email')" oninput="setCustomValidity('')" required>
                                 @if ($errors->has('email'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('email') }}</strong>

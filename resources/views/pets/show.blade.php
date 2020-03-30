@@ -4,8 +4,8 @@
         <div class="row">
             <div class="col-3">
                 <div class="card bg-light">
-                    <div class="card-header text-center">
-                        <h4>Pet profile</h4>
+                    <div class="card-header text-center" style="font-size: 20px">
+                        Pet profile
                     </div>
                     <div class="card-body">
                         <table class="table table-borderless text-left">
@@ -37,19 +37,33 @@
                             <tr>
                                 <th>STATUS</th>
                                 @if($pet->weight <= $weight_status[0]->breakpoint_start_weight)
-                                    <td>Underweight</td>
+                                    <td>
+                                        <h4><span class="badge badge-secondary" style="background-color: #F8C471;">Underweight</span>
+                                        </h4>
+                                    </td>
                                 @elseif($pet->weight >= $weight_status[0]->breakpoint_end_weight)
-                                    <td>Overweight</td>
+                                    <td>
+                                        <h4><span class="badge badge-secondary" style="background-color: #EC7063;">Overweight</span>
+                                        </h4>
+                                    </td>
                                 @else
-                                    <td>Fit weight</td>
+                                    <td>
+                                        <h4><span class="badge badge-secondary" style="background-color: #CDDC39;">Fit weight</span>
+                                        </h4>
+                                    </td>
                                 @endif
                             </tr>
                             <tr>
-                                <th></th>
+                                <th>
+                                    <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                            data-target="#weightHistory">weight history
+                                    </button>
+                                </th>
                                 <td>
-                                    <i class="fas fa-info-circle" style="margin-right: 5px"></i> recomment <br/>
+                                    <i class="fas fa-info-circle" style="margin-right: 7px"></i>suitable<br/>
                                     <div style="margin-left: 22px">
-                                        {{ $weight_status[0]->breakpoint_start_weight }} - {{ $weight_status[0]->breakpoint_end_weight }} kg.
+                                        {{ $weight_status[0]->breakpoint_start_weight }}
+                                        - {{ $weight_status[0]->breakpoint_end_weight }} kg.
                                     </div>
                                 </td>
                             </tr>
@@ -76,7 +90,8 @@
                                 <td></td>
                                 <td class="text-center">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add"
-                                            style="margin-left: 1rem;">add vaccine <i class="fas fa-plus"></i>
+                                            style="margin-left: 1rem;">add vaccine <i class="fas fa-plus"
+                                                                                      style="margin-left: 5px"></i>
                                     </button>
                                 </td>
                             </tr>
@@ -188,7 +203,7 @@
                                         @csrf
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="editModalLabel" style="color: #1b1e21">Edit
-                                                Profile</h5>
+                                                Pet Profile</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -200,7 +215,7 @@
                                                     <input
                                                         class="form-control {{ $errors->has('birth-date-input') ? ' has-error' : '' }}"
                                                         type="date" value="{{$pet->birth_date}}" id="birth-date-input"
-                                                        name="birth-date-input" required>
+                                                        name="birth-date-input" oninvalid="this.setCustomValidity('Please enter your pet birthdate')" oninput="setCustomValidity('')" required>
                                                     @if ($errors->has('birth-date-input'))
                                                         <span class="help-block">
                                                     <strong>{{ $errors->first('birth-date-input') }}</strong>
@@ -214,7 +229,7 @@
                                                 <p class="col-6">
                                                     <input type="number"
                                                            class="form-control {{ $errors->has('weight') ? ' has-error' : '' }}"
-                                                           id="weight" name="weight" value="{{$pet->weight}}" required>
+                                                           id="weight" name="weight" value="{{$pet->weight}}" oninvalid="this.setCustomValidity('Please enter your pet weight')" oninput="setCustomValidity('')" required>
                                                     @if ($errors->has('weight'))
                                                         <span class="help-block">
                                                     <strong>{{ $errors->first('weight') }}</strong>
@@ -279,7 +294,7 @@
                                                     </datalist>
                                                     <input type="search"
                                                            class="form-control {{ $errors->has('vaccineName') ? ' has-error' : '' }}"
-                                                           id="vaccineName" name="vaccineName" list="vaccineName"
+                                                           id="vaccineName" name="vaccineName" list="vaccineName" oninvalid="this.setCustomValidity('Please enter vaccine name')" oninput="setCustomValidity('')"
                                                            required>
                                                     @if ($errors->has('vaccineName'))
                                                         <span class="help-block">
@@ -294,7 +309,7 @@
                                                 <div class="col-sm-8">
                                                 <textarea type="text"
                                                           class="form-control {{ $errors->has('PreventSymptom') ? ' has-error' : '' }}"
-                                                          name="PreventSymptom" id="PreventSymptom" required>
+                                                          name="PreventSymptom" id="PreventSymptom" oninvalid="this.setCustomValidity('Please enter prevent symptom')" oninput="setCustomValidity('')" required>
                                                         </textarea>
                                                     @if ($errors->has('PreventSymptom'))
                                                         <span class="help-block">
@@ -309,7 +324,7 @@
                                                 <div class="col-sm-6">
                                                     <input type="number"
                                                            class="form-control {{ $errors->has('activateRange') ? ' has-error' : '' }}"
-                                                           id="activateRange" name="activateRange" required>
+                                                           id="activateRange" name="activateRange" oninvalid="this.setCustomValidity('Please enter activate range')" oninput="setCustomValidity('')" required>
                                                     @if ($errors->has('activateRange'))
                                                         <span class="help-block">
                                                     <strong>{{ $errors->first('activateRange') }}</strong>
@@ -324,7 +339,7 @@
                                                 <div class="col-sm-8">
                                                     <input type="date"
                                                            class="form-control {{ $errors->has('receivedDate') ? ' has-error' : '' }}"
-                                                           id="receivedDate" name="receivedDate" required>
+                                                           id="receivedDate" name="receivedDate" oninvalid="this.setCustomValidity('Please enter received date')" oninput="setCustomValidity('')" required>
                                                     @if ($errors->has('receivedDate'))
                                                         <span class="help-block">
                                                     <strong>{{ $errors->first('receivedDate') }}</strong>
@@ -370,7 +385,7 @@
                                                         <input type="text"
                                                                class="form-control {{ $errors->has('vaccineName') ? ' has-error' : '' }}"
                                                                value="{{ $recieve_vaccine->vaccine->name }}"
-                                                               id="vaccineName" name="vaccineName" required>
+                                                               id="vaccineName" name="vaccineName" oninvalid="this.setCustomValidity('Please enter vaccine name')" oninput="setCustomValidity('')" required>
                                                         @if ($errors->has('vaccineName'))
                                                             <span class="help-block">
                                                     <strong>{{ $errors->first('vaccineName') }}</strong>
@@ -385,7 +400,7 @@
                                                         <input type="date"
                                                                class="form-control {{ $errors->has('receiveDate') ? ' has-error' : '' }}"
                                                                value="{{ $recieve_vaccine->received_at }}"
-                                                               id="receivedDate" name="receivedDate" required>
+                                                               id="receivedDate" name="receivedDate" oninvalid="this.setCustomValidity('Please enter received date')" oninput="setCustomValidity('')" required>
                                                         @if ($errors->has('receiveDate'))
                                                             <span class="help-block">
                                                     <strong>{{ $errors->first('receiveDate') }}</strong>
@@ -401,7 +416,7 @@
                                                         <input type="number"
                                                                class="form-control {{ $errors->has('activateRange') ? ' has-error' : '' }}"
                                                                value="{{ $recieve_vaccine->vaccine->activate_range }}"
-                                                               id="activateRange" name="activateRange" required>
+                                                               id="activateRange" name="activateRange" oninvalid="this.setCustomValidity('Please enter activate range')" oninput="setCustomValidity('')"  required>
                                                         @if ($errors->has('activateRange'))
                                                             <span class="help-block">
                                                     <strong>{{ $errors->first('activateRange') }}</strong>
@@ -449,6 +464,59 @@
                                 </div>
                             </div>
                         @endforeach
+
+                        {{-- weightHistory--}}
+                        <div id="weightHistory" class="modal fade" role="dialog"
+                             style="color: black">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Weight History</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <table class="table table-borderless">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">Weight</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Status</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($weight_Histories as $weight_History)
+                                                <tr>
+                                                    <td>{{$weight_History->weight}} kg</td>
+                                                    <td>{{$weight_History->created_at->toDateString()}}</td>
+                                                    @if($weight_History->weight <= $weight_status[0]->breakpoint_start_weight)
+                                                        <td>
+                                                            <h4><span class="badge badge-secondary"
+                                                                      style="background-color: #F8C471;">Underweight</span>
+                                                            </h4>
+                                                        </td>
+                                                    @elseif($weight_History->weight >= $weight_status[0]->breakpoint_end_weight)
+                                                        <td>
+                                                            <h4><span class="badge badge-secondary"
+                                                                      style="background-color: #EC7063;">Overweight</span>
+                                                            </h4>
+                                                        </td>
+                                                    @else
+                                                        <td>
+                                                            <h4><span class="badge badge-secondary"
+                                                                      style="background-color: #CDDC39;">Fit weight</span>
+                                                            </h4>
+                                                        </td>
+                                                    @endif
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -464,5 +532,7 @@
     <script>
         $('.datepicker').pickadate();
         createEditableSelect(document.forms[0].myText);
+
+
     </script>
 @endsection

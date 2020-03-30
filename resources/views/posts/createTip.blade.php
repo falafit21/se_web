@@ -76,7 +76,7 @@
                                 <tr>
                                     <th>Title</th>
                                     <td>
-                                        <input type="title" class="form-control {{ $errors->has('title') ? ' has-error' : '' }}" id="title" name="title" aria-describedby="emailHelp" placeholder="Enter title" value="{{$tip->title}}" required>
+                                        <input type="title" class="form-control {{ $errors->has('title') ? ' has-error' : '' }}" id="title" name="title" aria-describedby="emailHelp" placeholder="Enter title" value="{{$tip->title}}" oninvalid="this.setCustomValidity('Please enter title')" oninput="setCustomValidity('')" required>
                                         @if ($errors->has('title'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('title') }}</strong>
@@ -86,7 +86,7 @@
                                 </tr>
                                 <tr>
                                     <th>Detail</th>
-                                    <td><textarea type="text" class="form-control {{ $errors->has('detail') ? ' has-error' : '' }}" id="detail" name="detail" aria-describedby="emailHelp" placeholder="Tips Detail" required>{{$tip->detail}}</textarea>
+                                    <td><textarea type="text" class="form-control {{ $errors->has('detail') ? ' has-error' : '' }}" id="detail" name="detail" aria-describedby="emailHelp" placeholder="Tips Detail" oninvalid="this.setCustomValidity('Please enter detail')" oninput="setCustomValidity('')" required>{{$tip->detail}}</textarea>
                                         @if ($errors->has('detail'))
                                         <span class="help-block">
                                             <strong>{{ $errors->first('detail') }}</strong>
