@@ -1,27 +1,31 @@
 @extends('layouts.master')
+<style>
+    .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+    
+
+</style>
 @section('content')
 <div class="panel-body">
     @if (session('error'))
     <div class="alert alert-danger">
         {{ session('error') }}
     </div>
-    @endif
-    @if (session('success'))
-    <div class="alert alert-success">
-        {{ session('success') }}
-    </div>
-    @endif
-</div>
-<div style="margin: 50px; color: white">
-    <div class="row">
-        <div class="col-4">
-            <div class="card bg-light">
-                <h4 class="card-header text-center" style="color: black">
-                    Doctor profile
-                </h4>
-                <div class="card-body">
-                    <table class="table table-borderless">
-                        <tbody style="color: black">
+    <div style="margin: 50px; color: white">
+        <div class="row">
+            <div class="col-4">
+                <div class="card bg-light">
+                    <h4 class="card-header text-center" style="color: black">
+                        Doctor profile
+                    </h4>
+                    <div class="card-body">
+                    <img src="{{Storage::url($user->img_path)}}" class="center" alt="" width="120" height="120" srcset="">
+                        <table class="table table-borderless">
+                            <tbody style="color: black">
                             <tr>
                                 <th scope="row">NAME</th>
                                 <td>{{$doctor->user->name}}</td>
@@ -67,38 +71,54 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-8">
-            <h2>Request Question
-                {{-- <span class="badge badge-light">{{ count($requestQuestion) }}</span>--}}
-            </h2>
-            @foreach($requestQuestion as $post)
-            @if($post->requestDoctor->role == 'doctor' && $post->requestDoctor->id == $doctor->user->id)
-            <a href="{{ route('post.show', ['post' => $post->id]) }}" style="text-decoration: none; color: #1b1e21">
-                <div class="card post-card border-light" style="margin-bottom: 10px">
-                    <div class="card-body">
-                        <div class="row">
-                            <p class="col-9" style="font-size: 25px;">
-                                {{ $post->question }}
-                            </p>
-                            <p class="text-muted text-right col-3" style="font-size: 15px;">
-                                <i class="fas fa-user" style="margin-right: 6px"></i>
-                                {{ $post->user->name }}
-                                <br>
-                                <i class="fas fa-dog" style="margin-right: 6px"></i>
-                                {{ $post->pet->name }}
-                            </p>
+            <div class="col-8">
+                <h2>Request Question
+                </h2>
+                @foreach($requestQuestion as $post)
+                    @if($post->requestDoctor->role == 'doctor' && $post->requestDoctor->id == $doctor->user->id )
+                        <div class="card-body">
+                            <div class="card post-card border-light" style="margin-bottom: 10px">
+                                <a href="{{ route('post.show', ['post' => $post->id]) }}"
+                                   style="text-decoration: none; color: #1b1e21; margin-top: 10px" class="container">
+                                    <div>Question :</div>
+                                    <div class="row">
+                                        <div class="col-8" style="font-size: 25px;">
+                                            {{ $post->question }}
+                                        </div>
+                                        <p class="text-muted text-right col-4" style="font-size: 15px;">
+                                            <i class="fas fa-user" style="margin-right: 6px"></i>
+                                            {{ $post->user->name }}
+                                            <i class="fas fa-dog" style="margin-right: 5px; margin-left: 4px"></i>
+                                            {{ $post->pet->name }}
+                                        </p>
+                                    </div>
+                                    <p style="font-size: 18px">{{ $post->detail }}</p>
+                                </a>
+                                <form action="{{  route('post.comment.store.new', ['post_id' => $post->id]) }}"
+                                      method="POST" {{ $user->status ? "" : "hidden" }} class="container"
+                                      style="margin-bottom: 10px;">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-10">
+                                            <label for="answer" style="color: black">Answers : </label>
+                                            <textarea name="answer" id="answer"
+                                                      style="width: 100%; background-color: #EAECEE" rows="2"
+                                                      class="form-control @error('answer') is-invalid @enderror">{{ old('answer') }}</textarea>
+                                            @error('answer')
+                                            <div class="alert alert-danger">{{$message}}</div>
+                                            @enderror
+                                        </div>
+                                        <div class="col-2 text-right"
+                                             style="display: flex; justify-content: center; align-items: center;">
+                                            <button class="btn btn-warning" type="submit">answer</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <p style="font-size: 18px">{{ $post->detail }}</p>
-                        <small class="text-muted" style="font-size: 13px">
-                            {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
-                        </small>
-                    </div>
-                </div>
-            </a>
-            @endif
-            @endforeach
-
+                    @endif
+                @endforeach
+            </div>
         </div>
     </div>
 
@@ -234,45 +254,92 @@
     </div>
 </div>
 
-{{-- answeres question model--}}
-<div class="modal fade bd-example-modal-xl" id="answeredQuestion" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Answered question</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="model-body container" style="margin-top: 10px">
-                @foreach($answeredPost as $post)
-                @if($post->requestDoctor->role == 'doctor' && $post->requestDoctor->id == $doctor->user->id)
-                <a href="{{ route('post.show', ['post' => $post->id]) }}" style="text-decoration: none; color: #1b1e21" target="_blank">
-                    <div class="card post-card border-light" style="margin-bottom: 10px; background-color: #D5D8DC">
-                        <div class="card-body">
-                            <div class="row">
-                                <p class="col-9" style="font-size: 25px;">
-                                    {{ $post->question }}
-                                </p>
-                                <p class="text-muted text-right col-3" style="font-size: 15px;">
-                                    <i class="fas fa-user" style="margin-right: 6px"></i>
-                                    {{ $post->user->name }}
-                                    <br>
-                                    <i class="fas fa-dog" style="margin-right: 6px"></i>
-                                    {{ $post->pet->name }}
-                                </p>
-                            </div>
-                            <p style="font-size: 18px">{{ $post->detail }}</p>
-                            <small class="text-muted" style="font-size: 13px">
-                                {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
-                            </small>
-                        </div>
-                    </div>
-                </a>
-                @endif
-                @endforeach
+    {{--    answeres question model--}}
+    <div class="modal fade bd-example-modal-xl" id="answeredQuestion" tabindex="-1" role="dialog"
+         aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Answered question</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="model-body container" style="margin-top: 10px">
+                    @foreach($answeredPost as $post)
+                        @if($post->requestDoctor->role == 'doctor' && $post->requestDoctor->id == $doctor->user->id)
+                            <a href="{{ route('post.show', ['post' => $post->id]) }}"
+                               style="text-decoration: none; color: #1b1e21;" target="_blank">
+                                <div class="card post-card" style="margin-bottom: 10px ;">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <p class="col-9" style="font-size: 25px;">
+                                                {{ $post->question }}
+                                            </p>
+                                            <p class="text-muted text-right col-3" style="font-size: 15px;">
+                                                <i class="fas fa-user" style="margin-right: 6px"></i>
+                                                {{ $post->user->name }}
+                                                <br>
+                                                <i class="fas fa-dog" style="margin-right: 6px"></i>
+                                                {{ $post->pet->name }}
+                                            </p>
+                                        </div>
+                                        <div style="font-size: 18px">{{ $post->detail }}</div>
+                                        <a onclick="myFunction({{$post->id}})" style="margin-top: 20px;"
+                                           type="button">
+                                            <i style="font-size: 20px; margin-right: 5px; margin-bottom: 20px" class="far fa-comment"></i> My answer
+                                        </a>
+                                        <div id="dots-{{$post->id}}"></div>
+                                        <div id="more-{{$post->id}}" style="display: none; margin-top: 20px">
+                                            <ul class="list-group list-group-flush">
+                                                @foreach($post->comments as $comment)
+                                                    @if($comment->user_id == $user->id)
+                                                        <li class="list-group-item" style="background-color: #EAECEE">
+{{--                                                            <h6>--}}
+{{--                                                                <i class="fas fa-stethoscope"--}}
+{{--                                                                   style="margin-right: 10px; font-size: 20px"></i>{{ $comment->user->name }}--}}
+{{--                                                            </h6>--}}
+                                                            <div class="row">
+                                                                <h4 style="margin-left: 18px; margin-top: 10px">{{ $comment->comment }}</h4>
+
+                                                            </div>
+                                                            {{ $comment->created_at->diffForHumans() }}
+                                                        </li>
+                                                    @endif
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        @endif
+                    @endforeach
+                </div>
             </div>
         </div>
     </div>
-</div>
+@endsection
+
+@section('script')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+
+        function myFunction($i) {
+            var dots = document.getElementById("dots-" + $i);
+            var moreText = document.getElementById("more-"  + $i);
+            // var btnText = document.getElementById("myBtn-"  . $i);
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                // btnText.innerHTML = "Read more";
+                moreText.style.display = "none";
+            } else {
+                dots.style.display = "none";
+                // btnText.innerHTML = "Read less";
+                moreText.style.display = "inline";
+            }
+        }
+    </script>
 @endsection

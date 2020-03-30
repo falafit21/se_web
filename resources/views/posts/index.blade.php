@@ -1,57 +1,51 @@
 @extends('layouts.master')
 
 @section('style')
-<style>
-    a {
-        text-decoration: none;
-    }
-
-    .sidenav {
-        height: 100%;
-        width: 0;
-        position: fixed;
-        z-index: 1;
-        top: 0;
-        left: 0;
-        background-color: white;
-        overflow-x: hidden;
-        transition: 0.5s;
-        padding-top: 60px;
-    }
-
-    .sidenav .closebtn {
-        position: absolute;
-        top: 0;
-        right: 25px;
-        font-size: 36px;
-        margin-left: 50px;
-    }
-
-    @media screen and (max-height: 450px) {
+    <style>
+        a {
+            text-decoration: none;
+        }
         .sidenav {
-            padding-top: 15px;
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: white;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
         }
-
-        .sidenav a {
-            font-size: 18px;
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
         }
-    }
-
-    #loadMore:hover {
-        background-color: #fff;
-        color: #33739E;
-    }
-
-    #loadMore {
-        text-align: center;
-        background-color: #33739E;
-        color: #fff;
-        transition: all 600ms ease-in-out;
-        -webkit-transition: all 600ms ease-in-out;
-        -moz-transition: all 600ms ease-in-out;
-        -o-transition: all 600ms ease-in-out;
-    }
-</style>
+        @media screen and (max-height: 450px) {
+            .sidenav {
+                padding-top: 15px;
+            }
+            .sidenav a {
+                font-size: 18px;
+            }
+        }
+        #loadMore:hover {
+            background-color: #fff;
+            color: #33739E;
+        }
+        #loadMore {
+            text-align: center;
+            background-color: #33739E;
+            color: #fff;
+            transition: all 600ms ease-in-out;
+            -webkit-transition: all 600ms ease-in-out;
+            -moz-transition: all 600ms ease-in-out;
+            -o-transition: all 600ms ease-in-out;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -79,16 +73,26 @@
                 <span class="help-block">
                     <strong>{{ $errors->first('detail') }}</strong>
                 </span>
-                @endif
-            </div>
-            <div class="form-group">
-                <label for="choosePet">Choose your pet</label>
-                @if(!count($pets))
-                <div class="row">
-                    <div class="col-10">
-                        <select disabled class="form-control">
-                            <option value="">.</option>
-                        </select>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <label for="img">More detail</label>
+                    <input type="file"class="form-control {{ $errors->has('img') ? ' has-error' : '' }}" id="img"
+                              name="img" required></input>
+                    @if ($errors->has('img'))
+                        <span class="help-block">
+                    <strong>{{ $errors->first('img') }}</strong>
+                </span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <label for="choosePet">Choose your pet</label>
+                    @if(!count($pets))
+                        <div class="row">
+                            <div class="col-10">
+                                <select disabled class="form-control">
+                                    <option value="">.</option>
+                                </select>
 
                     </div>
                     <a href="{{ url('/user/profile') }}" class="btn btn-info col-2" style="background-color: #EB984E; color: white">create pet</a>
@@ -231,38 +235,29 @@
 
 @section('script')
 
-<script>
-    function openNav() {
-        document.getElementById("mySidenav").style.width = "700px";
-        document.getElementById("main").style.marginLeft = "700px";
-        document.body.style.backgroundColor = "rgba(0,0,0,0)";
-    }
-
-    function closeNav() {
-        document.getElementById("mySidenav").style.width = "0px";
-        document.getElementById("main").style.marginLeft = "0px";
-        document.body.style.backgroundColor = "white";
-    }
-
-    $('a[href=#top]').click(function() {
-        $('body,html').animate({
-            scrollTop: 0
-        }, 600);
-        return false;
-    });
-
-    $(window).scroll(function() {
-        if ($(this).scrollTop() > 50) {
-            $('.totop a').fadeIn();
-        } else {
-            $('.totop a').fadeOut();
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "700px";
+            document.getElementById("main").style.marginLeft = "700px";
+            document.body.style.backgroundColor = "rgba(0,0,0,0)";
         }
-    });
-    // document.getElementById("title").oninvalid = function() {
-    //     this.setCustomValidity(this.value ? '' : 'Please enter your question');
-    // }
-    // document.getElementById("detail").oninvalid = function() {
-    //     this.setCustomValidity(this.value ? '' : 'Please enter your detail');
-    // }
-</script>
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0px";
+            document.getElementById("main").style.marginLeft = "0px";
+            document.body.style.backgroundColor = "white";
+        }
+        $('a[href=#top]').click(function () {
+            $('body,html').animate({
+                scrollTop: 0
+            }, 600);
+            return false;
+        });
+        $(window).scroll(function () {
+            if ($(this).scrollTop() > 50) {
+                $('.totop a').fadeIn();
+            } else {
+                $('.totop a').fadeOut();
+            }
+        });
+    </script>
 @endsection

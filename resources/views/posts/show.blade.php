@@ -1,12 +1,14 @@
 @extends('layouts.master')
+<style>
+    .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 
-@section('style')
-    <style>
-        #more {
-            display: none;
-        }
-    </style>
-@endsection
+}
+    
+
+</style>
 
 @section('content')
     <div class="container" style="margin-top: 30px">
@@ -53,9 +55,13 @@
                    type="button">
                     <i style="font-size: 20px; margin-right: 8px" class="fab fa-wpforms"></i> Question detail
                 </a>
+                <a onclick="my1Function()" style="margin-right: 20px; margin-bottom: 20px; margin-left: 33px"
+                   type="button">
+                    <i style="font-size: 20px; margin-right: 8px" class="far fa-file-image"></i> More Detail
+                </a>
                 <div>
                     <div id="dots"></div>
-                    <div id="more">
+                    <div id="more" style="display: none">
                         <div class="row">
                             <div class="col-2">
                                 <i class="fas fa-dog" style="margin-left: 50px; margin-right: 7px;"></i> pet detail
@@ -92,9 +98,22 @@
                                 </table>
                             </div>
                         </div>
-
-
-
+                    </div>
+                </div>
+                <div>
+                    <div id="dots1"></div>
+                    <div id="more1" style="display: none">
+                        <!-- <div class="row"> -->
+                            <div class="col-6">
+                            <div >
+                                <i class="far fa-question-circle" style="margin-left: 50px; margin-right: 7px"></i> More detail
+                            </div>
+                            <br>
+                            <div>
+                                <img src="{{Storage::url($post->img)}}" class="center" alt="" width="200" height="200" srcset="">
+                            </div></div>
+                            
+                        <!-- </div> -->
                     </div>
                 </div>
             </div>
@@ -300,6 +319,22 @@
             var dots = document.getElementById("dots");
             var moreText = document.getElementById("more");
             var btnText = document.getElementById("myBtn");
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                // btnText.innerHTML = "Read more";
+                moreText.style.display = "none";
+            } else {
+                dots.style.display = "none";
+                // btnText.innerHTML = "Read less";
+                moreText.style.display = "inline";
+            }
+        }
+
+        function my1Function() {
+            var dots = document.getElementById("dots1");
+            var moreText = document.getElementById("more1");
+            var btnText = document.getElementById("myBtn1");
 
             if (dots.style.display === "none") {
                 dots.style.display = "inline";

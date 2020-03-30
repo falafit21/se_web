@@ -234,35 +234,33 @@
                                                         <span class="help-block">
                                                     <strong>{{ $errors->first('weight') }}</strong>
                                                 </span>
-                                                    @endif
-                                                    <small id="fileHelp" class="form-text text-muted"> Please answer
-                                                        in Kilograms Unit</small>
-                                                </p>
-                                                <p class="col-3 col-form-label">
-                                                    Kilograms
-                                                </p>
-                                            </div>
-                                            {{--                                        <div class="form-group row">--}}
-                                            {{--                                            <label for="img" class="col-sm-3 col-form-label text-left">Image</label>--}}
-                                            {{--                                            <div class="col-sm-9">--}}
-                                            {{--                                                <img src="{{ Storage::url('/public/imgs'.$pet->img) }}"/>--}}
-                                            {{--                                                <input type="file" name="img" class="form-control @error('img') is-invalid @enderror"--}}
-                                            {{--                                                        value="{{ old('imgs', isset($pet) ? $pet->img : '') }}"/>--}}
-                                            {{--                                                @error('img')--}}
-                                            {{--                                                <span class="help-block">--}}
-                                            {{--                                                    <strong>{{ $message }}</strong>--}}
-                                            {{--                                                </span>--}}
-                                            {{--                                                @enderror--}}
-                                            {{--                                                @if(isset($pet))--}}
-                                            {{--                                                    <label>Image</label>--}}
-                                            {{--                                                    <img src="{{Storage::url($pet->img)}} " width="80" height="75" alt="">--}}
-                                            {{--                                                @endif--}}
-                                            {{--                                            </div>--}}
-                                            {{--                                        </div>--}}
-
-                                            <div class="form-group text-right">
-                                                <button type="submit" class="btn btn-primary">Save changes</button>
-                                            </div>
+                                                @endif
+                                                <small id="fileHelp" class="form-text text-muted"> Please answer
+                                                    in Kilograms Unit</small>
+                                            </p>
+                                            <p class="col-3 col-form-label">
+                                                Kilograms
+                                            </p>
+                                        </div>
+{{--                                        <div class="form-group row">--}}
+{{--                                            <label for="img" class="col-sm-3 col-form-label text-left">Image</label>--}}
+{{--                                            <div class="col-sm-9">--}}
+{{--                                                <img src="{{ Storage::url('/public/imgs'.$pet->img) }}"/>--}}
+{{--                                                <input type="file" name="img" class="form-control @error('img') is-invalid @enderror"--}}
+{{--                                                        value="{{ old('imgs', isset($pet) ? $pet->img : '') }}"/>--}}
+{{--                                                @error('img')--}}
+{{--                                                <span class="help-block">--}}
+{{--                                                    <strong>{{ $message }}</strong>--}}
+{{--                                                </span>--}}
+{{--                                                @enderror--}}
+{{--                                                @if(isset($pet))--}}
+{{--                                                    <label>Image</label>--}}
+{{--                                                    <img src="{{Storage::url($pet->img)}} " width="80" height="75" alt="">--}}
+{{--                                                @endif--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+                                        <div class="form-group text-right">
+                                            <button type="submit" class="btn btn-primary">Save changes</button>
                                         </div>
                                     </form>
                                 </div>

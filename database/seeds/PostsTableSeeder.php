@@ -14,6 +14,7 @@ class PostsTableSeeder extends Seeder
         $post->question = "หมาไม่ยอมกินข้าวทำไรดีครับ";
         $post->detail = "เมื่อ 3 วันก่อนมันกินไก่ติดคอ หลังจากนั้นมันก็ bully ไก่ไปเลยครับ ทำยังไงดีครับ";
         $post->pet_id = 1;
+        $post->img = "public/posts/dogsad.jpg";
         $post->save();
 
         $post1 = new Post;
