@@ -52,7 +52,12 @@
             border: 5px solid rgba(255, 255, 255, 0.5);
             margin-top: 1.5em;
         }
-
+        .center {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 50%;
+        }
     </style>
 @endsection
 
@@ -69,6 +74,8 @@
                             {{ $doctor->name }}
                         </div>
                         <div class="card-body">
+                            <img src="{{Storage::url($doctor->img_path)}}" class="center" alt="" width="120" height="120" style="margin-bottom: 10px">
+
                             <table class="table table-borderless text-left">
                                 <tbody style="color: black">
                                 <tr>

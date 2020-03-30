@@ -12,6 +12,7 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
+        border-radius: 50%;
     }
 
     .active {

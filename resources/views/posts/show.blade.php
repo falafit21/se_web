@@ -1,12 +1,14 @@
 @extends('layouts.master')
+<style>
+    .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
 
-@section('style')
-    <style>
-        #more {
-            display: none;
-        }
-    </style>
-@endsection
+    }
+
+
+</style>
 
 @section('content')
     <div class="container" style="margin-top: 30px">
@@ -53,13 +55,18 @@
                    type="button">
                     <i style="font-size: 20px; margin-right: 8px" class="fab fa-wpforms"></i> Question detail
                 </a>
+                {{--                <a onclick="my1Function()" style="margin-right: 20px; margin-bottom: 20px; margin-left: 33px"--}}
+                {{--                   type="button">--}}
+                {{--                    <i style="font-size: 20px; margin-right: 8px" class="far fa-file-image"></i> More Detail--}}
+                {{--                </a>--}}
                 <div>
                     <div id="dots"></div>
-                    <div id="more">
+                    <div id="more" style="display: none">
                         <div class="row">
                             <div class="col-2">
                                 <i class="fas fa-dog" style="margin-left: 50px; margin-right: 7px;"></i> pet detail
-                                <table class="table table-borderless"  style="margin-top: 10px; margin-left: 50px; white-space: nowrap; width: 1%; margin-bottom: 30px" >
+                                <table class="table table-borderless"
+                                       style="margin-top: 10px; margin-left: 50px; white-space: nowrap; width: 1%; margin-bottom: 30px">
                                     <tbody>
                                     <tr>
                                         <th style="background-color: #EAECEE">Name</th>
@@ -77,8 +84,10 @@
                                 </table>
                             </div>
                             <div class="col-10">
-                                <i class="far fa-question-circle" style="margin-left: 50px; margin-right: 7px"></i> pet symptom form
-                                <table class="table table-borderless"  style="margin-top: 10px; margin-left: 50px; white-space: nowrap; width: 1%;">
+                                <i class="far fa-question-circle" style="margin-left: 50px; margin-right: 7px"></i> pet
+                                symptom form
+                                <table class="table table-borderless"
+                                       style="margin-top: 10px; margin-left: 50px; white-space: nowrap; width: 1%;">
                                     <tbody>
                                     @foreach($forms as $form)
                                         @if($form->post_id == $post->id)
@@ -92,9 +101,16 @@
                                 </table>
                             </div>
                         </div>
-
-
-
+                        @if($post->img != null)
+                        <div>
+                            <div>
+                                <i class="far fa-file-image" style="margin-left: 50px; margin-right: 7px"></i>Illustration
+                            </div>
+                            <br>
+                            <img src="{{Storage::url($post->img)}}" class="rounded float-left" width="200" height="200"
+                                 style="background-color: black; margin-left: 50px;">
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -300,6 +316,22 @@
             var dots = document.getElementById("dots");
             var moreText = document.getElementById("more");
             var btnText = document.getElementById("myBtn");
+
+            if (dots.style.display === "none") {
+                dots.style.display = "inline";
+                // btnText.innerHTML = "Read more";
+                moreText.style.display = "none";
+            } else {
+                dots.style.display = "none";
+                // btnText.innerHTML = "Read less";
+                moreText.style.display = "inline";
+            }
+        }
+
+        function my1Function() {
+            var dots = document.getElementById("dots1");
+            var moreText = document.getElementById("more1");
+            var btnText = document.getElementById("myBtn1");
 
             if (dots.style.display === "none") {
                 dots.style.display = "inline";

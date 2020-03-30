@@ -55,6 +55,7 @@ class DoctorListsController extends Controller
             $user->role = "doctor";
             $user->status = 1;
             $user->doctor_info_id = $recentDocInfo_id;
+            $user->img_path = $request->file('img_path')->store('public/doctors');
             $user->save();
         }
         return  redirect()->route('admin.createDoc');
@@ -104,4 +105,5 @@ class DoctorListsController extends Controller
     {
         //
     }
+
 }

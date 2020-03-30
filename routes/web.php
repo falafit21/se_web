@@ -14,6 +14,7 @@ Route::resource('/post', 'PostsController');
 
 //comment
 Route::post('/posts/{post_id}/comment', 'PostsController@commentStore')->name('post.comment.store');
+Route::post('/posts/{post_id}/comment/new', 'PostsController@commentStoreNew')->name('post.comment.store.new');
 Route::put('/posts/{post_id}/commentedit', 'PostsController@commentUpdate')->name('post.comment.update');
 Route::delete('posts/{comment_id}/comment','PostsController@destroyComment')->name('post.comment.destroy');
 
@@ -53,4 +54,8 @@ Auth::routes();
 
 Route::get('/image-upload', 'UsersController@imageUpload')->name('image.upload');
 Route::post('/image-upload', 'UsersController@imageUploadPost')->name('image.upload.post');
+
+Route::post('/petTip/image','PetTipsController@storeImage')->name('petTip.image');
+
+
 
