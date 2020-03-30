@@ -127,7 +127,7 @@
                 @endif
             </div>
             <div class="form-group">
-                <label for="email">email</label>
+                <label for="email">E-mail</label>
                 <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" oninvalid="this.setCustomValidity('Please enter doctor email')" oninput="setCustomValidity('')" required>
                 @if ($errors->has('email'))
                 <span class="help-block">
@@ -135,15 +135,7 @@
                 </span>
                 @endif
             </div>
-            <div class="form-group">
-                <label for="name">E-mail</label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" id="email" name="email" required>
-                @error('email')
-                <span class="invalid-feedback" role="alert">
-                    <strong>{{ $message }}</strong>
-                </span>
-                @enderror
-            </div>
+
             <div class="form-group">
                 <label for="password">password</label>
                 <input type="password" class="form-control {{ $errors->has('password') ? ' has-error' : '' }}" id="password" name="password" oninvalid="this.setCustomValidity('Please enter password')" oninput="setCustomValidity('')"  required>

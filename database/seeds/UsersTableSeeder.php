@@ -68,5 +68,68 @@ class UsersTableSeeder extends Seeder
 //        $user3->role = "user";
         $user6->save();
 
+
+
+        $user7 = new \App\User();
+        $user7->name = "Dr.Nathan Ureaka";
+        $user7->email = "Nathan@shukishi.com";
+        $user7->password = Hash::make('nathan1234');
+        $user7->status = 1;
+        $user7->role = "doctor";
+        $user7->img_path = "public/doctors/doc4.jpg";
+        $user7->doctor_info_id = 4;
+        $user7->save();
+
+
+        $user8 = new \App\User();
+        $user8->name = "Dr.Viva Titee";
+        $user8->email = "Viva@shukishi.com";
+        $user8->password = Hash::make('viva1234');
+        $user8->status = 1;
+        $user8->role = "doctor";
+        $user8->img_path = "public/doctors/doc5.jpg";
+        $user8->doctor_info_id = 5;
+        $user8->save();
+
+
+        $user9 = new \App\User();
+        $user9->name = "Pizza shukishi";
+        $user9->email = "pizza@shukishi.com";
+        $user9->password = Hash::make('pizza1234');
+        $user9->status = 1;
+//        $user->role = "user";
+        $user9->save();
+
+        $user10 = new \App\User();
+        $user10->name = "Arbenz shukishi";
+        $user10->email = "arbenz@shukishi.com";
+        $user10->password = Hash::make('arbenz1234');
+        $user10->status = 1;
+//        $user->role = "user";
+        $user10->save();
+
+        $user11 = new \App\User();
+        $user11->name = "Ing shukishi";
+        $user11->email = "ing@shukishi.com";
+        $user11->password = Hash::make('ing1234');
+        $user11->status = 1;
+//        $user->role = "user";
+        $user11->save();
+
+        $user12 = new \App\User();
+        $user12->name = "Arnon shukishi";
+        $user12->email = "arnon@shukishi.com";
+        $user12->password = Hash::make('arnon1234');
+        $user12->status = 1;
+//        $user->role = "user";
+        $user12->save();
+
+
+
+
+
+
+
+
     }
 }
