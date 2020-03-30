@@ -5,7 +5,6 @@
     a {
         text-decoration: none;
     }
-
     .sidenav {
         height: 100%;
         width: 0;
@@ -18,7 +17,6 @@
         transition: 0.5s;
         padding-top: 60px;
     }
-
     .sidenav .closebtn {
         position: absolute;
         top: 0;
@@ -26,12 +24,10 @@
         font-size: 36px;
         margin-left: 50px;
     }
-
     @media screen and (max-height: 450px) {
         .sidenav {
             padding-top: 15px;
         }
-
         .sidenav a {
             font-size: 18px;
         }
@@ -118,7 +114,7 @@
     <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
     <div style="margin-left: 40px; margin-right: 40px; margin-top: 10px; margin-bottom: 50px;">
         <h3>Create doctor</h3>
-        <form method="POST" action="{{ route('doctorLists.store') }}">
+        <form method="POST" enctype="multipart/form-data" action="{{ route('doctorLists.store') }}">
             @csrf
             <h5 style="margin-top: 50px">Step 1 : Basic info</h5>
 
@@ -126,6 +122,15 @@
                 <label for="name">name</label>
                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" required>
                 @error('name')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+                @enderror
+            </div>
+            <div class="form-group">
+                <label for="name">E-mail</label>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="email" name="email" required>
+                @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -184,6 +189,15 @@
                 @if ($errors->has('workAt'))
                 <span class="help-block">
                     <strong>{{ $errors->first('workAt') }}</strong>
+                </span>
+                @endif
+            </div>
+            <div class="form-group">
+                <label for="img_path">Image</label>
+                <input type="file" class="form-control {{ $errors->has('img_path') ? ' has-error' : '' }}" id="img_path" name="img_path" required>
+                @if ($errors->has('img_path'))
+                <span class="help-block">
+                    <strong>{{ $errors->first('img_path') }}</strong>
                 </span>
                 @endif
             </div>
@@ -340,20 +354,17 @@
         document.getElementById("main").style.marginLeft = "700px";
         document.body.style.backgroundColor = "rgba(0,0,0,0)";
     }
-
     function closeNav() {
         document.getElementById("mySidenav").style.width = "0px";
         document.getElementById("main").style.marginLeft = "0px";
         document.body.style.backgroundColor = "white";
     }
-
     let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
     elems.forEach(function(html) {
         let switchery = new Switchery(html, {
             size: 'small'
         });
     });
-
     $(document).ready(function() {
         $('.custom-control-input').change(function() {
             let status = $(this).prop('checked') === true ? 0 : 1;

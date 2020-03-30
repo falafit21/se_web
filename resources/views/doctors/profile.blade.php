@@ -1,4 +1,14 @@
 @extends('layouts.master')
+<style>
+    .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+    
+
+</style>
 @section('content')
     <div class="panel-body">
         @if (session('error'))
@@ -20,6 +30,7 @@
                         Doctor profile
                     </h4>
                     <div class="card-body">
+                    <img src="{{Storage::url($user->img_path)}}" class="center" alt="" width="120" height="120" srcset="">
                         <table class="table table-borderless">
                             <tbody style="color: black">
                             <tr>

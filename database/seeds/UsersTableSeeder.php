@@ -20,6 +20,7 @@ class UsersTableSeeder extends Seeder
         $user1->password = Hash::make('bell1234');
         $user1->status = 1;
         $user1->role = "doctor";
+        $user1->img_path = "public/doctors/doc1.jpg";
         $user1->doctor_info_id = 1;
         $user1->save();
 
@@ -45,6 +46,7 @@ class UsersTableSeeder extends Seeder
         $user4->password = Hash::make('jing1234');
         $user4->status = 1;
         $user4->role = "doctor";
+        $user4->img_path = "public/doctors/doc2.jpg";
         $user4->doctor_info_id = 2;
         $user4->save();
 
@@ -54,6 +56,7 @@ class UsersTableSeeder extends Seeder
         $user5->password = Hash::make('mook1234');
         $user5->status = 1;
         $user5->role = "doctor";
+        $user5->img_path = "public/doctors/doc3.jpg";
         $user5->doctor_info_id = 3;
         $user5->save();
 

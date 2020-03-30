@@ -5,7 +5,6 @@
         a {
             text-decoration: none;
         }
-
         .sidenav {
             height: 100%;
             width: 0;
@@ -18,7 +17,6 @@
             transition: 0.5s;
             padding-top: 60px;
         }
-
         .sidenav .closebtn {
             position: absolute;
             top: 0;
@@ -26,22 +24,18 @@
             font-size: 36px;
             margin-left: 50px;
         }
-
         @media screen and (max-height: 450px) {
             .sidenav {
                 padding-top: 15px;
             }
-
             .sidenav a {
                 font-size: 18px;
             }
         }
-
         #loadMore:hover {
             background-color: #fff;
             color: #33739E;
         }
-
         #loadMore {
             text-align: center;
             background-color: #33739E;
@@ -56,26 +50,12 @@
 
 @section('content')
 
-<<<<<<< HEAD
-<!-- creat post -->
-<div id="mySidenav" class="sidenav">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-    <div style="margin-left: 40px; margin-right: 40px; margin-top: 10px; margin-bottom: 50px;">
-        <h2>Create post </h2>
-        <form method="POST" enctype="multipart/form-data" action="{{ route('post.store') }}" class="text-left">
-            @csrf
-            <div class="form-group">
-                <label for="title">title</label>
-                <input type="text" class="form-control {{ $errors->has('title') ? ' has-error' : '' }}" id="title" name="title" required>
-                @if ($errors->has('title'))
-                <span class="help-block">
-=======
-    <!-- creat post -->
+    <!-- create post -->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div style="margin-left: 40px; margin-right: 40px; margin-top: 10px; margin-bottom: 50px;">
             <h2>Create post </h2>
-            <form method="POST" action="{{ route('post.store') }}" class="text-left">
+            <form method="POST" enctype="multipart/form-data" action="{{ route('post.store') }}" class="text-left">
                 @csrf
                 <div class="form-group">
                     <label for="title">title</label>
@@ -83,7 +63,6 @@
                            name="title" required>
                     @if ($errors->has('title'))
                         <span class="help-block">
->>>>>>> 37c297e68f57d109206db497fcdbc5faf161ed36
                     <strong>{{ $errors->first('title') }}</strong>
                 </span>
                     @endif
@@ -95,6 +74,16 @@
                     @if ($errors->has('detail'))
                         <span class="help-block">
                     <strong>{{ $errors->first('detail') }}</strong>
+                </span>
+                    @endif
+                </div>
+                <div class="form-group">
+                    <label for="img">More detail</label>
+                    <input type="file"class="form-control {{ $errors->has('img') ? ' has-error' : '' }}" id="img"
+                              name="img" required></input>
+                    @if ($errors->has('img'))
+                        <span class="help-block">
+                    <strong>{{ $errors->first('img') }}</strong>
                 </span>
                     @endif
                 </div>
@@ -147,14 +136,7 @@
                            style="background-color: #EB984E; color: white">doctor list</a>
                     </div>
                 </div>
-            </div>
-            <div>
-                <label for="img">Image</label>
-                <input type="file" id="img" name="img" class="btn btn-outline-info form-control-file">
-                @error('img')
-                <div class="alert alert-danger">{{$message}}</div>
-                @enderror
-            </div>
+                
 
                 <h5 style="margin-top: 50px" class="text-left">Pet Symptom</h5>
                 <table class="table text-left">
@@ -273,20 +255,17 @@
             document.getElementById("main").style.marginLeft = "700px";
             document.body.style.backgroundColor = "rgba(0,0,0,0)";
         }
-
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0px";
             document.getElementById("main").style.marginLeft = "0px";
             document.body.style.backgroundColor = "white";
         }
-
         $('a[href=#top]').click(function () {
             $('body,html').animate({
                 scrollTop: 0
             }, 600);
             return false;
         });
-
         $(window).scroll(function () {
             if ($(this).scrollTop() > 50) {
                 $('.totop a').fadeIn();
@@ -294,7 +273,5 @@
                 $('.totop a').fadeOut();
             }
         });
-
-
     </script>
 @endsection

@@ -47,7 +47,7 @@ class PostsController extends Controller
             'title' => ['required'],
             'detail' => ['required'],
             'choosePet' => ['required'],
-            'img' =>['nullable|sometimes']
+            'img' => ['required']
         ]);
         $post = new Post();
 
@@ -55,8 +55,9 @@ class PostsController extends Controller
         $post->request_ans_user_id = $request->input('chooseDoc');
         $post->question = $request->input('title');
         $post->detail = $request->input('detail');
-        $post->pet_id = $request->input('choosePet');
         $post->img = $request->file('img')->store('public/posts');
+        $post->pet_id = $request->input('choosePet');
+        
 
         if($post->save()){
             $recentPost_id = $post->latest()->first()->id;
@@ -149,10 +150,12 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         $validatedData = $request->validate([
             'question' => 'required',
-            'detail' => 'required'
+            'detail' => 'required',
+            
         ]);
         $post->question = $request->input('question');
         $post->detail = $request->input('detail');
+        
         $post->save();
         return redirect()->route('post.show',['post'=>$post]);
     }
