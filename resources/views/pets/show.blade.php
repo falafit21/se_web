@@ -203,7 +203,7 @@
                                         @csrf
                                         <div class="modal-header">
                                             <h5 class="modal-title" id="editModalLabel" style="color: #1b1e21">Edit
-                                                Profile</h5>
+                                                Pet Profile</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>
@@ -215,7 +215,7 @@
                                                     <input
                                                         class="form-control {{ $errors->has('birth-date-input') ? ' has-error' : '' }}"
                                                         type="date" value="{{$pet->birth_date}}" id="birth-date-input"
-                                                        name="birth-date-input" required>
+                                                        name="birth-date-input" oninvalid="this.setCustomValidity('Please enter your pet birthdate')" oninput="setCustomValidity('')" required>
                                                     @if ($errors->has('birth-date-input'))
                                                         <span class="help-block">
                                                     <strong>{{ $errors->first('birth-date-input') }}</strong>
@@ -229,7 +229,7 @@
                                                 <p class="col-6">
                                                     <input type="number"
                                                            class="form-control {{ $errors->has('weight') ? ' has-error' : '' }}"
-                                                           id="weight" name="weight" value="{{$pet->weight}}" required>
+                                                           id="weight" name="weight" value="{{$pet->weight}}" oninvalid="this.setCustomValidity('Please enter your pet weight')" oninput="setCustomValidity('')" required>
                                                     @if ($errors->has('weight'))
                                                         <span class="help-block">
                                                     <strong>{{ $errors->first('weight') }}</strong>
@@ -292,7 +292,7 @@
                                                     </datalist>
                                                     <input type="search"
                                                            class="form-control {{ $errors->has('vaccineName') ? ' has-error' : '' }}"
-                                                           id="vaccineName" name="vaccineName" list="vaccineName"
+                                                           id="vaccineName" name="vaccineName" list="vaccineName" oninvalid="this.setCustomValidity('Please enter vaccine name')" oninput="setCustomValidity('')"
                                                            required>
                                                     @if ($errors->has('vaccineName'))
                                                         <span class="help-block">
@@ -307,7 +307,7 @@
                                                 <div class="col-sm-8">
                                                 <textarea type="text"
                                                           class="form-control {{ $errors->has('PreventSymptom') ? ' has-error' : '' }}"
-                                                          name="PreventSymptom" id="PreventSymptom" required>
+                                                          name="PreventSymptom" id="PreventSymptom" oninvalid="this.setCustomValidity('Please enter prevent symptom')" oninput="setCustomValidity('')" required>
                                                         </textarea>
                                                     @if ($errors->has('PreventSymptom'))
                                                         <span class="help-block">
@@ -322,7 +322,7 @@
                                                 <div class="col-sm-6">
                                                     <input type="number"
                                                            class="form-control {{ $errors->has('activateRange') ? ' has-error' : '' }}"
-                                                           id="activateRange" name="activateRange" required>
+                                                           id="activateRange" name="activateRange" oninvalid="this.setCustomValidity('Please enter activate range')" oninput="setCustomValidity('')" required>
                                                     @if ($errors->has('activateRange'))
                                                         <span class="help-block">
                                                     <strong>{{ $errors->first('activateRange') }}</strong>
@@ -337,7 +337,7 @@
                                                 <div class="col-sm-8">
                                                     <input type="date"
                                                            class="form-control {{ $errors->has('receivedDate') ? ' has-error' : '' }}"
-                                                           id="receivedDate" name="receivedDate" required>
+                                                           id="receivedDate" name="receivedDate" oninvalid="this.setCustomValidity('Please enter received date')" oninput="setCustomValidity('')" required>
                                                     @if ($errors->has('receivedDate'))
                                                         <span class="help-block">
                                                     <strong>{{ $errors->first('receivedDate') }}</strong>
@@ -356,7 +356,7 @@
                             </div>
                         </div>
 
-                        // edit vaccine modal
+{{--                        // edit vaccine modal--}}
                         @foreach($recieve_vaccines as $recieve_vaccine)
                             <div id="edit-{{ $recieve_vaccine->vaccine->id }}" class="modal fade" role="dialog"
                                  style="color: black">
@@ -383,7 +383,7 @@
                                                         <input type="text"
                                                                class="form-control {{ $errors->has('vaccineName') ? ' has-error' : '' }}"
                                                                value="{{ $recieve_vaccine->vaccine->name }}"
-                                                               id="vaccineName" name="vaccineName" required>
+                                                               id="vaccineName" name="vaccineName" oninvalid="this.setCustomValidity('Please enter vaccine name')" oninput="setCustomValidity('')" required>
                                                         @if ($errors->has('vaccineName'))
                                                             <span class="help-block">
                                                     <strong>{{ $errors->first('vaccineName') }}</strong>
@@ -398,7 +398,7 @@
                                                         <input type="date"
                                                                class="form-control {{ $errors->has('receiveDate') ? ' has-error' : '' }}"
                                                                value="{{ $recieve_vaccine->received_at }}"
-                                                               id="receivedDate" name="receivedDate" required>
+                                                               id="receivedDate" name="receivedDate" oninvalid="this.setCustomValidity('Please enter received date')" oninput="setCustomValidity('')" required>
                                                         @if ($errors->has('receiveDate'))
                                                             <span class="help-block">
                                                     <strong>{{ $errors->first('receiveDate') }}</strong>
@@ -414,7 +414,7 @@
                                                         <input type="number"
                                                                class="form-control {{ $errors->has('activateRange') ? ' has-error' : '' }}"
                                                                value="{{ $recieve_vaccine->vaccine->activate_range }}"
-                                                               id="activateRange" name="activateRange" required>
+                                                               id="activateRange" name="activateRange" oninvalid="this.setCustomValidity('Please enter activate range')" oninput="setCustomValidity('')"  required>
                                                         @if ($errors->has('activateRange'))
                                                             <span class="help-block">
                                                     <strong>{{ $errors->first('activateRange') }}</strong>
@@ -434,7 +434,7 @@
                             </div>
                         @endforeach
 
-                        // show info model
+{{--                        // show info model--}}
                         @foreach($recieve_vaccines as $recieve_vaccine)
                             <div id="info-{{ $recieve_vaccine->vaccine->id }}" class="modal fade" role="dialog"
                                  style="color: black">

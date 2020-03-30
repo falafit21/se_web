@@ -67,7 +67,7 @@ class UsersController extends Controller
     {
         $user = Auth::user();
         $doctor = DoctorInfo::find($user->doctor_info_id);
-         $posts = Post::all();
+        $posts = Post::all();
         $requestQuestion = Post::where('doc_already_ans', '=', null)->get();
         $answeredPost = Post::where('doc_already_ans', '=', 1)->get();
 

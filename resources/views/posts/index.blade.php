@@ -78,9 +78,9 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="img">Illustration</label>
-                    <input type="file" class="form-control {{ $errors->has('img') ? ' has-error' : '' }}" id="img"
-                              name="img" required>
+                    <label for="img">More detail</label>
+                    <input type="file"class="form-control {{ $errors->has('img') ? ' has-error' : '' }}" id="img"
+                           name="img" required></input>
                     @if ($errors->has('img'))
                         <span class="help-block">
                     <strong>{{ $errors->first('img') }}</strong>
@@ -95,6 +95,7 @@
                                 <select disabled class="form-control">
                                     <option value="">.</option>
                                 </select>
+
                             </div>
                             <a href="{{ url('/user/profile') }}" class="btn btn-info col-2"
                                style="background-color: #EB984E; color: white">create pet</a>
@@ -175,15 +176,24 @@
 
             @foreach( $petTips as $tip )
                 <div class="carousel-item ">
-                    <div class="container"
-                         style=" padding-top:3.5em; color: white; background-image: url('{{asset('imgs/petTipBG.png')}}');">
-                        <div>
-                            <h3 style="text-align: center;margin-top: 3.6em ;font-weight: bold;font-size: 26px">{{$tip->title}}</h3>
+                    @if($tip->img_path == null)
+                        <div class="container"
+                             style=" padding-top:3.5em; color: white; background-image: url('{{asset('imgs/petTipBG.png')}}');">
+
+                            <div>
+                                <h3 style="text-align: center;margin-top: 3.6em ;font-weight: bold;font-size: 26px">{{$tip->title}}</h3>
+                            </div>
+                            <div>
+                                <h4 style="text-align: center;margin-top: 1em ;">{{$tip->detail}}</h4>
+                            </div>
                         </div>
-                        <div>
-                            <h4 style="text-align: center;margin-top: 1em ;">{{$tip->detail}}</h4>
-                        </div>
-                    </div>
+                    @else
+                        {{--                       <div>--}}
+                        <img class="d-block w-100" src="{{Storage::url($tip->img_path)}}" alt="" style="max-height: 500px" srcset="">
+                        {{--                        </div>--}}
+                    @endif
+
+
                 </div>
             @endforeach
 
