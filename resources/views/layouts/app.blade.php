@@ -19,9 +19,9 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
-<body>
+<body style="background-color: #243B55;">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-lg navbar-light navbar-dark" style="background-color: #192730;">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                      Pet Track

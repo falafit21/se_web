@@ -20,5 +20,11 @@ class PetTipsTableSeeder extends Seeder
         $pet_tip2->title = "PROVIDE A PROTECTED AND CLEAN LIVING ENVIRONMENT FOR YOUR DOG.";
         $pet_tip2->detail = "Shelter from the elements and hazards, as well as good hygiene, are basic to a quality life.";
         $pet_tip2->save();
+
+        $pet_tip3 = new \App\PetTip();
+        $pet_tip3->title = "";
+        $pet_tip3->detail = "";
+        $pet_tip3->img_path = "public/tips/banner.png";
+        $pet_tip3->save();
     }
 }

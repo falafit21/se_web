@@ -356,7 +356,7 @@
                             </div>
                         </div>
 
-                        // edit vaccine modal
+{{--                        // edit vaccine modal--}}
                         @foreach($recieve_vaccines as $recieve_vaccine)
                             <div id="edit-{{ $recieve_vaccine->vaccine->id }}" class="modal fade" role="dialog"
                                  style="color: black">
@@ -434,7 +434,7 @@
                             </div>
                         @endforeach
 
-                        // show info model
+{{--                        // show info model--}}
                         @foreach($recieve_vaccines as $recieve_vaccine)
                             <div id="info-{{ $recieve_vaccine->vaccine->id }}" class="modal fade" role="dialog"
                                  style="color: black">
