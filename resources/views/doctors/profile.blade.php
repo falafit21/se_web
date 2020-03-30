@@ -1,27 +1,13 @@
 @extends('layouts.master')
 <style>
     .center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 50%;
-}
-    
-
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 50%;
+    }
 </style>
 @section('content')
-    <div class="panel-body">
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
-            </div>
-        @endif
-        @if (session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
-    </div>
     <div style="margin: 50px; color: white">
         <div class="row">
             <div class="col-4">
@@ -30,7 +16,9 @@
                         Doctor profile
                     </h4>
                     <div class="card-body">
-                    <img src="{{Storage::url($user->img_path)}}" class="center" alt="" width="120" height="120" srcset="">
+                        <img src="{{ Storage::url($user->img_path) }}" class="center" alt="" width="120"
+                             height="120"
+                             style="margin-bottom: 10px">
                         <table class="table table-borderless">
                             <tbody style="color: black">
                             <tr>
@@ -60,10 +48,10 @@
                             <tr>
                                 <th scope="row">ANSWERED QUESTION</th>
                                 <td>
-                                    <a type="button" class="btn btn-info btn-block"
-                                       data-toggle="modal" data-target="#answeredQuestion">
+                                    <a type="button" class="btn btn-info btn-block" data-toggle="modal"
+                                       data-target="#answeredQuestion">
                                         detail
-                                        {{--                                        <span class="badge badge-light">{{ count($answeredPost) }}</span>--}}
+                                        {{-- <span class="badge badge-light">{{ count($answeredPost) }}</span>--}}
                                     </a>
                                 </td>
                             </tr>
@@ -72,14 +60,13 @@
                                 <td><a href=" " data-toggle="modal" data-target="#changePassword"
                                        style="font-size: 18px; color: #F5B041" data-toggle="tooltip"
                                        data-placement="top" title="change Password">change password</a></td>
-
                             </tr>
                             </tbody>
                         </table>
                         <div class=" text-right">
                             <i class="far fa-edit" data-toggle="modal" data-target="#editProfile"
-                               style="font-size: 18px; color: #F5B041" data-toggle="tooltip" data-placement="top"
-                               title="edit profile"></i>
+                               style="font-size: 18px; color: #F5B041" data-toggle="tooltip"
+                               data-placement="top" title="edit profile"></i>
                         </div>
                     </div>
                 </div>
@@ -92,7 +79,8 @@
                         <div class="card-body">
                             <div class="card post-card border-light" style="margin-bottom: 10px">
                                 <a href="{{ route('post.show', ['post' => $post->id]) }}"
-                                   style="text-decoration: none; color: #1b1e21; margin-top: 10px" class="container">
+                                   style="text-decoration: none; color: #1b1e21; margin-top: 10px"
+                                   class="container">
                                     <div>Question :</div>
                                     <div class="row">
                                         <div class="col-8" style="font-size: 25px;">
@@ -101,21 +89,24 @@
                                         <p class="text-muted text-right col-4" style="font-size: 15px;">
                                             <i class="fas fa-user" style="margin-right: 6px"></i>
                                             {{ $post->user->name }}
-                                            <i class="fas fa-dog" style="margin-right: 5px; margin-left: 4px"></i>
+                                            <i class="fas fa-dog"
+                                               style="margin-right: 5px; margin-left: 4px"></i>
                                             {{ $post->pet->name }}
                                         </p>
                                     </div>
                                     <p style="font-size: 18px">{{ $post->detail }}</p>
                                 </a>
-                                <form action="{{  route('post.comment.store.new', ['post_id' => $post->id]) }}"
-                                      method="POST" {{ $user->status ? "" : "hidden" }} class="container"
-                                      style="margin-bottom: 10px;">
+                                <form
+                                    action="{{  route('post.comment.store.new', ['post_id' => $post->id]) }}"
+                                    method="POST" {{ $user->status ? "" : "hidden" }} class="container"
+                                    style="margin-bottom: 10px;">
                                     @csrf
                                     <div class="row">
                                         <div class="col-10">
                                             <label for="answer" style="color: black">Answers : </label>
                                             <textarea name="answer" id="answer"
-                                                      style="width: 100%; background-color: #EAECEE" rows="2"
+                                                      style="width: 100%; background-color: #EAECEE"
+                                                      rows="2"
                                                       class="form-control @error('answer') is-invalid @enderror">{{ old('answer') }}</textarea>
                                             @error('answer')
                                             <div class="alert alert-danger">{{$message}}</div>
@@ -133,9 +124,8 @@
                 @endforeach
             </div>
         </div>
-
-
     </div>
+
     <!-- Modal edit Profile -->
     <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
          aria-hidden="true">
@@ -158,9 +148,11 @@
                                 <th>Name</th>
                                 <td>
                                     <input type="name"
-                                           class="form-control {{ $errors->has('name') ? ' has-error' : '' }}" id="name"
-                                           name="name" aria-describedby="emailHelp" placeholder="Enter Name"
-                                           value="{{$doctor->user->name}}" required>
+                                           class="form-control {{ $errors->has('name') ? ' has-error' : '' }}"
+                                           id="name" name="name" aria-describedby="emailHelp"
+                                           placeholder="Enter Name" value="{{$doctor->user->name}}"
+                                           oninvalid="this.setCustomValidity('Please enter your name')"
+                                           oninput="setCustomValidity('')" required>
                                     @if ($errors->has('name'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -173,7 +165,9 @@
                                 <td><input type="email"
                                            class="form-control {{ $errors->has('email') ? ' has-error' : '' }}"
                                            id="email" name="email" aria-describedby="emailHelp"
-                                           placeholder="Enter email" value="{{$doctor->user->email}}" required>
+                                           placeholder="Enter email" value="{{$doctor->user->email}}"
+                                           oninvalid="this.setCustomValidity('Please enter your email')"
+                                           oninput="setCustomValidity('')" required>
                                     @if ($errors->has('email'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -186,8 +180,10 @@
                                 <td><input type="text"
                                            class="form-control {{ $errors->has('phone_number') ? ' has-error' : '' }}"
                                            id="phone_number" name="phone_number" aria-describedby="emailHelp"
-                                           placeholder="Enter your phone number" value="{{$doctor->phone_number}}"
-                                           required>
+                                           placeholder="Enter your phone number"
+                                           value="{{$doctor->phone_number}}"
+                                           oninvalid="this.setCustomValidity('Please enter your phone number')"
+                                           oninput="setCustomValidity('')" required>
 
                                     @if ($errors->has('phone_number'))
                                         <span class="help-block">
@@ -201,7 +197,9 @@
                                 <td><input type="text"
                                            class="form-control {{ $errors->has('work_at') ? ' has-error' : '' }}"
                                            id="work_at" name="work_at" aria-describedby="emailHelp"
-                                           placeholder="Enter your work place" value="{{$doctor->work_at}}" required>
+                                           placeholder="Enter your work place" value="{{$doctor->work_at}}"
+                                           oninvalid="this.setCustomValidity('Please enter your work place')"
+                                           oninput="setCustomValidity('')" required>
 
                                     @if ($errors->has('work_at'))
                                         <span class="help-block">
@@ -229,7 +227,8 @@
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <form method="POST" action="{{ route('users.changePassword',['user'=>$user->id]) }}" method="post">
+                <form method="POST" action="{{ route('users.changePassword',['user'=>$user->id]) }}"
+                      method="post">
                     @method('PUT')
                     @csrf
                     <div class="modal-header">
@@ -244,32 +243,44 @@
                             <table class="table table-borderless">
                                 <tbody style="color: black">
                                 <tr>
-                                    <div class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
+                                    <div
+                                        class="form-group{{ $errors->has('current-password') ? ' has-error' : '' }}">
                                         <td><label for="new-password">Current Password</label></td>
                                         <td><input id="current-password" type="password" class="form-control"
-                                                   name="current-password" required>
+                                                   name="current-password"
+                                                   oninvalid="this.setCustomValidity('Please enter your current password')"
+                                                   oninput="setCustomValidity('')" required>
                                             @if ($errors->has('current-password'))
                                                 <span class="help-block">
-                                                <strong>{{ $errors->first('current-password') }}</strong>
-                                            </span>
-                                            @endif</td>
+                                                            <strong>{{ $errors->first('current-password') }}</strong>
+                                                        </span>
+                                            @endif
+                                        </td>
                                     </div>
                                 </tr>
                                 <tr>
-                                    <div class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
+                                    <div
+                                        class="form-group{{ $errors->has('new-password') ? ' has-error' : '' }}">
                                         <th><label for="new-password">New Password</label></th>
-                                        <td><input id="new-password" type="password" class="form-control"
-                                                   name="new-password" required>
+                                        <td>
+                                            <input id="new-password" type="password" class="form-control"
+                                                   name="new-password"
+                                                   oninvalid="this.setCustomValidity('Please enter your new password')"
+                                                   oninput="setCustomValidity('')" required>
                                             @if ($errors->has('new-password'))
                                                 <span
-                                                    class="help-block"><strong>{{ $errors->first('new-password') }}</strong></span>
-                                            @endif</td>
+                                                    class="help-block"><strong>{{ $errors->first('new-password') }}</strong>
+                                                        </span>
+                                            @endif
+                                        </td>
                                     </div>
                                 </tr>
                                 <tr>
                                     <th><label for="new-password-confirm">Confirm New Password</label></th>
                                     <td><input id="new-password-confirm" type="password" class="form-control"
-                                               name="new-password_confirmation" required></td>
+                                               name="new-password_confirmation"
+                                               oninvalid="this.setCustomValidity('Please confirm your new password')"
+                                               oninput="setCustomValidity('')" required></td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -318,18 +329,20 @@
                                         <div style="font-size: 18px">{{ $post->detail }}</div>
                                         <a onclick="myFunction({{$post->id}})" style="margin-top: 20px;"
                                            type="button">
-                                            <i style="font-size: 20px; margin-right: 5px; margin-bottom: 20px" class="far fa-comment"></i> My answer
+                                            <i style="font-size: 20px; margin-right: 5px; margin-bottom: 20px"
+                                               class="far fa-comment"></i> My answer
                                         </a>
                                         <div id="dots-{{$post->id}}"></div>
                                         <div id="more-{{$post->id}}" style="display: none; margin-top: 20px">
                                             <ul class="list-group list-group-flush">
                                                 @foreach($post->comments as $comment)
                                                     @if($comment->user_id == $user->id)
-                                                        <li class="list-group-item" style="background-color: #EAECEE">
-{{--                                                            <h6>--}}
-{{--                                                                <i class="fas fa-stethoscope"--}}
-{{--                                                                   style="margin-right: 10px; font-size: 20px"></i>{{ $comment->user->name }}--}}
-{{--                                                            </h6>--}}
+                                                        <li class="list-group-item"
+                                                            style="background-color: #EAECEE">
+                                                            {{--                                                            <h6>--}}
+                                                            {{--                                                                <i class="fas fa-stethoscope"--}}
+                                                            {{--                                                                   style="margin-right: 10px; font-size: 20px"></i>{{ $comment->user->name }}--}}
+                                                            {{--                                                            </h6>--}}
                                                             <div class="row">
                                                                 <h4 style="margin-left: 18px; margin-top: 10px">{{ $comment->comment }}</h4>
 
@@ -359,7 +372,7 @@
 
         function myFunction($i) {
             var dots = document.getElementById("dots-" + $i);
-            var moreText = document.getElementById("more-"  + $i);
+            var moreText = document.getElementById("more-" + $i);
             // var btnText = document.getElementById("myBtn-"  . $i);
 
             if (dots.style.display === "none") {

@@ -1,12 +1,12 @@
 @extends('layouts.master')
 <style>
     .center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
 
-}
-    
+    }
+
 
 </style>
 
@@ -55,17 +55,18 @@
                    type="button">
                     <i style="font-size: 20px; margin-right: 8px" class="fab fa-wpforms"></i> Question detail
                 </a>
-                <a onclick="my1Function()" style="margin-right: 20px; margin-bottom: 20px; margin-left: 33px"
-                   type="button">
-                    <i style="font-size: 20px; margin-right: 8px" class="far fa-file-image"></i> More Detail
-                </a>
+                {{--                <a onclick="my1Function()" style="margin-right: 20px; margin-bottom: 20px; margin-left: 33px"--}}
+                {{--                   type="button">--}}
+                {{--                    <i style="font-size: 20px; margin-right: 8px" class="far fa-file-image"></i> More Detail--}}
+                {{--                </a>--}}
                 <div>
                     <div id="dots"></div>
                     <div id="more" style="display: none">
                         <div class="row">
                             <div class="col-2">
                                 <i class="fas fa-dog" style="margin-left: 50px; margin-right: 7px;"></i> pet detail
-                                <table class="table table-borderless"  style="margin-top: 10px; margin-left: 50px; white-space: nowrap; width: 1%; margin-bottom: 30px" >
+                                <table class="table table-borderless"
+                                       style="margin-top: 10px; margin-left: 50px; white-space: nowrap; width: 1%; margin-bottom: 30px">
                                     <tbody>
                                     <tr>
                                         <th style="background-color: #EAECEE">Name</th>
@@ -83,8 +84,10 @@
                                 </table>
                             </div>
                             <div class="col-10">
-                                <i class="far fa-question-circle" style="margin-left: 50px; margin-right: 7px"></i> pet symptom form
-                                <table class="table table-borderless"  style="margin-top: 10px; margin-left: 50px; white-space: nowrap; width: 1%;">
+                                <i class="far fa-question-circle" style="margin-left: 50px; margin-right: 7px"></i> pet
+                                symptom form
+                                <table class="table table-borderless"
+                                       style="margin-top: 10px; margin-left: 50px; white-space: nowrap; width: 1%;">
                                     <tbody>
                                     @foreach($forms as $form)
                                         @if($form->post_id == $post->id)
@@ -98,22 +101,16 @@
                                 </table>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div>
-                    <div id="dots1"></div>
-                    <div id="more1" style="display: none">
-                        <!-- <div class="row"> -->
-                            <div class="col-6">
-                            <div >
-                                <i class="far fa-question-circle" style="margin-left: 50px; margin-right: 7px"></i> More detail
+                        @if($post->img != null)
+                        <div>
+                            <div>
+                                <i class="far fa-file-image" style="margin-left: 50px; margin-right: 7px"></i>Illustration
                             </div>
                             <br>
-                            <div>
-                                <img src="{{Storage::url($post->img)}}" class="center" alt="" width="200" height="200" srcset="">
-                            </div></div>
-                            
-                        <!-- </div> -->
+                            <img src="{{Storage::url($post->img)}}" class="rounded float-left" width="200" height="200"
+                                 style="background-color: black; margin-left: 50px;">
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -231,7 +228,7 @@
                                 <input type="text"
                                        class="form-control {{ $errors->has('question') ? ' has-error' : '' }}"
                                        id="question" name="question" placeholder="Enter Question"
-                                       value="{{ $post->question }}" required>
+                                       value="{{ $post->question }}" oninvalid="this.setCustomValidity('Please enter your question')" oninput="setCustomValidity('')" required>
                                 @if ($errors->has('question'))
                                     <span class="help-block">
                                 <strong>{{ $errors->first('question') }}</strong>
@@ -245,7 +242,7 @@
                             <div class="col-sm-9">
                                 <textarea type="text"
                                           class="form-control {{ $errors->has('detail') ? ' has-error' : '' }}"
-                                          id="detail" name="detail" placeholder="Enter Detail"
+                                          id="detail" name="detail" placeholder="Enter Detail" oninvalid="this.setCustomValidity('Please enter detail')" oninput="setCustomValidity('')"
                                           required>{{ $post->detail }}</textarea>
                                 @if ($errors->has('detail'))
                                     <span class="help-block">
@@ -280,7 +277,7 @@
                     <div class="modal-body">
                         <input type="hidden" name="id" id="id">
                         <input type="text" class="form-control {{ $errors->has('comment') ? ' has-error' : '' }}"
-                               id="comment" name="comment" placeholder="Enter comment" required>
+                               id="comment" name="comment" placeholder="Enter comment" oninvalid="this.setCustomValidity('Please enter comment')" oninput="setCustomValidity('')" required>
                         @if ($errors->has('comment'))
                             <span class="help-block">
                         <strong>{{ $errors->first('comment') }}</strong>
