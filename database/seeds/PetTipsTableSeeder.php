@@ -24,7 +24,7 @@ class PetTipsTableSeeder extends Seeder
         $pet_tip3 = new \App\PetTip();
         $pet_tip3->title = "";
         $pet_tip3->detail = "";
-        $pet_tip3->img_path = "public/tips/banner.png";
+        $pet_tip3->img_path = "public/tips/banner1.jpg";
         $pet_tip3->save();
     }
 }
