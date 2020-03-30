@@ -108,6 +108,22 @@ class UsersTableSeeder extends Seeder
 //        $user->role = "user";
         $user10->save();
 
+        $user11 = new \App\User();
+        $user11->name = "Ing shukishi";
+        $user11->email = "ing@shukishi.com";
+        $user11->password = Hash::make('ing1234');
+        $user11->status = 1;
+//        $user->role = "user";
+        $user11->save();
+
+        $user12 = new \App\User();
+        $user12->name = "Arnon shukishi";
+        $user12->email = "arnon@shukishi.com";
+        $user12->password = Hash::make('arnon1234');
+        $user12->status = 1;
+//        $user->role = "user";
+        $user12->save();
+
 
 
 
