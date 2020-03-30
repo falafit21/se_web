@@ -163,11 +163,26 @@
             <img class="d-block w-100" src="/images/petTipsBg1.png" style="max-height: 500px" alt="First slide">
         </div>
 
-        @foreach( $petTips as $tip )
-        <div class="carousel-item ">
-            <div class="container" style=" padding-top:3.5em; color: white; background-image: url('{{asset('imgs/petTipBG.png')}}');">
-                <div>
-                    <h3 style="text-align: center;margin-top: 3.6em ;font-weight: bold;font-size: 26px">{{$tip->title}}</h3>
+            @foreach( $petTips as $tip )
+                <div class="carousel-item ">
+                    @if($tip->img_path == null)
+                    <div class="container"
+                         style=" padding-top:3.5em; color: white; background-image: url('{{asset('imgs/petTipBG.png')}}');">
+
+                        <div>
+                            <h3 style="text-align: center;margin-top: 3.6em ;font-weight: bold;font-size: 26px">{{$tip->title}}</h3>
+                        </div>
+                        <div>
+                            <h4 style="text-align: center;margin-top: 1em ;">{{$tip->detail}}</h4>
+                        </div>
+                    </div>
+                    @else
+{{--                       <div>--}}
+                        <img class="d-block w-100" src="{{Storage::url($tip->img_path)}}" alt="" style="max-height: 500px" srcset="">
+{{--                        </div>--}}
+                    @endif
+
+
                 </div>
                 <div>
                     <h4 style="text-align: center;margin-top: 1em ;">{{$tip->detail}}</h4>

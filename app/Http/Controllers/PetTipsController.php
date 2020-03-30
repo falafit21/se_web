@@ -36,9 +36,16 @@ class PetTipsController extends Controller
         $tip = new PetTip();
         $tip->title = $request->input('title');
         $tip->detail = $request->input('detail');
-        $tip->img_path = 'path';
         $tip->save();
 
+        return redirect()->route('petTip.index');
+    }
+    public function storeImage(Request $request){
+        $tip = new PetTip();
+        $tip->title ="";
+        $tip->detail="";
+        $tip->img_path = $request->file('img_path')->store('public/tips');
+        $tip->save();
         return redirect()->route('petTip.index');
     }
 
@@ -80,10 +87,18 @@ class PetTipsController extends Controller
         ]);
         $tip->title = $request->input('title');
         $tip->detail = $request->input('detail');
+//        $tip->img_path = $request->file('img_path')->store('public/imgs');
         $tip->save();
         return redirect()->back();
 
     }
+
+//    public function updateImage(Request $request,$id){
+//        $tip =PetTip::findOrFail($id);
+//        $tip->img = $request->file('img')->store('public/imgs');
+//        $tip->save();
+//        return redirect()->back();
+//    }
 
     /**
      * Remove the specified resource from storage.
