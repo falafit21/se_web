@@ -1,13 +1,11 @@
 @extends('layouts.master')
 <style>
     .center {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 50%;
-}
-    
-
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 50%;
+    }
 </style>
 @section('content')
     <div class="panel-body">
@@ -30,7 +28,8 @@
                         Doctor profile
                     </h4>
                     <div class="card-body">
-                    <img src="{{Storage::url($user->img_path)}}" class="center" alt="" width="120" height="120" srcset="">
+                        <img src="{{ Storage::url($user->img_path) }}" class="center" alt="" width="120" height="120"
+                             style="margin-bottom: 10px">
                         <table class="table table-borderless">
                             <tbody style="color: black">
                             <tr>
@@ -318,7 +317,8 @@
                                         <div style="font-size: 18px">{{ $post->detail }}</div>
                                         <a onclick="myFunction({{$post->id}})" style="margin-top: 20px;"
                                            type="button">
-                                            <i style="font-size: 20px; margin-right: 5px; margin-bottom: 20px" class="far fa-comment"></i> My answer
+                                            <i style="font-size: 20px; margin-right: 5px; margin-bottom: 20px"
+                                               class="far fa-comment"></i> My answer
                                         </a>
                                         <div id="dots-{{$post->id}}"></div>
                                         <div id="more-{{$post->id}}" style="display: none; margin-top: 20px">
@@ -326,10 +326,10 @@
                                                 @foreach($post->comments as $comment)
                                                     @if($comment->user_id == $user->id)
                                                         <li class="list-group-item" style="background-color: #EAECEE">
-{{--                                                            <h6>--}}
-{{--                                                                <i class="fas fa-stethoscope"--}}
-{{--                                                                   style="margin-right: 10px; font-size: 20px"></i>{{ $comment->user->name }}--}}
-{{--                                                            </h6>--}}
+                                                            {{--                                                            <h6>--}}
+                                                            {{--                                                                <i class="fas fa-stethoscope"--}}
+                                                            {{--                                                                   style="margin-right: 10px; font-size: 20px"></i>{{ $comment->user->name }}--}}
+                                                            {{--                                                            </h6>--}}
                                                             <div class="row">
                                                                 <h4 style="margin-left: 18px; margin-top: 10px">{{ $comment->comment }}</h4>
 
@@ -359,7 +359,7 @@
 
         function myFunction($i) {
             var dots = document.getElementById("dots-" + $i);
-            var moreText = document.getElementById("more-"  + $i);
+            var moreText = document.getElementById("more-" + $i);
             // var btnText = document.getElementById("myBtn-"  . $i);
 
             if (dots.style.display === "none") {

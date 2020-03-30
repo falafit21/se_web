@@ -78,9 +78,9 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="img">More detail</label>
-                    <input type="file"class="form-control {{ $errors->has('img') ? ' has-error' : '' }}" id="img"
-                              name="img" required></input>
+                    <label for="img">Illustration</label>
+                    <input type="file" class="form-control {{ $errors->has('img') ? ' has-error' : '' }}" id="img"
+                              name="img" required>
                     @if ($errors->has('img'))
                         <span class="help-block">
                     <strong>{{ $errors->first('img') }}</strong>
@@ -95,7 +95,6 @@
                                 <select disabled class="form-control">
                                     <option value="">.</option>
                                 </select>
-
                             </div>
                             <a href="{{ url('/user/profile') }}" class="btn btn-info col-2"
                                style="background-color: #EB984E; color: white">create pet</a>
@@ -136,7 +135,7 @@
                            style="background-color: #EB984E; color: white">doctor list</a>
                     </div>
                 </div>
-                
+
 
                 <h5 style="margin-top: 50px" class="text-left">Pet Symptom</h5>
                 <table class="table text-left">
