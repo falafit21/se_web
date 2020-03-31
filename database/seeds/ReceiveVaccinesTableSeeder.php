@@ -54,16 +54,10 @@ class ReceiveVaccinesTableSeeder extends Seeder
         $v6->save();$v1 = new \App\RecievedVaccines();
 //
         $v7 = new \App\RecievedVaccines();
-        $v7->pet_id = 8;
-        $v7->vaccine_id = 8;
+        $v7->pet_id = 6;
+        $v7->vaccine_id = 11;
         $v7->received_at = \Carbon\Carbon::create('2018', '10', '10');
         $v7->save();
-//
-        $v8 = new \App\RecievedVaccines();
-        $v8->pet_id = 6;
-        $v8->vaccine_id = 11;
-        $v8->received_at = \Carbon\Carbon::create('2018', '10', '10');
-        $v8->save();
 //
 //        $v9 = new \App\RecievedVaccines();
 //        $v9->pet_id = 1;

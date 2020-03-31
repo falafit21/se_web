@@ -66,7 +66,6 @@ class PetsController extends Controller
             'img' => ['required']
         ]);
 
-
         $pet = new Pet;
         $pet->name = $request->input('name');
         $pet->user_id = Auth::id();
@@ -75,8 +74,16 @@ class PetsController extends Controller
         $pet->weight = $request->input('weight');
         $pet->birth_date = $request->input('birth-date-input');
         $pet->img = $request->file('img')->store('public/imgs');
-        $pet->save();
+        $pet-_save();
 
+//        if($pet->save()){
+//            $recentPet_id = $pet->latest()->first()->id;
+//
+//            $weight_history = new WeightHistory;
+//            $weight_history->weight = $request->input('weight');
+//            $weight_history->pet_id = $recentPet_id;
+//            $weight_history->save();
+//        }
         return redirect()->route('users.profile');
     }
 
@@ -90,6 +97,7 @@ class PetsController extends Controller
         $recieve_vaccines = RecievedVaccines::where('pet_id', '=' , $id)->get();
         $current_weight_statuses = WeightStatuses::where('pet_gene_id', '=', $currentGene)->get();
         $weight_Histories = WeightHistory::where("pet_id", "=", $id)->get();
+
         return view('pets.show', [
             'vaccinesInCurrentType' => $vaccineInCurrentType,
             'pet'=> $pet,

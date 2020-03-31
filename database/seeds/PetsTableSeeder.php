@@ -30,16 +30,16 @@ class PetsTableSeeder extends Seeder
         $pet1->birth_date = "1997-10-10";
         $pet1->img = "public/imgs/dog2.jpg";
         $pet1->save();
-
-        $pet2 = new \App\Pet();
-        $pet2->name = "Sugar";
-        $pet2->user_id = 4;
-        $pet2->pet_type_id = 2;
-        $pet2->pet_gene_id = 18;
-        $pet2->weight = 8.4;
-        $pet2->birth_date = "1997-11-22";
-        $pet2->img = "public/imgs/cat.jpg";
-        $pet2->save();
+//
+//        $pet2 = new \App\Pet();
+//        $pet2->name = "Sugar";
+//        $pet2->user_id = 4;
+//        $pet2->pet_type_id = 2;
+//        $pet2->pet_gene_id = 18;
+//        $pet2->weight = 8.4;
+//        $pet2->birth_date = "1997-11-22";
+//        $pet2->img = "public/imgs/cat.jpg";
+//        $pet2->save();
 
         $pet3 = new \App\Pet();
         $pet3->name = "Pingping";

@@ -4,11 +4,6 @@ use Illuminate\Database\Seeder;
 
 class FormsTableSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $form = new \App\Form();
@@ -82,5 +77,23 @@ class FormsTableSeeder extends Seeder
         $form12->question_form_id = 3;
         $form12->answer = "มีอาการน่าสงสัย แต่ไม่ทราบว่าเกิดจากสาเหตุใด แต่ไม่รุนแรง ไม่น่าเป็นห่วง";
         $form12->save();
+
+        $form13 = new \App\Form();
+        $form13->post_id = 5;
+        $form13->question_form_id = 1;
+        $form13->answer = "เป็นปกติ แต่มีเสียงดังบ้างบางจังหวะ";
+        $form13->save();
+
+        $form14 = new \App\Form();
+        $form14->post_id = 5;
+        $form14->question_form_id = 2;
+        $form14->answer = "เรื่องเดินไม่มีปัญหา";
+        $form14->save();
+
+        $form15 = new \App\Form();
+        $form15->post_id = 5;
+        $form15->question_form_id = 3;
+        $form15->answer = "มีอาการน่าสงสัย แต่ไม่ทราบว่าเกิดจากสาเหตุใด แต่ไม่รุนแรง ไม่น่าเป็นห่วง";
+        $form15->save();
     }
 }

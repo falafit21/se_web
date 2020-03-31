@@ -41,5 +41,22 @@ class PostsTableSeeder extends Seeder
         $post3->detail = "แมวมีอาการ ไม่สนใจอะไรเลย อาหารไม่ค่อยกิน สงสัยว่ามันอาจจะประชด ที่ไม่ยอมหาเพื่อนให้มันครับ";
         $post3->pet_id = 2;
         $post3->save();
+
+        $post4 = new Post;
+        $post4->user_id = 13;
+        $post4->request_ans_user_id = 6;
+        $post4->doc_already_ans = 1;
+        $post4->question = "เราควรให้อาหารแมวในปริมาณเท่าไร?";
+        $post4->detail = "แมวมีอาการ ไม่สนใจอะไรเลย อาหารไม่ค่อยกิน สงสัยว่ามันอาจจะประชด ที่ไม่ยอมหาเพื่อนให้มันครับ เราต้องให้อาหารอันประมาณไหนดีครับ";
+        $post4->pet_id = 3;
+        $post4->save();
+
+        $post5 = new Post;
+        $post5->user_id = 1;
+        $post5->request_ans_user_id = 6;
+        $post5->question = "ทำไมสุนัขถึงเลียฉัน";
+        $post5->detail = "มันชอบเลีย ไม่ทราบว่ามันผิดปกติมั้ยครับ";
+        $post5->pet_id = 3;
+        $post5->save();
     }
 }
