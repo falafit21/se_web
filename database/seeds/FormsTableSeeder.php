@@ -95,5 +95,23 @@ class FormsTableSeeder extends Seeder
         $form15->question_form_id = 3;
         $form15->answer = "มีอาการน่าสงสัย แต่ไม่ทราบว่าเกิดจากสาเหตุใด แต่ไม่รุนแรง ไม่น่าเป็นห่วง";
         $form15->save();
+
+        $form16 = new \App\Form();
+        $form16->post_id = 6;
+        $form16->question_form_id = 1;
+        $form16->answer = "เป็นปกติ แต่มีเสียงดังบ้างบางจังหวะ";
+        $form16->save();
+
+        $form17 = new \App\Form();
+        $form17->post_id = 6;
+        $form17->question_form_id = 2;
+        $form17->answer = "เรื่องเดินไม่มีปัญหา";
+        $form17->save();
+
+        $form18 = new \App\Form();
+        $form18->post_id = 6;
+        $form18->question_form_id = 3;
+        $form18->answer = "มีอาการน่าสงสัย แต่ไม่ทราบว่าเกิดจากสาเหตุใด แต่ไม่รุนแรง ไม่น่าเป็นห่วง";
+        $form18->save();
     }
 }
