@@ -18,7 +18,7 @@ class PostsController extends Controller
 {
     public function index()
     {
-        $posts = Post::orderBy('id', 'desc')->get();
+        $posts = Post::orderBy('created_at', 'desc')->get();
         $petTips = PetTip::all();
         $pets = Pet::where('user_id', '=', Auth::id())->get();
         $doctors = User::where('role', '=', 'doctor')->get();
@@ -87,10 +87,16 @@ class PostsController extends Controller
         $comment->save();
 
         $post = Post::find($post_id);
+        $post->created_at = \Illuminate\Support\Carbon::now();
         if($use_user_id == $post->request_ans_user_id){
             $post->doc_already_ans = 1;
             $post->save();
         }
+        else {
+            $post->save();
+        }
+
+
         return redirect()->route('post.show', ['post' => $use_post_id->id]);
     }
 

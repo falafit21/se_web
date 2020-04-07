@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div class="col-8">
-                <h2>Request Question
+                <h2>Question Request
                 </h2>
                 @foreach($requestQuestion as $post)
                     @if($post->requestDoctor->role == 'doctor' && $post->requestDoctor->id == $doctor->user->id )

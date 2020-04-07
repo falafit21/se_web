@@ -1,4 +1,5 @@
 @extends('layouts.master')
+
 <style>
     .center {
         display: block;
@@ -6,8 +7,6 @@
         margin-right: auto;
 
     }
-
-
 </style>
 
 @section('content')
@@ -115,7 +114,7 @@
                 </div>
             </div>
         </div>
-
+        {{--answer--}}
         @can('view', $post->user)
             <form action="{{  route('post.comment.store', ['post_id' => $post->id]) }}" style="margin-top: 30px;"
                   method="POST" {{ $user->status ? "" : "hidden" }}>
@@ -206,6 +205,7 @@
             @endforeach
         </ul>
     </div>
+
     <!-- Modal edit post -->
     <div class="modal fade" id="editPostModal" tabindex="-1" role="dialog" aria-labelledby="editPostModalLabel"
          aria-hidden="true">
@@ -293,7 +293,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('script')
