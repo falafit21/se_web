@@ -119,7 +119,7 @@
 
             <div class="form-group">
                 <label for="name">name</label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" oninvalid="this.setCustomValidity('Please enter doctor name')" oninput="setCustomValidity('')" required>
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" oninvalid="this.setCustomValidity('Please enter doctor name')" oninput="setCustomValidity('')"  required>
                 @if ($errors->has('name'))
                 <span class="help-block">
                     <strong>{{ $errors->first('name') }}</strong>
@@ -176,7 +176,7 @@
             </div>
             <div class="form-group">
                 <label for="licenseNumber">license number</label>
-                <input type="text" class="form-control {{ $errors->has('licenseNumber') ? ' has-error' : '' }}" id="licenseNumber" name="licenseNumber" oninvalid="this.setCustomValidity('Please enter doctor license number')" oninput="setCustomValidity('')" required>
+                <input type="text" class="form-control {{ $errors->has('licenseNumber') ? ' has-error' : '' }}" id="licenseNumber" name="licenseNumber" oninvalid="this.setCustomValidity('Please enter doctor license number')" oninput="setCustomValidity('')"  required>
                 @if ($errors->has('licenseNumber'))
                 <span class="help-block">
                     <strong>{{ $errors->first('licenseNumber') }}</strong>
@@ -185,7 +185,7 @@
             </div>
             <div class="form-group">
                 <label for="workAt">work at</label>
-                <input type="text" class="form-control {{ $errors->has('workAt') ? ' has-error' : '' }}" id="workAt" name="workAt" oninvalid="this.setCustomValidity('Please enter doctor work place')" oninput="setCustomValidity('')" required>
+                <input type="text" class="form-control {{ $errors->has('workAt') ? ' has-error' : '' }}" id="workAt" name="workAt" oninvalid="this.setCustomValidity('Please enter doctor work place')" oninput="setCustomValidity('')"  required>
                 @if ($errors->has('workAt'))
                 <span class="help-block">
                     <strong>{{ $errors->first('workAt') }}</strong>
