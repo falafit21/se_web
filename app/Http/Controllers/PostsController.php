@@ -7,6 +7,7 @@ use App\DoctorInfo;
 use App\Form;
 use App\PetTip;
 use App\Post;
+use App\PostImage;
 use App\QuestionForm;
 use App\User;
 use App\Pet;
@@ -30,8 +31,8 @@ class PostsController extends Controller
             'pets' => $pets,
             'doctors' => $doctors,
             'formsQuestion' => $formsQuestion,
-            'user'=>$user,
-            'petTips'=>$petTips
+            'user' => $user,
+            'petTips' => $petTips
         ]);
     }
 
@@ -40,25 +41,24 @@ class PostsController extends Controller
 
     }
 
-    public function store(Request $request)
+    public function storeImg(Request $request)
     {
         $request->validate([
             'chooseDoc' => ['required'],
             'title' => ['required'],
             'detail' => ['required'],
             'choosePet' => ['required'],
-            'img' => ['required']
+            'image' => ['required'],
+//            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         $post = new Post();
-
         $post->user_id = Auth::id();
         $post->request_ans_user_id = $request->input('chooseDoc');
         $post->question = $request->input('title');
         $post->detail = $request->input('detail');
-        $post->img = $request->file('img')->store('public/posts');
         $post->pet_id = $request->input('choosePet');
-
-        if($post->save()){
+        $recentPost_id = 0;
+        if ($post->save()) {
             $recentPost_id = $post->latest()->first()->id;
             $questionCount = DB::table('question_forms')->max('id');
             foreach (range(1, $questionCount) as $questionOrder) {
@@ -69,10 +69,17 @@ class PostsController extends Controller
                 $form->save();
             }
         }
-        return redirect()->route('post.index');
+        $images = $request->file('image');
+        foreach ($images as $image) {
+            $post_img = new PostImage();
+            $post_img->post_id = $recentPost_id;
+            $post_img->image = $image->store('public/posts');
+            $post_img->save();
+        }
     }
 
-    public function commentStore(Request $request, $post_id){
+    public function commentStore(Request $request, $post_id)
+    {
         $use_post_id = Post::findOrFail($post_id);
         $use_user_id = Auth::id();
 
@@ -88,19 +95,17 @@ class PostsController extends Controller
 
         $post = Post::find($post_id);
         $post->created_at = \Illuminate\Support\Carbon::now();
-        if($use_user_id == $post->request_ans_user_id){
+        if ($use_user_id == $post->request_ans_user_id) {
             $post->doc_already_ans = 1;
             $post->save();
-        }
-        else {
+        } else {
             $post->save();
         }
-
-
         return redirect()->route('post.show', ['post' => $use_post_id->id]);
     }
 
-    public function commentStoreNew(Request $request, $post_id){
+    public function commentStoreNew(Request $request, $post_id)
+    {
         $use_post_id = Post::findOrFail($post_id);
         $use_user_id = Auth::id();
 
@@ -115,7 +120,7 @@ class PostsController extends Controller
         $comment->save();
 
         $post = Post::find($post_id);
-        if($use_user_id == $post->request_ans_user_id){
+        if ($use_user_id == $post->request_ans_user_id) {
             $post->doc_already_ans = 1;
             $post->save();
         }
@@ -123,8 +128,8 @@ class PostsController extends Controller
         $user = Auth::user();
         $doctor = DoctorInfo::find($user->doctor_info_id);
         $posts = Post::all();
-        $requestQuestion = Post::where('doc_already_ans', '=', null)->get();
-        $answeredPost = Post::where('doc_already_ans', '=', 1)->get();
+        $requestQuestion = Post::where('doc_already_ans', ' = ', null)->get();
+        $answeredPost = Post::where('doc_already_ans', ' = ', 1)->get();
         return view('doctors.profile', [
             'user' => $user,
             'doctor' => $doctor,
@@ -138,10 +143,12 @@ class PostsController extends Controller
         $post = Post::find($id);
         $forms = Form::all();
         $user = Auth::user();
+        $images = PostImage::where('post_id', "=", $id)->get();
         return view('posts.show', [
             'post' => $post,
             'forms' => $forms,
-            'user' => $user
+            'user' => $user,
+            'images' => $images
         ]);
     }
 
@@ -162,31 +169,33 @@ class PostsController extends Controller
         $post->detail = $request->input('detail');
 
         $post->save();
-        return redirect()->route('post.show',['post'=>$post]);
+        return redirect()->route('post.show', ['post' => $post]);
     }
 
 
-    public function commentUpdate(Request $request, $post_id){
+    public function commentUpdate(Request $request, $post_id)
+    {
         $post = Post::findOrFail($post_id);
         $validatedData = $request->validate([
             'comment' => 'required'
         ]);
-        $comment= Comment::findOrFail($request->input('id'));
+        $comment = Comment::findOrFail($request->input('id'));
         $comment->comment = $request->input('comment');
         $comment->save();
-        return redirect()->route('post.show',['post'=>$post]);
+        return redirect()->route('post.show', ['post' => $post]);
     }
 
     public function destroy($id)
     {
         $post = Post::findOrFail($id);
-        $post -> delete();
+        $post->delete();
         return redirect()->route('post.index');
     }
 
-    public function destroyComment($comment_id){
+    public function destroyComment($comment_id)
+    {
         $comment = Comment::findOrFail($comment_id);
-        $comment -> delete();
+        $comment->delete();
         return redirect()->back();
     }
 

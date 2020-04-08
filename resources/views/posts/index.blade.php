@@ -61,7 +61,8 @@
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <div style="margin-left: 40px; margin-right: 40px; margin-top: 10px; margin-bottom: 50px;">
             <h2>Create post </h2>
-            <form method="POST" enctype="multipart/form-data" action="{{ route('post.store') }}" class="text-left">
+{{--            <form method="POST" enctype="multipart/form-data" action="{{ route('post.store') }}" class="text-left" id="upload">--}}
+            <form enctype="multipart/form-data" class="text-left" id="upload">
                 @csrf
                 <div class="form-group">
                     <label for="title">question</label>
@@ -87,8 +88,11 @@
                 </div>
                 <div class="form-group">
                     <label for="img">More detail</label>
-                    <input type="file" class="form-control {{ $errors->has('img') ? ' has-error' : '' }}" id="img"
-                           name="img" required></input>
+                    {{--                    <input type="file" class="form-control {{ $errors->has('img') ? ' has-error' : '' }}" id="img"--}}
+                    {{--                           name="img" required>--}}
+                    <input multiple type="file" id="image" name="image[]" class="form-control {{ $errors->has('image') ? ' has-error' : '' }}"/>
+                    <div id="previewImg" style="margin-top: 30px;"></div>
+
                     @if ($errors->has('img'))
                         <span class="help-block">
                     <strong>{{ $errors->first('img') }}</strong>
@@ -247,7 +251,7 @@
                             </p>
                         </div>
                         <p style="font-size: 18px">{{ $post->detail }}</p>
-{{--                        {{ $post->created_at->diffForHumans() }}--}}
+                        {{--                        {{ $post->created_at->diffForHumans() }}--}}
                     </div>
                 </a>
             </div>
@@ -276,6 +280,7 @@
             document.getElementById("mySidenav").style.width = "0px";
             document.getElementById("main").style.marginLeft = "0px";
             document.body.style.backgroundColor = "white";
+            document.getElementById("upload").reset();
         }
 
         $('a[href=#top]').click(function () {
@@ -291,5 +296,40 @@
                 $('.totop a').fadeOut();
             }
         });
+
+        $(document).ready( function() {
+            $('#image').on('change', function() { //on file input change
+
+                let data = $(this)[0].files; //this file data
+                $.each(data, function (index, file) { //loop though each file
+                    if (/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)) { //check supported file type
+                        let fRead = new FileReader(); //new filereader
+                        fRead.onload = (function (file) { //trigger function on successful read
+                            return function(e) {
+                                let img = $('<img/>').addClass('img-thumbnail').attr('src', e.target.result).attr('width', '200px').attr('height', '200px'); //create image element
+                                $('#previewImg').append(img); //append image to output element
+                            };
+                        })(file);
+                        fRead.readAsDataURL(file); //URL representing the file's data.
+                    }
+                });
+            });
+        });
+
+        let form = document.getElementById('upload');
+        let request = new XMLHttpRequest();
+        form.addEventListener('submit', function(e){
+            e.preventDefault();
+            let formData = new FormData(form);
+            request.open('post', '/uploadPostImg');
+            request.addEventListener("load", transferComplete);
+            request.send(formData);
+        });
+        function transferComplete(data){
+            console.log(data.currentTarget.response);
+            closeNav();
+            location.reload();
+        }
+
     </script>
 @endsection
