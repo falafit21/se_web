@@ -48,7 +48,6 @@ class PostsController extends Controller
             'title' => ['required'],
             'detail' => ['required'],
             'choosePet' => ['required'],
-            'image' => ['required'],
 //            'image.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
         $post = new Post();
@@ -76,6 +75,8 @@ class PostsController extends Controller
             $post_img->image = $image->store('public/posts');
             $post_img->save();
         }
+
+        return redirect()->route('post.index');
     }
 
     public function commentStore(Request $request, $post_id)
@@ -86,11 +87,12 @@ class PostsController extends Controller
         $request->validate([
             'answer' => ['required', 'min:1']
         ]);
-
+        $image = $request->file('image');
         $comment = new Comment;
         $comment->post_id = $use_post_id->id;
         $comment->user_id = $use_user_id;
         $comment->comment = $request->input('answer');
+        $comment->image = $image->store('public/comments');
         $comment->save();
 
         $post = Post::find($post_id);

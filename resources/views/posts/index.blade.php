@@ -87,7 +87,7 @@
                     @endif
                 </div>
                 <div class="form-group">
-                    <label for="img">More detail</label>
+                    <label for="img">More detail ( can choose more than 2 pictures )</label>
                     {{--                    <input type="file" class="form-control {{ $errors->has('img') ? ' has-error' : '' }}" id="img"--}}
                     {{--                           name="img" required>--}}
                     <input multiple type="file" id="image" name="image[]" class="form-control {{ $errors->has('image') ? ' has-error' : '' }}"/>
@@ -274,13 +274,13 @@
             document.getElementById("mySidenav").style.width = "700px";
             document.getElementById("main").style.marginLeft = "700px";
             document.body.style.backgroundColor = "rgba(0,0,0,0)";
+            document.getElementById("upload").reset();
         }
 
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0px";
             document.getElementById("main").style.marginLeft = "0px";
             document.body.style.backgroundColor = "white";
-            document.getElementById("upload").reset();
         }
 
         $('a[href=#top]').click(function () {
@@ -328,7 +328,6 @@
         function transferComplete(data){
             console.log(data.currentTarget.response);
             closeNav();
-            location.reload();
         }
 
     </script>

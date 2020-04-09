@@ -5,7 +5,6 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
-
     }
 </style>
 
@@ -50,7 +49,7 @@
                         @endcan
                     </div>
                 </div>
-                <a onclick="myFunction()" style="margin-right: 20px; margin-bottom: 20px; margin-left: 33px"
+                <a onclick="showQuestionDetail()" style="margin-right: 20px; margin-bottom: 20px; margin-left: 33px"
                    type="button">
                     <i style="font-size: 20px; margin-right: 8px" class="fab fa-wpforms"></i> Question detail
                 </a>
@@ -100,7 +99,7 @@
                                 </table>
                             </div>
                         </div>
-                        @if($images != null)
+                        @if(sizeof($images) != null)
                             <div>
                                 <div>
                                     <i class="far fa-file-image" style="margin-left: 50px; margin-right: 7px"></i>Illustration
@@ -121,7 +120,8 @@
         {{--answer--}}
         @can('view', $post->user)
             <form action="{{  route('post.comment.store', ['post_id' => $post->id]) }}" style="margin-top: 30px;"
-                  method="POST" {{ $user->status ? "" : "hidden" }}>
+                  method="POST" {{ $user->status ? "" : "hidden" }} enctype="multipart/form-data">
+                {{--                <form enctype="multipart/form-data" class="text-left" id="upload" {{ $user->status ? "" : "hidden" }} style="margin-top: 30px;">--}}
                 @csrf
                 <div class="row">
                     <div class="col-10">
@@ -131,9 +131,14 @@
                         @error('answer')
                         <div class="alert alert-danger">{{$message}}</div>
                         @enderror
+                        <div class="" style="background-color: white; border-radius: 5px">
+                            <input type="file" class="form-control" style="margin-top: 10px" id="image" name="image"/>
+                            <div id="previewImg"></div>
+                        </div>
+                        <small style="color: white">image is optional</small>
                     </div>
-                    <div class="col-2 text-right" style="display: flex; justify-content: center; align-items: center;">
-                        <button class="btn btn-info" type="submit">comment</button>
+                    <div class="col-2" style="margin-top: 121px">
+                        <button class="btn btn-info btn-block" type="submit">comment</button>
                     </div>
                 </div>
             </form>
@@ -152,7 +157,6 @@
                         <div class="row">
                             <h4 class="col-11" style="margin-top: 10px">{{ $comment->comment }}</h4>
                             <div class="col-1 text-right row" style="font-size: 20px">
-
                                 <form id="deleteForm" onsubmit="return confirm('Are you sure to delete this comment ?')"
                                       action="{{route('post.comment.destroy', ['comment_id' => $comment->id]) }}"
                                       method="post" class="">
@@ -203,7 +207,17 @@
                                 </form>
                             </div>
                         </div>
-                        {{ $comment->created_at->diffForHumans() }}
+                        <a onclick="showAnswerDetail()" style="margin-right: 20px; margin-bottom: 10px;"
+                           type="button">
+                            <i style="font-size: 20px; margin-right: 8px" class="fab fa-wpforms"></i> More detail
+                        </a>
+                        <div style="margin-bottom: 10px">
+                            <div id="dots1"></div>
+                            <div id="more1" style="display: none; width: 100%" >
+                                <img src="{{Storage::url($comment->image)}}" class="rounded float-left"
+                                     width="200" height="200" style="background-color: black; margin-bottom: 20px">
+                            </div>
+                        </div>
                     </li>
                 @endif
             @endforeach
@@ -306,14 +320,14 @@
 @endsection
 
 @section('script')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    {{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--}}
+    {{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>--}}
+    {{--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>--}}
     <script>
         $('#editCommentModal').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
             var comment = button.data('comment');
-            var id = button.data('id')
+            var id = button.data('id');
             var modal = $(this);
 
             modal.find('.modal-body #comment').val(comment);
@@ -321,36 +335,52 @@
         })
 
 
-        function myFunction() {
-            var dots = document.getElementById("dots");
-            var moreText = document.getElementById("more");
-            var btnText = document.getElementById("myBtn");
+        function showQuestionDetail() {
+            let dots = document.getElementById("dots");
+            let moreText = document.getElementById("more");
+            let btnText = document.getElementById("myBtn");
 
             if (dots.style.display === "none") {
                 dots.style.display = "inline";
-                // btnText.innerHTML = "Read more";
                 moreText.style.display = "none";
             } else {
                 dots.style.display = "none";
-                // btnText.innerHTML = "Read less";
                 moreText.style.display = "inline";
             }
         }
 
-        function my1Function() {
-            var dots = document.getElementById("dots1");
-            var moreText = document.getElementById("more1");
-            var btnText = document.getElementById("myBtn1");
+        function showAnswerDetail() {
+            let dots = document.getElementById("dots1");
+            let moreText = document.getElementById("more1");
+            let btnText = document.getElementById("myBtn1");
 
             if (dots.style.display === "none") {
                 dots.style.display = "inline";
-                // btnText.innerHTML = "Read more";
                 moreText.style.display = "none";
             } else {
                 dots.style.display = "none";
-                // btnText.innerHTML = "Read less";
                 moreText.style.display = "inline";
             }
         }
+
+        $(document).ready(function () {
+            $('#image').on('change', function () { //on file input change
+
+                let data = $(this)[0].files; //this file data
+                $.each(data, function (index, file) { //loop though each file
+                    if (/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)) { //check supported file type
+                        let fRead = new FileReader(); //new filereader
+                        fRead.onload = (function (file) { //trigger function on successful read
+                            return function (e) {
+                                let img = $('<img style="margin-top: 20px; padding-bottom: 20px; margin-left: 10px"/>').addClass('img-thumbnail').attr('src', e.target.result).attr('width', '200px').attr('height', '200px'); //create image element
+                                $('#previewImg').append(img); //append image to output element
+                            };
+                        })(file);
+                        fRead.readAsDataURL(file); //URL representing the file's data.
+                    }
+                });
+            });
+        });
+
     </script>
 @endsection
