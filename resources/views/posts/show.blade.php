@@ -178,7 +178,21 @@
                                 </form>
                             </div>
                         </div>
-                        {{ $comment->created_at->diffForHumans() }}
+                        @if($comment->image != null)
+                            <a onclick="showAnswerDetail({{$comment->id}})"
+                               style="margin-right: 20px; margin-bottom: 10px;"
+                               type="button">
+                                <i style="font-size: 20px; margin-right: 8px" class="fas fa-images"></i>Illustration
+                            </a>
+
+                            <div style="margin-bottom: 10px">
+                                <div id="dots-{{$comment->id}}"></div>
+                                <div id="more-{{$comment->id}}" style="display: none; width: 100%">
+                                    <img src="{{Storage::url($comment->image)}}" class="rounded float-left"
+                                         width="200" height="200" style="background-color: black; margin-bottom: 20px">
+                                </div>
+                            </div>
+                        @endif
                     </li>
                 @else
                     <li class="list-group-item">
@@ -207,17 +221,21 @@
                                 </form>
                             </div>
                         </div>
-                        <a onclick="showAnswerDetail()" style="margin-right: 20px; margin-bottom: 10px;"
-                           type="button">
-                            <i style="font-size: 20px; margin-right: 8px" class="fab fa-wpforms"></i> More detail
-                        </a>
-                        <div style="margin-bottom: 10px">
-                            <div id="dots1"></div>
-                            <div id="more1" style="display: none; width: 100%" >
-                                <img src="{{Storage::url($comment->image)}}" class="rounded float-left"
-                                     width="200" height="200" style="background-color: black; margin-bottom: 20px">
+                        @if($comment->image != null)
+                            <a onclick="showAnswerDetail({{$comment->id}})"
+                               style="margin-right: 20px; margin-bottom: 10px;"
+                               type="button">
+                                <i style="font-size: 20px; margin-right: 8px" class="fas fa-images"></i>Illustration
+                            </a>
+
+                            <div style="margin-bottom: 10px">
+                                <div id="dots-{{$comment->id}}"></div>
+                                <div id="more-{{$comment->id}}" style="display: none; width: 100%">
+                                    <img src="{{Storage::url($comment->image)}}" class="rounded float-left"
+                                         width="200" height="200" style="background-color: black; margin-bottom: 20px">
+                                </div>
                             </div>
-                        </div>
+                        @endif
                     </li>
                 @endif
             @endforeach
@@ -349,10 +367,10 @@
             }
         }
 
-        function showAnswerDetail() {
-            let dots = document.getElementById("dots1");
-            let moreText = document.getElementById("more1");
-            let btnText = document.getElementById("myBtn1");
+        function showAnswerDetail(comment_id) {
+            let dots = document.getElementById("dots-" + comment_id);
+            let moreText = document.getElementById("more-" + comment_id);
+            let btnText = document.getElementById("myBtn1-" + comment_id);
 
             if (dots.style.display === "none") {
                 dots.style.display = "inline";

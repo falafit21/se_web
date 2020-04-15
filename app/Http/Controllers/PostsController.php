@@ -87,13 +87,23 @@ class PostsController extends Controller
         $request->validate([
             'answer' => ['required', 'min:1']
         ]);
-        $image = $request->file('image');
-        $comment = new Comment;
-        $comment->post_id = $use_post_id->id;
-        $comment->user_id = $use_user_id;
-        $comment->comment = $request->input('answer');
-        $comment->image = $image->store('public/comments');
-        $comment->save();
+//        $image = $request->file('image');
+        if($image = $request->file('image') == null ){
+            $comment = new Comment;
+            $comment->post_id = $use_post_id->id;
+            $comment->user_id = $use_user_id;
+            $comment->comment = $request->input('answer');
+            $comment->save();
+        }
+        else {
+            $comment = new Comment;
+            $comment->post_id = $use_post_id->id;
+            $comment->user_id = $use_user_id;
+            $comment->comment = $request->input('answer');
+            $comment->image = $request->file('image')->store('public/comments');
+            $comment->save();
+        }
+
 
         $post = Post::find($post_id);
         $post->created_at = \Illuminate\Support\Carbon::now();
