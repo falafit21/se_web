@@ -17,6 +17,8 @@ Route::post('/posts/{post_id}/comment', 'PostsController@commentStore')->name('p
 Route::post('/posts/{post_id}/comment/new', 'PostsController@commentStoreNew')->name('post.comment.store.new');
 Route::put('/posts/{post_id}/commentedit', 'PostsController@commentUpdate')->name('post.comment.update');
 Route::delete('posts/{comment_id}/comment','PostsController@destroyComment')->name('post.comment.destroy');
+Route::post('/uploadPostImg', 'PostsController@storeImg');
+//Route::post('/uploadComment', 'CommentController@storeImg');
 
 //doctor
 Route::put('/docProfile/{doctor_id}/edit','UsersController@updateProfile')->name("user.update.doctor");

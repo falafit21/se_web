@@ -21,7 +21,7 @@ class CreatePostsTable extends Migration
             $table->string('question');
             $table->text('detail');
             $table->bigInteger('pet_id')->unsigned();
-            $table->string('img')->nullable(true);
+//            $table->string('img')->nullable(true);
             $table->timestamps();
 
 
