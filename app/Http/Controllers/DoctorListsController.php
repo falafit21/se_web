@@ -31,34 +31,36 @@ class DoctorListsController extends Controller
 
     public function store(Request $request)
     {
-        //        $request->validate();
-//        $validatedData = $request->validate([
-//            'name' => 'required',
-//            'email' => 'required',
-//            'password' => 'required',
-//            'phoneNumber' => 'required',
-//            'graduatedFrom' => 'required',
-//            'workAt' => 'required',
-//            'licenseNumber' => 'required'
-//        ]);
-//        $docInfo = new DoctorInfo;
-//        $docInfo->phone_number = $request->input('phoneNumber');
-//        $docInfo->graduated = $request->input('graduatedFrom');
-//        $docInfo->work_at = $request->input('workAt');
-//        $docInfo->license_number = $request->input('licenseNumber');
-//        if ($docInfo->save()) {
-//            $recentDocInfo_id = $docInfo->latest()->first()->id;
-//            $user = new User;
-//            $user->name = $request->input('name');
-//            $user->email = $request->input('email');
-//            $user->password = Hash::make($request->input('password'));
-//            $user->role = "doctor";
-//            $user->status = 1;
-//            $user->doctor_info_id = $recentDocInfo_id;
-//            $user->img_path = $request->file('img_path')->store('public/doctors');
-//            $user->save();
-//        }
-//        return  redirect()->route('admin.createDoc');
+        // return $request;
+
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'confirmPassword' => 'required',
+            'phoneNumber' => 'required',
+            'graduatedFrom' => 'required',
+            'workAt' => 'required',
+            'licenseNumber' => 'required'
+        ]);
+        $docInfo = new DoctorInfo;
+        $docInfo->phone_number = $request->input('phoneNumber');
+        $docInfo->graduated = $request->input('graduatedFrom');
+        $docInfo->work_at = $request->input('workAt');
+        $docInfo->license_number = $request->input('licenseNumber');
+        if ($docInfo->save()) {
+            $recentDocInfo_id = $docInfo->latest()->first()->id;
+            $user = new User;
+            $user->name = $request->input('name');
+            $user->email = $request->input('email');
+            $user->password = Hash::make($request->input('confirmPassword'));
+            $user->role = "doctor";
+            $user->status = 1;
+            $user->doctor_info_id = $recentDocInfo_id;
+            $user->img_path = $request->file('img_path')->store('public/doctors');
+            $user->save();
+            // dd($user);
+        }
+        return  redirect()->route('admin.createDoc');
 //        return;
     }
 
@@ -94,7 +96,24 @@ class DoctorListsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+//        $docInfo = new DoctorInfo;
+//        $docInfo->phone_number = $request->input('phoneNumber');
+//        $docInfo->graduated = $request->input('graduatedFrom');
+//        $docInfo->work_at = $request->input('workAt');
+//        $docInfo->license_number = $request->input('licenseNumber');
+//        if ($docInfo->save()) {
+//            $recentDocInfo_id = $docInfo->latest()->first()->id;
+//            $user = new User;
+//            $user->name = $request->input('name');
+//            $user->email = $request->input('email');
+//            $user->password = Hash::make($request->input('password'));
+//            $user->role = "doctor";
+//            $user->status = 1;
+//            $user->doctor_info_id = $recentDocInfo_id;
+//            $user->img_path = $request->file('img_path')->store('public/doctors');
+//            $user->save();
+//        }
+//        return redirect()->back()->with("success","Register successfully !");
     }
 
     /**

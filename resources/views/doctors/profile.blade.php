@@ -125,6 +125,7 @@
                                             @error('answer')
                                             <div class="alert alert-danger">{{$message}}</div>
                                             @enderror
+
                                         </div>
                                         <div class="col-2 text-right"
                                              style="display: flex; justify-content: center; align-items: center;">
@@ -391,5 +392,6 @@
                 moreText.style.display = "inline";
             }
         }
+
     </script>
 @endsection
