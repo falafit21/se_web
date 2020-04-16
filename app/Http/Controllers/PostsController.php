@@ -142,12 +142,13 @@ class PostsController extends Controller
         $posts = Post::all();
         $requestQuestion = Post::where('doc_already_ans', ' = ', null)->get();
         $answeredPost = Post::where('doc_already_ans', ' = ', 1)->get();
-        return view('doctors.profile', [
-            'user' => $user,
-            'doctor' => $doctor,
-            'requestQuestion' => $requestQuestion,
-            'answeredPost' => $answeredPost
-        ]);
+        return redirect()->route("docProfile");
+//        return view('doctors.profile', [
+//            'user' => $user,
+//            'doctor' => $doctor,
+//            'requestQuestion' => $requestQuestion,
+//            'answeredPost' => $answeredPost
+//        ]);
     }
 
     public function show($id)

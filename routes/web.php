@@ -22,7 +22,7 @@ Route::post('/uploadPostImg', 'PostsController@storeImg');
 
 //doctor
 Route::put('/docProfile/{doctor_id}/edit','UsersController@updateProfile')->name("user.update.doctor");
-Route::get('/docProfile', 'UsersController@getDocProfile');
+Route::get('/docProfile', 'UsersController@getDocProfile')->name("docProfile");
 Route::get('/admin/createDoc', 'UsersController@createDoc')->name('admin.createDoc');
 Route::resource('/doctorLists','DoctorListsController');
 Route::post('/doctor/profile/changePassword','DoctorListsController@changePassword')->name('doctor.changePassword');
