@@ -31,11 +31,12 @@ class DoctorListsController extends Controller
 
     public function store(Request $request)
     {
-                $request->validate();
+        // return $request;
+
         $validatedData = $request->validate([
             'name' => 'required',
             'email' => 'required',
-            'password' => 'required',
+            'confirmPassword' => 'required',
             'phoneNumber' => 'required',
             'graduatedFrom' => 'required',
             'workAt' => 'required',
@@ -51,14 +52,15 @@ class DoctorListsController extends Controller
             $user = new User;
             $user->name = $request->input('name');
             $user->email = $request->input('email');
-            $user->password = Hash::make($request->input('password'));
+            $user->password = Hash::make($request->input('confirmPassword'));
             $user->role = "doctor";
             $user->status = 1;
             $user->doctor_info_id = $recentDocInfo_id;
             $user->img_path = $request->file('img_path')->store('public/doctors');
             $user->save();
+            // dd($user);
         }
-        return  redirect()->route('admin.createDoc');
+       return  redirect()->route('admin.createDoc');
 //        return;
     }
 

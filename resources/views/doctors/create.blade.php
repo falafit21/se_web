@@ -101,59 +101,193 @@
         @endif
     </div>
 
-    {{--confirm doctor info--}}
-    <div class="modal fade" id="confirmDoctorInfo" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
 
-                    <div class="card border-light text-center" style="margin-bottom: 20px">
-                        <div class="card-header text-center" style="font-size: 20px">Confirmed Doctor Information
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
+    <form method="POST" enctype="multipart/form-data" action="{{ route('doctorLists.store') }}">
+        @csrf
+        {{--create doc section--}}
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div style="margin-left: 40px; margin-right: 40px; margin-top: 10px; margin-bottom: 50px;">
+                <h3>Create Doctor</h3>
+                    <h5 style="margin-top: 50px">Step 1 : Basic Info</h5>
 
-                                            </div>
-                        <div class="card-body">
-                            <img id="image_upload_preview" class="center" alt="" width="120" height="120" style="margin-bottom: 10px" src="" alt="your image" />
-                            <div class="container">
-                                <table class="table table-borderless text-left">
-                                    <tbody style="color: black">
-                                         <tr>
-                                             <th scope="row">NAME</th>
-                                             <td ><input class="custom" id="confirmName"/></td>
-                                          </tr>
-                                          <tr>
-                                             <th scope="row">PHONE NUMBER</th>
-                                             <td ><input class="custom" id="confirmPhoneNumber"/></td>
-                                          </tr>
-                                          <tr>
-                                              <th scope="row">EMAIL</th>
-                                              <td ><input class="custom" id="confirmEmail"/></td>
-                                          </tr>
-                                          <tr>
-                                              <th scope="row">GRADUATED FROM</th>
-                                              <td><input class="custom" id="confirmGraduateFrom"/></td>
-                                          </tr>
-                                          <tr>
-                                              <th scope="row">LICENSE NUMBER</th>
-                                              <td><input class="custom" id="confirmLicenseNumber"/></td>
-                                          </tr>
-                                          <tr>
-                                              <th scope="row">WORK AT</th>
-                                              <td><input class="custom" id="confirmWorkAt"/></td>
-                                          </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-
-                            {{--                            <a href="{{ url('docProfile') }}" class="btn btn-primary" style="margin: 20px">view Doctor profile</a>--}}
-                        </div>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
+                            oninvalid="this.setCustomValidity('Please enter doctor name')"
+                            oninput="setCustomValidity('')" required>
+                        @if ($errors->has('name'))
+                            <span class="help-block">
+                        <strong>{{ $errors->first('name') }}</strong>
+                    </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email"
+                            oninvalid="this.setCustomValidity('Please enter doctor email')"
+                            oninput="setCustomValidity('')" required>
+                        @if ($errors->has('email'))
+                            <span class="help-block">
+                        <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                        @endif
                     </div>
 
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control {{ $errors->has('password') ? ' has-error' : '' }}"
+                            id="password" name="password" oninvalid="this.setCustomValidity('Please enter password')"
+                            oninput="setCustomValidity('')" required>
+                        @if ($errors->has('password'))
+                            <span class="help-block">
+                        <strong>{{ $errors->first('password') }}</strong>
+                    </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <input type="password"
+                            class="form-control {{ $errors->has('confirmPassword') ? ' has-error' : '' }}"
+                            id="confirmPassword" name="confirmPassword"
+                            oninvalid="this.setCustomValidity('Please confirm password')" oninput="setCustomValidity('')"
+                            required>
+                        @if ($errors->has('confirmPassword'))
+                            <span class="help-block">
+                        <strong>{{ $errors->first('confirmPassword') }}</strong>
+                    </span>
+                        @endif
+                    </div>
+
+                    <h5 style="margin-top: 50px">Step 2 : Advance Info</h5>
+                    <div class="form-group">
+                        <label for="phoneNumber">Phone Number</label>
+                        <input type="text" class="form-control {{ $errors->has('phoneNumber') ? ' has-error' : '' }}"
+                            id="phoneNumber" name="phoneNumber"
+                            oninvalid="this.setCustomValidity('Please enter doctor phone number')"
+                            oninput="setCustomValidity('')" required>
+                        @if ($errors->has('phoneNumber'))
+                            <span class="help-block">
+                        <strong>{{ $errors->first('phoneNumber') }}</strong>
+                    </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="graduatedFrom">Graduated From</label>
+                        <input type="text" class="form-control {{ $errors->has('graduatedFrom') ? ' has-error' : '' }}"
+                            id="graduatedFrom" name="graduatedFrom"
+                            oninvalid="this.setCustomValidity('Please enter doctor graduated from')"
+                            oninput="setCustomValidity('')" required>
+                        @if ($errors->has('graduatedFrom'))
+                            <span class="help-block">
+                        <strong>{{ $errors->first('graduatedFrom') }}</strong>
+                    </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="licenseNumber">License Number</label>
+                        <input type="text" class="form-control {{ $errors->has('licenseNumber') ? ' has-error' : '' }}"
+                            id="licenseNumber" name="licenseNumber"
+                            oninvalid="this.setCustomValidity('Please enter doctor license number')"
+                            oninput="setCustomValidity('')" required>
+                        @if ($errors->has('licenseNumber'))
+                            <span class="help-block">
+                        <strong>{{ $errors->first('licenseNumber') }}</strong>
+                    </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="workAt">Work At</label>
+                        <input type="text" class="form-control {{ $errors->has('workAt') ? ' has-error' : '' }}" id="workAt"
+                            name="workAt" oninvalid="this.setCustomValidity('Please enter doctor work place')"
+                            oninput="setCustomValidity('')" required>
+                        @if ($errors->has('workAt'))
+                            <span class="help-block">
+                        <strong>{{ $errors->first('workAt') }}</strong>
+                    </span>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label for="img_path">Image</label>
+                        <input type='file' id="inputFile" class="form-control {{ $errors->has('img_path') ? ' has-error' : '' }}"
+                                            name="img_path" required>
+                        @if ($errors->has('img_path'))
+                            <span class="help-block">
+                        <strong>{{ $errors->first('img_path') }}</strong>
+                    </span>
+                        @endif
+                    </div>
+
+                    <div class="form-group text-right" >
+                        <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#confirmDoctorInfo" onclick="getInputValue()">
+                            Create
+                        </button>
+                    </div>
+                <!-- </form> -->
             </div>
         </div>
-    </div>
+
+        {{--confirm doctor info--}}
+        <div class="modal fade" id="confirmDoctorInfo" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                        <!-- <form method="POST" enctype="multipart/form-data" action="{{ route('doctorLists.store') }}"> -->
+
+                        <!-- @csrf -->
+                        <div class="card border-light text-center" style="margin-bottom: 20px">
+                            <div class="card-header text-center" style="font-size: 20px">Confirmed Doctor Information
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+
+                                                </div>
+                            <div class="card-body">
+                                <img id="image_upload_preview" class="center" alt="" width="120" height="120" style="margin-bottom: 10px" src="" alt="your image" />
+                                <div class="container">
+                                    <table class="table table-borderless text-left">
+                                        <tbody style="color: black">
+                                            <tr>
+                                                <th scope="row">NAME</th>
+                                                <td ><input class="custom" id="confirmName"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">PHONE NUMBER</th>
+                                                <td ><input class="custom" id="confirmPhoneNumber"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">EMAIL</th>
+                                                <td ><input class="custom" id="confirmEmail"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">GRADUATED FROM</th>
+                                                <td><input class="custom" id="confirmGraduateFrom"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">LICENSE NUMBER</th>
+                                                <td><input class="custom" id="confirmLicenseNumber"/></td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">WORK AT</th>
+                                                <td><input class="custom" id="confirmWorkAt"/></td>
+                                            </tr>
+
+                                            <input type="hidden" id="confirmPassword">
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button type="submit">Save</button>
+
+                                <!-- {{--                            <a href="{{ url('docProfile') }}" class="btn btn-primary" style="margin: 20px">view Doctor profile</a>--}} -->
+                            </div>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
 
     {{-- change password model--}}
     <div class="modal fade" id="changePassword" tabindex="-1" role="dialog" aria-labelledby="editModalLabel"
@@ -221,132 +355,6 @@
 
             </div>
 
-        </div>
-    </div>
-
-    {{--create doc section--}}
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <div style="margin-left: 40px; margin-right: 40px; margin-top: 10px; margin-bottom: 50px;">
-            <h3>Create Doctor</h3>
-{{--            <form method="POST" enctype="multipart/form-data" action="{{ route('doctorLists.store') }}">--}}
-{{--            <form>--}}
-                @csrf
-                <h5 style="margin-top: 50px">Step 1 : Basic Info</h5>
-
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name"
-                           oninvalid="this.setCustomValidity('Please enter doctor name')"
-                           oninput="setCustomValidity('')" required>
-                    @if ($errors->has('name'))
-                        <span class="help-block">
-                    <strong>{{ $errors->first('name') }}</strong>
-                </span>
-                    @endif
-                </div>
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email"
-                           oninvalid="this.setCustomValidity('Please enter doctor email')"
-                           oninput="setCustomValidity('')" required>
-                    @if ($errors->has('email'))
-                        <span class="help-block">
-                    <strong>{{ $errors->first('email') }}</strong>
-                </span>
-                    @endif
-                </div>
-
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control {{ $errors->has('password') ? ' has-error' : '' }}"
-                           id="password" name="password" oninvalid="this.setCustomValidity('Please enter password')"
-                           oninput="setCustomValidity('')" required>
-                    @if ($errors->has('password'))
-                        <span class="help-block">
-                    <strong>{{ $errors->first('password') }}</strong>
-                </span>
-                    @endif
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword">Confirm Password</label>
-                    <input type="password"
-                           class="form-control {{ $errors->has('confirmPassword') ? ' has-error' : '' }}"
-                           id="confirmPassword" name="confirmPassword"
-                           oninvalid="this.setCustomValidity('Please confirm password')" oninput="setCustomValidity('')"
-                           required>
-                    @if ($errors->has('confirmPassword'))
-                        <span class="help-block">
-                    <strong>{{ $errors->first('confirmPassword') }}</strong>
-                </span>
-                    @endif
-                </div>
-
-                <h5 style="margin-top: 50px">Step 2 : Advance Info</h5>
-                <div class="form-group">
-                    <label for="phoneNumber">Phone Number</label>
-                    <input type="text" class="form-control {{ $errors->has('phoneNumber') ? ' has-error' : '' }}"
-                           id="phoneNumber" name="phoneNumber"
-                           oninvalid="this.setCustomValidity('Please enter doctor phone number')"
-                           oninput="setCustomValidity('')" required>
-                    @if ($errors->has('phoneNumber'))
-                        <span class="help-block">
-                    <strong>{{ $errors->first('phoneNumber') }}</strong>
-                </span>
-                    @endif
-                </div>
-                <div class="form-group">
-                    <label for="graduatedFrom">Graduated From</label>
-                    <input type="text" class="form-control {{ $errors->has('graduatedFrom') ? ' has-error' : '' }}"
-                           id="graduatedFrom" name="graduatedFrom"
-                           oninvalid="this.setCustomValidity('Please enter doctor graduated from')"
-                           oninput="setCustomValidity('')" required>
-                    @if ($errors->has('graduatedFrom'))
-                        <span class="help-block">
-                    <strong>{{ $errors->first('graduatedFrom') }}</strong>
-                </span>
-                    @endif
-                </div>
-                <div class="form-group">
-                    <label for="licenseNumber">License Number</label>
-                    <input type="text" class="form-control {{ $errors->has('licenseNumber') ? ' has-error' : '' }}"
-                           id="licenseNumber" name="licenseNumber"
-                           oninvalid="this.setCustomValidity('Please enter doctor license number')"
-                           oninput="setCustomValidity('')" required>
-                    @if ($errors->has('licenseNumber'))
-                        <span class="help-block">
-                    <strong>{{ $errors->first('licenseNumber') }}</strong>
-                </span>
-                    @endif
-                </div>
-                <div class="form-group">
-                    <label for="workAt">Work At</label>
-                    <input type="text" class="form-control {{ $errors->has('workAt') ? ' has-error' : '' }}" id="workAt"
-                           name="workAt" oninvalid="this.setCustomValidity('Please enter doctor work place')"
-                           oninput="setCustomValidity('')" required>
-                    @if ($errors->has('workAt'))
-                        <span class="help-block">
-                    <strong>{{ $errors->first('workAt') }}</strong>
-                </span>
-                    @endif
-                </div>
-                <div class="form-group">
-                    <label for="img_path">Image</label>
-                    <input type='file' id="inputFile" class="form-control {{ $errors->has('img_path') ? ' has-error' : '' }}"
-                                           name="img_path" required>
-                    @if ($errors->has('img_path'))
-                        <span class="help-block">
-                    <strong>{{ $errors->first('img_path') }}</strong>
-                </span>
-                    @endif
-                </div>
-
-                <div class="form-group text-right" >
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#confirmDoctorInfo" onclick="getInputValue()">
-                        Create
-                    </button>
-                </div>
-{{--            </form>--}}
         </div>
     </div>
 
