@@ -8,7 +8,9 @@
  - สั่ง `composer require` เพื่อ install library ของ laravel เมื่อสั่งเสร็จ check จะต้องมี folder vendor ขึ้นมา
  - สั่ง `php migrate` เพื่อสร้าง tabel ใน database
  - สั่ง `php db:seed` เพื่อจำลอง record ใน table
- - "ของ fit เขียนต่อ" 
+ - สั่ง `php artisan storage:link`จากนั้น copy folder "comments doctor imgs posts และ tips" จาก folder public ใส่ลงใน storage เพื่อใส่ภาพในการจำลองข้อมูล
+ 
+ 
 
 ## Test user
     1. member(1)
