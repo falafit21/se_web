@@ -24,7 +24,7 @@
         passworf : mook1234
     4. admin
         username : zen@shukishi.com
-        passworf : mook1234    
+        passworf : zen1234    
 
     หรือ user อื่นๆ ดูใน  database/seeds/UserTableSeeder.php 
 
