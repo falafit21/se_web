@@ -2,10 +2,13 @@
 Route::get('/', function () {
     return redirect()->route('post.index');
 });
-//Route::get('/changePassword','UsersController@showChangePasswordForm');
+Route::get('/welcome', function () {
+    return view('welcome');
+});
+
 Route::put('/changePassword','UsersController@changePassword')->name('users.changePassword');
 
-//Route::post('/user/profile/changePassword','UsersController@showChangePasswordForm')->name('user.changePassword');
+
 
 Route::get('/user/profile', 'UsersController@getUserProfile')->name("users.profile");
 
@@ -18,7 +21,7 @@ Route::post('/posts/{post_id}/comment/new', 'PostsController@commentStoreNew')->
 Route::put('/posts/{post_id}/commentedit', 'PostsController@commentUpdate')->name('post.comment.update');
 Route::delete('posts/{comment_id}/comment','PostsController@destroyComment')->name('post.comment.destroy');
 Route::post('/uploadPostImg', 'PostsController@storeImg');
-//Route::post('/uploadComment', 'CommentController@storeImg');
+
 
 //doctor
 Route::put('/docProfile/{doctor_id}/edit','UsersController@updateProfile')->name("user.update.doctor");
@@ -29,7 +32,7 @@ Route::post('/doctor/profile/changePassword','DoctorListsController@changePasswo
 
 //pet tip
 Route::resource('/petTip', 'PetTipsController');
-//Route::get('/petTips/tip', 'PetTipsController@show');
+
 
 //admin
 Route::get('/admin/viewMembers', 'UsersController@index');
@@ -39,7 +42,7 @@ Route::get('/admin/updateStatus', 'UsersController@updateStatus')->name('user.up
 Route::get('/pet/createPet','PetsController@createPet');
 Route::resource('/pet', 'PetsController');
 
-//Route::post('/pets/{pet_id}/update', 'PetsController@update')->name('pet.update');
+
 Route::get('pets/{vaccine_id}/date','PetsController@calculate')->name('pet.calculate');
 Route::post('/pet/{pet_id}/edit','PetsController@update');
 Route::get('/pets/{pet_id}/edit', 'PetsController@edit')->name('pet.edit');
@@ -48,7 +51,7 @@ Route::get('/pets/{pet_id}/edit', 'PetsController@edit')->name('pet.edit');
 Route::resource('/vaccines', 'VaccinesController');
 Route::post('/pet/{pet}/vaccine', 'PetsController@vaccineStore')->name('pet.vaccine.store');
 Route::put('/pet/{pet}/vaccineedit', 'PetsController@vaccineUpdate')->name('pet.vaccine.update');
-//Route::post('/vaccine/{pet}/receivedDate', 'VaccinesController@receivedVaccineDateStore')->name('received.vaccine.date.store');
+
 Route::delete('/vaccines/{vaccine}/{pet}', 'VaccinesController@vaccineDestroy')->name('vaccines.vaccineDestroy');
 
 Auth::routes();
