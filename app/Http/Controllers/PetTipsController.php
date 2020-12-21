@@ -11,7 +11,6 @@ class PetTipsController extends Controller
 {
     public function index()
     {
-
         $tips = PetTip::orderBy('id','desc')->get();
         return view('posts.createTip', ['tips' => $tips]);
     }

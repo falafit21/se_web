@@ -1924,9 +1924,69 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log('Component mounted.');
+    this.getPetTips();
+    this.getPosts();
+  },
+  methods: {
+    getPetTips: function getPetTips() {
+      var _this = this;
+
+      axios.get('api/petTips').then(function (response) {
+        _this.petTips = response.data;
+      });
+    },
+    getPosts: function getPosts() {
+      var _this2 = this;
+
+      axios.get('api/posts').then(function (response) {
+        _this2.posts = response.data;
+      });
+    }
+  },
+  data: function data() {
+    return {
+      petTips: [],
+      posts: [],
+      tip: {
+        id: 0,
+        title: '',
+        detail: '',
+        img_path: ''
+      },
+      post: {
+        id: 0,
+        question: '',
+        detail: ''
+      }
+    };
   }
 });
 
@@ -37522,30 +37582,185 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", [
+    _c(
+      "div",
+      {
+        staticClass: "carousel slide",
+        attrs: { id: "carouselExampleIndicators", "data-ride": "carousel" }
+      },
+      [
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "carousel-inner",
+            staticStyle: { height: "380px", "background-color": "#192730" }
+          },
+          [
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._l(_vm.petTips, function(tip) {
+              return _c("div", { staticClass: "carousel-item " }, [
+                tip.img_path == null
+                  ? _c("div", [
+                      _c(
+                        "div",
+                        {
+                          staticClass: "container",
+                          staticStyle: {
+                            "padding-top": "3.5em",
+                            color: "white"
+                          }
+                        },
+                        [
+                          _c("div", [
+                            _c(
+                              "h3",
+                              {
+                                staticStyle: {
+                                  "text-align": "center",
+                                  "margin-top": "3.6em",
+                                  "font-weight": "bold",
+                                  "font-size": "26px"
+                                }
+                              },
+                              [_vm._v(_vm._s(tip.title))]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("div", [
+                            _c(
+                              "h4",
+                              {
+                                staticStyle: {
+                                  "text-align": "center",
+                                  "margin-top": "1em"
+                                }
+                              },
+                              [_vm._v(_vm._s(tip.detail))]
+                            )
+                          ])
+                        ]
+                      )
+                    ])
+                  : _c("div", [
+                      _c("img", {
+                        staticClass: "d-block w-100",
+                        staticStyle: { "max-height": "500px" },
+                        attrs: {
+                          src: "public/tips/banner1.jpg",
+                          alt: "",
+                          srcset: ""
+                        }
+                      })
+                    ])
+              ])
+            })
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _vm._m(2),
+        _vm._v(" "),
+        _vm._m(3)
+      ]
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "container" }, [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c("div", { staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _vm._v("Example Component")
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-body" }, [
-              _vm._v(
-                "\n                    I'm an example component.\n                "
-              )
-            ])
-          ])
-        ])
-      ])
+    return _c("ol", { staticClass: "carousel-indicators" }, [
+      _c("li", {
+        staticClass: "active",
+        attrs: {
+          "data-target": "#carouselExampleIndicators",
+          "data-slide-to": "0"
+        }
+      }),
+      _vm._v(" "),
+      _c("li", {
+        attrs: {
+          "data-target": "#carouselExampleIndicators",
+          "data-slide-to": "1"
+        }
+      }),
+      _vm._v(" "),
+      _c("li", {
+        attrs: {
+          "data-target": "#carouselExampleIndicators",
+          "data-slide-to": "2"
+        }
+      })
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "carousel-item active", staticStyle: { height: "380px" } },
+      [
+        _c("img", {
+          staticClass: "d-block w-100",
+          staticStyle: { "max-height": "500px" },
+          attrs: { src: "/images/petTipsBg1.png", alt: "First slide" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "carousel-control-prev",
+        attrs: {
+          href: "#carouselExampleIndicators",
+          role: "button",
+          "data-slide": "prev"
+        }
+      },
+      [
+        _c("span", {
+          staticClass: "carousel-control-prev-icon",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Previous")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "carousel-control-next",
+        attrs: {
+          href: "#carouselExampleIndicators",
+          role: "button",
+          "data-slide": "next"
+        }
+      },
+      [
+        _c("span", {
+          staticClass: "carousel-control-next-icon",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v(" "),
+        _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -49731,6 +49946,7 @@ module.exports = function(module) {
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
