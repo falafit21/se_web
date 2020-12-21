@@ -35,9 +35,34 @@
                     <span class="sr-only">Next</span>
                 </a>
         </div>
-        
+
+        <div class="" style="margin: 50px">
     
-    </div>
+            <div v-for="post in posts" class="card post-card border-light abc" style="margin-top: 10px">
+                <a href="" style="text-decoration: none; color: #1b1e21">
+                    <div class="card-body">
+                        <p class="card-text"></p>
+                        <div class="row">
+                            <p style="font-size: 25px" class="col-8"><i class="fas fa-paw" style="margin-right: 13px"></i>{{ post.question }}
+                            </p>
+                            <!-- <p class="text-muted text-right col-4" style="font-size: 15px">
+                                <i class="fas fa-user" style="margin-right: 6px"></i>
+                                {{ post.user.name }}
+                                <i class="fas fa-dog" style="margin-right: 3px; margin-left: 10px"></i>
+                                {{ post.pet.name }}
+                            </p> -->
+                        </div>
+                        <p style="font-size: 18px">{{ post.detail }}</p>
+                    </div>
+                </a>
+            </div>
+            <p class="totop" style="text-align: center; padding-top: 25px">
+                <a href="#top"><i class="fa fa-chevron-circle-up" style="font-size:60px"></i></a>
+            </p>
+        </div>
+ 
+    
+  </div>
 </template>
 
 <script>

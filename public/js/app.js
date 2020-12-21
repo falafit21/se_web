@@ -1950,6 +1950,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     this.getPetTips();
@@ -37666,6 +37691,63 @@ var render = function() {
         _vm._v(" "),
         _vm._m(3)
       ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticStyle: { margin: "50px" } },
+      [
+        _vm._l(_vm.posts, function(post) {
+          return _c(
+            "div",
+            {
+              staticClass: "card post-card border-light abc",
+              staticStyle: { "margin-top": "10px" }
+            },
+            [
+              _c(
+                "a",
+                {
+                  staticStyle: { "text-decoration": "none", color: "#1b1e21" },
+                  attrs: { href: "" }
+                },
+                [
+                  _c("div", { staticClass: "card-body" }, [
+                    _c("p", { staticClass: "card-text" }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "row" }, [
+                      _c(
+                        "p",
+                        {
+                          staticClass: "col-8",
+                          staticStyle: { "font-size": "25px" }
+                        },
+                        [
+                          _c("i", {
+                            staticClass: "fas fa-paw",
+                            staticStyle: { "margin-right": "13px" }
+                          }),
+                          _vm._v(
+                            _vm._s(post.question) +
+                              "\n                          "
+                          )
+                        ]
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("p", { staticStyle: { "font-size": "18px" } }, [
+                      _vm._v(_vm._s(post.detail))
+                    ])
+                  ])
+                ]
+              )
+            ]
+          )
+        }),
+        _vm._v(" "),
+        _vm._m(4)
+      ],
+      2
     )
   ])
 }
@@ -37759,6 +37841,26 @@ var staticRenderFns = [
         }),
         _vm._v(" "),
         _c("span", { staticClass: "sr-only" }, [_vm._v("Next")])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "p",
+      {
+        staticClass: "totop",
+        staticStyle: { "text-align": "center", "padding-top": "25px" }
+      },
+      [
+        _c("a", { attrs: { href: "#top" } }, [
+          _c("i", {
+            staticClass: "fa fa-chevron-circle-up",
+            staticStyle: { "font-size": "60px" }
+          })
+        ])
       ]
     )
   }
