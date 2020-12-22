@@ -60,7 +60,7 @@
 @section('content')
 <body>
     <div id="app">
-    <example-component></example-component>
+    <home></home>
     </div>
 </body>
 

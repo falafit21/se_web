@@ -45,12 +45,21 @@
                         <div class="row">
                             <p style="font-size: 25px" class="col-8"><i class="fas fa-paw" style="margin-right: 13px"></i>{{ post.question }}
                             </p>
-                            <!-- <p class="text-muted text-right col-4" style="font-size: 15px">
-                                <i class="fas fa-user" style="margin-right: 6px"></i>
-                                {{ post.user.name }}
-                                <i class="fas fa-dog" style="margin-right: 3px; margin-left: 10px"></i>
-                                {{ post.pet.name }}
-                            </p> -->
+                            <p class="text-muted text-right col-4" style="font-size: 15px">
+                                <span v-for="user in users">
+                                    <span v-if="user.id == post.user_id">
+                                        <i class="fas fa-user" style="margin-right: 6px"></i>
+                                        {{ user.name }}
+
+                                    </span>
+                                </span>
+                                <span v-for="pet in pets">
+                                    <span v-if="pet.id == post.pet_id">
+                                        <i class="fas fa-dog" style="margin-right: 3px; margin-left: 10px"></i>
+                                        {{ pet.name }}
+                                    </span>
+                                </span>
+                            </p>
                         </div>
                         <p style="font-size: 18px">{{ post.detail }}</p>
                     </div>
@@ -70,6 +79,8 @@ export default {
     mounted() {
         this.getPetTips();
         this.getPosts();
+        this.getUsers();
+        this.getPets();
     },
     methods: {
         getPetTips() {
@@ -81,11 +92,21 @@ export default {
             axios.get('api/posts').then(response => {
                 this.posts = response.data;
             });
+        },
+        getUsers() {
+            axios.get('api/users').then(response => {
+                this.users = response.data;
+            });
+        },
+        getPets() {
+            axios.get('api/pets').then(response => {
+                this.pets = response.data;
+            });
         }
     },
     data(){
         return {
-            petTips: [],posts:[],
+            petTips:[],posts:[],users:[],pets:[],
             tip: {
                 id: 0,
                 title: '',
@@ -95,7 +116,17 @@ export default {
             post: {
                 id: 0,
                 question: '',
-                detail: ''
+                detail: '',
+                user_id: 0,
+                pet_id: 0
+            },
+            user: {
+                id: 0,
+                name:''
+            },
+            pet:{
+                id: 0,
+                name:''
             }
         }
     }
