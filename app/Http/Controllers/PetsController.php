@@ -74,7 +74,7 @@ class PetsController extends Controller
         $pet->weight = $request->input('weight');
         $pet->birth_date = $request->input('birth-date-input');
         $pet->img = $request->file('img')->store('public/imgs');
-        $pet-_save();
+        $pet->save();
 
 //        if($pet->save()){
 //            $recentPet_id = $pet->latest()->first()->id;

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Post;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\AssignOp\Pow;
 
 class PostsController extends Controller
 {
@@ -37,7 +38,10 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post();
+        $post->title = $request->get('title');
+        $post->detail = $request->get('detail');
+        $post->save();
     }
 
     /**

@@ -19,3 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('users', 'Api\UsersController');
 Route::resource('posts', 'Api\PostsController');
 Route::resource('petTips', 'Api\PetTipsController');
+Route::resource('pets', 'Api\PetsController');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Pet;
 
 class PetsController extends Controller
 {
@@ -14,7 +15,8 @@ class PetsController extends Controller
      */
     public function index()
     {
-        //
+        $pets = Pet::all();
+        return response()->json($pets);
     }
 
     /**
@@ -35,7 +37,8 @@ class PetsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $pet = new Pet();
+        // $pet->name = $request
     }
 
     /**
